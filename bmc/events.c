@@ -437,7 +437,8 @@ int HandleEvent(SDL_Event *event)
 //TEST REMOVE LATER!!!!!!!!!!!!!!!!!!!!!!
 				if(event->key.keysym.sym==SDLK_F5)
 					{
-						terr_map[translate_coords(-cx,-cy)].state=100;
+						if(ctrl_on) terr_map[translate_coords(-cx,-cy)].state=255;
+						else terr_map[translate_coords(-cx,-cy)].state=100;
 						terr_map[translate_coords(-cx,-cy)].into_tile=1;
 					}
 				if(event->key.keysym.sym==SDLK_F6)

@@ -70,10 +70,12 @@ void load_e3d_list()
 	for(i=0;i<e3dlistsize;i++){
 		char temp[256];
 		int id;
-		fscanf(fp,"%s %d",temp,&id);
+		int attributes=0;
+		fscanf(fp,"%s %d %d",temp,&id, &attributes);
 		e3dlist[i].fn=(char*)malloc(strlen(temp)+1);
 		strcpy(e3dlist[i].fn,temp);
 		e3dlist[i].id=id;
+		e3dlist[i].attributes=attributes;
 	}
 	fclose(fp);
 	return;

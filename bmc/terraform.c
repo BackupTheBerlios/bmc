@@ -319,7 +319,7 @@ void terraform(int pos, int type)
 
 int create_terraform_partsys(int x, int y, int from, int to, int state)
 {
-	float x_pos=x*3+1.5f, y_pos=y*3+1.5f, z_pos=1;
+	float x_pos=x*3+1.5f, y_pos=y*3+1.5f, z_pos=0.05;
 	particle_sys_def *def=(particle_sys_def*)calloc(1,sizeof(particle_sys_def));
 
 	def->part_sys_type=4;
@@ -332,7 +332,7 @@ int create_terraform_partsys(int x, int y, int from, int to, int state)
 	def->part_size=1.8f;
 	def->random_func=0;
 	def->minx=    -1.50000f; def->miny=    -1.50000f; def->minz=     0.00000f;
-	def->maxx=     1.50000f; def->maxx= 	1.50000f; def->maxz=     0.00000f;
+	def->maxx=     1.50000f; def->maxy= 	1.50000f; def->maxz=     0.00000f;
 	def->constrain_rad_sq=-1.0f;
 	def->vel_minx= 0.00000f; def->vel_miny=	0.00000f; def->vel_minz=-0.00150f;
 	def->vel_maxx= 0.00000f; def->vel_maxy=	0.00000f; def->vel_maxz= 0.00000f;
@@ -347,24 +347,27 @@ int create_terraform_partsys(int x, int y, int from, int to, int state)
 }
 
 void terraform_control()
-{/*
+{
 	int x;
 	int y;
 	int pos;
+	if(!have_a_map) return;
 	for(y=0;y<tile_map_size_y;y++)
 		{
 			for(x=0;x<tile_map_size_x;x++)
 				{
 					pos=y*tile_map_size_x+x;
-					if(terr_map[pos].into_tile && terr_map[pos].into_tile!=tile_map[pos])
+					if(terr_map[pos].into_tile && terr_map[pos].into_tile!=255 && terr_map[pos].into_tile!=tile_map[pos])
 						{
 							if(terr_map[pos].state==255)
 								{
+									free(particles_list[terr_map[pos].index]);
+									particles_list[terr_map[pos].index]=0;
 									terraform(pos, terr_map[pos].into_tile);
 								}
 							else if(particles_list[terr_map[pos].index])
 								{
-									particles_list[terr_map[pos].index]->particle_count=(float)terr_map[pos].state/255.0f*2000.0f;
+									particles_list[terr_map[pos].index]->def->total_particle_no=(float)terr_map[pos].state*5.72f;//~2000.0/255.0;
 								}
 							else
 								{
@@ -372,5 +375,5 @@ void terraform_control()
 								}
 						}
 				}
-		}*/
+		}
 }
