@@ -211,6 +211,7 @@ int find_reflection()
 	int x_start,x_end,y_start,y_end;
 	int x,y;
 	float x_scaled,y_scaled;
+	int found_water=0;
 
 	//get only the tiles around the camera
 	//we have the axes inverted, btw the go from 0 to -255
@@ -233,10 +234,14 @@ int find_reflection()
 				{
 					x_scaled=x*3.0f;
 					if(!check_tile_in_frustrum(x_scaled,y_scaled))continue;//outside of the frustrum
-					if(!tile_map[y*tile_map_size_x+x])return 1;
+					if(is_water_tile(tile_map[y*tile_map_size_x+x]))
+						{
+							if(is_reflecting(tile_map[y*tile_map_size_x+x])) return 2;
+							found_water=1;
+						}
 				}
 		}
-	return 0;
+	return found_water;
 }
 
 int find_local_reflection(int x_pos,int y_pos,int range)
@@ -262,7 +267,7 @@ int find_local_reflection(int x_pos,int y_pos,int range)
 		{
 			for(x=x_start;x<=x_end;x++)
 				{
-					if(!tile_map[y*tile_map_size_x+x])return 1;
+					if(is_reflecting(tile_map[y*tile_map_size_x+x]))return 1;
 				}
 		}
 	return 0;
@@ -455,7 +460,11 @@ void draw_lake_tiles()
 					if(actualx<0)actualx=0;
 					else if(actualx>=tile_map_size_x)actualx=tile_map_size_x-1;
 					x_scaled=x*3.0f;
-					if(!tile_map[actualy+actualx] && check_tile_in_frustrum(x_scaled,y_scaled))draw_lake_water_tile(x_scaled,y_scaled);
+					if(is_water_tile(tile_map[actualy+actualx]) && check_tile_in_frustrum(x_scaled,y_scaled))
+						{
+							get_and_set_texture_id(tile_list[tile_map[actualx+actualy]]);
+							draw_lake_water_tile(x_scaled,y_scaled);
+						}
 				}
 		}
 

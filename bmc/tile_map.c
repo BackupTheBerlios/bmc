@@ -13,6 +13,28 @@ float ambient_g=0;
 float ambient_b=0;
 char map_file_name[60];
 
+int is_water_tile(int tile)
+{
+	switch(tile)
+		{
+			case 200:
+			case 201: 
+			case 202:
+			case 203: return 1;
+		}
+	return 0;
+}
+
+int is_reflecting(int tile)
+{
+	switch(tile)
+		{
+			case 200:
+			case 201: return 1;
+		}
+	return 0;
+}
+
 void draw_tile_map()
 {
 	int x_start,x_end,y_start,y_end;
@@ -145,7 +167,6 @@ void load_map_tiles()
 					else tile_list[cur_tile]=load_texture_cache(str,255);
 				}
 		}
-
 }
 
 
