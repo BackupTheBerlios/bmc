@@ -135,7 +135,6 @@ void draw_light_halo(light * l)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	glDisable(GL_LIGHTING);
-	glDisable(GL_DEPTH_TEST);
 	glPushMatrix();
 	glTranslatef(x_pos, y_pos, z_pos);
 	glRotatef(-rz, 0.0f, 0.0f, 1.0f);
@@ -151,7 +150,6 @@ void draw_light_halo(light * l)
 	glEnd();
 	glPopMatrix();
 	
-	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 	glDisable(GL_BLEND);
 }
