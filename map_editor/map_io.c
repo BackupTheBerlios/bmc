@@ -141,7 +141,7 @@ int save_map(char * file_name)
 
 	FILE *f = NULL;
 
-
+	sector_add_map();
 	//get the sizes of structures (they might change in the future)
 	obj_3d_io_size=sizeof(object3d_io);
 	obj_2d_io_size=sizeof(obj_2d_io);
@@ -505,6 +505,7 @@ void new_map(int m_x_size,int m_y_size)
 	// memory for the sectors
 	num_sectors=(m_x_size/4)*(m_y_size/4);
 	sectors=(map_sector*)malloc(sizeof(map_sector)*num_sectors);
+	memset(sectors,-1,sizeof(map_sector)*num_sectors);
 
 	load_map_tiles();
 	//reset the camera coordinates
