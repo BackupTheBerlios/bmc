@@ -41,9 +41,9 @@ void draw_scene()
 			check_gl_errors();
 			if(view_2d || cur_mode==mode_2d)display_2d_objects();
 			check_gl_errors();
+			display_3d_reflection();
 			glNormal3f(0.0f,0.0f,1.0f);
 			draw_lake_tiles();
-			display_3d_reflection();
 		}
 	else
 		{
