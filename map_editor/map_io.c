@@ -137,7 +137,7 @@ void sector_add_map()
 			objects_list[i]->o3dio.object_type=e3dlist_getid(objects_list[i]->file_name);
 			objects_list[i]->o3dio.x_pos=global_to_sector(objects_list[i]->x_pos);
 			objects_list[i]->o3dio.y_pos=global_to_sector(objects_list[i]->y_pos);
-			objects_list[i]->o3dio.z_pos=objects_list[i]->z_pos/0.04f;
+			objects_list[i]->o3dio.z_pos=(objects_list[i]->z_pos+2.2f)/0.04f;
 	
 			objects_list[i]->o3dio.x_rot=objects_list[i]->x_rot/1.5;
 			objects_list[i]->o3dio.y_rot=objects_list[i]->y_rot/1.5;
@@ -165,7 +165,7 @@ void sector_add_map()
 			obj_2d_list[i]->o2dio.object_type=e2dlist_getid(obj_2d_list[i]->file_name);
 			obj_2d_list[i]->o2dio.x_pos=global_to_sector(obj_2d_list[i]->x_pos);
 			obj_2d_list[i]->o2dio.y_pos=global_to_sector(obj_2d_list[i]->y_pos);
-			obj_2d_list[i]->o2dio.z_pos=obj_2d_list[i]->z_pos/0.04f;
+			obj_2d_list[i]->o2dio.z_pos=(obj_2d_list[i]->z_pos+2.2f)/0.04f;
 
 			obj_2d_list[i]->o2dio.x_rot=obj_2d_list[i]->x_rot/1.5;
 			obj_2d_list[i]->o2dio.y_rot=obj_2d_list[i]->y_rot/1.5;
@@ -182,7 +182,7 @@ void sector_add_map()
 		if(lights_list[i]){
 			lights_list[i]->lightio.x_pos=global_to_sector(lights_list[i]->pos_x);
 			lights_list[i]->lightio.y_pos=global_to_sector(lights_list[i]->pos_y);
-			lights_list[i]->lightio.z_pos=lights_list[i]->pos_z/0.04f;
+			lights_list[i]->lightio.z_pos=(lights_list[i]->pos_z+2.2f)/0.04f;
 
 			lights_list[i]->lightio.r=lights_list[i]->r*255;
 			lights_list[i]->lightio.g=lights_list[i]->g*255;
@@ -202,7 +202,7 @@ void sector_add_map()
 			particles_list[i]->particleio.object_type=partlist_getid(particles_list[i]->def->file_name);
 			particles_list[i]->particleio.x_pos=global_to_sector(particles_list[i]->x_pos);
 			particles_list[i]->particleio.y_pos=global_to_sector(particles_list[i]->y_pos);
-			particles_list[i]->particleio.z_pos=particles_list[i]->z_pos/0.04f;
+			particles_list[i]->particleio.z_pos=(particles_list[i]->z_pos+2.2f)/0.04f;
 			sector_add_particle(i);
 			j++;
 		}
@@ -481,7 +481,7 @@ int load_map(char * file_name)
 			fread(cur_3do_pointer, 1, obj_3d_io_size, f);
 
 			k=add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
-			cur_3d_obj_io.z_pos*0.04f,cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
+			cur_3d_obj_io.z_pos*0.04f-2.2f,cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
 			cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f);
 			memcpy(&objects_list[k]->o3dio,&cur_3d_obj_io,sizeof(object3d_io));
 		}
@@ -494,7 +494,7 @@ int load_map(char * file_name)
 			fread(cur_2do_pointer, 1, obj_2d_io_size, f);
 
 			k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
-			cur_2d_obj_io.z_pos*0.04f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
+			cur_2d_obj_io.z_pos*0.04f-2.2f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
 			memcpy(&obj_2d_list[k]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
 		}
 
@@ -505,7 +505,7 @@ int load_map(char * file_name)
 			char * cur_light_pointer=(char *)&cur_light_io;
 			int k;
 			fread(cur_light_pointer, 1, lights_io_size, f);
-			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,cur_light_io.z_pos*0.04f,cur_light_io.r/255.0f,cur_light_io.g/255.0f,cur_light_io.b/255.0f,1.0f);
+			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,cur_light_io.z_pos*0.04f-2.2f,cur_light_io.r/255.0f,cur_light_io.g/255.0f,cur_light_io.b/255.0f,1.0f);
 			memcpy(&lights_list[k]->lightio,&cur_light_io,sizeof(light_io));
 		}
 
@@ -515,7 +515,7 @@ int load_map(char * file_name)
 			char *cur_particles_pointer=(char *)&cur_particles_io;
 			int k;
 			fread(cur_particles_pointer,1,particles_io_size,f);
-			k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,cur_particles_io.z_pos*0.04f);
+			k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,cur_particles_io.z_pos*0.04f-2.2f);
 			memcpy(&particles_list[k]->particleio,&cur_particles_io,sizeof(particles_io));
 		}
 	

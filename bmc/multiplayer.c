@@ -762,6 +762,11 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 			get_particle_objects(in_data);
 			break;
 
+		case GET_3D_OBJECTS_FULL_ROTATION:
+			get_3d_objects_full_rotation(in_data);
+			break;
+
+
 		default:
 			{
 				/* Unknown data type?? */;

@@ -38,4 +38,5 @@ void get_3d_objects(char *d);
 void get_2d_objects(char *d);
 void get_light_objects(char *d);
 void get_particle_objects(char *d);
+void get_3d_objects_full_rotation(char *d);
 #endif

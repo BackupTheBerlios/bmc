@@ -269,6 +269,40 @@ void get_3d_objects(char *d)
 	}
 }
 
+void get_3d_objects_full_rotation(char *d)
+{
+	int i;
+	Uint8 numobjects=*(Uint8*)d;
+	d++;
+	for(i=0;i<numobjects;i++){
+		int k;
+		object3d_io o3dio;
+
+		memset(&o3dio,0,sizeof(object3d_io));
+
+		o3dio.object_type=*(Uint16*)d;
+		d+=2;
+		o3dio.x_pos=*(Uint16*)d;
+		d+=2;
+		o3dio.y_pos=*(Uint16*)d;
+		d+=2;
+		o3dio.z_pos=*(Uint8*)d;
+		d++;
+		o3dio.z_rot=*(Uint8*)d;
+		d++;
+		o3dio.x_rot=*(Uint8*)d;
+		d++;
+		o3dio.y_rot=*(Uint8*)d;
+		d++;
+
+		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos),sector_to_global_y(active_sector,o3dio.y_pos),
+		o3dio.z_pos,o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
+		o3dio.flags&0x1,o3dio.flags&0x2,o3dio.r/255.0f,o3dio.g/255.0f,o3dio.b/255.0f);
+		memcpy(&objects_list[k]->o3dio,&o3dio,sizeof(object3d_io));
+		sector_add_3do(k);
+	}
+
+}
 
 void get_2d_objects(char *d)
 {
