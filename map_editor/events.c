@@ -690,7 +690,7 @@ int HandleEvent(SDL_Event *event)
 					return(done);
 				}
 
-			if(left_click && cur_mode==mode_tile && cur_tool==tool_select && selected_tile!=255  && scene_mouse_y>0 && scene_mouse_x>0 && scene_mouse_y<tile_map_size_y*3 && scene_mouse_x<tile_map_size_x*3)
+			if(left_click && cur_mode==mode_tile && cur_tool==tool_select && selected_tile && scene_mouse_y>0 && scene_mouse_x>0 && scene_mouse_y<tile_map_size_y*3 && scene_mouse_x<tile_map_size_x*3)
 			{
 				tile_map[(int)scene_mouse_y/3*tile_map_size_x+(int)scene_mouse_x/3]=selected_tile;
 				if(selected_tile == 0 || selected_tile == 20 || selected_tile == 21)
@@ -715,7 +715,7 @@ int HandleEvent(SDL_Event *event)
 
 
 			if(check_interface_buttons()==1)tool_bar_click=1;
-			if(right_click==1 && cur_tool==tool_select && selected_tile!=255 && cur_mode==mode_tile)selected_tile=255;
+			if(right_click==1 && cur_tool==tool_select && selected_tile && cur_mode==mode_tile)selected_tile=0;
 			if(right_click==1 && cur_tool==tool_select && selected_height!=-1 && cur_mode==mode_height)selected_height=-1;
 			if(right_click==1 && cur_tool==tool_select && selected_2d_object!=-1 && cur_mode==mode_2d)kill_2d_object(selected_2d_object);
 			if(right_click==1 && cur_tool==tool_select && selected_3d_object!=-1 && cur_mode==mode_3d)kill_3d_object(selected_3d_object);
@@ -922,7 +922,7 @@ int HandleEvent(SDL_Event *event)
 										undo_type = mode_tile;
 										undo_tile = (int)scene_mouse_y/3*tile_map_size_x+(int)scene_mouse_x/3;
 										undo_tile_value = tile_map[(int)scene_mouse_y/3*tile_map_size_x+(int)scene_mouse_x/3];
-										tile_map[(int)scene_mouse_y/3*tile_map_size_x+(int)scene_mouse_x/3]=255;
+										tile_map[(int)scene_mouse_y/3*tile_map_size_x+(int)scene_mouse_x/3]=0;
 										kill_height_map_at_texture_tile((int)scene_mouse_y/3*tile_map_size_x+(int)scene_mouse_x/3);
 										return(done);
 									}
@@ -935,7 +935,7 @@ int HandleEvent(SDL_Event *event)
 									}
 
 								//if we have a tile attached to us, drop it
-								if(cur_tool==tool_select && selected_tile!=255  && scene_mouse_y>0 && scene_mouse_x>0 && scene_mouse_y<tile_map_size_y*3 && scene_mouse_x<tile_map_size_x*3)
+								if(cur_tool==tool_select && selected_tile && scene_mouse_y>0 && scene_mouse_x>0 && scene_mouse_y<tile_map_size_y*3 && scene_mouse_x<tile_map_size_x*3)
 									{
 										tile_map[(int)scene_mouse_y/3*tile_map_size_x+(int)scene_mouse_x/3]=selected_tile;
 										if(selected_tile == 0 || selected_tile == 20 || selected_tile == 21){
@@ -986,7 +986,7 @@ int HandleEvent(SDL_Event *event)
 						else
 						if(cur_mode==mode_light && cur_tool==tool_select && selected_light!=-1)move_light(selected_light);
 						else
-						if(cur_mode==mode_tile && cur_tool==tool_select && selected_tile!=255)move_tile_a_tile=1;
+						if(cur_mode==mode_tile && cur_tool==tool_select && selected_tile)move_tile_a_tile=1;
 						else move_tile_a_tile=0;
 						if(cur_mode==mode_height && cur_tool==tool_select && selected_height!=-1)move_tile_a_height=1;
 						else move_tile_a_height=0;

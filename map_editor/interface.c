@@ -2,6 +2,8 @@
 #include "../bmc/terraform.h"
 #include <math.h>
 
+int show_position_on_minimap=0;
+
 int check_interface_buttons()
 {
 	if((left_click!=1 && right_click!=1) || mouse_x>=14*32 || mouse_y>=32)return -1;//no interface buttons were selected
@@ -43,7 +45,7 @@ int check_interface_buttons()
 						{
 							view_tiles_list=1;
 							cur_tool=tool_select;
-							selected_tile=255;
+							selected_tile=0;
 						}
 					if(cur_mode==mode_height)
 						{
@@ -464,7 +466,8 @@ void draw_light_info()
 	y_menu-=2*17;
 	x_menu+=12*14;
 
-	draw_string(x_menu,y_menu,"Pulsation:",1);
+	sprintf((char*) str, "[P]ulsation: %i",((lights_list[selected_light]->flags&PULSATE)>0));
+	draw_string(x_menu,y_menu,str,1);
 
 	y_menu+=17;
 	sprintf((char *)str, "Interval: %g",lights_list[selected_light]->interval);
@@ -686,8 +689,11 @@ GLuint generate_minimap()
 						{
 						for(j=0;j<scale;j++)
 							{
-								if((cur_img=&map_tiles[tile_map[x*tile_map_size_y+y]])==NULL) break;//fuck, drop it
-								*((Uint32 *)(map+(((x*(int)scale+j)+(i+y*(int)scale)*256)*4)))=*((Uint32 *)(cur_img->img+(((i+y*(int)scale)&(cur_img->y-1))*cur_img->x+((j+x*(int)scale)&(cur_img->x-1)))*4));
+								if((cur_img=&map_tiles[tile_map[x*tile_map_size_y+y]])==NULL||
+								    cur_img->img==NULL)
+									*((Uint32 *)(map+(((x*(int)scale+j)+(i+y*(int)scale)*256)*4)))=0x00000000;
+								else
+									*((Uint32 *)(map+(((x*(int)scale+j)+(i+y*(int)scale)*256)*4)))=*((Uint32 *)(cur_img->img+(((i+y*(int)scale)&(cur_img->y-1))*cur_img->x+((j+x*(int)scale)&(cur_img->x-1)))*4));
 							}
 						}
 					}
@@ -749,10 +755,12 @@ GLuint minimap_tex;
 
 void draw_minimap()
 {
-	int minimap_x_start=window_width/2-128;
+        int minimap_x_start=window_width/2-128;
+	int minimap_y_end;
 	int scale;//looks ugly if it's accurate :)...
+	float x_map_pos, y_map_pos;
 
-	if(map_has_changed||!minimap_tex)
+	if(map_has_changed)
 		{
 			if(minimap_tex>0) glDeleteTextures(1,&minimap_tex);
 			minimap_tex=generate_minimap();
@@ -761,27 +769,55 @@ void draw_minimap()
 
 	//We have the map, display the texture
 
-	if((Uint32)last_texture!=minimap_tex) 
+	if((Uint32)last_texture!=minimap_tex)
 		{
 			glBindTexture(GL_TEXTURE_2D, minimap_tex);
 			last_texture=minimap_tex;
 		}
-	
+
 	if(window_width<window_height) scale=window_width/256;
 	else scale=window_height/256;
 
+	x_map_pos=(float)-cx/(float)(tile_map_size_x*3.0f)*256.0f*scale;
+	y_map_pos=(float)-cy/(float)(tile_map_size_y*3.0f)*256.0f*scale;
+
+	minimap_x_start/=scale*scale;
+
 	glPushMatrix();
 	glScalef(scale,scale,scale);
+
 	glBegin(GL_QUADS);
 
-	scale*=scale;
-	glTexCoord2f(0.0f, 0.0f); glVertex3i(minimap_x_start/scale,10+256,0);
-	glTexCoord2f(1.0f, 0.0f); glVertex3i(minimap_x_start/scale,10,0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3i(minimap_x_start/scale+256,10,0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3i(minimap_x_start/scale+256,10+256,0);
+	glTexCoord2f(0.0f, 0.0f); glVertex3i(minimap_x_start,10+256,0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3i(minimap_x_start,10,0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3i(minimap_x_start+256,10,0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3i(minimap_x_start+256,10+256,0);
 
 	glEnd();
+
 	glPopMatrix();
+
+	if(show_position_on_minimap)
+		{
+			int minimap_y_end;
+			glDisable(GL_TEXTURE_2D);
+			glColor3f(1.0f,0.0f,0.0f);
+			minimap_x_start*=scale;
+			minimap_y_end=(10+256)*scale;
+
+			glBegin(GL_LINES);
+
+			glVertex2i(minimap_x_start+x_map_pos-7,minimap_y_end-y_map_pos+7);
+			glVertex2i(minimap_x_start+x_map_pos+7,minimap_y_end-y_map_pos-7);
+
+			glVertex2i(minimap_x_start+x_map_pos+7,minimap_y_end-y_map_pos+7);
+			glVertex2i(minimap_x_start+x_map_pos-7,minimap_y_end-y_map_pos-7);
+			
+			glEnd();
+
+			glColor3f(1.0f,1.0f,1.0f);
+			glEnable(GL_TEXTURE_2D);
+		}
 }
 
 int map_size=0;

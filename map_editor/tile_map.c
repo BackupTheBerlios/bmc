@@ -101,8 +101,8 @@ void draw_tile_map()
 					for(x=x_start;x<=x_end;x++)
 						{
 							x_scaled=x*3.0f;
-							if(!tile_map[y*tile_map_size_x+x])continue;//lake, skip
-							if(tile_map[y*tile_map_size_x+x]==255)continue;//null, skip
+							if(is_water_tile(tile_map[y*tile_map_size_x+x]))continue;//lake, skip
+							if(!tile_map[y*tile_map_size_x+x])continue;//null, skip
 							cur_texture=get_texture_id(tile_list[tile_map[y*tile_map_size_x+x]]);
 							if(last_texture!=cur_texture)
 								{

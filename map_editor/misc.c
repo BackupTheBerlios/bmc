@@ -458,10 +458,6 @@ void load_all_tiles()
 		tiles_no=i;
 		map_tiles[i].img=load_bmp8_color_key_no_texture_img(str,map_tiles+i);
 	}
-	strcpy(str,"./art/water.bmp");
-	map_tiles[0].img=load_bmp8_color_key_no_texture_img(str,map_tiles);
-	strcpy(str,"./art/mountain.bmp");
-	map_tiles[255].img=load_bmp8_color_key_no_texture_img(str,map_tiles+255);
 }
 
 
@@ -1146,7 +1142,7 @@ void open_2d_obj_continued()
 void open_map_file()
 {
   gtk_window_set_title(GTK_WINDOW(file_selector), "open map");
-  //  gtk_file_selection_complete(GTK_FILE_SELECTION(file_selector), "*.elm");
+  //  gtk_file_selection_complete(GTK_FILE_SELECTION(file_selector), "*.bmm");
   continue_with = OPEN_MAP;
   gtk_widget_show(file_selector);
 }
@@ -1159,7 +1155,7 @@ void open_map_file_continued()
 void save_map_file()
 {
   gtk_window_set_title(GTK_WINDOW(file_selector), "save map");
-  //  gtk_file_selection_complete(GTK_FILE_SELECTION(file_selector), "*.elm");
+  //  gtk_file_selection_complete(GTK_FILE_SELECTION(file_selector), "*.bmm");
   continue_with = SAVE_MAP;
   gtk_widget_show(file_selector);
 }

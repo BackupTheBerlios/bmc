@@ -124,7 +124,7 @@ int check_replace_window_interface(window_info *win, int mx, int my, Uint32 flag
 			oid=(int)obj_2d_list[selected_2d_object]->obj_pointer;
 #endif
 			strcpy(cOid,obj_2d_list[selected_2d_object]->file_name);
-	   }else if(selected_tile!=255 && mode==1){
+	   }else if(selected_tile && mode==1){
 			oid=selected_tile;
 	   }
 
@@ -144,7 +144,7 @@ int check_replace_window_interface(window_info *win, int mx, int my, Uint32 flag
 			nid=(int)obj_2d_list[selected_2d_object]->obj_pointer;
 #endif
 			strcpy(cNid,obj_2d_list[selected_2d_object]->file_name);
-	   }else if(selected_tile!=255 && mode==1){
+	   }else if(selected_tile && mode==1){
 			nid=selected_tile;
 	   }
 
