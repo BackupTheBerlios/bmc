@@ -250,7 +250,7 @@ void send_superchecksum(int sector)
 	}
 	
 	msg[0]=SEND_SUPERCHECKSUM;
-	*(Uint32 *)&msg[1]=t;
+	*(Uint32 *)&msg[1]=~t;
 	my_tcp_send(my_socket,msg,5);
 }
 
