@@ -36,6 +36,9 @@ extern windows_info	windows_list;
 e3d_list *e3dlist=NULL;
 int e3dlistsize=0;
 
+e2d_list *e2dlist=NULL;
+int e2dlistsize=0;
+
 void unload_e3d_list()
 {
 	int i;
@@ -68,6 +71,43 @@ void load_e3d_list()
 		e3dlist[i].fn=(char*)malloc(strlen(temp)+1);
 		strcpy(e3dlist[i].fn,temp);
 		e3dlist[i].id=id;
+	}
+	fclose(fp);
+	return;
+}
+
+void unload_e2d_list()
+{
+	int i;
+	for(i=0;i<e2dlistsize;i++)
+		free(e2dlist[i].fn);
+	free(e2dlist);
+}
+
+void load_e2d_list()
+{
+	FILE *fp;
+	int i=0;
+
+	fp=fopen("e2dlist.txt","r");
+	if(!fp){
+		char str[120];
+		sprintf(str, "%s: %s\n",fatal_error_str,no_e2d_list);
+		log_error(str);
+		SDL_Quit();
+		exit(1);
+	}
+
+	fscanf(fp,"%d",&e2dlistsize);
+	e2dlist=(e2d_list*)malloc(sizeof(e2d_list)*e2dlistsize);
+
+	for(i=0;i<e2dlistsize;i++){
+		char temp[256];
+		int id;
+		fscanf(fp,"%s %d",temp,&id);
+		e2dlist[i].fn=(char*)malloc(strlen(temp)+1);
+		strcpy(e2dlist[i].fn,temp);
+		e2dlist[i].id=id;
 	}
 	fclose(fp);
 	return;
@@ -519,6 +559,7 @@ void init_stuff()
 	load_filters();
 	load_harvestable_list();
 	load_e3d_list();
+	load_e2d_list();
 	load_entrable_list();
 	load_knowledge_list();
 	load_cursors();

@@ -220,6 +220,7 @@ extern char	reg_error_str[15],
 		/*init.c*/
 		fatal_error_str[10],
 		no_e3d_list[50],
+		no_e2d_list[50],
 		enabled_vertex_arrays[50],
 		disabled_point_particles[50],
 		disabled_particles_str[50],

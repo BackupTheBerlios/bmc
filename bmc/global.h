@@ -93,6 +93,7 @@
 #include "options.h"
 #include "translate.h"
 #include "elconfig.h"
+#include "terraform.h"
 #ifdef CAL3D
 #include "cal3dwrap.h"
 #endif

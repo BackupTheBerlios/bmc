@@ -35,6 +35,7 @@ typedef struct
 	float y_rot;
 	float z_rot;
 	short sector;
+	short tile;
 	obj_2d_def *obj_pointer;
 }obj_2d;
 

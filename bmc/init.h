@@ -110,6 +110,15 @@ typedef struct{
 extern e3d_list *e3dlist;
 extern int e3dlistsize;
 
+void load_e2d_list();
+void unload_e2d_list();
+typedef struct{
+	int id;
+	char *fn;
+}e2d_list;
+extern e2d_list *e2dlist;
+extern int e2dlistsize;
+
 extern int video_mode_set;
 
 #endif	//__INIT_H__

@@ -439,6 +439,28 @@ void test_for_console_command()
 				}
 		}
 
+/* Terraform test, remove later!! */
+
+	if(my_strncompare(text_loc,"tile",4))
+		{
+			int id;
+			actor * me;
+			while(*text_loc && !isspace(*text_loc)) text_loc++;
+			while(*text_loc && isspace(*text_loc))  text_loc++;
+
+			me=get_actor_ptr_from_id(yourself);
+			
+			id=atoi(text_loc);
+			if(id<28 && id>=0)
+				{
+					terraform(translate_coords(me->x_pos, me->y_pos),id);
+				}
+			return;
+		}
+				
+
+/*End of test*/
+
 	send_input_text_line();//no command, send it to the server, as plain text
 
 }

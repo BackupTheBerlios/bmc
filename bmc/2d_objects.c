@@ -2,6 +2,7 @@
 #include <math.h>
 #include <string.h>
 #include "global.h"
+#include "terraform.h" //for the translate_coords macro
 
 obj_2d *obj_2d_list[max_obj_2d];
 
@@ -416,7 +417,9 @@ int add_2d_obj(char * file_name, float x_pos, float y_pos, float z_pos,
 	sector=(y_pos/sector_size_y)*(map_meters_size_x/sector_size_x)
 		+(x_pos/sector_size_x);
 	our_object->sector=sector;
-
+	
+	our_object->tile=translate_coords(x_pos,y_pos);
+	
 	return i;
 }
 
