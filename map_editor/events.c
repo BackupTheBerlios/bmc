@@ -105,7 +105,7 @@ int HandleEvent(SDL_Event *event)
 					case mode_light:
 					{
 						light *o = (light *) undo_object;
-						add_light(o->pos_x, o->pos_y, o->pos_z, o->r, o->g, o->b, 1.0f, 0, 0);
+						add_light(o->pos_x, o->pos_y, o->pos_z, o->r, o->g, o->b, 1.0f, 0, 0, 0);
 						free(undo_object);
 						undo_object = NULL;
 						break;
@@ -551,6 +551,16 @@ int HandleEvent(SDL_Event *event)
 			{
 				if(lights_list[selected_light]->interval>0) lights_list[selected_light]->interval-=500;
 				else lights_list[selected_light]->interval=0;
+			}
+		if((ch=='z'||ch=='Z') && selected_light!=-1 && cur_mode==mode_light)
+			{
+				if(lights_list[selected_light]->flicker<1) lights_list[selected_light]->flicker+=0.01f;
+				else lights_list[selected_light]->flicker=1;
+			}
+		if((ch=='x'||ch=='X') && selected_light!=-1 && cur_mode==mode_light)
+			{
+				if(lights_list[selected_light]->flicker>-1) lights_list[selected_light]->flicker-=0.01f;
+				else lights_list[selected_light]->flicker=-1;
 			}
 		//for ambient light
   		if(ch=='1' && cur_mode==mode_map && !alt_on)

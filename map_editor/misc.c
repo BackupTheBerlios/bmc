@@ -668,7 +668,7 @@ void clone_light(int object_id)
 	g=lights_list[object_id]->g;
 	b=lights_list[object_id]->b;
 
-	selected_light=add_light(scene_mouse_x,scene_mouse_y,z_pos,r,g,b,1.0f,0,0);
+	selected_light=add_light(scene_mouse_x,scene_mouse_y,z_pos,r,g,b,1.0f,0,0,0);
 	cur_tool=tool_select;//change the current tool
 }
 

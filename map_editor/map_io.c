@@ -204,6 +204,7 @@ void sector_add_map()
 			lights_list[i]->lightio.flags=lights_list[i]->flags;
 			lights_list[i]->lightio.intensity=global_to_io_intensity(lights_list[i]->intensity);
 			lights_list[i]->lightio.interval=global_to_io_interval(lights_list[i]->interval);//each step is 0.5s
+			lights_list[i]->lightio.flicker=global_to_io_flicker(lights_list[i]->flicker);
 
 			sector_add_light(i);
 			j++;
@@ -529,7 +530,7 @@ int load_map(char * file_name)
 			char * cur_light_pointer=(char *)&cur_light_io;
 			int k;
 			fread(cur_light_pointer, 1, lights_io_size, f);
-			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),cur_light_io.r/50.0f,cur_light_io.g/50.0f,cur_light_io.b/50.0f,io_to_global_intensity(cur_light_io.intensity),cur_light_io.flags,io_to_global_interval(cur_light_io.interval));
+			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),cur_light_io.r/50.0f,cur_light_io.g/50.0f,cur_light_io.b/50.0f,io_to_global_intensity(cur_light_io.intensity),cur_light_io.flags,io_to_global_interval(cur_light_io.interval),io_to_global_flicker(cur_light_io.flicker));
 			memcpy(&lights_list[k]->lightio,&cur_light_io,sizeof(light_io));
 		}
 

@@ -86,7 +86,7 @@ void draw_light_halo(light * l)
 			if(interval<2)interval=2;
 			pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
 			if(pos<=0) scale+=(-(float)pos/(float)interval)*l->intensity*0.25f;
-			else scale+=((float)pos/(float)interval)*l->intensity*0.25f;//Which part of the
+			else scale+=((float)pos/(float)interval)*l->intensity*0.25f;
 		}
 	
 	x_pos=l->pos_x; y_pos=l->pos_y; z_pos=l->pos_z;
@@ -149,7 +149,7 @@ void draw_lights()
 
 }
 
-int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity, Uint8 flags, float interval)
+int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity, Uint8 flags, float interval, float flicker)
 {
 	int i;
 	light *new_light;
@@ -165,6 +165,7 @@ int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, 
 	new_light->b=b;
 	
 	new_light->intensity=intensity;
+	new_light->flicker=flicker;
 	new_light->interval=interval;
 	new_light->flags=flags;
 
@@ -271,8 +272,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=-1+(rand()&0x02);
-													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													lights_list[i]->intensity=intensity=1.0f+(float)rand()/(float)RAND_MAX*lights_list[i]->flicker;
 													last_flicker=cur_time;
 												}
 										}
@@ -313,8 +313,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=-1+(rand()&0x2);
-													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													lights_list[i]->intensity=intensity=1.0f+(float)rand()/(float)RAND_MAX*lights_list[i]->flicker;
 													last_flicker=cur_time;
 												}
 										}
@@ -355,8 +354,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=-1+(rand()&0x2);
-													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													lights_list[i]->intensity=intensity=1.0f+(float)rand()/(float)RAND_MAX*lights_list[i]->flicker;
 													last_flicker=cur_time;
 												}
 										}
@@ -397,8 +395,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=-1+(rand()&0x2);
-													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													lights_list[i]->intensity=intensity=1.0f+(float)rand()/(float)RAND_MAX*lights_list[i]->flicker;
 													last_flicker=cur_time;
 												}
 										}
@@ -439,8 +436,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=-1+(rand()&0x2);
-													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													lights_list[i]->intensity=intensity=1.0f+(float)rand()/(float)RAND_MAX*lights_list[i]->flicker;
 													last_flicker=cur_time;
 												}
 										}
@@ -481,8 +477,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=-1+(rand()&0x2);
-													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													lights_list[i]->intensity=intensity=1.0f+(float)rand()/(float)RAND_MAX*lights_list[i]->flicker;
 													last_flicker=cur_time;
 												}
 										}
@@ -523,8 +518,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=-1+(rand()&0x2);
-													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													lights_list[i]->intensity=intensity=1.0f+(float)rand()/(float)RAND_MAX*lights_list[i]->flicker;
 													last_flicker=cur_time;
 												}
 										}
