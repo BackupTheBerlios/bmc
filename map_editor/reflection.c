@@ -92,19 +92,19 @@ void draw_3d_reflection(object3d * object_id)
 	check_gl_errors();
 }
 
-//if there is any reflecting tile, returns 1, otherwise 0
 int find_reflection()
 {
 	int x_start,x_end,y_start,y_end;
 	int x,y;
 	float x_scaled,y_scaled;
+	int found_water=0;
 
 	//get only the tiles around the camera
 	//we have the axes inverted, btw the go from 0 to -255
-	if(cx<0)x=(int)(cx*-1)/3;
-	else x=(int)cx/3;
-	if(cy<0)y=(int)(cy*-1)/3;
-	else y=(int)cy/3;
+	if(cx<0)x=(cx*-1)/3;
+	else x=cx/3;
+	if(cy<0)y=(cy*-1)/3;
+	else y=cy/3;
 	x_start=(int)x-4;
 	y_start=(int)y-4;
 	x_end=(int)x+4;
@@ -120,10 +120,14 @@ int find_reflection()
 				{
 					x_scaled=x*3.0f;
 					if(!check_tile_in_frustrum(x_scaled,y_scaled))continue;//outside of the frustrum
-					if(!tile_map[y*tile_map_size_x+x])return 1;
+					if(is_water_tile(tile_map[y*tile_map_size_x+x]))
+						{
+							if(is_reflecting(tile_map[y*tile_map_size_x+x])) return 2;
+							found_water=1;
+						}
 				}
 		}
-	return 0;
+	return found_water;
 }
 
 int find_local_reflection(int x_pos,int y_pos,int range)
@@ -149,7 +153,7 @@ int find_local_reflection(int x_pos,int y_pos,int range)
 		{
 			for(x=x_start;x<=x_end;x++)
 				{
-					if(!tile_map[y*tile_map_size_x+x])return 1;
+					if(is_reflecting(tile_map[y*tile_map_size_x+x]))return 1;
 				}
 		}
 	return 0;
@@ -275,42 +279,44 @@ void draw_lake_water_tile(float x_pos, float y_pos)
 
 void draw_lake_tiles()
 {
-	int x_start,x_end,y_start,y_end;
+        int x_start,x_end,y_start,y_end;
 	int x,y;
 	float x_scaled,y_scaled;
-	int cur_texture;
 
-	//glDisable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-	bind_texture_id(get_texture_id(sky_text_1));
 
 	//get only the tiles around the camera
 	//we have the axes inverted, btw the go from 0 to -255
-	if(cx<0)x=(int)(cx*-1)/3;
-	else x=(int)cx/3;
-	if(cy<0)y=(int)(cy*-1)/3;
-	else y=(int)cy/3;
-	x_start=x-(int)zoom_level;
-	y_start=y-(int)zoom_level;
-	x_end=x+(int)zoom_level;
-	y_end=y+(int)zoom_level;
-	if(x_start<0)x_start=0;
-	if(x_end>=tile_map_size_x)x_end=tile_map_size_x-1;
-	if(y_start<0)y_start=0;
-	if(y_end>=tile_map_size_y)y_end=tile_map_size_y-1;
+	if(cx<0)x=(cx*-1)/3;
+	else x=cx/3;
+	if(cy<0)y=(cy*-1)/3;
+	else y=cy/3;
+	x_start=(int)x-5;
+	y_start=(int)y-5;
+	x_end=(int)x+5;
+	y_end=(int)y+5;
 	for(y=y_start;y<=y_end;y++)
 		{
+			int actualy=y;
+			if(actualy<0)actualy=0;
+			else if(actualy>=tile_map_size_y)actualy=tile_map_size_y-1;
+			actualy*=tile_map_size_x;
 			y_scaled=y*3.0f;
 			for(x=x_start;x<=x_end;x++)
 				{
+					int actualx=x;
+					if(actualx<0)actualx=0;
+					else if(actualx>=tile_map_size_x)actualx=tile_map_size_x-1;
 					x_scaled=x*3.0f;
-					if(!check_tile_in_frustrum(x_scaled,y_scaled))continue;//outside of the frustrum
-					if(!tile_map[y*tile_map_size_x+x])draw_lake_water_tile(x_scaled,y_scaled);
+					if(is_water_tile(tile_map[actualy+actualx]) && check_tile_in_frustrum(x_scaled,y_scaled))
+						{
+							get_and_set_texture_id(tile_list[tile_map[actualx+actualy]]);
+							draw_lake_water_tile(x_scaled,y_scaled);
+						}
 				}
 		}
-
 	glDisable(GL_BLEND);
 	glDisable(GL_CULL_FACE);
 }

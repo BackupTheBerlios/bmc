@@ -465,7 +465,30 @@ int HandleEvent(SDL_Event *event)
 			game_minute--;
 		}
 
-        //see if we get any text
+                if(event->key.keysym.sym == SDLK_KP_PLUS)
+			{
+				if(view_tiles_list)
+					{
+						if(tile_offset<192)tile_offset+=64;
+					}
+				else
+					{
+						grid_height+=0.1f;
+					}
+			}
+		if(event->key.keysym.sym == SDLK_KP_MINUS)
+			{
+				if(view_tiles_list)
+					{
+						if(tile_offset>0)tile_offset-=64;
+					}
+				else
+					{
+						grid_height-=0.1f;
+					}
+			}
+
+        //see ifwe get any text
         if ((event->key.keysym.unicode & 0xFF80)==0)
   		ch = event->key.keysym.unicode & 0x7F;
   		//check wehter we should switch shadows on/off
@@ -505,7 +528,9 @@ int HandleEvent(SDL_Event *event)
   		if((ch=='h'||ch=='H') && selected_light!=-1 && cur_mode==mode_light)
   			lights_list[selected_light]->flags^=HALO;
   		if((ch=='f'||ch=='F') && selected_light!=-1 && cur_mode==mode_light)
-  			lights_list[selected_light]->flags^=FLICKER;
+			lights_list[selected_light]->flags^=FLICKER|lights_list[selected_light]->flags&PULSATE;//They can't pulsate and flicker at the same time
+		if((ch=='p'||ch=='P') && selected_light!=-1 && cur_mode==mode_light)
+			lights_list[selected_light]->flags^=PULSATE|lights_list[selected_light]->flags&FLICKER;
 		if((ch=='q'||ch=='Q') && selected_light!=-1 && cur_mode==mode_light)
 			{
 				if(lights_list[selected_light]->intensity<5.0f) lights_list[selected_light]->intensity+=0.1f;

@@ -532,7 +532,7 @@ void display_tiles_list()
 	glEnd();
 	glEnable(GL_TEXTURE_2D);
 
-	for(i=tile_offset,j=0;i<tiles_no;i++,j++)
+	for(i=tile_offset,j=0;i<tiles_no && j<64 ;i++,j++)
 		{
 
 			x_start=64*(j%8);
@@ -543,42 +543,24 @@ void display_tiles_list()
 			y_start+=(int)y_tile_menu_offset;
 			y_end=y_start+63;
 
-			if(!i)//we have a lake tile
-			{
-				glDisable(GL_TEXTURE_2D);
-				glDisable(GL_LIGHTING);
-				glColor3f(0,0.6f,1.0f);
-				glBegin(GL_QUADS);
-				glVertex3i(x_start,y_end,0);
-				glVertex3i(x_start,y_start,0);
-				glVertex3i(x_end,y_start,0);
-				glVertex3i(x_end,y_end,0);
-				glEnd();
-				glEnable(GL_LIGHTING);
-				glEnable(GL_TEXTURE_2D);
-			}
-			else
-			{
-				glBindTexture(GL_TEXTURE_2D, get_texture_id(tile_list[i]));
+			glBindTexture(GL_TEXTURE_2D, get_texture_id(tile_list[i]));
 
-				glBegin(GL_QUADS);
-				glTexCoord2f(0,1.0f);
-				glVertex3i(x_start,y_end,0);
+			glBegin(GL_QUADS);
+			glTexCoord2f(0,1.0f);
+			glVertex3i(x_start,y_end,0);
 
-				glTexCoord2f(0,0);
-				glVertex3i(x_start,y_start,0);
+			glTexCoord2f(0,0);
+			glVertex3i(x_start,y_start,0);
 
-				glTexCoord2f(1.0f,0);
-				glVertex3i(x_end,y_start,0);
+			glTexCoord2f(1.0f,0);
+			glVertex3i(x_end,y_start,0);
 
-				glTexCoord2f(1.0f,1.0f);
-				glVertex3i(x_end,y_end,0);
+			glTexCoord2f(1.0f,1.0f);
+			glVertex3i(x_end,y_end,0);
 
-				glEnd();
-			}
+			glEnd();
 		}
 }
-
 
 void display_heights_list()
 {

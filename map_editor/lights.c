@@ -1,7 +1,7 @@
 #include "global.h"
 #include <math.h>
 
-GLuint halo_tex=0;
+int halo_tex=0;
 
 void draw_test_light()
 {
@@ -68,7 +68,17 @@ void draw_light_halo(light * l)
 	float render_x_start,render_y_start,u_start=0.0f,v_start=0.0f,u_end=1.0f,v_end=1.0f;//Change if inside a bitmap...
 	float scale;
 	
-	if(l->r>l->g)
+	if(l->flags&FLICKER) scale=l->intensity*0.25;
+	else if(l->flags&PULSATE && l->interval)
+		{
+			float interval=l->interval;
+			float pos;
+			if(interval<2)interval=2;
+			pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+			if(pos<=0) scale=(-(float)pos/(float)interval)*l->intensity*0.25f;
+			else scale=((float)pos/(float)interval)*l->intensity*0.25f;//Which part of the
+		}
+	else if(l->r>l->g)
 		{
 			if(l->r>l->b) scale=l->r*0.25f;
 			else scale=l->b*0.25f;
@@ -92,11 +102,7 @@ void draw_light_halo(light * l)
 	glRotatef(-rz, 0.0f, 0.0f, 1.0f);
 	glRotatef(-rx, 1.0f, 0.0f, 0.0f);
 	glRotatef(-ry, 0.0f, 1.0f, 0.0f);
-	if(last_texture!=(int)halo_tex)
-		{
-			glBindTexture(GL_TEXTURE_2D, halo_tex);
-			last_texture=halo_tex;
-		}
+	get_and_set_texture_id(halo_tex);
 	glBegin(GL_TRIANGLE_STRIP);
 	glColor3f(l->r/5.0f,l->g/5.0f,l->b/5.0f);
 	glTexCoord2f(u_start,v_start);	glVertex2f(-scale,-scale);
@@ -155,9 +161,9 @@ int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, 
 	new_light->pos_y=y;
 	new_light->pos_z=z;
 
-	new_light->r=r*intensity;
-	new_light->g=g*intensity;
-	new_light->b=b*intensity;
+	new_light->r=r;
+	new_light->g=g;
+	new_light->b=b;
 	
 	new_light->intensity=intensity;
 	new_light->interval=interval;
@@ -271,7 +277,7 @@ void update_scene_lights()
 													last_flicker=cur_time;
 												}
 										}
-									if(lights_list[i]->interval)
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
 										{
 											float interval=lights_list[i]->interval;
 											float pos;
@@ -313,7 +319,7 @@ void update_scene_lights()
 													last_flicker=cur_time;
 												}
 										}
-									if(lights_list[i]->interval)
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
 										{
 											float interval=lights_list[i]->interval;
 											float pos;
@@ -355,7 +361,7 @@ void update_scene_lights()
 													last_flicker=cur_time;
 												}
 										}
-									if(lights_list[i]->interval)
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
 										{
 											float interval=lights_list[i]->interval;
 											float pos;
@@ -397,7 +403,7 @@ void update_scene_lights()
 													last_flicker=cur_time;
 												}
 										}
-									if(lights_list[i]->interval)
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
 										{
 											float interval=lights_list[i]->interval;
 											float pos;
@@ -435,7 +441,7 @@ void update_scene_lights()
 											intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
 											last_flicker=cur_time;
 										}
-									if(lights_list[i]->interval)
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
 										{
 											float interval=lights_list[i]->interval;
 											float pos;
@@ -477,7 +483,7 @@ void update_scene_lights()
 													last_flicker=cur_time;
 												}
 										}
-									if(lights_list[i]->interval)
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
 										{
 											float interval=lights_list[i]->interval;
 											float pos;
@@ -519,7 +525,7 @@ void update_scene_lights()
 													last_flicker=cur_time;
 												}
 										}
-									if(lights_list[i]->interval)
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
 										{
 											float interval=lights_list[i]->interval;
 											float pos;

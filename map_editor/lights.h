@@ -1,7 +1,7 @@
 #ifndef __LIGHTS_H__
 #define __LIGHTS_H__
 
-#define FADE 1
+#define PULSATE 1
 #define HALO 2
 #define FLICKER 4
 
@@ -69,7 +69,7 @@ extern sun sun_pos[60*3];
 
 #define max_lights 1000
 extern light *lights_list[max_lights];
-extern GLuint halo_tex;
+extern int halo_tex;
 
 extern char lights_on;
 extern unsigned char light_level;

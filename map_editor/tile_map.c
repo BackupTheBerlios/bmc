@@ -10,6 +10,28 @@ void destroy_map_tiles()
 	for(;i<255;i++) if(map_tiles[i].img) free(map_tiles[i].img);
 }
 
+int is_water_tile(int tile)
+{
+	switch(tile)
+		{
+			case 200:
+			case 201: 
+			case 202:
+			case 203: return 1;
+		}
+	return 0;
+}
+
+int is_reflecting(int tile)
+{
+	switch(tile)
+		{
+			case 200:
+			case 201: return 1;
+		}
+	return 0;
+}
+
 void draw_tile_map()
 {
 	int x_start,x_end,y_start,y_end;
@@ -40,8 +62,8 @@ void draw_tile_map()
 					for(x=x_start;x<=x_end;x++)
 						{
 							x_scaled=x*3.0f;
-							if(!tile_map[y*tile_map_size_x+x])continue;//lake, skip
-							if(tile_map[y*tile_map_size_x+x]==255)continue;//null, skip
+							if(is_water_tile(tile_map[y*tile_map_size_x+x]))continue;//lake, skip
+							if(!tile_map[y*tile_map_size_x+x])continue;//null, skip
 							cur_texture=get_texture_id(tile_list[tile_map[y*tile_map_size_x+x]]);
 							if(last_texture!=cur_texture)
 								{

@@ -298,7 +298,7 @@ void init_stuff()
 	icons_text=load_texture_cache("./textures/gamebuttons.bmp",0);
 	buttons_text=load_texture_cache("./textures/buttons.bmp",0);
 	sky_text_1=load_texture_cache("./textures/sky.bmp",70);
-	halo_tex=load_bmp8_color_key("./art/halo.bmp");
+	halo_tex=load_texture_cache("./art/halo.bmp",0);
 	
 	particle_textures[0]=load_texture_cache("./textures/particle0.bmp",0);
 	particle_textures[1]=load_texture_cache("./textures/particle1.bmp",0);
