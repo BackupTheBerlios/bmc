@@ -179,6 +179,14 @@ void draw_3d_reflection(object3d * object_id)
 	glRotatef(x_rot, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_rot, 0.0f, 1.0f, 0.0f);
 
+	//rescale the object if needed
+	if(object_id->object_size)
+		{
+			glScalef(scaling_array[object_id->object_size],
+			scaling_array[object_id->object_size], scaling_array[object_id->object_size]);
+		}
+
+
 	check_gl_errors();
 	glVertexPointer(3,GL_FLOAT,0,array_vertex);
 	glTexCoordPointer(2,GL_FLOAT,0,array_uv_main);

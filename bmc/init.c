@@ -161,7 +161,7 @@ void load_knowledge_list()
 	int i=0;
 	char strLine[255];
 	char filename[200];
-	
+
 	memset(knowledge_list, 0, sizeof(knowledge_list));
 	i=0;
 	sprintf(filename,"languages/%s/knowledge.lst",lang);
@@ -220,7 +220,7 @@ void read_config()
 		}
 	while(fgets(str,250,f))
 		{
-			if(str[0]=='#')	
+			if(str[0]=='#')
 				{
 					check_var(str+1,1);//check only for the long strings
 				}
@@ -229,7 +229,7 @@ void read_config()
 #ifndef WINDOWS
 		chdir(datadir);
 #endif
-	
+
 	if(password_str[0])//We have a password
 		{
 			for(k=0;k<(int)strlen(password_str);k++) display_password_str[k]='*';
@@ -241,7 +241,7 @@ void read_config()
 			password_box_selected=1;
 		}
 
-	
+
 	fclose(f);
 }
 
@@ -307,7 +307,7 @@ void read_bin_cfg()
 			if((quickbar_draggable=(cfg_mem.quickbar_flags&0xFF00)>>8)!=1)quickbar_draggable=0;
 			draw_quickbar();
 		}
-	
+
 	watch_this_stat=cfg_mem.watch_this_stat;
 	if(watch_this_stat<0 || watch_this_stat>=NUM_WATCH_STAT)
 		watch_this_stat=0;
@@ -522,14 +522,14 @@ void init_stuff()
 
 	//TODO: process command line options
 	chdir(datadir);
-	
+
 	//Initialize all strings
 	init_translatables();
 
 #ifdef WRITE_XML
 	load_translatables();//Write to the current working directory - hopefully we'll have write rights here...
 #endif
-	
+
 	//read the config file
 	read_config();
 
@@ -543,7 +543,7 @@ void init_stuff()
 
 	//Good, we should be in the right working directory - load all translatables from their files
 	load_translatables();
-	
+
 	init_video();
 	resize_window();
 	init_gl_extensions();
@@ -593,6 +593,7 @@ void init_stuff()
 	build_rain_table();
 	read_bin_cfg();
 	build_levels_table();//for some HUD stuff
+	init_scale_array();
 
 	if(!no_sound)init_sound();
 
@@ -665,10 +666,10 @@ void init_stuff()
 	read_key_config();
 	load_questlog();
 	init_buddy();
-	
+
 	//initiate function pointers
 	init_attribf();
-	
+
 	//we might want to do this later.
 	connect_to_server();
 }

@@ -223,6 +223,8 @@ void build_cursors()
 void check_cursor_change()
 {
 	int i;
+	int object_id;
+
 	if(elwin_mouse >= 0) {
 		if(current_cursor!=elwin_mouse)change_cursor(elwin_mouse);
 		elwin_mouse=-1;
@@ -252,6 +254,7 @@ void check_cursor_change()
 					if(current_cursor!=CURSOR_USE)change_cursor(CURSOR_USE);
 					return;
 				}
+/*
 			//see if the object is a harvestable resource.
 			if(objects_list[object_under_mouse]->attributes&MINABLE||objects_list[object_under_mouse]->attributes&CUTTABLE||
 			   objects_list[object_under_mouse]->attributes&DIGGABLE || objects_list[object_under_mouse]->attributes&PICKABLE)
@@ -259,7 +262,7 @@ void check_cursor_change()
 					if(current_cursor!=CURSOR_HARVEST)change_cursor(CURSOR_HARVEST);
 					return;
 				}
-/*
+
 			if(objects_list[object_under_mouse]->attributes&PICKABLE)
 				{
 					if(current_cursor!=CURSOR_PICK)change_cursor(CURSOR_PICK);
@@ -272,6 +275,24 @@ void check_cursor_change()
 					if(current_cursor!=CURSOR_ENTER)change_cursor(CURSOR_ENTER);
 					return;
 				}
+
+			//maybe a harvestable resource? if so, look in the e3d list, we don't send the harvestable attributes from the server
+
+			//TO DO maybe later on we should cache this ID
+			object_id=e3dlist_getid(objects_list[object_under_mouse]->file_name);
+			for(i=0;i<e3dlistsize;i++)
+			if(e3dlist[i].id==object_id)
+				{
+
+					if(e3dlist[i].attributes&MINABLE || e3dlist[i].attributes&CUTTABLE || e3dlist[i].attributes&DIGGABLE ||
+					e3dlist[i].attributes&PICKABLE)
+						{
+							if(current_cursor!=CURSOR_HARVEST)change_cursor(CURSOR_HARVEST);
+							return;
+						}
+					break;
+				}
+
 
 			//hmm, no usefull object, so select walk....
 			if(current_cursor!=CURSOR_WALK)change_cursor(CURSOR_WALK);

@@ -6,8 +6,8 @@ int e3dlist_getid(char *name)
 {
 	int i;
 	for(i=0;i<e3dlistsize;i++)
-		if(!strcmp(name,e3dlist[i].fn))
-			return i;
+		if(strstr(name,e3dlist[i].fn+1))
+			return e3dlist[i].id;
 	return -1;
 }
 
@@ -15,8 +15,8 @@ int e2dlist_getid(char *name)
 {
 	int i;
 	for(i=0;i<e2dlistsize;i++)
-		if(!strcmp(name,e2dlist[i].fn))
-			return i;
+		if(strstr(name,e2dlist[i].fn+1))
+			return e2dlist[i].id;
 	return -1;
 }
 
@@ -42,8 +42,8 @@ int partlist_getid(char *name)
 {
 	int i;
 	for(i=0;i<partlistsize;i++)
-		if(!strcmp(name,partlist[i].fn))
-			return i;
+		if(strstr(name,partlist[i].fn+1))
+			return partlist[i].id;
 	return -1;
 }
 
@@ -54,6 +54,16 @@ char *partlist_getname(int id)
 		if(partlist[i].id==id)
 			return partlist[i].fn;
 	return NULL;
+}
+
+
+int e3dlist_get_attributes(char * name)
+{
+	int i;
+        for(i=0;i<e3dlistsize;i++)
+                if(strstr(name,e3dlist[i].fn+1))
+                        return e3dlist[i].attributes;
+	return 0;
 }
 
 void destroy_map()
@@ -243,7 +253,7 @@ int save_map(char * file_name)
 	for(i=0;i<max_particle_systems;i++)
 	{
 		if(j>=particles_no)break;
-		if(particles_list[i]){	
+		if(particles_list[i]){
 			fwrite(&particles_list[i]->particleio,sizeof(particles_io),1,f);
 			j++;
 		}
@@ -304,7 +314,7 @@ int load_map(char * file_name)
 	if(cur_map_header.file_sig[3]!='f')return 0;
 
 	strcpy(map_file_name,file_name);
-	
+
 	//get the map size
 	tile_map_size_x=cur_map_header.tile_map_x_len;
 	tile_map_size_y=cur_map_header.tile_map_y_len;
@@ -365,7 +375,7 @@ int load_map(char * file_name)
 
 	//read the tiles map
 	fread(tile_map, 1, tile_map_size_x*tile_map_size_y, f);
-	
+
 	//load the tiles in this map, if not already loaded
 	load_map_tiles();
 
@@ -378,17 +388,31 @@ int load_map(char * file_name)
 			char * cur_3do_pointer=(char *)&cur_3d_obj_io;
 			int k;
 			fread(cur_3do_pointer, 1, obj_3d_io_size, f);
-			if((Sint16)cur_3d_obj_io.object_type!=-1){
-				k=add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
-				sector_to_global_z(cur_3d_obj_io.z_pos),cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
-				cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f,
-				cur_3d_obj_io.attributes);
-				if(i!=k){
-					objects_list[i]=objects_list[k];
-					objects_list[k]=0;
+			if((Sint16)cur_3d_obj_io.object_type!=-1)
+				{
+					Uint16 object_type;
+					Uint16 object_size=0;
+
+					object_type=cur_3d_obj_io.object_type;
+					//try to determine if we are dealing with a 'baby' object
+					if(object_type>8191)
+						{
+							object_size=object_type>>13;
+							object_type=object_type&0x1fff;
+						}
+
+					k=add_e3d(e3dlist_getname(object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
+					sector_to_global_z(cur_3d_obj_io.z_pos),cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
+					cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f,
+					cur_3d_obj_io.attributes);
+					if(i!=k)
+						{
+							objects_list[i]=objects_list[k];
+							objects_list[k]=0;
+						}
+					memcpy(&objects_list[i]->o3dio,&cur_3d_obj_io,sizeof(object3d_io));
+					objects_list[i]->object_size=object_size;
 				}
-				memcpy(&objects_list[i]->o3dio,&cur_3d_obj_io,sizeof(object3d_io));
-			}
 		}
 
 	//read the 2d objects
@@ -410,7 +434,7 @@ int load_map(char * file_name)
 			int k;
 			fread(cur_light_pointer, 1, lights_io_size, f);
 			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),
-			io_to_global_intensity(cur_light_io.r),io_to_global_intensity(cur_light_io.g),io_to_global_intensity(cur_light_io.b), 
+			io_to_global_intensity(cur_light_io.r),io_to_global_intensity(cur_light_io.g),io_to_global_intensity(cur_light_io.b),
 			io_to_global_intensity(cur_light_io.intensity),cur_light_io.flags, io_to_global_interval(cur_light_io.interval),io_to_global_flicker(cur_light_io.flicker));
 			memcpy(&lights_list[k]->lightio,&cur_light_io,sizeof(light_io));
 		}
@@ -424,7 +448,7 @@ int load_map(char * file_name)
 			k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,sector_to_global_z(cur_particles_io.z_pos));
 			memcpy(&particles_list[k]->particleio,&cur_particles_io,sizeof(particles_io));
 		}
-	
+
 	sectors=(map_sector*)malloc(sizeof(map_sector)*num_sectors);
 	fread(sectors,sizeof(map_sector),num_sectors,f);
 	fclose(f);

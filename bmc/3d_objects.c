@@ -6,6 +6,20 @@
 object3d *objects_list[max_obj_3d];
 int highest_obj_3d= 0;
 
+float scaling_array[8];
+
+void init_scale_array()
+{
+scaling_array[0]=1.0f;
+scaling_array[1]=.9f;
+scaling_array[2]=.8f;
+scaling_array[3]=.7f;
+scaling_array[4]=.6f;
+scaling_array[5]=.5f;
+scaling_array[6]=.4f;
+scaling_array[7]=.3f;
+}
+
 void draw_3d_object(object3d * object_id)
 {
 	float x_pos,y_pos,z_pos;
@@ -84,6 +98,12 @@ void draw_3d_object(object3d * object_id)
 	glRotatef(x_rot, 1.0f, 0.0f, 0.0f);
 	y_rot=object_id->y_rot;
 	glRotatef(y_rot, 0.0f, 1.0f, 0.0f);
+
+	//rescale the object if needed
+	if(object_id->object_size)
+		{
+			glScalef(scaling_array[object_id->object_size],scaling_array[object_id->object_size], scaling_array[object_id->object_size]);
+		}
 
 	check_gl_errors();
 	if(!have_multitexture || (!clouds_shadows && !use_shadow_mapping))

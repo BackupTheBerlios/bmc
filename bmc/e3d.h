@@ -142,11 +142,12 @@ typedef struct
    float r,g,b;
 
    Uint32 attributes;
-   
+
    e3d_array_uv_detail *clouds_uv;
 
    e3d_object *e3d_data;
    unsigned int last_acessed_time;
+   Uint8 object_size;//0 to 7. 0 is normal size, 7 is the smallest.
 
    object3d_io o3dio;
 }object3d;

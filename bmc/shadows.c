@@ -207,6 +207,13 @@ void draw_3d_object_shadow(object3d * object_id)
 	glRotatef(x_rot, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_rot, 0.0f, 1.0f, 0.0f);
 
+	//rescale the object if needed
+	if(object_id->object_size)
+		{
+			glScalef(scaling_array[object_id->object_size],scaling_array[object_id->object_size], scaling_array[object_id->object_size]);
+		}
+
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3,GL_FLOAT,0,array_vertex);
 	if(is_transparent)

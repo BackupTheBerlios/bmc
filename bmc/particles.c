@@ -438,7 +438,7 @@ void draw_point_particle_sys(particle_sys *system_id)
 #if 0
 	//#ifdef USE_VERTEX_ARRAYS
 	// This might be useful if we allow more particles per system.
-	// It does, however, render free particles... 
+	// It does, however, render free particles...
 	if(use_vertex_array)
 		{
 			glEnableClientState(GL_VERTEX_ARRAY);
@@ -624,7 +624,7 @@ void update_burst_sys(particle_sys *system_id)
 						p->vx=distx*len;
 						p->vy=disty*len;
 						p->vz=distz*len;
-					}			
+					}
 				p->x+=p->vx;
 				p->y+=p->vy;
 				p->z+=p->vz;
@@ -644,7 +644,7 @@ void update_fire_sys(particle_sys *system_id)
 	int total_particle_no=system_id->def->total_particle_no;
 	particle *p;
 	int j;
-	
+
 	//see if we need to add new particles
 	lock_particles_list();
 
@@ -678,7 +678,7 @@ void update_fire_sys(particle_sys *system_id)
 						if(system_id->particle_count)system_id->particle_count--;
 						continue;
 					}
-				
+
 				// Fires don't use acceleration as usual...
 				p->x+=p->vx+particle_random(system_id->def->acc_minx,system_id->def->acc_maxx);
 				p->y+=p->vy+particle_random(system_id->def->acc_miny,system_id->def->acc_maxy);
@@ -734,7 +734,7 @@ void update_teleporter_sys(particle_sys *system_id)
 						if(system_id->particle_count)system_id->particle_count--;
 						continue;
 					}
-				
+
 				// Teleporters don't use acceleration as usual...
 				p->x+=p->vx+particle_random2(system_id->def->acc_minx,system_id->def->acc_maxx);
 				p->y+=p->vy+particle_random2(system_id->def->acc_miny,system_id->def->acc_maxy);
@@ -907,7 +907,7 @@ void update_particles() {
 					free(particles_list[i]);
 					particles_list[i]=0;
 				}
-				
+
 			}
 		}
 	unlock_particles_list();
@@ -923,6 +923,7 @@ void add_teleporters_from_list(Uint8 *teleport_list)
 	int i;
 	int teleport_x,teleport_y,teleport_type,my_offset;
 	float x,y,z;
+	int obj_3d_id;
 
 	teleporters_no=*((Uint16 *)(teleport_list));
 	lock_particles_list();	//lock it to avoid timing issues
@@ -946,7 +947,8 @@ void add_teleporters_from_list(Uint8 *teleport_list)
 
 
 			add_particle_sys("./particles/teleporter.part",x,y,z);
-			add_e3d("./3dobjects/misc_objects/portal1.e3d",x,y,z,0,0,0,1,0,1.0f,1.0f,1.0f,0);
+			obj_3d_id=add_e3d("./3dobjects/misc_objects/portal1.e3d",x,y,z,0,0,0,1,0,1.0f,1.0f,1.0f,0);
+			objects_list[obj_3d_id]->object_size=0;
 
 			//mark the teleporter as an unwalkable so that the pathfinder
 			//won't try to plot a path through it
