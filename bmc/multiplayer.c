@@ -771,6 +771,18 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 			break;
 		}
 
+		case ADD_3D_OBJECT:
+			add_3d_object(in_data+3);
+			break;
+
+		case DELETE_3D_OBJECT:
+			delete_3d_object(in_data+3);
+			break;
+
+		case REPLACE_3D_OBJECT:
+			replace_3d_object(in_data+3);
+			break;
+
 		default:
 			{
 				/* Unknown data type?? */;

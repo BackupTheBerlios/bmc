@@ -77,4 +77,10 @@ void send_superchecksum(int sector);
 void update_sector_objects(Uint16 sector);
 void update_sector_tiles(Uint16 sector);
 
+
+//
+void add_3d_object(char *d);
+void delete_3d_object(char *d);
+void replace_3d_object(char *d);
+
 #endif
