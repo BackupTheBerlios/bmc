@@ -657,6 +657,7 @@ int vscrollbar_get_pos(Uint32 window_id, Uint32 widget_id)
 		vscrollbar *c = (vscrollbar *)w->widget_info;
 		return c->pos;
 	}
+	return -1;
 }
 
 // XML Windows

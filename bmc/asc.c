@@ -266,7 +266,7 @@ Uint32	clean_file_name(Uint8 *dest, const Uint8 *src, Uint32 max_len)
 	Uint32	len;
 	Uint32	i;
 
-	if(!dest || !src)return;//don't crash
+	if(!dest || !src)return -1;//don't crash
 
 	len=strlen(src);
 	if(len > max_len)len=max_len-1;
