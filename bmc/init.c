@@ -606,8 +606,12 @@ void init_stuff()
 	sky_text_1=load_texture_cache("./textures/sky.bmp",70);
 	particle_textures[0]=load_texture_cache("./textures/particle0.bmp",0);
 	particle_textures[1]=load_texture_cache("./textures/particle1.bmp",0);
-	particle_textures[2]=particle_textures[3]=particle_textures[4]=0;
-	particle_textures[5]=particle_textures[6]=particle_textures[7]=0;
+	particle_textures[2]=load_texture_cache("./textures/particle2.bmp",0);
+	particle_textures[3]=load_texture_cache("./textures/particle3.bmp",0);
+	particle_textures[4]=load_texture_cache("./textures/particle4.bmp",0);
+	particle_textures[5]=load_texture_cache("./textures/particle5.bmp",0);
+	particle_textures[6]=load_texture_cache("./textures/particle6.bmp",0);
+	particle_textures[7]=load_texture_cache("./textures/particle7.bmp",0);
 
 	items_text_1=load_texture_cache("./textures/items1.bmp",0);
 	items_text_2=load_texture_cache("./textures/items2.bmp",0);
@@ -626,7 +630,7 @@ void init_stuff()
 	portraits5_tex=load_texture_cache("./textures/portraits5.bmp",0);
 
 	sigils_text=load_texture_cache("./textures/sigils.bmp",0);
-	halo_tex=load_texture_cache("./art/halo.bmp",0);
+	halo_tex=load_texture_cache("./textures/halo.bmp",0);
 
 	if(have_multitexture)ground_detail_text=load_texture_cache("./textures/ground_detail.bmp",255);
 	check_gl_errors();
