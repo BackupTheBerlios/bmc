@@ -482,7 +482,7 @@ int HandleEvent(SDL_Event *event)
 			{
 				if(view_tiles_list)
 					{
-						if(tile_offset>0)tile_offset-=64;
+						if(tile_offset>1)tile_offset-=64;
 					}
 				else
 					{

@@ -7,7 +7,7 @@ int view_attributes=0;
 int attributes_x=20;
 int attributes_y=100;
 int attributes_x_len=240;
-int attributes_y_len=180;
+int attributes_y_len=200;
 int attributes_win;
 
 draw_option(int startx, int starty, char * str, int selected)
@@ -100,6 +100,7 @@ int display_attributes_handler(window_info * win)
 	draw_option(15,115,"Use with:",objects_list[aw_selected_object]->attributes&USE_WITH);
 	draw_option(15,135,"Attackable:",objects_list[aw_selected_object]->attributes&ATTACKABLE);
 	draw_option(15,155,"Entrable:",objects_list[aw_selected_object]->attributes&ENTRABLE);
+	draw_option(15,175,"Openable:",objects_list[aw_selected_object]->attributes&OPENABLE);
 
 	return 1;
 }
@@ -121,7 +122,8 @@ int check_attributes_interface(window_info * win, int mx, int my, Uint32 flags)
 			if(my>95&&my<110) objects_list[aw_selected_object]->attributes^=USABLE|(objects_list[aw_selected_object]->attributes&USE_WITH);
 			if(my>115&&my<130) objects_list[aw_selected_object]->attributes^=USE_WITH|(objects_list[aw_selected_object]->attributes&USABLE);
 			if(my>135&&my<150) objects_list[aw_selected_object]->attributes^=ATTACKABLE;
-			if(my>155&&my<170) objects_list[aw_selected_object]->attributes^=ENTRABLE;
+			if(my>155&&my<170) objects_list[aw_selected_object]->attributes^=ENTRABLE|(objects_list[aw_selected_object]->attributes&OPENABLE);
+			if(my>175&&my<190) objects_list[aw_selected_object]->attributes^=OPENABLE|(objects_list[aw_selected_object]->attributes&ENTRABLE);
 		}
 	return 1;
 }

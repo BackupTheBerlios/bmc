@@ -9,6 +9,7 @@
 #define USE_WITH 32
 #define ATTACKABLE 64
 #define ENTRABLE 128
+#define OPENABLE 256 //For chests and such
 
 typedef struct
 {
