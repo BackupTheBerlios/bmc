@@ -114,7 +114,7 @@ void destroy_map()
 // adds everything from the maps to the sectors
 void sector_add_map()
 {
-	int i,j;
+	int i,j=0;
 	int obj_3d_no=0;
 	int obj_2d_no=0;
 	int lights_no=0;
