@@ -88,6 +88,7 @@ int start_rendering()
 					log_to_console(c_red2,"Timer failure, timer has been restarted!");
 					log_error("Timer failure!");
 					SDL_SetTimer((Uint32)my_timer,0);
+					my_timer_clock=cur_time;
 				}
 			
 			//cache handling
