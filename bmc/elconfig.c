@@ -1,8 +1,17 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+//#include "global.h"
+
+#ifdef MAP_EDITOR
+#include "../map_editor/global.h"
+#else
 #include "global.h"
+#endif
+
 #include "elconfig.h"
+
+
 
 #define SPECINT		0 	//Multiple ints, special func							func(int)
 #define SPECCHAR	1 	//Char pointer, special func							func(char*)
@@ -89,7 +98,7 @@ void change_point_particles(int value)
 void change_particles_percentage(int value)
 {
 	if(value>0 && value <=100) particles_percentage=value;
-	else 
+	else
 		{
 			particles_percentage=0;
 			log_to_console(c_green2,disabled_particles_str);
@@ -111,7 +120,7 @@ void switch_vidmode(int mode)
 
 void toggle_full_screen_mode(int * fs)
 {
-	if(!video_mode_set) 
+	if(!video_mode_set)
 		{
 			*fs=!*fs;
 			return;
@@ -150,7 +159,7 @@ int check_var(char * str, int type)
 							char *tptr=++ptr;
 							while(*tptr && *tptr!='"')
 								{
-									if(*tptr==0x0a||*tptr==0x0d) 
+									if(*tptr==0x0a||*tptr==0x0d)
 										{
 #ifdef ELC
 											char str[200];
@@ -273,12 +282,12 @@ void init_vars()
 
 	add_var(FLOAT,"normal_camera_rotation_speed","nrot",&normal_camera_rotation_speed,change_float,15);
 	add_var(FLOAT,"fine_camera_rotation_speed","frot",&fine_camera_rotation_speed,change_float,1);
-	
+
 	add_var(FLOAT,"name_text_size","nsize",&name_zoom,change_float,1);
 	add_var(INT,"name_font","nfont",&name_font,change_int,0);
 	add_var(FLOAT,"chat_text_size","csize",&chat_zoom,change_float,1);
 	add_var(INT,"chat_font","cfont",&chat_font,change_int,0);
-	
+
 	add_var(BOOL,"no_sound","sound",&no_sound,change_var,0);
 	add_var(FLOAT,"sound_gain","sgain",&sound_gain,change_sound_level,1);
 	add_var(FLOAT,"music_gain","mgain",&music_gain,change_sound_level,1);
@@ -290,16 +299,16 @@ void init_vars()
 	add_var(BOOL,"show_help_text","shelp",&show_help_text,change_var,1);
 	add_var(BOOL,"relocate_quickbar","requick",&quickbar_relocatable,change_var,0);
 	add_var(SPECINT,"compass_north","comp",&compass_direction,change_compass_direction,1);
-	
+
 	add_var(SPECINT,"auto_afk_time","afkt",&afk_time,set_afk_time,5*60000);
 	add_var(STRING,"afk_message","afkm",afk_message,change_string,127);
-	
+
 	add_var(BOOL,"use_global_ignores","gign",&use_global_ignores,change_var,1);
 	add_var(BOOL,"save_ignores","sign",&save_ignores,change_var,1);
 	add_var(BOOL,"use_global_filters","gfil",&use_global_filters,change_var,1);
 	add_var(STRING,"text_filter_replace","trepl",text_filter_replace,change_string,127);
 	add_var(BOOL,"caps_filter","caps",&caps_filter,change_var,1);
-	
+
 	add_var(STRING,"server_address","sa",server_address,change_string,70);
 	add_var(INT,"server_port","sp",&port,change_int,2000);
 	add_var(STRING,"username","u",username_str,change_string,16);

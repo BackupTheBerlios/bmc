@@ -1,5 +1,9 @@
 #include <string.h>
+#ifdef MAP_EDITOR
+#include "../map_editor/global.h"
+#else
 #include "global.h"
+#endif
 
 map_sector *sectors;
 int num_sectors;
@@ -87,7 +91,7 @@ int sector_del_3do(int objectid)
 
 	for(i=0;i<100;i++){
 		if(sectors[sector_no].e3d_local[i]==objectid){
-			memmove(&sectors[sector_no].e3d_local[i], &sectors[sector_no].e3d_local[i+1], (99-i)*sizeof(short));	
+			memmove(&sectors[sector_no].e3d_local[i], &sectors[sector_no].e3d_local[i+1], (99-i)*sizeof(short));
 			sectors[sector_no].e3d_local[99]=-1;//if the list was full we can get a bad value here
 			return i;
 		}
@@ -120,7 +124,7 @@ int sector_del_2do(int objectid)
 
 	for(i=0;i<20;i++){
 		if(sectors[sector_no].e2d_local[i]==objectid){
-			memmove(&sectors[sector_no].e2d_local[i], &sectors[sector_no].e2d_local[i+1], (19-i)*sizeof(short));	
+			memmove(&sectors[sector_no].e2d_local[i], &sectors[sector_no].e2d_local[i+1], (19-i)*sizeof(short));
 			sectors[sector_no].e2d_local[19]=-1;//if the list was full we can get a bad value here
 			return i;
 		}
@@ -153,7 +157,7 @@ int sector_del_light(int objectid)
 
 	for(i=0;i<4;i++){
 		if(sectors[sector_no].lights_local[i]==objectid){
-			memmove(&sectors[sector_no].lights_local[i], &sectors[sector_no].lights_local[i+1], (3-i)*sizeof(short));	
+			memmove(&sectors[sector_no].lights_local[i], &sectors[sector_no].lights_local[i+1], (3-i)*sizeof(short));
 			sectors[sector_no].lights_local[3]=-1;//if the list was full we can get a bad value here
 			return i;
 		}
@@ -186,7 +190,7 @@ int sector_del_particle(int objectid)
 
 	for(i=0;i<4;i++){
 		if(sectors[sector_no].particles_local[i]==objectid){
-			memmove(&sectors[sector_no].particles_local[i], &sectors[sector_no].particles_local[i+1], (3-i)*sizeof(short));	
+			memmove(&sectors[sector_no].particles_local[i], &sectors[sector_no].particles_local[i+1], (3-i)*sizeof(short));
 			sectors[sector_no].particles_local[3]=-1;//if the list was full we can get a bad value here
 			return i;
 		}
@@ -242,7 +246,7 @@ void send_superchecksum(int sector)
 			t=CRC32_continue(t,(unsigned char*)&sectors[(j*(tile_map_size_x/4))+i].tiles_checksum,sizeof(Uint32));
 		}
 	}
-	
+
 	msg[0]=SEND_SUPERCHECKSUM;
 	*(Uint32 *)&msg[1]=~t;
 	my_tcp_send(my_socket,msg,5);

@@ -5,10 +5,11 @@
 #include <string.h>
 #include <stdarg.h>
 #include "translate.h"
+
 #ifdef ELC
 #include "stats.h"
 #else
-#include "global.h"
+#include "../map_editor/global.h"
 #endif
 
 #define GROUP 0
@@ -165,7 +166,7 @@ dichar	sig_change,
 
 #ifdef ELC
 //Help messages
-char	
+char
 	/*3d_objects.c*/
 	values_str[20],
 	/*draw_scene.c*/
@@ -189,7 +190,7 @@ char
 	connect_to_server_str[50],
 	reconnect_str[50],
 	alt_x_quit[30],
-	license_check[150], 
+	license_check[150],
 	/*new_character.c*/
 	skin_str[10],
 	hair_str[10],
@@ -219,7 +220,7 @@ char
 
 #ifdef ELC
 //Console
-char	name_too_long[75], 
+char	name_too_long[75],
 	name_too_short[75],
 	not_added_to_ignores[75],
 	already_ignoring[50],
@@ -255,11 +256,11 @@ char	reg_error_str[15],
 	cant_load_2d_object[30],
 	cant_open_file[30],
 	/*3d_objects.c*/
-	object_error_str[30], 
+	object_error_str[30],
 	nasty_error_str[50],
 	corrupted_object[100],
 	bad_object[30],
-	multiple_material_same_texture[100], 	
+	multiple_material_same_texture[100],
 #ifdef ELC
 	/*actors.c*/
 	cant_load_actor[30],
@@ -302,13 +303,13 @@ char	reg_error_str[15],
 	disabled_particles_str[50],
 	invalid_video_mode[75],
 	failed_sdl_net_init[30],
-	failed_sdl_timer_init[30], 
+	failed_sdl_timer_init[30],
 	cant_read_elini[50],
 	/*multiplayer.c*/
 	failed_resolve[150],
-	failed_connect[100], 
-	error_username_length[50], 
-	error_password_length[50], 
+	failed_connect[100],
+	error_username_length[50],
+	error_password_length[50],
 	error_pass_no_match[30],
 	invalid_pass[30],
 	redefine_your_colours[250],
@@ -362,7 +363,7 @@ char	reg_error_str[15],
 	snd_media_internal_error[50],
 	snd_media_ogg_error[50],
 	/*stats.c*/
-	stat_no_invalid[50]; 
+	stat_no_invalid[50];
 #else
 	;
 #endif
@@ -437,7 +438,7 @@ void * add_xml_group(int type, int no, ...)
 					return grp;
 				}
 #endif
-			default: 
+			default:
 				return NULL;
 		}
 }
@@ -498,7 +499,7 @@ void init_console()
 	group_id * filter=&(console_str[0]);
 	group_id * ignore=&(console_str[1]);
 	group_id * misc=&(console_str[2]);
-	
+
 	add_xml_identifier(ignore,"toolong",name_too_long,"Name too long, the max limit is 15 characters.",75);
 	add_xml_identifier(ignore,"tooshort",name_too_short,"Name too short, only names>=3 characters can be used!",75);
 	add_xml_identifier(ignore,"noadd",not_added_to_ignores,"Name not added to the ignore list!",75);
@@ -510,7 +511,7 @@ void init_console()
 	add_xml_identifier(ignore,"rem",removed_from_ignores,"OK, %s was removed from your ignore list!",50);
 	add_xml_identifier(ignore,"none",no_ignores_str,"You are ignoring no one!",50);
 	add_xml_identifier(ignore,"cur",ignores_str,"You are currently ignoring",50);
-	
+
 	add_xml_identifier(filter,"toolong",word_too_long,"Word too long, the max limit is 15 characters.",75);
 	add_xml_identifier(filter,"tooshort",word_too_short,"Word too short, only words>=3 characters can be used!",75);
 	add_xml_identifier(filter,"notadd",not_added_to_filter,"Word not added to the filter list!",50);
@@ -521,7 +522,7 @@ void init_console()
 	add_xml_identifier(filter,"rem",removed_from_filter,"OK, %s was removed from your filter list!",50);
 	add_xml_identifier(filter,"none",no_filters_str,"You are filtering nothing!",50);
 	add_xml_identifier(filter,"cur",filters_str,"You are currently filtering",50);
-	
+
 	add_xml_identifier(misc,"log",logconn_str,"Logging raw connection data",50);
 	add_xml_identifier(misc,"card",video_card_str,"Video card",20);
 	add_xml_identifier(misc,"vendor",video_vendor_str,"Vendor ID",20);
@@ -532,7 +533,7 @@ void init_console()
 
 void init_errors()
 {
-	
+
 #ifdef ELC
 	group_id * actors=&(errors[0]);
 	group_id * load=&(errors[1]);
@@ -564,14 +565,14 @@ void init_errors()
 	add_xml_identifier(actors,"helmet",error_helmet,"helmet",15);
 	add_xml_identifier(actors,"cape",error_cape,"cape",15);
 	add_xml_identifier(actors,"dupnpc",duplicate_npc_actor,"Duplicate actor name",50);
-	
+
 	//Loading errors
 	add_xml_identifier(load,"obj",cant_load_2d_object,"Can't load 2d object",30);
 	add_xml_identifier(load,"file",cant_open_file,"Can't open file",30);
 	add_xml_identifier(load,"cursors",cursors_file_str,"Can't open cursors file.",30);
 	add_xml_identifier(load,"font",cant_load_font,"Unable to load font",30);
 	add_xml_identifier(load,"elini",cant_read_elini,"Couldn't read configuration file el.ini",50);
-	
+
 	//Miscellaneous errors
 	add_xml_identifier(misc,"error",reg_error_str,"Error",15);
 	add_xml_identifier(misc,"objerr",object_error_str,"Object error",30);
@@ -632,7 +633,7 @@ void init_errors()
 	add_xml_identifier(snd,"header",snd_media_invalid_header,"Invalid Vorbis header.",50);
 	add_xml_identifier(snd,"intern",snd_media_internal_error,"Internal logic fault (bug or heap/stack corruption.",50);
 	add_xml_identifier(snd,"unknown",snd_media_ogg_error,"Unknown Ogg error.",50);
-	
+
 	//Video errors
 	add_xml_identifier(video,"nostencil",no_stencil_str,"Video mode %s with a stencil buffer is not available\nTrying this mode without a stencil buffer...",150);
 	add_xml_identifier(video,"safemode",safemode_str,"Video mode %s without a stencil buffer is not available\nTrying the safemode (640x480x32) Full Screen (no stencil)",150);
@@ -705,7 +706,7 @@ void init_help()
 	add_xml_identifier(new,"elf",elf_str,"Elf",10);
 	add_xml_identifier(new,"dwarf",dwarf_str,"Dwarf",10);
 	add_xml_identifier(new,"confirm",confirm_password,"Confirm Password",30);
-	
+
 	//Icons
 	add_xml_identifier(tooltips,"walk",tt_walk,"Walk",30);
 	add_xml_identifier(tooltips,"sit",tt_sit,"Sit down",30);
@@ -920,7 +921,7 @@ void load_translatables()
 #endif
 			xmlFreeDoc(file.file);
 		}
-#endif 
+#endif
 #ifdef ELC
 	file = load_strings("stats.xml");
 	if(file.file!=NULL)
@@ -988,7 +989,7 @@ struct xml_struct load_strings_file(char * filename)
 #ifdef WRITE_XML
 					file.root=xmlNewNode(NULL,"root");
 					xmlDocSetRootElement (file.file, file.root);
-					if((file.root=xmlDocGetRootElement(file.file))==NULL) 
+					if((file.root=xmlDocGetRootElement(file.file))==NULL)
 						{
 #endif
 		               	        char str[120];
@@ -1013,7 +1014,7 @@ void copy_strings(xmlNode * in, distring_item * string)
 				{
 					if(cur->children)
 						{
-							if(!xmlStrcasecmp(cur->name,"name")) 
+							if(!xmlStrcasecmp(cur->name,"name"))
 								{
 									int length=30;
 									UTF8Toisolat1(string->var->str, &length, cur->children->content, &length);
@@ -1021,10 +1022,10 @@ void copy_strings(xmlNode * in, distring_item * string)
 									string->var->saved_str=1;
 #endif
 								}
-							else if (!xmlStrcasecmp(cur->name,"desc")) 
+							else if (!xmlStrcasecmp(cur->name,"desc"))
 								{
 									int length=100;
-									UTF8Toisolat1(string->var->desc, &length, cur->children->content, &length); 
+									UTF8Toisolat1(string->var->desc, &length, cur->children->content, &length);
 #ifdef WRITE_XML
 									string->var->saved_desc=1;
 #endif
@@ -1047,7 +1048,7 @@ void copy_stats(xmlNode * in, statstring_item * string)
 				{
 					if(cur->children)
 						{
-							if(!xmlStrcasecmp(cur->name,"name")) 
+							if(!xmlStrcasecmp(cur->name,"name"))
 								{
 									int len=20;
 									UTF8Toisolat1(string->var->name, &len, cur->children->content, &len);
@@ -1055,7 +1056,7 @@ void copy_stats(xmlNode * in, statstring_item * string)
 									string->var->saved_name=1;
 #endif
 								}
-							else if (!xmlStrcasecmp(cur->name,"shortname"))	
+							else if (!xmlStrcasecmp(cur->name,"shortname"))
 								{
 									int len=5;
 									UTF8Toisolat1(string->var->shortname, &len, cur->children->content, &len);
@@ -1300,7 +1301,7 @@ void parse_stats(xmlNode * in)
 	parse_groups(in, stats_extra, STATS_EXTRA, GROUP);
 	parse_groups(in, stats_str, STATS_STR, STAT_GROUP);
 }
-#endif 
+#endif
 
 void free_xml_parser(int type, void * gPtr, int no)
 {
