@@ -104,6 +104,8 @@
 int SphereInFrustum(float x, float y, float z, float radius);
 int check_tile_in_frustrum(float x,float y);
 void read_command_line(); //from main.c
+int makeargv(char *s, char *delimiters, char ***argvp);
+void freemakeargv(char **argv);
 
 #endif
 
