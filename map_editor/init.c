@@ -1,6 +1,12 @@
+#include <stdio.h>
+#include <dirent.h>
 #include "global.h"
 
 char lang[10]={"en"};
+
+char configdir[256]={"./"};
+
+char datadir[256]={"./"};
 
 void init_colors();
 
@@ -154,6 +160,52 @@ void init_2d_obj_cache()
 		}
 }
 
+void read_config()
+{
+	FILE *f = NULL;
+	int k;
+	char str[250];
+#ifndef WINDOWS
+	char el_ini[256];
+	DIR *d = NULL;
+	strcpy(configdir, getenv("HOME"));
+	strcat(configdir, "/.elc/");
+	d=opendir(configdir);
+	if(!d)
+		mkdir(configdir,0755);
+	else
+		{
+			strcpy(el_ini, configdir);
+			strcat(el_ini, "el.ini");
+			closedir(d);
+			f=fopen(el_ini,"rb"); //try to load local settings
+		}
+	if(!f) //use global settings
+		{
+			strcpy(el_ini, datadir);
+			strcat(el_ini, "el.ini");
+			f=fopen(el_ini,"rb");
+		}
+#else
+	f=fopen("el.ini","rb");
+#endif
+	if(!f)//oops, the file doesn't exist, use the defaults
+		{
+			return;//in the map editor this is a non-fatal error..
+		}
+	while(fgets(str,250,f))
+		{
+			if(str[0]=='#')
+				{
+					check_var(str+1,1);//check only for the long strings
+				}
+		}
+
+	#ifndef WINDOWS
+	chdir(datadir);
+	#endif
+}
+
 void init_stuff()
 {
 	int i;
@@ -162,7 +214,13 @@ void init_stuff()
 	Uint32 (*my_timer_pointer) (unsigned int) = my_timer;
 	
 	init_translatables();
-
+	
+#ifdef LINUX
+	init_vars();
+	//Well, this doesn't do anything useful on windows yet...
+	read_config();
+#endif
+	
 #ifdef LOAD_XML
 	//Well, the current version of the map editor doesn't support having a datadir - will add that later ;-)
 	load_translatables();
