@@ -260,8 +260,13 @@ int HandleEvent(SDL_Event *event)
 						s[8]=0;
 						get_particle_objects(s);
 						*/
-						//send_superchecksum(4095);			
+					static int a=2;
+					//if(a){
 						
+						actor *xxx=pf_get_our_actor();
+						a--;
+						send_superchecksum(sector_get(xxx->x_pos,xxx->y_pos));			
+					//
 						if(!last_turn_around || last_turn_around+500<cur_time)
 							{
 								Uint8 str[2];

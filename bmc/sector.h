@@ -6,8 +6,13 @@
 #define ITF    0.000183105f //12/65536
 #define global_to_sector(f) (((float)(f-(int)f)+(float)((int)f%12))*FTI)
 #define global_to_sector_z(z) ((int)((float)(z+2.2f)/0.025f))
+/* they dont want to work on vc...i'll check it later
 #define sector_to_global_x(sector,f) (((float)f*ITF)+sector%(tile_map_size_x>>2)*12.0f)
 #define sector_to_global_y(sector,f) (((float)f*ITF)+sector/(tile_map_size_y>>2)*12.0f)
+*/
+float sector_to_global_x(int sector, Uint16 f);
+float sector_to_global_y(int sector, Uint16 f);
+
 #define sector_to_global_z_step(z) (z*0.025f)
 #define sector_to_global_z(z) ((float)sector_to_global_z_step(z)-2.2f)
 #define sector_to_global_rot(rot) ((float)rot*1.5f)
@@ -36,6 +41,9 @@ typedef struct{
 extern map_sector *sectors;
 extern int num_sectors;
 extern Uint16 active_sector;
+extern int current_sector;
+
+void check_sector();
 
 int sector_add_3do(int objectid);
 int sector_del_3do(int objectid);

@@ -8,6 +8,7 @@
 map_sector *sectors;
 int num_sectors;
 Uint16 active_sector;
+int current_sector=-1;
 
 /* MISC SECTOR*/
 
@@ -17,6 +18,16 @@ void sector_update_checksums(int sector)
 	sector_update_tiles_checksum(sector);
 }
 
+
+float sector_to_global_x(int sector, Uint16 f)
+{
+	return (((float)f/65536)*12)+sector%(tile_map_size_x/4)*12.0f;
+}
+
+float sector_to_global_y(int sector, Uint16 f)
+{
+	return (((float)f/65536)*12)+sector/(tile_map_size_y/4)*12.0f;
+}
 
 /* CHECKSUM FUNCTIONS */
 void sector_update_objects_checksum(int sector)
@@ -55,8 +66,8 @@ void sector_update_objects_checksum(int sector)
 void sector_update_tiles_checksum(int sector)
 {
 	char temp[16];
-	int fy=sector/(tile_map_size_y/4)*4;
-	int fx=sector%(tile_map_size_x/4)*4;
+	int fy=(sector<<2)/tile_map_size_y<<2;
+	int fx=(sector<<2)%tile_map_size_x;
 	int i,j,k=0;
 	for(i=fx;i<fx+4;i++)
 		for(j=fy;j<fy+4;j++)
@@ -66,6 +77,44 @@ void sector_update_tiles_checksum(int sector)
 
 
 /* SECTOR OBJECT MANIPULATION */
+
+void clear_sector(Uint16 sector)
+{
+	int i;
+	// 3d objects
+	for(i=0;i<100;i++){
+		if(sectors[sector].e3d_local[i]!=-1){
+			destroy_3d_object(sectors[sector].e3d_local[i]);
+			sectors[sector].e3d_local[i]=-1;
+		}
+	}
+	//2d objects
+	for(i=0;i<20;i++){
+		if(sectors[sector].e2d_local[i]!=-1){
+			free(obj_2d_list[i]);
+			obj_2d_list[i]=0;
+			sectors[sector].e2d_local[i]=-1;
+		}
+	}
+	//lights
+	for(i=0;i<4;i++){
+		if(sectors[sector].lights_local[i]!=-1){
+			free(lights_list[i]);
+			lights_list[i]=0;
+			sectors[sector].lights_local[i]=-1;
+		}
+	}
+	//particles
+	for(i=0;i<8;i++){
+		if(sectors[sector].particles_local[i]!=-1){
+			free(particles_list[i]);
+			particles_list[i]=0;
+			sectors[sector].particles_local[i]=-1;
+		}
+	}
+
+}
+
 int sector_add_3do(int objectid)
 {
 	int i;
@@ -221,9 +270,22 @@ void change_tile(Uint8 nt, Uint8 t)
 }
 
 
-#ifdef ELC
+void check_sector()
+{
+	int ns;
+	actor *act=pf_get_our_actor();
+	if(act==NULL) return;
+
+	ns=sector_get(act->x_pos, act->y_pos);
+	if(ns!=current_sector){
+		current_sector=ns;
+		send_superchecksum(current_sector);
+	}
+}
+
 
 // Functions that send data to server
+#ifdef ELC
 void send_superchecksum(int sector)
 {
 	Uint32 t=0;
@@ -231,6 +293,7 @@ void send_superchecksum(int sector)
 	int fx=sector%(tile_map_size_x/4);
 	int sx,sy,ex,ey,i,j;
 	char msg[5];
+
 	sx=fx-1;
 	if(sx<0)sx=0;
 	sy=fy-1;
@@ -255,6 +318,7 @@ void send_superchecksum(int sector)
 void update_sector_objects(Uint16 sector)
 {
 	char msg[3];
+	clear_sector(sector);
 	msg[0]=UPDATE_SECTOR_OBJECTS;
 	*(Uint16 *)&msg[1]=sector;
 	my_tcp_send(my_socket,msg,3);
@@ -297,7 +361,7 @@ void get_checksums(char *d, int sector)
 	}
 
 }
-#endif
+
 
 
 
@@ -313,6 +377,8 @@ void get_tile_data(char *d)
 		d++;
 		change_tile(fb,sb);
 	}
+	load_map_tiles();
+	sector_update_tiles_checksum(active_sector);
 }
 
 void get_3d_objects(char *d)
@@ -337,12 +403,13 @@ void get_3d_objects(char *d)
 		o3dio.z_rot=*(Uint8*)d;
 		d++;
 
-		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos),sector_to_global_y(active_sector,o3dio.y_pos),
+		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos), sector_to_global_y(active_sector,o3dio.y_pos) ,
 		sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
 		o3dio.flags&0x1,o3dio.flags&0x2,o3dio.r/255.0f,o3dio.g/255.0f,o3dio.b/255.0f);
 		memcpy(&objects_list[k]->o3dio,&o3dio,sizeof(object3d_io));
 		sector_add_3do(k);
 	}
+	sector_update_objects_checksum(active_sector);
 }
 
 void get_3d_objects_full_rotation(char *d)
@@ -377,7 +444,7 @@ void get_3d_objects_full_rotation(char *d)
 		memcpy(&objects_list[k]->o3dio,&o3dio,sizeof(object3d_io));
 		sector_add_3do(k);
 	}
-
+	sector_update_objects_checksum(active_sector);
 }
 
 void get_2d_objects(char *d)
@@ -407,6 +474,7 @@ void get_2d_objects(char *d)
 		memcpy(&obj_2d_list[k]->o2dio,&o2dio,sizeof(obj_2d_io));
 		sector_add_2do(k);
 	}
+	sector_update_objects_checksum(active_sector);
 }
 
 
@@ -440,6 +508,7 @@ void get_light_objects(char *d)
 		memcpy(&lights_list[k]->lightio,&lightio,sizeof(light_io));
 		sector_add_light(k);
 	}
+	sector_update_objects_checksum(active_sector);
 }
 
 void get_particle_objects(char *d)
@@ -467,4 +536,7 @@ void get_particle_objects(char *d)
 		memcpy(&particles_list[k]->particleio,&particlesio,sizeof(particles_io));
 		sector_add_particle(k);
 	}
+	sector_update_objects_checksum(active_sector);
 }
+
+#endif

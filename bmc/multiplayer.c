@@ -743,29 +743,35 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 			break;
 
 		case GET_TILE_DATA:
-			get_tile_data(in_data);
+			get_tile_data(in_data+3);
 			break;
 		
 		case GET_3D_OBJECTS:
-			get_3d_objects(in_data);
+			get_3d_objects(in_data+3);
 			break;
 
 		case GET_2D_OBJECTS:
-			get_2d_objects(in_data);
+			get_2d_objects(in_data+3);
 			break;
 
 		case GET_LIGHT_OBJECTS:
-			get_light_objects(in_data);
+			get_light_objects(in_data+3);
 			break;
 
 		case GET_PARTICLE_OBJECTS:
-			get_particle_objects(in_data);
+			get_particle_objects(in_data+3);
 			break;
 
 		case GET_3D_OBJECTS_FULL_ROTATION:
-			get_3d_objects_full_rotation(in_data);
+			get_3d_objects_full_rotation(in_data+3);
 			break;
 
+		case GET_CHECKSUMS:
+		{
+			actor *actor=pf_get_our_actor();
+			get_checksums(in_data+3, sector_get(actor->x_pos,actor->y_pos));
+			break;
+		}
 
 		default:
 			{

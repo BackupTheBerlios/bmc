@@ -70,6 +70,9 @@ int start_rendering()
 			else
 				SDL_Delay(1);//give up timeslice for anyone else
 
+			//ask for updates
+			check_sector();
+
 			//AFK?
 			if(afk_time)
 				{
