@@ -3,10 +3,15 @@
 #include <math.h>
 
 int show_position_on_minimap=0;
+int virtual_object_menu=0;
 
 int check_interface_buttons()
 {
+#ifdef VIRTUAL
+	if((left_click!=1 && right_click!=1) || mouse_x>=15*32 || mouse_y>=32)return -1;//no interface buttons were selected
+#else
 	if((left_click!=1 && right_click!=1) || mouse_x>=14*32 || mouse_y>=32)return -1;//no interface buttons were selected
+#endif
 	if(left_click==1)
 		{
 			if(mouse_x>=0 && mouse_x<=31)cur_mode=mode_tile;
@@ -79,6 +84,12 @@ int check_interface_buttons()
 				{
 					new_map_menu=1;
 				}
+#ifdef VIRTUAL
+			if(mouse_x>=448 && mouse_x<=480)
+				{
+					virtual_object_menu=1;
+				}
+#endif
 
 		}
 	else if(right_click==1)
@@ -247,6 +258,11 @@ void draw_toolbar()
 	//new
 	draw_2d_thing((float)128/255,1.0f-(float)32/255,(float)160/255,1.0f-(float)64/255, 416,0,448,32);
 
+#ifdef VIRTUAL
+	//virtual
+	draw_2d_thing((float)128/255,1.0f-(float)32/255,(float)160/255,1.0f-(float)64/255, 449,0,480,32);
+#endif
+	
 	glEnd();
 }
 
@@ -828,6 +844,57 @@ void draw_minimap()
 
 int map_size=0;
 
+#ifdef VIRTUAL
+void display_virtual_object_menu()
+{
+	char str[128];
+	int x_menu,y_menu;
+	if(!virtual_object_menu)return;
+
+	x_menu=90;
+	y_menu=84;
+
+	//draw a black rectangle
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE,GL_SRC_ALPHA);
+	glDisable(GL_TEXTURE_2D);
+	glBegin(GL_QUADS);
+	glColor4f(0.0f,0.0f,0.0f,0.5f);
+	glVertex3i(x_menu,y_menu+80,0);
+	glVertex3i(x_menu,y_menu,0);
+	glVertex3i(x_menu+160,y_menu,0);
+	glVertex3i(x_menu+160,y_menu+80,0);
+	glColor3f(1.0f,1.0f,1.0f);
+	glEnd();
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+
+	x_menu+=4;
+	y_menu+=4;
+
+	glColor3f(1.0f,1.0f,1.0f);
+	draw_string(x_menu,y_menu,(unsigned char *)"Create virtual",1);
+	y_menu+=17;
+	draw_string(x_menu+4*12,y_menu,(unsigned char *)"object",1);
+
+	y_menu+=32;
+
+	draw_string(x_menu,y_menu,(unsigned char *)"[Yes]",1);
+	
+	if(mouse_y<y_menu+17 && mouse_y>y_menu && mouse_x>x_menu && mouse_x<x_menu+4*12 && left_click==1){
+		new_virtual_object();
+		virtual_object_menu=0;
+	}
+	
+	x_menu+=60;
+	draw_string(x_menu,y_menu,(unsigned char *)"[Cancel]",1);
+
+	if(mouse_y<y_menu+17 && mouse_y>y_menu && mouse_x>x_menu && mouse_x<x_menu+8*12 && left_click==1){
+		virtual_object_menu=0;
+	}
+}
+#endif
+
 void display_new_map_menu()
 {
 	char str[128];
@@ -922,7 +989,6 @@ void display_new_map_menu()
 	y_menu+=17;
 	glColor3f(1.0f,1.0f,1.0f);
 	draw_string(x_menu,y_menu,(unsigned char *)"   [Ok]    [Cancel]",1);
-
 }
 
 void display_map_settings()

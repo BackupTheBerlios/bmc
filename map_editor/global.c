@@ -188,3 +188,5 @@ int use_mipmaps=0;
 
 int auto_save_time=0;
 int video_mode=2;
+
+int virtual_objects_mode=0;

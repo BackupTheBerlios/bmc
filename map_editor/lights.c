@@ -78,15 +78,15 @@ void draw_light_halo(light * l)
 			if(l->g>l->b) scale+=l->g*0.25f;
 			else scale+=l->b*0.25f;
 		}
-	if(l->flags&FLICKER) scale+=l->intensity*0.25;
+	if(l->flags&FLICKER) scale+=(l->intensity-1)*0.25;
 	else if(l->flags&PULSATE && l->interval)
 		{
 			float interval=l->interval;
 			float pos;
 			if(interval<2)interval=2;
 			pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
-			if(pos<=0) scale+=(-(float)pos/(float)interval)*l->intensity*0.25f;
-			else scale+=((float)pos/(float)interval)*l->intensity*0.25f;
+			if(pos<=0) scale+=(-(float)pos/(float)interval)*(l->intensity-1)*0.25f;
+			else scale+=((float)pos/(float)interval)*(l->intensity-1)*0.25f;
 		}
 	
 	x_pos=l->pos_x; y_pos=l->pos_y; z_pos=l->pos_z;

@@ -119,6 +119,9 @@ void draw_scene()
 	draw_light_info();
 	draw_height_info();
 	display_new_map_menu();
+#ifdef VIRTUAL
+	display_virtual_object_menu();
+#endif
 	display_map_settings();
 
 	Leave2DMode();

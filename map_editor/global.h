@@ -172,6 +172,8 @@ extern int limit_fps;
 extern int auto_save_time;
 extern int video_mode;
 
+extern int virtual_objects_mode;
+
 #ifndef POINT_SIZE_MIN_ARB
 #define POINT_SIZE_MIN_ARB 0x8126
 #endif

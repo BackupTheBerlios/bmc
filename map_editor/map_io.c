@@ -617,4 +617,27 @@ void new_map(int m_x_size,int m_y_size)
 	cy=0;
 }
 
+#ifdef VIRTUAL
+void new_virtual_object()
+{
+	int i;
+	destroy_map();
+	tile_map=(unsigned char *)calloc(128*128,sizeof(char));
+	
+	memset(tile_map,255,128*128);
 
+	tile_map_size_x=tile_map_size_y=128;
+
+	height_map=(unsigned char *) calloc(128*128*6*6,sizeof(char));
+
+	memset(height_map,11,128*128*6*6);
+
+	load_map_tiles();
+	
+	cx=cy=0;
+
+	view_grid=1;
+
+	virtual_objects_mode=1;
+}
+#endif
