@@ -19,7 +19,41 @@ void sector_update_checksums(int sector)
 
 void sector_update_objects_checksum(int sector)
 {
-	sectors[sector].objects_checksum=CRC32((unsigned char*)sectors[sector].e3d_local, 264);
+
+//	sectors[sector].objects_checksum=CRC32((unsigned char*)sectors[sector].e3d_local, 264);
+	int i;
+	Uint32 t=0;
+	//3d objects
+	for(i=0;i<100;i++){
+		if(sectors[sector].e3d_local[i]==-1)
+			break;
+		//we only crc xpos,ypos,zpos,xrot,yrot,zrot,blended,selflit
+		t=CRC32_continue(t,(unsigned char*)objects_list[i]+80,sizeof(6*sizeof(float)+2*sizeof(char)));
+	}
+	// 2d objects
+	for(i=0;i<20;i++){
+		if(sectors[sector].e3d_local[i]==-1)
+			break;
+		//we only crc xpos,ypos,zpos,xrot,yrot,zrot
+		t=CRC32_continue(t,(unsigned char*)obj_2d_list[i]+80,sizeof(6*sizeof(float)));
+	}
+	//lights
+	for(i=0;i<4;i++){
+		if(sectors[sector].e3d_local[i]==-1)
+			break;
+		// crc whole struct
+		t=CRC32_continue(t,(unsigned char*)lights_list[i],sizeof(light));
+	}
+	//particles
+	for(i=0;i<4;i++){
+		if(sectors[sector].e3d_local[i]==-1)
+			break;
+		// crc position only
+		t=CRC32_continue(t,(unsigned char*)particles_list[i]+8,sizeof(sizeof(float)*3));
+	}
+
+	sectors[sector].objects_checksum = t ? ~t : t;
+
 }
 
 void sector_update_tiles_checksum(int sector)
