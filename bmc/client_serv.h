@@ -70,6 +70,7 @@
 #define SHIRT_TITANIUM_CHAIN_ARMOR 15
 #define SHIRT_IRON_PLATE_ARMOR 16
 #define SHIRT_ARMOR_6 17
+#define SHIRT_FUR 18
 
 #define NO_BODY_ARMOR 0
 #define NO_PANTS_ARMOR 0
@@ -109,6 +110,7 @@
 #define PANTS_WHITE 8
 #define PANTS_LEATHER 9
 #define PANTS_IRON_CUISSES 10
+#define PANTS_FUR 11
 
 //capes
 #define CAPE_BLACK 0
@@ -125,6 +127,12 @@
 #define CAPE_GOLD 11
 #define CAPE_RED 12
 #define CAPE_ORANGE 13
+#define CAPE_MOD 14
+#define CAPE_MOONSHADOW 15
+#define CAPE_RAVENOD 16
+#define CAPE_ROGUE 17
+#define CAPE_WYTTER 18
+#define CAPE_QUELL 19
 #define CAPE_NONE 30
 
 //heads
@@ -232,6 +240,7 @@
 #define frame_attack_up_4 21
 #define frame_attack_down_1 22
 #define frame_attack_down_2 23
+
 
 //colors
 #define c_red1 0
