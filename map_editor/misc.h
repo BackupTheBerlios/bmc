@@ -1,6 +1,8 @@
 #ifndef	__MISC_H
 #define	__MISC_H
 
+Uint32 CRC32(unsigned char *data, int len);
+
 void open_3d_obj();
 void open_2d_obj();
 void open_map_file();

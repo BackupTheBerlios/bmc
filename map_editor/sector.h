@@ -2,8 +2,8 @@
 #define __SECTOR_H__
 
 typedef struct{
-	int objects_checksum;
-	int tiles_checksum;
+	Uint32 objects_checksum;
+	Uint32 tiles_checksum;
 	short e3d_local[100];
 	short e2d_local[20];
 	short lights_local[4];
@@ -13,13 +13,7 @@ typedef struct{
 extern map_sector *sectors;
 extern int num_sectors;
 
-int sector_get(float x, float y)
-{
-	int sx=x/12;
-	int sy=y/12;
-	return sy*(tile_map_size_x>>2)+sx;
-}
-
+int sector_get(float x, float y);
 void sector_add_map();
 int sector_add_3do(int objectid);
 int sector_del_3do(int objectid);
@@ -31,5 +25,8 @@ int sector_add_particle(int objectid);
 int sector_del_particle(int objectid);
 int sector_add_tile(int objectid);
 int sector_del_tile(int objectid);
-
+int sector_get(float x, float y);
+void sector_update_checksums(int sector);
+void sector_update_objects_checksum(int sector);
+void sector_update_tiles_checksum(int sector);
 #endif

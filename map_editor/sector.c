@@ -11,6 +11,29 @@ int sector_get(float x, float y)
 	return sy*(tile_map_size_x>>2)+sx;
 }
 
+void sector_update_checksums(int sector)
+{
+	sector_update_objects_checksum(sector);
+	sector_update_tiles_checksum(sector);
+}
+
+void sector_update_objects_checksum(int sector)
+{
+	sectors[sector].objects_checksum=CRC32((unsigned char*)sectors[sector].e3d_local, 264);
+}
+
+void sector_update_tiles_checksum(int sector)
+{
+	char temp[16];
+	int fy=sector/(tile_map_size_y/4)*4;
+	int fx=sector%(tile_map_size_x/4)*4;
+	int i,j,k=0;
+	for(i=fx;i<fx+4;i++)
+		for(j=fy;j<fy+4;j++)
+			temp[k++]=tile_map[(j*tile_map_size_x)+i];
+	sectors[sector].tiles_checksum=CRC32(temp, 16);
+}
+
 // adds everything from the maps to the sectors
 void sector_add_map()
 {
@@ -70,7 +93,9 @@ void sector_add_map()
 		}
 	}
 
-	
+	for(i=0;i<num_sectors;i++)
+		sector_update_checksums(i);
+
 }
 
 int sector_add_3do(int objectid)

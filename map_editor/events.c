@@ -580,8 +580,6 @@ int HandleEvent(SDL_Event *event)
 										else{
 											if(calhm)
 												add_e3d_heightmap(selected_3d_object, 3);
-											
-										//	sector_add_3do(selected_3d_object);
 											selected_3d_object=-1;
 										}
 									}

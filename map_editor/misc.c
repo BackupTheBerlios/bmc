@@ -1,5 +1,24 @@
 #include "global.h"
 
+Uint32 CRC32(unsigned char *data, int len)
+{
+    unsigned int result=0;
+    int i,j;
+    unsigned char octet;
+
+    for (i=0; i<len; i++){
+        octet = *(data++);
+        for (j=0; j<8; j++){
+            if ((octet >> 7) ^ (result >> 31))
+                result = (result << 1) ^ 0x04c11db7;
+            else
+                result = (result << 1);
+            octet <<= 1;
+        }
+    }
+    return ~result;
+}
+
 void kill_height_map_at_texture_tile(int tex_pos){
   int start_point;
   int h_x, h_y;
