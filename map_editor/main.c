@@ -31,6 +31,7 @@ int start_rendering()
 		
 		if(auto_save_time && (cur_time-last_save_time)>(Uint32)auto_save_time)
 			{
+				printf("saving map...\n");
 				last_save_time=cur_time;
 				save_map("maps/Autosave.bmm");
 			}

@@ -89,7 +89,7 @@ int HandleEvent(SDL_Event *event)
 					case mode_3d:
 					{
 						object3d *o = (object3d *) undo_object;
-						add_e3d(o->file_name, o->x_pos, o->y_pos, o->z_pos, o->x_rot, o->y_rot, o->z_rot, o->self_lit, o->blended, o->r, o->g, o->b);
+						add_e3d(o->file_name, o->x_pos, o->y_pos, o->z_pos, o->x_rot, o->y_rot, o->z_rot, o->self_lit, o->blended, o->r, o->g, o->b, e3dlist_get_attributes(o->file_name));
 						free(undo_object);
 						undo_object = NULL;
 						break;

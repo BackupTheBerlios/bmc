@@ -132,7 +132,7 @@ void clone_3d_object(int object_id)
 
 	z_pos=(z_pos == 0.01f)?0.02f:(z_pos == 0.02f?0.01f:z_pos);
 
-	selected_3d_object=add_e3d(objects_list[object_id]->file_name,scene_mouse_x,scene_mouse_y,z_pos,x_rot,y_rot,z_rot,self_lit,blended,r,g,b);
+	selected_3d_object=add_e3d(objects_list[object_id]->file_name,scene_mouse_x,scene_mouse_y,z_pos,x_rot,y_rot,z_rot,self_lit,blended,r,g,b,objects_list[object_id]->attributes);
 	cur_tool=tool_select;//change the current tool
 }
 
@@ -171,7 +171,7 @@ void open_3d_obj()
 		for(i=app_dir_len;i<fn_len;i++,j++)proper_path[j+1]=szFileName[i];
 		proper_path[j+1]=0;
 
-		selected_3d_object=add_e3d(proper_path,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
+		selected_3d_object=add_e3d(proper_path,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,e3dlist_get_attributes(proper_path));
 		cur_tool=tool_select;//change the current tool
     }
 
@@ -1099,7 +1099,7 @@ void open_3d_obj_continued()
   if (selected_file)
     {
 
-		selected_3d_object=add_e3d(selected_file,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
+		selected_3d_object=add_e3d(selected_file,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,e3dlist_get_attributes(selected_file));
 		cur_tool=tool_select;//change the current tool
 		particles_list[selected_particles_object]->ttl=-1; // we dont want the particle sys to disapear
     }

@@ -279,7 +279,7 @@ int check_browser_interface(window_info *win, int mx, int my, Uint32 flags)
 			char fn[256];
 			strcpy(fn,".");
 			strcat(fn,Dir[cd].Files[cp]);
-			selected_3d_object=add_e3d(fn,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
+			selected_3d_object=add_e3d(fn,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,e3dlist_get_attributes(fn));
 			cur_tool=tool_select;
 			if(close_browser_on_select) toggle_window(browser_win);
 		}
@@ -287,7 +287,7 @@ int check_browser_interface(window_info *win, int mx, int my, Uint32 flags)
 			char fn[256];
 			strcpy(fn,".");
 			strcat(fn,Dir[cd].Files[cp+2]);
-			selected_3d_object=add_e3d(fn,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
+			selected_3d_object=add_e3d(fn,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,e3dlist_get_attributes(fn));
 			cur_tool=tool_select;
 			if(close_browser_on_select) toggle_window(browser_win);
 		}
@@ -295,7 +295,7 @@ int check_browser_interface(window_info *win, int mx, int my, Uint32 flags)
 			char fn[256];
 			strcpy(fn,".");
 			strcat(fn,Dir[cd].Files[cp+1]);
-			selected_3d_object=add_e3d(fn,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
+			selected_3d_object=add_e3d(fn,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,e3dlist_get_attributes(fn));
 			cur_tool=tool_select;
 			if(close_browser_on_select) toggle_window(browser_win);
 		}
@@ -303,7 +303,7 @@ int check_browser_interface(window_info *win, int mx, int my, Uint32 flags)
 			char fn[256];
 			strcpy(fn,".");
 			strcat(fn,Dir[cd].Files[cp+3]);
-			selected_3d_object=add_e3d(fn,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
+			selected_3d_object=add_e3d(fn,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,e3dlist_get_attributes(fn));
 			cur_tool=tool_select;
 			if(close_browser_on_select) toggle_window(browser_win);
 		}

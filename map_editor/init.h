@@ -16,6 +16,7 @@ void unload_e3d_list();
 typedef struct{
 	int id;
 	char *fn;
+	Uint32 attributes;
 }e3d_list;
 extern e3d_list *e3dlist;
 extern int e3dlistsize;
