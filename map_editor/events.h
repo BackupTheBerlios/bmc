@@ -5,6 +5,8 @@
 #define CTRL (1<<30)
 #define ALT (1<<29)
 
+extern int last_resize;
+
 void zoomin();
 void zoomout();
 int HandleEvent(SDL_Event *event);

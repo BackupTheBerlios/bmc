@@ -6,6 +6,7 @@ int undo_tile_value;
 int undo_tile_height;
 int undo_tile = -1;
 int calhm = 0;
+int last_resize=0;
 
 void zoomin(){
 	zoom_level -= ctrl_on ? 2.5f : 0.25f;
@@ -405,7 +406,7 @@ int HandleEvent(SDL_Event *event)
 	    {
 	      window_width = event->resize.w;
 	      window_height = event->resize.h;
-		  resize_window();
+		last_resize=cur_time;
 	    }
 	    break;
 

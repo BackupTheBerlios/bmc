@@ -19,12 +19,23 @@ int start_rendering()
     	last_time=cur_time;
     	get_world_x_y();
 		draw_scene();
+	
+	if(last_resize&&cur_time-1>last_resize)
+		{
+			if(SDL_SetVideoMode(window_width, window_height, bpp, SDL_OPENGL|SDL_RESIZABLE)) 
+				{
+					resize_window();
+				}
+			last_resize=0;
+		}
+
 
 #ifdef LINUX
 		while (gtk_events_pending())
 			gtk_main_iteration();
 #endif		
 	}
+
 
 	/* Destroy our GL context, etc. */ 
 	SDL_SetTimer(0,NULL);
