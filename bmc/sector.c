@@ -356,11 +356,11 @@ void get_3d_objects(char *d)
 		d++;
 		global_id=*(Uint16 *)d;
 		d+=2;
-		
+
 		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos), sector_to_global_y(active_sector,o3dio.y_pos) ,
 		sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
 		o3dio.flags&0x1,o3dio.flags&0x2,o3dio.r/255.0f,o3dio.g/255.0f,o3dio.b/255.0f, o3dio.attributes);
-		
+
 		// put the object in global id
 		if(global_id!=k){
 			objects_list[global_id]=objects_list[k];
@@ -409,7 +409,7 @@ void get_3d_objects_full_rotation(char *d)
 		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos),sector_to_global_y(active_sector,o3dio.y_pos),
 		sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
 		o3dio.flags&0x1,o3dio.flags&0x2,o3dio.r/255.0f,o3dio.g/255.0f,o3dio.b/255.0f,o3dio.attributes);
-		
+
 		// put the object in global id
 		if(global_id!=k){
 			objects_list[global_id]=objects_list[k];
@@ -552,7 +552,7 @@ void add_3d_object(char *d)
 	k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(sector,o3dio.x_pos), sector_to_global_y(sector,o3dio.y_pos) ,
 	sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
 	o3dio.flags&0x1,o3dio.flags&0x2,o3dio.r/255.0f,o3dio.g/255.0f,o3dio.b/255.0f, o3dio.attributes);
-	
+
 	// put the object in global id
 	if(global_id!=k){
 		objects_list[global_id]=objects_list[k];
@@ -598,7 +598,7 @@ void add_3d_object_fullrotation(char *d)
 	k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(sector,o3dio.x_pos), sector_to_global_y(sector,o3dio.y_pos) ,
 	sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
 	o3dio.flags&0x1,o3dio.flags&0x2,o3dio.r/255.0f,o3dio.g/255.0f,o3dio.b/255.0f, o3dio.attributes);
-	
+
 	// put the object in global id
 	if(global_id!=k){
 		objects_list[global_id]=objects_list[k];
@@ -618,6 +618,12 @@ void delete_3d_object(char *d)
 	sector=*(Uint16*)d;
 	d+=2;
 	k=*(Uint8*)d;
+
+	if(sectors[sector].e3d_local[k]==-1)
+		{
+			log_to_console(c_red2, "Request to remove nonexisting object");
+			return;
+		}
 
 	destroy_3d_object(sectors[sector].e3d_local[k]);
 	sectors[sector].e3d_local[k]=-1;
