@@ -143,8 +143,6 @@ int save_map(char * file_name)
 
 	FILE *f = NULL;
 
-//	memset(sectors,-1,num_sectors*sizeof(map_sector));
-//	sector_add_map();
 	//get the sizes of structures (they might change in the future)
 	obj_3d_io_size=sizeof(object3d_io);
 	obj_2d_io_size=sizeof(obj_2d_io);
@@ -152,8 +150,9 @@ int save_map(char * file_name)
 	particles_io_size=sizeof(particles_io);
 	sector_size=sizeof(map_sector);
 
+	memset(&cur_3d_obj_io,-1,sizeof(object3d_io));
+
 	//get the number of objects and lights
-	for(i=0;i<max_obj_3d;i++)if(objects_list[i])obj_3d_no++;
 	for(i=0;i<max_obj_2d;i++)if(obj_2d_list[i])obj_2d_no++;
 	for(i=0;i<max_lights;i++)if(lights_list[i])lights_no++;
 	// We ignore temporary particle systems (i.e. ones with a ttl)
@@ -161,6 +160,7 @@ int save_map(char * file_name)
 		if(particles_list[i])
 			particles_no++;
 	}
+	obj_3d_no=max_obj_3d;
 	sector_no=num_sectors;
 
 	//ok, now build the header...
@@ -212,12 +212,10 @@ int save_map(char * file_name)
 	//write the 3d objects
 	j=0;
 	for(i=0;i<max_obj_3d;i++){
-
-		if(j>=obj_3d_no)break;
-		if(objects_list[i]){
+		if(objects_list[i])
 			fwrite(&objects_list[i]->o3dio, sizeof(object3d_io), 1, f);
-			j++;
-		}
+		else
+			fwrite(&cur_3d_obj_io, sizeof(object3d_io), 1, f);
 	}
 
 	//write the 2d objects
@@ -380,12 +378,17 @@ int load_map(char * file_name)
 			char * cur_3do_pointer=(char *)&cur_3d_obj_io;
 			int k;
 			fread(cur_3do_pointer, 1, obj_3d_io_size, f);
-
-			k=add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
-			sector_to_global_z(cur_3d_obj_io.z_pos),cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
-			cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f,
-			cur_3d_obj_io.attributes);
-			memcpy(&objects_list[k]->o3dio,&cur_3d_obj_io,sizeof(object3d_io));
+			if((Sint16)cur_3d_obj_io.object_type!=-1){
+				k=add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
+				sector_to_global_z(cur_3d_obj_io.z_pos),cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
+				cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f,
+				cur_3d_obj_io.attributes);
+				if(i!=k){
+					objects_list[i]=objects_list[k];
+					objects_list[k]=0;
+				}
+				memcpy(&objects_list[i]->o3dio,&cur_3d_obj_io,sizeof(object3d_io));
+			}
 		}
 
 	//read the 2d objects
@@ -394,7 +397,6 @@ int load_map(char * file_name)
 			char * cur_2do_pointer=(char *)&cur_2d_obj_io;
 			int k;
 			fread(cur_2do_pointer, 1, obj_2d_io_size, f);
-
 			k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
 			sector_to_global_z(cur_2d_obj_io.z_pos)+0.001,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
 			memcpy(&obj_2d_list[k]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
