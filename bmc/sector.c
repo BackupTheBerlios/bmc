@@ -18,7 +18,6 @@ void sector_update_checksums(int sector)
 	sector_update_tiles_checksum(sector);
 }
 
-
 float sector_to_global_x(int sector, Uint16 f)
 {
 	return (((float)f/65536)*12)+sector%(tile_map_size_x/4)*12.0f;
@@ -504,7 +503,9 @@ void get_light_objects(char *d)
 		d++;
 
 		k=add_light(sector_to_global_x(active_sector,lightio.x_pos),sector_to_global_y(active_sector,lightio.y_pos),
-		sector_to_global_z(lightio.z_pos),lightio.r/255.0f,lightio.g/255.0f,lightio.b/255.0f, 1.0f);
+		sector_to_global_z(lightio.z_pos),io_to_global_intensity(lightio.r),io_to_global_intensity(lightio.g),
+		io_to_global_intensity(lightio.b), 1.0f,lightio.flags, io_to_global_interval(lightio.interval));
+
 		memcpy(&lights_list[k]->lightio,&lightio,sizeof(light_io));
 		sector_add_light(k);
 	}

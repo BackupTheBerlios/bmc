@@ -42,6 +42,9 @@ unsigned char light_level=58;
 sun sun_pos[60*3];
 short game_minute=60;
 
+static int last_flicker=0;
+int halo_tex;
+
 void draw_test_light()
 {
 	GLfloat light_position[] = { 15.0, 15.0, 3.0, 1.0 };
@@ -77,6 +80,82 @@ void enable_local_lights()
     glEnable(GL_LIGHT6);
 }
 
+void draw_light_halos()
+{
+	int i;
+	float x,y;
+	if(!halo_tex)return;
+	x=-cx;
+	y=-cy;
+	for(i=0;i<max_lights;i++)
+		{
+			if(lights_list[i] && lights_list[i]->flags&HALO)
+				{
+					int dist1=x-lights_list[i]->pos_x;
+					int dist2=y-lights_list[i]->pos_y;
+					if(dist1*dist1+dist2*dist2<900)
+						{
+							draw_light_halo(lights_list[i]);
+						}
+				}
+		}
+}
+
+
+void draw_light_halo(light * l)
+{
+	float x_pos,y_pos,z_pos;
+	float x_rot,y_rot,z_rot;
+	float render_x_start,render_y_start,u_start=0.0f,v_start=0.0f,u_end=1.0f,v_end=1.0f;//Change if inside a bitmap...
+	float scale;
+	
+	if(l->flags&FLICKER) scale=l->intensity*0.25;
+	else if(l->flags&PULSATE && l->interval)
+		{
+			float interval=l->interval;
+			float pos;
+			if(interval<2)interval=2;
+			pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+			if(pos<=0) scale=(-(float)pos/(float)interval)*l->intensity*0.25f;
+			else scale=((float)pos/(float)interval)*l->intensity*0.25f;//Which part of the
+		}
+	else if(l->r>l->g)
+		{
+			if(l->r>l->b) scale=l->r*0.25f;
+			else scale=l->b*0.25f;
+		}
+	else
+		{
+			if(l->g>l->b) scale=l->g*0.25f;
+			else scale=l->b*0.25f;
+		}
+	scale+=0.25f;
+	
+	x_pos=l->pos_x; y_pos=l->pos_y; z_pos=l->pos_z;
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_DEPTH_TEST);
+	glPushMatrix();
+	glTranslatef(x_pos, y_pos, z_pos);
+	glRotatef(-rz, 0.0f, 0.0f, 1.0f);
+	glRotatef(-rx, 1.0f, 0.0f, 0.0f);
+	glRotatef(-ry, 0.0f, 1.0f, 0.0f);
+	get_and_set_texture_id(halo_tex);
+	glBegin(GL_TRIANGLE_STRIP);
+	glColor3f(l->r/5.0f,l->g/5.0f,l->b/5.0f);
+	glTexCoord2f(u_start,v_start);	glVertex2f(-scale,-scale);
+	glTexCoord2f(u_start,v_end);	glVertex2f(-scale,scale);
+	glTexCoord2f(u_end,v_start);	glVertex2f(scale,-scale);
+	glTexCoord2f(u_end,v_end);	glVertex2f(scale,scale);
+	glEnd();
+	glPopMatrix();
+	
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glDisable(GL_BLEND);
+}
 
 void draw_lights()
 {
@@ -112,7 +191,7 @@ void draw_lights()
 
 }
 
-int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity)
+int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity, Uint8 flags, float interval)
 {
 	int i;
 	light *new_light;
@@ -123,9 +202,13 @@ int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, 
 	new_light->pos_y=y;
 	new_light->pos_z=z;
 
-	new_light->r=r*intensity;
-	new_light->g=g*intensity;
-	new_light->b=b*intensity;
+	new_light->r=r;
+	new_light->g=g;
+	new_light->b=b;
+	
+	new_light->intensity=intensity;
+	new_light->interval=interval;
+	new_light->flags=flags;
 
 	//find a free spot, in the lights list
 	for(i=0;i<max_lights;i++)
@@ -148,7 +231,7 @@ void update_scene_lights()
 	float x_dist,y_dist,dist;
 	char all_full=0;
 	char max_changed=0;
-	int max_dist=0;
+	float max_dist=0;
 	int max_light=0;
 
 	x=-cx;
@@ -179,7 +262,6 @@ void update_scene_lights()
 					if(max_changed)
 						{
 							max_dist=0;
-							max_changed=0;
 							if(light_0_dist>max_dist)
 								{
 									max_dist=light_0_dist;
@@ -215,6 +297,7 @@ void update_scene_lights()
 									max_dist=light_6_dist;
 									max_light=6;
 								}
+							max_changed=0;
 						}
 					x_dist=x-lights_list[i]->pos_x;
 					y_dist=y-lights_list[i]->pos_y;
@@ -223,6 +306,26 @@ void update_scene_lights()
 						{
 							if((light_0_dist==255.0f) || (all_full && (max_light==0)))
 								{
+									float intensity=1.0f;
+									if(lights_list[i]->flags&FLICKER)
+										{
+											intensity=lights_list[i]->intensity;
+											if(cur_time-last_flicker>100)
+												{
+													int sign=(rand()%2>0)?1:-1;
+													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													last_flicker=cur_time;
+												}
+										}
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
+										{
+											float interval=lights_list[i]->interval;
+											float pos;
+											if(interval<2)interval=2;
+											pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+											if(pos<=0) intensity=(-(float)pos/(float)interval)*lights_list[i]->intensity;
+											else intensity=((float)pos/(float)interval)*lights_list[i]->intensity;//Which part of the
+										}
 									//see if we should recompute the max distance
 									if(all_full)max_changed=1;
 
@@ -231,9 +334,9 @@ void update_scene_lights()
 									light_0_position[2]=lights_list[i]->pos_z;
 									light_0_position[3]=1.0;
 
-									light_0_diffuse[0]=lights_list[i]->r;
-									light_0_diffuse[1]=lights_list[i]->g;
-									light_0_diffuse[2]=lights_list[i]->b;
+									light_0_diffuse[0]=lights_list[i]->r*intensity;
+									light_0_diffuse[1]=lights_list[i]->g*intensity;
+									light_0_diffuse[2]=lights_list[i]->b*intensity;
 									light_0_diffuse[3]=1.0;
 									light_0_dist=dist;
 									if(dist>max_dist)
@@ -245,6 +348,26 @@ void update_scene_lights()
 								}
 							if((light_1_dist==255.0f) || (all_full && (max_light==1)))
 								{
+									float intensity=1;
+									if(lights_list[i]->flags&FLICKER)
+										{
+											intensity=lights_list[i]->intensity;
+											if(cur_time-last_flicker>100)
+												{
+													int sign=(rand()%2>0)?1:-1;
+													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													last_flicker=cur_time;
+												}
+										}
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
+										{
+											float interval=lights_list[i]->interval;
+											float pos;
+											if(interval<2)interval=2;
+											pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+											if(pos<=0) intensity=(-(float)pos/(float)interval)*lights_list[i]->intensity;
+											else intensity=((float)pos/(float)interval)*lights_list[i]->intensity;//Which part of the
+										}
 									//see if we should recompute the max distance
 									if(all_full)max_changed=1;
 
@@ -253,9 +376,9 @@ void update_scene_lights()
 									light_1_position[2]=lights_list[i]->pos_z;
 									light_1_position[3]=1.0;
 
-									light_1_diffuse[0]=lights_list[i]->r;
-									light_1_diffuse[1]=lights_list[i]->g;
-									light_1_diffuse[2]=lights_list[i]->b;
+									light_1_diffuse[0]=lights_list[i]->r*intensity;
+									light_1_diffuse[1]=lights_list[i]->g*intensity;
+									light_1_diffuse[2]=lights_list[i]->b*intensity;
 									light_1_diffuse[3]=1.0;
 									light_1_dist=dist;
 									if(dist>max_dist)
@@ -267,6 +390,26 @@ void update_scene_lights()
 								}
 							if((light_2_dist==255.0f) || (all_full && (max_light==2)))
 								{
+									float intensity=1;
+									if(lights_list[i]->flags&FLICKER)
+										{
+											intensity=lights_list[i]->intensity;
+											if(cur_time-last_flicker>100)
+												{
+													int sign=(rand()%2>0)?1:-1;
+													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													last_flicker=cur_time;
+												}
+										}
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
+										{
+											float interval=lights_list[i]->interval;
+											float pos;
+											if(interval<2)interval=2;
+											pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+											if(pos<=0) intensity=(-(float)pos/(float)interval)*lights_list[i]->intensity;
+											else intensity=((float)pos/(float)interval)*lights_list[i]->intensity;//Which part of the
+										}
 									//see if we should recompute the max distance
 									if(all_full)max_changed=1;
 
@@ -275,9 +418,9 @@ void update_scene_lights()
 									light_2_position[2]=lights_list[i]->pos_z;
 									light_2_position[3]=1.0;
 
-									light_2_diffuse[0]=lights_list[i]->r;
-									light_2_diffuse[1]=lights_list[i]->g;
-									light_2_diffuse[2]=lights_list[i]->b;
+									light_2_diffuse[0]=lights_list[i]->r*intensity;
+									light_2_diffuse[1]=lights_list[i]->g*intensity;
+									light_2_diffuse[2]=lights_list[i]->b*intensity;
 									light_2_diffuse[3]=1.0;
 									light_2_dist=dist;
 									if(dist>max_dist)
@@ -289,6 +432,26 @@ void update_scene_lights()
 								}
 							if((light_3_dist==255.0f) || (all_full && (max_light==3)))
 								{
+									float intensity=1;
+									if(lights_list[i]->flags&FLICKER)
+										{
+											intensity=lights_list[i]->intensity;
+											if(cur_time-last_flicker>100)
+												{
+													int sign=(rand()%2>0)?1:-1;
+													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													last_flicker=cur_time;
+												}
+										}
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
+										{
+											float interval=lights_list[i]->interval;
+											float pos;
+											if(interval<2)interval=2;
+											pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+											if(pos<=0) intensity=(-(float)pos/(float)interval)*lights_list[i]->intensity;
+											else intensity=((float)pos/(float)interval)*lights_list[i]->intensity;//Which part of the
+										}
 									//see if we should recompute the max distance
 									if(all_full)max_changed=1;
 
@@ -297,9 +460,9 @@ void update_scene_lights()
 									light_3_position[2]=lights_list[i]->pos_z;
 									light_3_position[3]=1.0;
 
-									light_3_diffuse[0]=lights_list[i]->r;
-									light_3_diffuse[1]=lights_list[i]->g;
-									light_3_diffuse[2]=lights_list[i]->b;
+									light_3_diffuse[0]=lights_list[i]->r*intensity;
+									light_3_diffuse[1]=lights_list[i]->g*intensity;
+									light_3_diffuse[2]=lights_list[i]->b*intensity;
 									light_3_diffuse[3]=1.0;
 									light_3_dist=dist;
 									if(dist>max_dist)
@@ -311,6 +474,22 @@ void update_scene_lights()
 								}
 							if((light_4_dist==255.0f) || (all_full && (max_light==4)))
 								{
+									float intensity=1;
+									if(lights_list[i]->flags&FLICKER && cur_time-last_flicker>100)
+										{
+											int sign=(rand()%2>0)?1:-1;
+											intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+											last_flicker=cur_time;
+										}
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
+										{
+											float interval=lights_list[i]->interval;
+											float pos;
+											if(interval<2)interval=2;
+											pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+											if(pos<=0) intensity=(-(float)pos/(float)interval)*lights_list[i]->intensity;
+											else intensity=((float)pos/(float)interval)*lights_list[i]->intensity;//Which part of the
+										}
 									//see if we should recompute the max distance
 									if(all_full)max_changed=1;
 
@@ -319,9 +498,9 @@ void update_scene_lights()
 									light_4_position[2]=lights_list[i]->pos_z;
 									light_4_position[3]=1.0;
 
-									light_4_diffuse[0]=lights_list[i]->r;
-									light_4_diffuse[1]=lights_list[i]->g;
-									light_4_diffuse[2]=lights_list[i]->b;
+									light_4_diffuse[0]=lights_list[i]->r*intensity;
+									light_4_diffuse[1]=lights_list[i]->g*intensity;
+									light_4_diffuse[2]=lights_list[i]->b*intensity;
 									light_4_diffuse[3]=1.0;
 									light_4_dist=dist;
 									if(dist>max_dist)
@@ -333,6 +512,26 @@ void update_scene_lights()
 								}
 							if((light_5_dist==255.0f) || (all_full && (max_light==5)))
 								{
+									float intensity=1;
+									if(lights_list[i]->flags&FLICKER)
+										{
+											intensity=lights_list[i]->intensity;
+											if(cur_time-last_flicker>100)
+												{
+													int sign=(rand()%2>0)?1:-1;
+													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													last_flicker=cur_time;
+												}
+										}
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
+										{
+											float interval=lights_list[i]->interval;
+											float pos;
+											if(interval<2)interval=2;
+											pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+											if(pos<=0) intensity=(-(float)pos/(float)interval)*lights_list[i]->intensity;
+											else intensity=((float)pos/(float)interval)*lights_list[i]->intensity;//Which part of the
+										}
 									//see if we should recompute the max distance
 									if(all_full)max_changed=1;
 
@@ -341,9 +540,9 @@ void update_scene_lights()
 									light_5_position[2]=lights_list[i]->pos_z;
 									light_5_position[3]=1.0;
 
-									light_5_diffuse[0]=lights_list[i]->r;
-									light_5_diffuse[1]=lights_list[i]->g;
-									light_5_diffuse[2]=lights_list[i]->b;
+									light_5_diffuse[0]=lights_list[i]->r*intensity;
+									light_5_diffuse[1]=lights_list[i]->g*intensity;
+									light_5_diffuse[2]=lights_list[i]->b*intensity;
 									light_5_diffuse[3]=1.0;
 									light_5_dist=dist;
 									if(dist>max_dist)
@@ -355,6 +554,26 @@ void update_scene_lights()
 								}
 							if((light_6_dist==255.0f) || (all_full && (max_light==6)))
 								{
+									float intensity=1;
+									if(lights_list[i]->flags&FLICKER)
+										{
+											intensity=lights_list[i]->intensity;
+											if(cur_time-last_flicker>100)
+												{
+													int sign=(rand()%2>0)?1:-1;
+													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													last_flicker=cur_time;
+												}
+										}
+									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
+										{
+											float interval=lights_list[i]->interval;
+											float pos;
+											if(interval<2)interval=2;
+											pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
+											if(pos<=0) intensity=(-(float)pos/(float)interval)*lights_list[i]->intensity;
+											else intensity=((float)pos/(float)interval)*lights_list[i]->intensity;//Which part of the
+										}
 									//see if we should recompute the max distance
 									if(all_full)max_changed=1;
 
@@ -363,9 +582,9 @@ void update_scene_lights()
 									light_6_position[2]=lights_list[i]->pos_z;
 									light_6_position[3]=1.0;
 
-									light_6_diffuse[0]=lights_list[i]->r;
-									light_6_diffuse[1]=lights_list[i]->g;
-									light_6_diffuse[2]=lights_list[i]->b;
+									light_6_diffuse[0]=lights_list[i]->r*intensity;
+									light_6_diffuse[1]=lights_list[i]->g*intensity;
+									light_6_diffuse[2]=lights_list[i]->b*intensity;
 									light_6_diffuse[3]=1.0;
 									light_6_dist=dist;
 									if(dist>max_dist)

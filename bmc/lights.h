@@ -1,6 +1,10 @@
 #ifndef __LIGHTS_H__
 #define __LIGHTS_H__
 
+#define PULSATE 1
+#define HALO 2
+#define FLICKER 4
+
 typedef struct
 {
 	float pos_x;
@@ -9,6 +13,9 @@ typedef struct
 	float r;
 	float g;
 	float b;
+	Uint8 flags;
+	float intensity;
+	float interval;
 	light_io lightio;
 }light;
 
@@ -69,6 +76,8 @@ extern int sun_use_static_position;
 #define max_lights 1000
 extern light *lights_list[max_lights];
 
+extern int halo_tex;
+
 extern char lights_on;
 extern unsigned char light_level;
 extern short game_minute;
@@ -77,7 +86,7 @@ void draw_test_light();
 void disable_local_lights();
 void enable_local_lights();
 void draw_lights();
-int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity);
+int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity, Uint8 flags, float interval);
 void update_scene_lights();
 void init_lights();
 void reset_material();
@@ -88,6 +97,8 @@ void make_gradient_light(int start,int steps,float *light_table, float r_start,
 						 float g_start, float b_start, float r_end, float g_end, float b_end);
 void build_global_light_table();
 void build_sun_pos_table();
+void draw_light_halos();
+void draw_light_halo(light * l);
 void new_minute();
 
 #endif

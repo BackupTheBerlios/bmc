@@ -306,6 +306,8 @@ int load_map(char * file_name)
 	if(cur_map_header.file_sig[2]!='m')return 0;
 	if(cur_map_header.file_sig[3]!='f')return 0;
 
+	strcpy(map_file_name,file_name);
+	
 	//get the map size
 	tile_map_size_x=cur_map_header.tile_map_x_len;
 	tile_map_size_y=cur_map_header.tile_map_y_len;
@@ -405,7 +407,9 @@ int load_map(char * file_name)
 			char * cur_light_pointer=(char *)&cur_light_io;
 			int k;
 			fread(cur_light_pointer, 1, lights_io_size, f);
-			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),cur_light_io.r/255.0f,cur_light_io.g/255.0f,cur_light_io.b/255.0f,1.0f);
+			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),
+			io_to_global_intensity(cur_light_io.r),io_to_global_intensity(cur_light_io.g),io_to_global_intensity(cur_light_io.b), 
+			io_to_global_intensity(cur_light_io.intensity),cur_light_io.flags, io_to_global_interval(cur_light_io.interval));
 			memcpy(&lights_list[k]->lightio,&cur_light_io,sizeof(light_io));
 		}
 
@@ -430,26 +434,26 @@ int load_map(char * file_name)
 			if(sectors[i].e3d_local[j]==-1)
 				break;
 			objects_list[sectors[i].e3d_local[j]]->x_pos=sector_to_global_x(i,objects_list[sectors[i].e3d_local[j]]->x_pos);
-			objects_list[sectors[i].e3d_local[j]]->y_pos=sector_to_global_y(i,objects_list[sectors[i].e3d_local[j]]->y_pos);
+			objects_list[sectors[i].e3d_local[j]]->y_pos=sector_to_global_y(i,objects_list[sectors[i].e3d_local[j]]->y_pos);;
 		}
 		for(j=0;j<20;j++){
 			if(sectors[i].e2d_local[j]==-1)
 				break;
 			obj_2d_list[sectors[i].e2d_local[j]]->x_pos=sector_to_global_x(i,obj_2d_list[sectors[i].e2d_local[j]]->x_pos);
-			obj_2d_list[sectors[i].e2d_local[j]]->y_pos=sector_to_global_y(i,obj_2d_list[sectors[i].e2d_local[j]]->y_pos);
+			obj_2d_list[sectors[i].e2d_local[j]]->y_pos=sector_to_global_y(i,obj_2d_list[sectors[i].e2d_local[j]]->y_pos);;
 		}
 		for(j=0;j<4;j++){
 			if(sectors[i].lights_local[j]==-1)
 				break;
 			lights_list[sectors[i].lights_local[j]]->pos_x=sector_to_global_x(i,lights_list[sectors[i].lights_local[j]]->pos_x);
-			lights_list[sectors[i].lights_local[j]]->pos_y=sector_to_global_y(i,lights_list[sectors[i].lights_local[j]]->pos_y);
+			lights_list[sectors[i].lights_local[j]]->pos_y=sector_to_global_y(i,lights_list[sectors[i].lights_local[j]]->pos_y);;
 		}
 		for(j=0;j<8;j++){
 			if(sectors[i].particles_local[j]==-1)
 				break;
 			if(sectors[i].particles_local[j]==0)continue; //Hmm, shouldn't happen in newer map formats
 			particles_list[sectors[i].particles_local[j]-1]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]-1]->x_pos);//The client does not have the particle editors default particle system, which is located as no. 0 in the particles_list - hence the particles for this map will always be 1 less than when it was saved in the map editor.
-			particles_list[sectors[i].particles_local[j]-1]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]-1]->y_pos);
+			particles_list[sectors[i].particles_local[j]-1]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]-1]->y_pos);;
 		}
 
 
