@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#ifndef WINDOWS
+#include <locale.h>
+#endif
 #include "global.h"
 #include "md5.h"
 
@@ -167,6 +170,9 @@ float get_float_after_string(const Uint8 * source_pointer, const Uint8 * dest_po
 							if(cur_dest_char==0x0a) return -1;//we didn't find any number on this line
 							i++;
 						}
+#ifndef WINDOWS
+					setlocale(LC_NUMERIC,"en_US");
+#endif
 					return atof(dest_pointer+i);
 				}
 		}//end of the for
