@@ -639,7 +639,7 @@ void display_actors()
 										draw_enhanced_actor(cur_actor);
 										//check for network data - reduces resyncs
 										get_message_from_server();
-										if(cur_actor==NULL)continue;
+										if(cur_actor==NULL || cur_actor!=actors_list[i])continue;
 									}
 								else
 									{
