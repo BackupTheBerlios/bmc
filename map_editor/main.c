@@ -15,6 +15,8 @@ int start_rendering()
 		SDL_Event event;
 		/* Check if there's a pending event. */
 		
+		cur_time = SDL_GetTicks();
+
 		while( SDL_PollEvent( &event ) )
         		{
 				done = HandleEvent(&event);
@@ -27,11 +29,9 @@ int start_rendering()
 				last_time=cur_time;
 			}
 		else SDL_Delay(1);
-		draw_scene();
 		
 		if(auto_save_time && (cur_time-last_save_time)>(Uint32)auto_save_time)
 			{
-				printf("saving map...\n");
 				last_save_time=cur_time;
 				save_map("maps/Autosave.bmm");
 			}

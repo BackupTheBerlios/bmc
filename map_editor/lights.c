@@ -66,29 +66,28 @@ void draw_light_halo(light * l)
 	float x_pos,y_pos,z_pos;
 	float x_rot,y_rot,z_rot;
 	float render_x_start,render_y_start,u_start=0.0f,v_start=0.0f,u_end=1.0f,v_end=1.0f;//Change if inside a bitmap...
-	float scale;
+	float scale=0.25f;
 	
-	if(l->flags&FLICKER) scale=l->intensity*0.25;
+	if(l->r>l->g)
+		{
+			if(l->r>l->b) scale+=l->r*0.25f;
+			else scale+=l->b*0.25f;
+		}
+	else
+		{
+			if(l->g>l->b) scale+=l->g*0.25f;
+			else scale+=l->b*0.25f;
+		}
+	if(l->flags&FLICKER) scale+=l->intensity*0.25;
 	else if(l->flags&PULSATE && l->interval)
 		{
 			float interval=l->interval;
 			float pos;
 			if(interval<2)interval=2;
 			pos=cur_time%(int)(2*interval+1)-interval;//Ascending or descending...
-			if(pos<=0) scale=(-(float)pos/(float)interval)*l->intensity*0.25f;
-			else scale=((float)pos/(float)interval)*l->intensity*0.25f;//Which part of the
+			if(pos<=0) scale+=(-(float)pos/(float)interval)*l->intensity*0.25f;
+			else scale+=((float)pos/(float)interval)*l->intensity*0.25f;//Which part of the
 		}
-	else if(l->r>l->g)
-		{
-			if(l->r>l->b) scale=l->r*0.25f;
-			else scale=l->b*0.25f;
-		}
-	else
-		{
-			if(l->g>l->b) scale=l->g*0.25f;
-			else scale=l->b*0.25f;
-		}
-	scale+=0.25f;
 	
 	x_pos=l->pos_x; y_pos=l->pos_y; z_pos=l->pos_z;
 	

@@ -9,8 +9,6 @@ void draw_scene()
 	int y_line;
 	int any_reflection=0;
 
-	cur_time = SDL_GetTicks();
-
 	if(!shadows_on)glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
 	else glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 	glLoadIdentity();					// Reset The Matrix
