@@ -1,10 +1,5 @@
 #include <math.h>
 #include <stdlib.h>
-
-#ifndef WINDOWS
-#include <locale.h>
-#endif
-
 #include "global.h"
 
 //find the first string occurance, and return the distance to that string
@@ -138,9 +133,6 @@ for(i=0;i<max_len;i++)
 					if(cur_dest_char==0x0a||cur_dest_char==0x0d) return -1;//we didn't find any number on this line
 					i++;
 				}
-#ifndef WINDOWS
-			setlocale(LC_NUMERIC,"en_US");
-#endif
 			return atof(dest_pointer+i);
 		}
   }//end of the for
