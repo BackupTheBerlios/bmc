@@ -626,3 +626,56 @@ void display_console_text()
 	draw_string(0,command_line_y,input_text_line,input_text_lines);
 }
 
+int small_text_win=-1;
+int small_text_win_x=100;
+int small_text_win_y=100;
+int small_text_win_x_len=250;
+int small_text_win_y_len=100;
+char small_text_buffer[512]={0};
+
+void add_text_to_small_text_buffer(char * in_data, int len)
+{
+	char *small_text=small_text_buffer;
+	
+	while(len>0) {
+		int l=len;
+
+		if(l>25) l=25;
+		strncpy(small_text, in_data, l);
+		small_text[l]='\n';
+		small_text+=l+1;
+		in_data+=l;
+		
+		len-=l;
+	}
+	
+	*small_text=0;
+}
+
+int display_small_text_window_handler(window_info * win)
+{
+	if(small_text_buffer[0])draw_string_small(10, 10, small_text_buffer, 4);
+
+	return 1;
+}
+
+void display_small_text_window()
+{
+	int x=mouse_x-(small_text_win_x_len>>1);
+	int y=mouse_y-(small_text_win_y_len>>1);
+
+	if(x<0)x=200;
+	if(y<0)y=200;
+	if(x>window_width-small_text_win_x_len)x=200;
+	if(y>window_height-small_text_win_y_len)y=200;
+	
+	if(small_text_win < 0){
+		small_text_win= create_window("Small text window", 0, 0, x, y, small_text_win_x_len, small_text_win_y_len, ELW_CLOSE_BOX|ELW_DRAGGABLE|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW);
+		set_window_handler(small_text_win, ELW_HANDLER_DISPLAY, &display_small_text_window_handler );
+	} else {
+		move_window(small_text_win, 0, 0, x, y);
+		show_window(small_text_win);
+		select_window(small_text_win);
+	}
+}
+

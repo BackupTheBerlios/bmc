@@ -292,6 +292,13 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 					}
 			}
 			break;
+		
+		case SMALL_WINDOW_TEXT:
+			{
+				add_text_to_small_text_buffer(in_data+3, data_lenght-3);
+				display_small_text_window();
+			}
+			break;
 
 		case ADD_NEW_ACTOR:
 			{

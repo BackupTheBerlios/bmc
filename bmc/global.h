@@ -94,6 +94,7 @@
 #include "elconfig.h"
 #include "terraform.h"
 #include "keys.h"
+#include "seeds.h"
 #ifdef CAL3D
 #include "cal3dwrap.h"
 #endif

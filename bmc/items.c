@@ -233,7 +233,7 @@ int display_items_handler(window_info *win)
 void get_your_items(Uint8 *data)
 {
 	int i,total_items;
-	Uint8 flags;
+	int flags;
 
 	total_items=data[0];
 
@@ -247,17 +247,19 @@ void get_your_items(Uint8 *data)
 		}
 	for(i=0;i<total_items;i++)
 		{
-			item_list[i].image_id=*((Uint16 *)(data+i*8+1));
-			item_list[i].quantity=*((Uint32 *)(data+i*8+1+2));
-			item_list[i].pos=data[i*8+1+6];
-			flags=data[i*8+1+7];
-
+			item_list[i].image_id=*((Uint16 *)(data+i*9+1));
+			item_list[i].quantity=*((Uint32 *)(data+i*9+1+2));
+			item_list[i].pos=data[i*9+1+6];
+			flags=*((Uint16*)(data+i*9+1+7));
+					
 			if((flags&ITEM_RESOURCE))item_list[i].is_resource=1;
 			else item_list[i].is_resource=0;
 			if((flags&ITEM_REAGENT))item_list[i].is_reagent=1;
 			else item_list[i].is_reagent=0;
 			if((flags&ITEM_INVENTORY_USABLE))item_list[i].use_with_inventory=1;
 			else item_list[i].use_with_inventory=0;
+			if((flags&ITEM_SEED)) item_list[i].is_seed=1;
+			else item_list[i].is_seed=0;
 		}
 }
 
@@ -509,12 +511,12 @@ void get_new_inventory_item(Uint8 *data)
 {
 	int i;
 	int pos;
-	Uint8 flags;
+	int flags;
 	int quantity;
 	int image_id;
 
 	pos= data[6];
-	flags= data[7];
+	flags= *((Uint16 *)(data+7));
 	image_id=*((Uint16 *)(data));
 	quantity=*((Uint32 *)(data+2));
 
@@ -544,6 +546,8 @@ void get_new_inventory_item(Uint8 *data)
 					else item_list[i].is_reagent=0;
 					if((flags&ITEM_INVENTORY_USABLE))item_list[i].use_with_inventory=1;
 					else item_list[i].use_with_inventory=0;
+					if((flags&ITEM_SEED)) item_list[i].is_seed=1;
+					else item_list[i].is_seed=0;
 					return;
 				}
 		}

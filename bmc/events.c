@@ -290,6 +290,11 @@ int HandleEvent(SDL_Event *event)
 						camera_rotation_frames=10;
 					}
 
+				if(key==K_SEEDS)
+					{
+						display_seeds_window();
+					}
+
 
 				if(key==K_AFK)
 					{

@@ -9,7 +9,7 @@ typedef struct
 	int is_reagent;//can be used for spells?
 	int is_resource;//does it appear on the manufacturing menu?
 	int use_with_inventory;
-
+	int is_seed;
 } item;
 
 typedef struct
@@ -36,6 +36,8 @@ typedef enum {
 	ITEM_PLAYER_USABLE     = 32,
 	ITEM_OBJECT_USABLE     = 64,
 	ITEM_ON_OFF            = 128,
+	ITEM_WEARABLE          = 256,//can be worn
+	ITEM_SEED              = 512,
 } item_definition_flags;
 
 #define	ITEM_WEAR_START	36

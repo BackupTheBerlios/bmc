@@ -55,9 +55,10 @@ void draw_hud_frame();
 
 // icons subsection
 void init_peace_icons();
+void 	init_vertical_icons();
 void draw_peace_icons();
 int check_peace_icons();
-void add_icon(float u_start, float v_start, float colored_u_start, float colored_v_start, char * help_message, void * func, void * data, char data_type);
+void add_icon(struct icons_struct * icons, float u_start, float v_start, float colored_u_start, float colored_v_start, char * help_message, void * func, void * data, char data_type);
 void reset_states(int id, int state);
 int translate_win_id(int * win_id);
 void free_icons();

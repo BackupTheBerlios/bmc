@@ -43,6 +43,7 @@ extern Uint32 K_ITEM5;
 extern Uint32 K_ITEM6;
 extern Uint32 K_VIEWTEXTASOVERTEXT;
 extern Uint32 K_AFK;
+extern Uint32 K_SEEDS;
 
 void read_key_config();
 unsigned int CRC32(unsigned char *, int);

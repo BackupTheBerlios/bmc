@@ -41,6 +41,7 @@ Uint32 K_ITEM5=CTRL|'5';
 Uint32 K_ITEM6=CTRL|'6';
 Uint32 K_VIEWTEXTASOVERTEXT=ALT|'o';
 Uint32 K_AFK=CTRL|ALT|'a';
+Uint32 K_SEEDS=CTRL|'s';
 
 
 // load the dynamic definitions for keys
@@ -147,6 +148,8 @@ void read_key_config()
 		K_VIEWTEXTASOVERTEXT = parse_key_string(&file_mem[t]);
 	if((t=get_string_occurance("#K_AFK",file_mem,key_file_size,0))!=-1)
 		K_AFK = parse_key_string(&file_mem[t]);
+	if((t=get_string_occurance("#K_SEEDS",file_mem,key_file_size,0))!=-1)
+		K_SEEDS = parse_key_string(&file_mem[t]);
 }
 
 Uint32 parse_key_string(char *s)

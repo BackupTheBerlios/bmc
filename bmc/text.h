@@ -46,4 +46,7 @@ void console_move_page_up();
 void display_console_text();
 #define log_to_console(color,buffer)	put_colored_text_in_buffer(color,buffer,-1,0)
 
+void display_small_text_window();
+void add_text_to_small_text_buffer(char * in_data, int len);
+
 #endif
