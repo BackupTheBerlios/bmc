@@ -143,6 +143,7 @@ void sector_add_map()
 			objects_list[i]->o3dio.y_rot=objects_list[i]->y_rot/1.5;
 			objects_list[i]->o3dio.z_rot=objects_list[i]->z_rot/1.5;
 	
+			objects_list[i]->o3dio.flags=0;
 			objects_list[i]->o3dio.flags|=(objects_list[i]->self_lit<<0);
 			objects_list[i]->o3dio.flags|=(objects_list[i]->blended<<1);
 

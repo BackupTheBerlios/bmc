@@ -55,7 +55,7 @@
 #include "../bmc/particles.h"
 #include "../bmc/translate.h"
 #include "particles_window.h"
-#include "sector.h"
+#include "../bmc/sector.h"
 
 #define sector_size_x 15
 #define sector_size_y 15

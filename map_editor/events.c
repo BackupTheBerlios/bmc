@@ -539,7 +539,6 @@ int HandleEvent(SDL_Event *event)
 									{
 										get_3d_object_under_mouse();
 										if(selected_3d_object!=-1){
-											sector_del_3do(selected_3d_object);
 											undo_type = mode_3d;
 											if(undo_object == NULL)
 												free(undo_object);
@@ -587,7 +586,6 @@ int HandleEvent(SDL_Event *event)
 									{
 										get_3d_object_under_mouse();
 										if(selected_3d_object!=-1){
-											sector_del_3do(selected_3d_object);
 											if(calhm)
 												clear_e3d_heightmap(selected_3d_object);
 
