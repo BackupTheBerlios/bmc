@@ -17,7 +17,6 @@ Uint16 global_to_sector(float f);
 float sector_to_global_x(int sector, Uint16 f);
 float sector_to_global_y(int sector, Uint16 f);
 int sector_get(float x, float y);
-void sector_add_map();
 int sector_add_3do(int objectid);
 int sector_del_3do(int objectid);
 int sector_add_2do(int objectid);

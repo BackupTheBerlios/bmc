@@ -110,6 +110,108 @@ void destroy_map()
 	destroy_all_particles();
 }
 
+
+// adds everything from the maps to the sectors
+void sector_add_map()
+{
+	int i,j;
+	int obj_3d_no=0;
+	int obj_2d_no=0;
+	int lights_no=0;
+	int particles_no=0;
+
+
+	for(i=0;i<max_obj_3d;i++)if(objects_list[i])obj_3d_no++;
+	for(i=0;i<max_obj_2d;i++)if(obj_2d_list[i])obj_2d_no++;
+	for(i=0;i<max_lights;i++)if(lights_list[i])lights_no++;
+	for(i=0;i<max_particle_systems;i++){
+		if(particles_list[i] && particles_list[i]->def && particles_list[i]->def != &def)
+			particles_no++;
+	}
+	// 3d objects
+	for(i=0;i<max_obj_3d;i++){
+		if(j>obj_3d_no)
+			break;
+
+		if(objects_list[i]){
+			objects_list[i]->o3dio.object_type=e3dlist_getid(objects_list[i]->file_name);
+			objects_list[i]->o3dio.x_pos=global_to_sector(objects_list[i]->x_pos);
+			objects_list[i]->o3dio.y_pos=global_to_sector(objects_list[i]->y_pos);
+			objects_list[i]->o3dio.z_pos=objects_list[i]->z_pos;
+	
+			objects_list[i]->o3dio.x_rot=objects_list[i]->x_rot/1.5;
+			objects_list[i]->o3dio.y_rot=objects_list[i]->y_rot/1.5;
+			objects_list[i]->o3dio.z_rot=objects_list[i]->z_rot/1.5;
+	
+			objects_list[i]->o3dio.flags|=(objects_list[i]->self_lit<<0);
+			objects_list[i]->o3dio.flags|=(objects_list[i]->blended<<1);
+
+			objects_list[i]->o3dio.r=objects_list[i]->r*255;
+			objects_list[i]->o3dio.g=objects_list[i]->g*255;
+			objects_list[i]->o3dio.b=objects_list[i]->b*255;
+			
+			sector_add_3do(i);
+			j++;
+		}
+	}
+
+	//2d objects
+	j=0;
+	for(i=0;i<max_obj_2d;i++){
+		if(j>obj_2d_no)
+			break;
+		if(obj_2d_list[i]){
+			obj_2d_list[i]->o2dio.object_type=e2dlist_getid(obj_2d_list[i]->file_name);
+			obj_2d_list[i]->o2dio.x_pos=global_to_sector(obj_2d_list[i]->x_pos);
+			obj_2d_list[i]->o2dio.y_pos=global_to_sector(obj_2d_list[i]->y_pos);
+			obj_2d_list[i]->o2dio.z_pos=obj_2d_list[i]->z_pos;
+
+			obj_2d_list[i]->o2dio.x_rot=obj_2d_list[i]->x_rot/1.5;
+			obj_2d_list[i]->o2dio.y_rot=obj_2d_list[i]->y_rot/1.5;
+			obj_2d_list[i]->o2dio.z_rot=obj_2d_list[i]->z_rot/1.5;
+			sector_add_2do(i);
+			j++;
+		}
+	}
+
+	//lights
+	j=0;
+	for(i=0;i<max_lights;i++){
+		if(j>lights_no)break;
+		if(lights_list[i]){
+			lights_list[i]->lightio.x_pos=global_to_sector(lights_list[i]->pos_x);
+			lights_list[i]->lightio.y_pos=global_to_sector(lights_list[i]->pos_y);
+			lights_list[i]->lightio.z_pos=lights_list[i]->pos_z;
+
+			lights_list[i]->lightio.r=lights_list[i]->r*255;
+			lights_list[i]->lightio.g=lights_list[i]->g*255;
+			lights_list[i]->lightio.b=lights_list[i]->b*255;
+
+			sector_add_light(i);
+			j++;
+		}
+	}
+
+	//particle systems
+	j=0;
+	for(i=0;i<max_particle_systems;i++){
+		if(j>particles_no)
+			break;
+		if(particles_list[i] && particles_list[i]->def && particles_list[i]->def != &def){
+			particles_list[i]->particleio.object_type=partlist_getid(particles_list[i]->def->file_name);
+			particles_list[i]->particleio.x_pos=global_to_sector(particles_list[i]->x_pos);
+			particles_list[i]->particleio.y_pos=global_to_sector(particles_list[i]->y_pos);
+			particles_list[i]->particleio.z_pos=particles_list[i]->z_pos;
+			sector_add_particle(i);
+			j++;
+		}
+	}
+
+	for(i=0;i<num_sectors;i++)
+		sector_update_checksums(i);
+
+}
+
 //fix z_pos
 int save_map(char * file_name)
 {
@@ -210,114 +312,45 @@ int save_map(char * file_name)
 
 	//write the 3d objects
 	j=0;
-	for(i=0;i<max_obj_3d;i++)
-		{
+	for(i=0;i<max_obj_3d;i++){
 
-			if(j>obj_3d_no)break;
-			if(objects_list[i])
-				{
-					char * cur_3do_pointer=(char *)&cur_3d_obj_io;
-					int k=0;
-
-					//clear the object
-					for(k=0;k<sizeof(object3d_io);k++)cur_3do_pointer[k]=0;
-
-					cur_3d_obj_io.object_type=e3dlist_getid(objects_list[i]->file_name);
-					cur_3d_obj_io.x_pos=global_to_sector(objects_list[i]->x_pos);
-					cur_3d_obj_io.y_pos=global_to_sector(objects_list[i]->y_pos);
-					cur_3d_obj_io.z_pos=objects_list[i]->z_pos;
-
-					cur_3d_obj_io.x_rot=objects_list[i]->x_rot/1.5;
-					cur_3d_obj_io.y_rot=objects_list[i]->y_rot/1.5;
-					cur_3d_obj_io.z_rot=objects_list[i]->z_rot/1.5;
-
-					cur_3d_obj_io.flags|=(objects_list[i]->self_lit<<0);
-					cur_3d_obj_io.flags|=(objects_list[i]->blended<<1);
-
-					cur_3d_obj_io.r=objects_list[i]->r*255;
-					cur_3d_obj_io.g=objects_list[i]->g*255;
-					cur_3d_obj_io.b=objects_list[i]->b*255;
-
-					fwrite(cur_3do_pointer, sizeof(object3d_io), 1, f);
-
-					j++;
-				}
+		if(j>obj_3d_no)break;
+		if(objects_list[i]){
+			fwrite(&objects_list[i]->o3dio, sizeof(object3d_io), 1, f);
+			j++;
 		}
+	}
 
 	//write the 2d objects
 	j=0;
-	for(i=0;i<max_obj_2d;i++)
-		{
-
-			if(j>obj_2d_no)break;
-			if(obj_2d_list[i])
-				{
-					char * cur_2do_pointer=(char *)&cur_2d_obj_io;
-					int k=0;
-
-					//clear the object
-					for(k=0;k<sizeof(obj_2d_io);k++)cur_2do_pointer[k]=0;
-
-					cur_2d_obj_io.object_type=e2dlist_getid(obj_2d_list[i]->file_name);
-					cur_2d_obj_io.x_pos=global_to_sector(obj_2d_list[i]->x_pos);
-					cur_2d_obj_io.y_pos=global_to_sector(obj_2d_list[i]->y_pos);
-					cur_2d_obj_io.z_pos=obj_2d_list[i]->z_pos;
-
-					cur_2d_obj_io.x_rot=obj_2d_list[i]->x_rot/1.5;
-					cur_2d_obj_io.y_rot=obj_2d_list[i]->y_rot/1.5;
-					cur_2d_obj_io.z_rot=obj_2d_list[i]->z_rot/1.5;
-
-					fwrite(cur_2do_pointer, sizeof(obj_2d_io), 1, f);
-
-					j++;
-				}
+	for(i=0;i<max_obj_2d;i++){
+		if(j>obj_2d_no)break;
+		if(obj_2d_list[i]){
+			fwrite(&obj_2d_list[i]->o2dio, sizeof(obj_2d_io), 1, f);
+			j++;
 		}
+	}
 
 	//write the lights
 	j=0;
-	for(i=0;i<max_lights;i++)
-		{
-			if(j>lights_no)break;
-			if(lights_list[i])
-				{
-					char * cur_light_pointer=(char *)&cur_light_io;
-					int k=0;
-
-					//clear the object
-					for(k=0;k<sizeof(light_io);k++)cur_light_pointer[k]=0;
-
-					cur_light_io.x_pos=global_to_sector(lights_list[i]->pos_x);
-					cur_light_io.y_pos=global_to_sector(lights_list[i]->pos_y);
-					cur_light_io.z_pos=lights_list[i]->pos_z;
-
-					cur_light_io.r=lights_list[i]->r*255;
-					cur_light_io.g=lights_list[i]->g*255;
-					cur_light_io.b=lights_list[i]->b*255;
-
-					fwrite(cur_light_pointer, sizeof(light_io), 1, f);
-
-					j++;
-				}
+	for(i=0;i<max_lights;i++){
+		if(j>lights_no)break;
+		if(lights_list[i]){
+			fwrite(&lights_list[i]->lightio, sizeof(light_io), 1, f);
+			j++;
 		}
+	}
 
 	// Write the particle systems
 	j=0;
 	for(i=0;i<max_particle_systems;i++)
-		{
-			if(j>particles_no)break;
-			if(particles_list[i] && particles_list[i]->def && particles_list[i]->def != &def)
-				{
-					char *cur_particles_pointer=(char *)&cur_particles_io;
-					Uint32 k=0;
-					for(k=0;k<sizeof(particles_io);k++)cur_particles_pointer[k]=0;
-					cur_particles_io.object_type=partlist_getid(particles_list[i]->def->file_name);
-					cur_particles_io.x_pos=global_to_sector(particles_list[i]->x_pos);
-					cur_particles_io.y_pos=global_to_sector(particles_list[i]->y_pos);
-					cur_particles_io.z_pos=particles_list[i]->z_pos;
-					fwrite(cur_particles_pointer,sizeof(particles_io),1,f);
-					j++;
-				}
+	{
+		if(j>particles_no)break;
+		if(particles_list[i] && particles_list[i]->def && particles_list[i]->def != &def){	
+			fwrite(&particles_list[i]->particleio,sizeof(particles_io),1,f);
+			j++;
 		}
+	}
 
 	// writing sectors
 	fwrite(sectors,sizeof(map_sector),sector_no,f);
@@ -447,7 +480,7 @@ int load_map(char * file_name)
 
 			add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
 			cur_3d_obj_io.z_pos,cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
-			cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f);
+			cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f,&cur_3d_obj_io);
 
 		}
 
@@ -458,7 +491,7 @@ int load_map(char * file_name)
 			fread(cur_2do_pointer, 1, obj_2d_io_size, f);
 
 			add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
-			cur_2d_obj_io.z_pos,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
+			cur_2d_obj_io.z_pos,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5, &cur_2d_obj_io);
 		}
 
 
@@ -467,7 +500,7 @@ int load_map(char * file_name)
 		{
 			char * cur_light_pointer=(char *)&cur_light_io;
 			fread(cur_light_pointer, 1, lights_io_size, f);
-			add_light(cur_light_io.x_pos,cur_light_io.y_pos,cur_light_io.z_pos,cur_light_io.r/255.0f,cur_light_io.g/255.0f,cur_light_io.b/255.0f,1.0f);
+			add_light(cur_light_io.x_pos,cur_light_io.y_pos,cur_light_io.z_pos,cur_light_io.r/255.0f,cur_light_io.g/255.0f,cur_light_io.b/255.0f,1.0f,&cur_light_io);
 		}
 
 	//read particle systems
@@ -475,7 +508,7 @@ int load_map(char * file_name)
 		{
 			char *cur_particles_pointer=(char *)&cur_particles_io;
 			fread(cur_particles_pointer,1,particles_io_size,f);
-			add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,cur_particles_io.z_pos);
+			add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,cur_particles_io.z_pos,&cur_particles_io);
 			particles_list[i]->ttl=-1;
 		}
 	

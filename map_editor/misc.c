@@ -130,7 +130,7 @@ void clone_3d_object(int object_id)
 
 	z_pos=(z_pos == 0.01f)?0.02f:(z_pos == 0.02f?0.01f:z_pos);
 
-	selected_3d_object=add_e3d(objects_list[object_id]->file_name,scene_mouse_x,scene_mouse_y,z_pos,x_rot,y_rot,z_rot,self_lit,blended,r,g,b);
+	selected_3d_object=add_e3d(objects_list[object_id]->file_name,scene_mouse_x,scene_mouse_y,z_pos,x_rot,y_rot,z_rot,self_lit,blended,r,g,b,0);
 	cur_tool=tool_select;//change the current tool
 }
 
@@ -169,7 +169,7 @@ void open_3d_obj()
 		for(i=app_dir_len;i<fn_len;i++,j++)proper_path[j+1]=szFileName[i];
 		proper_path[j+1]=0;
 
-		selected_3d_object=add_e3d(proper_path,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
+		selected_3d_object=add_e3d(proper_path,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,0);
 		cur_tool=tool_select;//change the current tool
     }
 
@@ -270,7 +270,7 @@ void clone_2d_object(int object_id)
 			z_rot=rand()%360;
 		}
 
-	selected_2d_object=add_2d_obj(obj_2d_list[object_id]->file_name,scene_mouse_x,scene_mouse_y,z_pos,x_rot,0,z_rot);
+	selected_2d_object=add_2d_obj(obj_2d_list[object_id]->file_name,scene_mouse_x,scene_mouse_y,z_pos,x_rot,0,z_rot, 0);
 	cur_tool=tool_select;//change the current tool
 }
 
@@ -309,7 +309,7 @@ void open_2d_obj()
 		for(i=app_dir_len;i<fn_len;i++,j++)proper_path[j+1]=szFileName[i];
 		proper_path[j+1]=0;
 
-		selected_2d_object=add_2d_obj(proper_path,scene_mouse_x,scene_mouse_y,0.001f,0,0,0);
+		selected_2d_object=add_2d_obj(proper_path,scene_mouse_x,scene_mouse_y,0.001f,0,0,0, 0);
 		cur_tool=tool_select;//change the current tool
     }
 }
@@ -435,7 +435,7 @@ void move_particles_object(int object_id) {
 void clone_particles_object(int object_id) {
 	lock_particles_list();
 	if(!particles_list[object_id])return;
-	selected_particles_object=create_particle_sys(particles_list[object_id]->def,scene_mouse_x,scene_mouse_y,particles_list[object_id]->z_pos);
+	selected_particles_object=create_particle_sys(particles_list[object_id]->def,scene_mouse_x,scene_mouse_y,particles_list[object_id]->z_pos,0);
 	unlock_particles_list();
 }
 
@@ -664,7 +664,7 @@ void clone_light(int object_id)
 	g=lights_list[object_id]->g;
 	b=lights_list[object_id]->b;
 
-	selected_light=add_light(scene_mouse_x,scene_mouse_y,z_pos,r,g,b,1.0f);
+	selected_light=add_light(scene_mouse_x,scene_mouse_y,z_pos,r,g,b,1.0f,0);
 	cur_tool=tool_select;//change the current tool
 }
 
@@ -1072,7 +1072,7 @@ void open_particles_obj()
 		for(i=app_dir_len;i<fn_len;i++,j++)proper_path[j+1]=szFileName[i];
 		proper_path[j+1]=0;
 
-		selected_particles_object=add_particle_sys(proper_path,scene_mouse_x,scene_mouse_y,0.0);
+		selected_particles_object=add_particle_sys(proper_path,scene_mouse_x,scene_mouse_y,0.0,0);
 		cur_tool=tool_select;//change the current tool
 		particles_list[selected_particles_object]->ttl=-1; // we dont want the particle sys to disapear
     }
@@ -1095,7 +1095,7 @@ void open_3d_obj_continued()
   if (selected_file)
     {
 
-		selected_3d_object=add_e3d(selected_file,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
+		selected_3d_object=add_e3d(selected_file,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,0);
 		cur_tool=tool_select;//change the current tool
 		particles_list[selected_particles_object]->ttl=-1; // we dont want the particle sys to disapear
     }
@@ -1113,7 +1113,7 @@ void open_particles_obj_continued()
   if (selected_file)
     {
 
-		selected_particles_object=add_particle_sys(selected_file,scene_mouse_x,scene_mouse_y,0.0);
+		selected_particles_object=add_particle_sys(selected_file,scene_mouse_x,scene_mouse_y,0.0,0);
 		cur_tool=tool_select;//change the current tool
     }
 }
@@ -1130,7 +1130,7 @@ void open_2d_obj_continued()
 {
   if (selected_file)
     {
-		selected_2d_object=add_2d_obj(selected_file,scene_mouse_x,scene_mouse_y,0.001f,0,0,0);
+		selected_2d_object=add_2d_obj(selected_file,scene_mouse_x,scene_mouse_y,0.001f,0,0,0,0);
 		cur_tool=tool_select;//change the current tool
     }
 }

@@ -284,7 +284,7 @@ e3d_object * load_e3d_cache(char * file_name)
 
 int add_e3d(char * file_name, float x_pos, float y_pos, float z_pos,
 			float x_rot, float y_rot, float z_rot, char self_lit, char blended,
-			float r, float g, float b)
+			float r, float g, float b, object3d_io *o3dio)
 {
 	int i,len,k;
 	e3d_object *returned_e3d;
@@ -339,6 +339,8 @@ int add_e3d(char * file_name, float x_pos, float y_pos, float z_pos,
 	our_object->e3d_data=returned_e3d;
 
 	objects_list[i]=our_object;
+
+	if(o3dio!=NULL)memcpy(&our_object->o3dio,o3dio,sizeof(object3d_io));
 	return i;
 }
 

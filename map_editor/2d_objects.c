@@ -347,7 +347,7 @@ obj_2d_def * load_obj_2d_def_cache(char * file_name)
 	return obj_2d_def_id;
 }
 
-int add_2d_obj(char * file_name, float x_pos, float y_pos, float z_pos, float x_rot, float y_rot, float z_rot)
+int add_2d_obj(char * file_name, float x_pos, float y_pos, float z_pos, float x_rot, float y_rot, float z_rot, obj_2d_io *o2dio)
 {
 	int texture_id;
 	int i,k,len;
@@ -394,6 +394,7 @@ int add_2d_obj(char * file_name, float x_pos, float y_pos, float z_pos, float x_
 	sector=(short)((y_pos/sector_size_y)*(map_meters_size_x/sector_size_x)+(x_pos/sector_size_x));
 	our_object->sector=sector;
 
+	if(o2dio!=NULL)memcpy(&our_object->o2dio,o2dio,sizeof(obj_2d_io));
 	return i;
 }
 
