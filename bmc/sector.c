@@ -146,21 +146,16 @@ void clear_sector(Uint16 sector)
 
 }
 
-int sector_add_3do(int objectid)
+int sector_add_3do(int objectid, int local_id)
 {
 	int i;
 	int sector_no=sector_get(objects_list[objectid]->x_pos, objects_list[objectid]->y_pos);
 
 	if(sector_no>=num_sectors) return -1;
 
-	for(i=0;i<MAX_3D_PER_SECTOR;i++){
-		if(sectors[sector_no].e3d_local[i]==-1){
-			sectors[sector_no].e3d_local[i]=objectid;
-			add_change();
-			return i;
-		}
-	}
-	return -1;
+	sectors[sector_no].e3d_local[local_id]=objectid;
+	add_change();
+	return i;
 }
 
 
@@ -336,7 +331,9 @@ void get_3d_objects(char *d)
 {
 	int i;
 	Uint16 global_id;
+	Uint8 local_id;
 	Uint8 numobjects=*(Uint8*)d;
+
 	d++;
 	for(i=0;i<numobjects;i++){
 		int k;
@@ -356,6 +353,8 @@ void get_3d_objects(char *d)
 		d++;
 		global_id=*(Uint16 *)d;
 		d+=2;
+		local_id=*(Uint8 *)d;
+		d++;
 
 		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos), sector_to_global_y(active_sector,o3dio.y_pos) ,
 		sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
@@ -368,7 +367,7 @@ void get_3d_objects(char *d)
 		}
 
 		memcpy(&objects_list[global_id]->o3dio,&o3dio,sizeof(object3d_io));
-		sector_add_3do(global_id);
+		sector_add_3do(global_id,local_id);
 	}
 	sector_update_objects_checksum(active_sector);
 }
@@ -377,7 +376,9 @@ void get_3d_objects_full_rotation(char *d)
 {
 	int i;
 	Uint16 global_id;
+	Uint8 local_id;
 	Uint8 numobjects=*(Uint8*)d;
+
 	d++;
 	for(i=0;i<numobjects;i++){
 		int k;
@@ -405,6 +406,8 @@ void get_3d_objects_full_rotation(char *d)
 		d+=4;
 		global_id=*(Uint16 *)d;
 		d+=2;
+		local_id=*(Uint8 *)d;
+		d++;
 
 		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos),sector_to_global_y(active_sector,o3dio.y_pos),
 		sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
@@ -417,7 +420,7 @@ void get_3d_objects_full_rotation(char *d)
 		}
 
 		memcpy(&objects_list[global_id]->o3dio,&o3dio,sizeof(object3d_io));
-		sector_add_3do(global_id);
+		sector_add_3do(global_id,local_id);
 	}
 	sector_update_objects_checksum(active_sector);
 }
@@ -532,6 +535,7 @@ void add_3d_object(char *d)
 	int k, sector;
 	object3d_io o3dio;
 	Uint16 global_id;
+	Uint8 local_id;
 
 	memset(&o3dio,0,sizeof(object3d_io));
 
@@ -548,6 +552,8 @@ void add_3d_object(char *d)
 	o3dio.z_rot=*(Uint8*)d;
 	d++;
 	global_id=*(Uint16*)d;
+	d+=2;
+	local_id=*(Uint8*)d;
 
 	k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(sector,o3dio.x_pos), sector_to_global_y(sector,o3dio.y_pos) ,
 	sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
@@ -560,7 +566,7 @@ void add_3d_object(char *d)
 	}
 
 	memcpy(&objects_list[global_id]->o3dio,&o3dio,sizeof(object3d_io));
-	sector_add_3do(global_id);
+	sector_add_3do(global_id,local_id);
 	sector_update_objects_checksum(sector);
 }
 
@@ -569,6 +575,7 @@ void add_3d_object_fullrotation(char *d)
 	int k, sector;
 	object3d_io o3dio;
 	Uint16 global_id;
+	Uint8 local_id;
 
 	memset(&o3dio,0,sizeof(object3d_io));
 
@@ -593,6 +600,8 @@ void add_3d_object_fullrotation(char *d)
 	o3dio.attributes=*(Uint32*)d;
 	d+=4;
 	global_id=*(Uint16*)d;
+	d+=2;
+	local_id=*(Uint8*)d;
 
 
 	k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(sector,o3dio.x_pos), sector_to_global_y(sector,o3dio.y_pos) ,
@@ -607,7 +616,7 @@ void add_3d_object_fullrotation(char *d)
 
 
 	memcpy(&objects_list[global_id]->o3dio,&o3dio,sizeof(object3d_io));
-	sector_add_3do(global_id);
+	sector_add_3do(global_id,local_id);
 	sector_update_objects_checksum(sector);
 }
 
