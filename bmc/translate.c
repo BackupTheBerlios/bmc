@@ -278,6 +278,9 @@ char	reg_error_str[15],
 	/*font.c*/
 	cant_load_font[30],
 	/*init.c*/
+	no_e3d_list[50],
+	no_e2d_list[50],
+	fatal_error_str[10],
 #ifdef ELC
 	no_stencil_str[150],
 	safemode_str[150],
@@ -293,9 +296,6 @@ char	reg_error_str[15],
 	gl_ext_not_found[100],
 	gl_ext_no_multitexture[150],
 	disabled_shadow_mapping[50],
-	fatal_error_str[10],
-	no_e3d_list[50],
-	no_e2d_list[50],
 	enabled_vertex_arrays[50],
 	disabled_point_particles[50],
 	disabled_particles_str[50],
@@ -531,6 +531,7 @@ void init_console()
 
 void init_errors()
 {
+	
 #ifdef ELC
 	group_id * actors=&(errors[0]);
 	group_id * load=&(errors[1]);
@@ -541,8 +542,11 @@ void init_errors()
 #endif
 #ifdef MAP_EDITOR
 	group_id * particles=&(errors[0]);
+	group_id * load=&(errors[0]);
 #endif
-
+	add_xml_identifier(load,"noe3d",no_e3d_list,"Couldn't read e3dlist.txt",50);
+	add_xml_identifier(load,"noe2d",no_e2d_list,"Couldn't read e2dlist.txt",50);
+	add_xml_identifier(load,"fatal",fatal_error_str,"Fatal",10);
 #ifdef ELC
 	//Actor related errors
 	add_xml_identifier(actors,"load",cant_load_actor,"Can't load actor",30);
@@ -564,9 +568,6 @@ void init_errors()
 	add_xml_identifier(load,"file",cant_open_file,"Can't open file",30);
 	add_xml_identifier(load,"cursors",cursors_file_str,"Can't open cursors file.",30);
 	add_xml_identifier(load,"font",cant_load_font,"Unable to load font",30);
-	add_xml_identifier(load,"fatal",fatal_error_str,"Fatal",10);
-	add_xml_identifier(load,"noe3d",no_e3d_list,"Couldn't read e3dlist.txt",50);
-	add_xml_identifier(load,"noe2d",no_e2d_list,"Couldn't read e2dlist.txt",50);
 	add_xml_identifier(load,"elini",cant_read_elini,"Couldn't read configuration file el.ini",50);
 	
 	//Miscellaneous errors

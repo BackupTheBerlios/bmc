@@ -45,14 +45,15 @@
 #include "events.h"
 #include "frustum.h"
 #include "misc.h"
-#include "../elc/client_serv.h"
+#include "../bmc/client_serv.h"
 #include "textures.h"
 #include "font.h"
 #include "elwindows.h"
 #include "o3dow.h"
 #include "replace_window.h"
 #include "edit_window.h"
-#include "../elc/particles.h"
+#include "../bmc/particles.h"
+#include "../bmc/translate.h"
 #include "particles_window.h"
 
 #define sector_size_x 15

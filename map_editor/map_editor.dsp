@@ -53,7 +53,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /machine:I386
-# ADD LINK32 user32.lib SDL_net.lib kernel32.lib opengl32.lib SDL.lib ALut.lib OpenAL32.lib GLU32.lib comdlg32.lib libxml2.lib /nologo /subsystem:windows /pdb:"Release/el.pdb" /machine:I386 /out:"Release/mapedit.exe"
+# ADD LINK32 user32.lib SDL_net.lib kernel32.lib opengl32.lib SDL.lib ALut.lib OpenAL32.lib GLU32.lib comdlg32.lib libxml2.lib /nologo /subsystem:windows /pdb:"Release/el.pdb" /machine:I386 /out:"..\Debug\mapedit.exe"
 # SUBTRACT LINK32 /pdb:none
 
 !ELSEIF  "$(CFG)" == "map_editor - Win32 Debug"
@@ -80,7 +80,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 SDL_net.lib opengl32.lib SDL.lib ALut.lib OpenAL32.lib GLU32.lib comdlg32.lib libxml2.lib /nologo /subsystem:windows /pdb:"Debug/el.pdb" /debug /machine:I386 /out:"../elc/Debug/mapedit.exe" /pdbtype:sept
+# ADD LINK32 SDL_net.lib opengl32.lib SDL.lib ALut.lib OpenAL32.lib GLU32.lib comdlg32.lib libxml2.lib /nologo /subsystem:windows /pdb:"Debug/el.pdb" /debug /machine:I386 /out:"..\Debug\mapedit.exe" /pdbtype:sept
 # SUBTRACT LINK32 /pdb:none
 
 !ENDIF 
@@ -167,7 +167,7 @@ SOURCE=.\edit_window.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\elc\elwindows.c
+SOURCE=..\bmc\elwindows.c
 # End Source File
 # Begin Source File
 
@@ -197,7 +197,7 @@ SOURCE=.\events.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\elc\font.c
+SOURCE=..\bmc\font.c
 # End Source File
 # Begin Source File
 
@@ -309,7 +309,7 @@ SOURCE=.\o3dow.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\elc\particles.c
+SOURCE=..\bmc\particles.c
 # End Source File
 # Begin Source File
 
@@ -347,7 +347,7 @@ SOURCE=.\shadows.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\elc\textures.c
+SOURCE=..\bmc\textures.c
 # End Source File
 # Begin Source File
 
@@ -364,7 +364,7 @@ SOURCE=.\tile_map.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\elc\translate.c
+SOURCE=..\bmc\translate.c
 # End Source File
 # End Group
 # Begin Group "Header Files"

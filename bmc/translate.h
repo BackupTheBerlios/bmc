@@ -201,6 +201,10 @@ extern char	reg_error_str[15],
 #endif
 		/*font.c*/
 		cant_load_font[30],
+		/*init.c*/
+		no_e3d_list[50],
+		no_e2d_list[50],
+			fatal_error_str[10],
 #ifdef ELC
 		/*gl_init.c*/
 		no_stencil_str[150],
@@ -218,9 +222,6 @@ extern char	reg_error_str[15],
 		gl_ext_no_multitexture[150],
 		disabled_shadow_mapping[50],
 		/*init.c*/
-		fatal_error_str[10],
-		no_e3d_list[50],
-		no_e2d_list[50],
 		enabled_vertex_arrays[50],
 		disabled_point_particles[50],
 		disabled_particles_str[50],
