@@ -28,6 +28,8 @@ float sector_to_global_y(int sector, Uint16 f);
 #define io_to_global_intensity(intensity) ((float)intensity/(float)50.0f)
 #define global_to_io_interval(interval) ((float)interval/500.0f)
 #define io_to_global_interval(interval) ((float)interval*500.0f)
+#define global_to_io_flicker(flicker) ((float)flicker*100)
+#define io_to_global_flicker(flicker) ((float)flicker/100.0f)
 #define fast_reconv_x(x,y) (sector_to_global_x(sector_get(x,y),((int)global_to_sector(x))))
 #define fast_reconv_y(x,y) (sector_to_global_y(sector_get(x,y),((int)global_to_sector(y))))
 #define fast_reconv_z(z) (sector_to_global_z(global_to_sector_z(z)))

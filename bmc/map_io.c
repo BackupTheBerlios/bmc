@@ -410,7 +410,7 @@ int load_map(char * file_name)
 			fread(cur_light_pointer, 1, lights_io_size, f);
 			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),
 			io_to_global_intensity(cur_light_io.r),io_to_global_intensity(cur_light_io.g),io_to_global_intensity(cur_light_io.b), 
-			io_to_global_intensity(cur_light_io.intensity),cur_light_io.flags, io_to_global_interval(cur_light_io.interval));
+			io_to_global_intensity(cur_light_io.intensity),cur_light_io.flags, io_to_global_interval(cur_light_io.interval),io_to_global_flicker(cur_light_io.flicker));
 			memcpy(&lights_list[k]->lightio,&cur_light_io,sizeof(light_io));
 		}
 

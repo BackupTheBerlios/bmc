@@ -512,11 +512,13 @@ void get_light_objects(char *d)
 		d++;
 		lightio.intensity=*(Uint8*)d;
 		d++;
+		lightio.flicker=*(Sint8*)d;
+		d++;
 		lightio.interval=*(Uint16*)d;
 
 		k=add_light(sector_to_global_x(active_sector,lightio.x_pos),sector_to_global_y(active_sector,lightio.y_pos),
 		sector_to_global_z(lightio.z_pos),io_to_global_intensity(lightio.r),io_to_global_intensity(lightio.g),
-		io_to_global_intensity(lightio.b), 1.0f,lightio.flags, io_to_global_interval(lightio.interval));
+		io_to_global_intensity(lightio.b), 1.0f,lightio.flags, io_to_global_interval(lightio.interval), io_to_global_flicker(lightio.flicker));
 
 		memcpy(&lights_list[k]->lightio,&lightio,sizeof(light_io));
 		sector_add_light(k);

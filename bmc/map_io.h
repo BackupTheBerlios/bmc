@@ -51,8 +51,9 @@ typedef struct
 	Uint8 r,g,b;//real color (float) is color/50 (if > 1 it's specifies the intensity)
 	Uint8 flags;//flags
 	Uint8 intensity;
+	Sint8 flicker;
+	Uint8 reserved;
 	Uint16 interval;
-	Uint16 reserved;
 	Uint32 reserved_1;
 	Uint32 reserved_2;
 	Uint32 reserved_3;
