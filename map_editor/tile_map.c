@@ -154,7 +154,8 @@ void load_map_tiles()
 			{
 				//tile not loaded, so load it
 				sprintf(str,"./tiles/tile%i.bmp",cur_tile);
-				tile_list[cur_tile]=load_texture_cache(str,255);
+				if(is_reflecting(cur_tile)) tile_list[cur_tile]=load_texture_cache(str,70);
+				else tile_list[cur_tile]=load_texture_cache(str,255);
 			}
 	}
 
