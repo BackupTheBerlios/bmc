@@ -144,11 +144,11 @@ void put_text_in_buffer(unsigned char *text_to_add, int len, int x_chars_limit)
 
 
 //-- Logan Dugenoux [5/26/2004]
-// Checks chat string, if it begins with an actor name, 
+// Checks chat string, if it begins with an actor name,
 // and the actor is displayed, put said sentence into an overtext bubble
 #define allowedCharInName(_x_)		(isalnum(_x_)||(_x_=='_'))
 void check_chat_text_to_overtext(unsigned char *text_to_add, int len)
-{	
+{
 	if (!view_chat_text_as_overtext)
 		return;		// disabled
 
@@ -204,9 +204,9 @@ void check_chat_text_to_overtext(unsigned char *text_to_add, int len)
 					break;
 				}
 			}
-			
+
 		}
-		
+
 	}
 }
 
@@ -227,7 +227,7 @@ void put_char_in_buffer(unsigned char ch)
 }
 
 
-void put_colored_text_in_buffer(Uint8 color, unsigned char *text_to_add, int len, 
+void put_colored_text_in_buffer(Uint8 color, unsigned char *text_to_add, int len,
 								int x_chars_limit)
 {
 	int i;
@@ -251,7 +251,7 @@ void put_colored_text_in_buffer(Uint8 color, unsigned char *text_to_add, int len
 					display_console_text_buffer_first=0;
 				}
 		}
-	
+
 	// force the color
 	if(*text_to_add <= 127 || *text_to_add > 127+c_grey4)
 		{
@@ -357,13 +357,13 @@ void put_colored_text_in_buffer(Uint8 color, unsigned char *text_to_add, int len
 		}
 }
 
-void put_small_text_in_box(unsigned char *text_to_add, int len, int pixels_limit, 
+void put_small_text_in_box(unsigned char *text_to_add, int len, int pixels_limit,
 						   char *buffer)
 {
 	put_small_colored_text_in_box(c_grey1, text_to_add, len, pixels_limit, buffer);
 }
 
-void put_small_colored_text_in_box(Uint8 color,unsigned char *text_to_add, int len, 
+void put_small_colored_text_in_box(Uint8 color,unsigned char *text_to_add, int len,
 								   int pixels_limit, char *buffer)
 {
 	int i;
@@ -629,32 +629,39 @@ void display_console_text()
 int small_text_win=-1;
 int small_text_win_x=100;
 int small_text_win_y=100;
-int small_text_win_x_len=250;
-int small_text_win_y_len=100;
+int small_text_win_x_len=0;
+int small_text_win_y_len=0;
 char small_text_buffer[512]={0};
 
 void add_text_to_small_text_buffer(char * in_data, int len)
 {
-	char *small_text=small_text_buffer;
-	
-	while(len>0) {
-		int l=len;
+	int lines=1;//we can't have less than one anyway
+	int line_len=0;
+	int i;
+	int counter=0;
 
-		if(l>25) l=25;
-		strncpy(small_text, in_data, l);
-		small_text[l]='\n';
-		small_text+=l+1;
-		in_data+=l;
-		
-		len-=l;
-	}
-	
-	*small_text=0;
+	strncpy(small_text_buffer, in_data, len);
+
+	//count the new lines
+	for(i=0;i<len;i++)
+		{
+			counter++;
+			if(small_text_buffer[i]=='\n')
+				{
+					lines++;
+					if(counter>line_len)line_len=counter;
+					counter=0;
+				}
+		}
+
+	small_text_win_x_len=line_len*8+12;
+	small_text_win_y_len=lines*15;
+
 }
 
 int display_small_text_window_handler(window_info * win)
 {
-	if(small_text_buffer[0])draw_string_small(10, 10, small_text_buffer, 4);
+	if(small_text_buffer[0])draw_string_small(10, 10, small_text_buffer, 18);
 
 	return 1;
 }
@@ -668,7 +675,7 @@ void display_small_text_window()
 	if(y<0)y=200;
 	if(x>window_width-small_text_win_x_len)x=200;
 	if(y>window_height-small_text_win_y_len)y=200;
-	
+
 	if(small_text_win < 0){
 		small_text_win= create_window("Small text window", 0, 0, x, y, small_text_win_x_len, small_text_win_y_len, ELW_CLOSE_BOX|ELW_DRAGGABLE|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW);
 		set_window_handler(small_text_win, ELW_HANDLER_DISPLAY, &display_small_text_window_handler );
