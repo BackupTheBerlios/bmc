@@ -216,7 +216,7 @@ void init_stuff()
 	int rgb_size[3];
 	int seed;
 	Uint32 (*my_timer_pointer) (unsigned int) = my_timer;
-	
+
 	init_translatables();
 	
 #ifdef LINUX
