@@ -416,7 +416,13 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 				close_dialogue();	// close the dialogue window if open
 				destroy_all_particles();
 
-				load_map(&in_data[3]);
+				if(!load_map(&in_data[4])){ // creating map if it does not exist
+					int size=(in_data[3]&0x1f)<<4;
+					new_map(size,size);
+					dungeon=(in_data[3]&0x20)?1:0;
+					strcpy(map_file_name,&in_data[4]);
+					save_map(map_file_name);
+				}
 				kill_local_sounds();
 #ifndef	NO_MUSIC
 				playing_music=0;
@@ -776,6 +782,10 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 
 		case ADD_3D_OBJECT:
 			add_3d_object(in_data+3);
+			break;
+
+		case ADD_3D_OBJECT_FULL_ROTATION:
+			add_3d_object_fullrotation(in_data+3);
 			break;
 
 		case DELETE_3D_OBJECT:

@@ -82,6 +82,7 @@ void update_sector_tiles(Uint16 sector);
 
 // add delete replace funcs
 void add_3d_object(char *d);
+void add_3d_object_fullrotation(char *d);
 void delete_3d_object(char *d);
 void replace_3d_object(char *d);
 void add_2d_object(char *d);

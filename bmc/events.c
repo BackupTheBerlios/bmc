@@ -434,28 +434,6 @@ int HandleEvent(SDL_Event *event)
 						go_to_url_thread=SDL_CreateThread(go_to_url, 0);
 #endif
 					}
-//TEST REMOVE LATER!!!!!!!!!!!!!!!!!!!!!!
-				if(event->key.keysym.sym==SDLK_F5)
-					{
-						if(ctrl_on) terr_map[translate_coords(-cx,-cy)].state=255;
-						else terr_map[translate_coords(-cx,-cy)].state=100;
-						terr_map[translate_coords(-cx,-cy)].into_tile=1;
-					}
-				if(event->key.keysym.sym==SDLK_F6)
-					{
-						terr_map[translate_coords(-cx,-cy)].state-=10;
-					}
-				if(event->key.keysym.sym==SDLK_F7)
-					{
-						terr_map[translate_coords(-cx,-cy)].state+=10;
-					}
-				if(event->key.keysym.sym==SDLK_F8)
-				  have_point_sprite=!have_point_sprite;
-				if(event->key.keysym.sym==SDLK_F9) {
-				  actor *me=get_actor_ptr_from_id(yourself);
-				  add_particle_sys("./particles/fire_small.part",me->x_pos+0.25f,me->y_pos+0.25f,-2.2f+height_map[me->y_tile_pos*tile_map_size_x*6+me->x_tile_pos]*0.2f+0.1f);
-				}
-//END OF TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
 				if ( event->key.keysym.sym == SDLK_ESCAPE)
 					{

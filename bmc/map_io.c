@@ -458,6 +458,7 @@ int load_map(char * file_name)
 
 
 	}
+
 	return 1;
 
 }
