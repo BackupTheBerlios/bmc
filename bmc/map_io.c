@@ -300,6 +300,12 @@ int load_map(char * file_name)
 
 	fread(mem_map_header, 1, sizeof(cur_map_header), f);//header only
 
+	//verify if we have a valid file
+	if(cur_map_header.file_sig[0]!='b')return 0;
+	if(cur_map_header.file_sig[1]!='m')return 0;
+	if(cur_map_header.file_sig[2]!='m')return 0;
+	if(cur_map_header.file_sig[3]!='f')return 0;
+
 	//get the map size
 	tile_map_size_x=cur_map_header.tile_map_x_len;
 	tile_map_size_y=cur_map_header.tile_map_y_len;
@@ -308,6 +314,9 @@ int load_map(char * file_name)
 	tile_map=(unsigned char *)calloc(tile_map_size_x*tile_map_size_y, 1);
 	//allocates the memory for the heights now
 	height_map=(unsigned char *)calloc(tile_map_size_x*tile_map_size_y*6*6, 1);
+	//allocate the terraform map
+	terr_map=(terraform_struct *)malloc(tile_map_size_x*tile_map_size_y*sizeof(terraform_struct));
+	memset(terr_map,255,tile_map_size_x*tile_map_size_y*sizeof(terraform_struct));//Start at 0xFF...
 
 	//get the sizes of structures (they might change in the future)
 	obj_3d_io_size=cur_map_header.obj_3d_struct_len;
@@ -355,17 +364,9 @@ int load_map(char * file_name)
 	//this is useful if we go in/out a dungeon
 	new_minute();
 
-
-
-	//verify if we have a valid file
-	if(cur_map_header.file_sig[0]!='b')return 0;
-	if(cur_map_header.file_sig[1]!='m')return 0;
-	if(cur_map_header.file_sig[2]!='m')return 0;
-	if(cur_map_header.file_sig[3]!='f')return 0;
-
 	//read the tiles map
 	fread(tile_map, 1, tile_map_size_x*tile_map_size_y, f);
-
+	
 	//load the tiles in this map, if not already loaded
 	load_map_tiles();
 

@@ -20,6 +20,9 @@ typedef struct {
 	Uint16 index; //The location in the particle system
 } terraform_struct;
 
+extern terraform_struct * terr_map;
+
 void terraform(int tile_pos, int type);
+void terraform_control();
 
 #endif

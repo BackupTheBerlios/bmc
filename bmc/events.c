@@ -430,26 +430,25 @@ int HandleEvent(SDL_Event *event)
 #endif
 					}
 //TEST REMOVE LATER!!!!!!!!!!!!!!!!!!!!!!
+				if(event->key.keysym.sym==SDLK_F5)
+					{
+						terr_map[translate_coords(-cx,-cy)].state=100;
+						terr_map[translate_coords(-cx,-cy)].into_tile=1;
+					}
+				if(event->key.keysym.sym==SDLK_F6)
+					{
+						terr_map[translate_coords(-cx,-cy)].state-=10;
+					}
+				if(event->key.keysym.sym==SDLK_F7)
+					{
+						terr_map[translate_coords(-cx,-cy)].state+=10;
+					}
 				if(event->key.keysym.sym==SDLK_F8)
 				  have_point_sprite=!have_point_sprite;
 				if(event->key.keysym.sym==SDLK_F9) {
 				  actor *me=get_actor_ptr_from_id(yourself);
 				  add_particle_sys("./particles/fire_small.part",me->x_pos+0.25f,me->y_pos+0.25f,-2.2f+height_map[me->y_tile_pos*tile_map_size_x*6+me->x_tile_pos]*0.2f+0.1f);
 				}
-				if(event->key.keysym.sym==SDLK_F6)
-					{
-						if(!hud_x)
-							{
-								hud_x=64;
-								hud_y=49;
-							}
-						else
-							{
-								hud_x=0;
-								hud_y=0;
-							}
-						resize_window();
-					}
 //END OF TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
 				if ( event->key.keysym.sym == SDLK_ESCAPE)

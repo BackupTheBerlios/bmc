@@ -88,6 +88,8 @@ int nearby_3d_objects[9][15];
 char object_2d_match[100];
 char object_3d_match[100];
 
+terraform_struct * terr_map;//just for compiling ;)
+
 void reset_nearby_2d_objects()
 {
 	int i,j;
@@ -317,14 +319,14 @@ void terraform(int pos, int type)
 
 int create_terraform_partsys(int x, int y, int from, int to, int state)
 {
-	float x_pos=x*3+1.5f, y_pos=y*3+1.5f, z_pos=0;
+	float x_pos=x*3+1.5f, y_pos=y*3+1.5f, z_pos=1;
 	particle_sys_def *def=(particle_sys_def*)calloc(1,sizeof(particle_sys_def));
 
 	def->part_sys_type=4;
 	def->sblend=302;
 	def->dblend=303;
 
-	def->total_particle_no=(int)((float)state/255.0f*1600.0f);
+	def->total_particle_no=(int)((float)state/255.0f*2000.0f);
 	def->ttl=-1;
 	def->part_texture=0;
 	def->part_size=1.8f;
@@ -334,7 +336,7 @@ int create_terraform_partsys(int x, int y, int from, int to, int state)
 	def->constrain_rad_sq=-1.0f;
 	def->vel_minx= 0.00000f; def->vel_miny=	0.00000f; def->vel_minz=-0.00150f;
 	def->vel_maxx= 0.00000f; def->vel_maxy=	0.00000f; def->vel_maxz= 0.00000f;
-	def->minr=     0.25000f; def->ming=	3.00000f; def->minb=     0.25000f; def->mina=-0.15000f;
+	def->minr=     0.25000f; def->ming=	2.98000f; def->minb=     0.25000f; def->mina=-0.15000f;
 	def->maxr=     0.90000f; def->maxg=	0.90000f; def->maxb=     0.90000f; def->maxa= 0.10000f;
 	def->acc_minx=-0.00005f; def->acc_miny=-0.00005f; def->acc_minz=-0.01015f;
 	def->acc_maxx= 0.00000f; def->acc_maxy= 0.00000f; def->acc_maxz= 0.01150f;
@@ -343,16 +345,6 @@ int create_terraform_partsys(int x, int y, int from, int to, int state)
 	
 	return create_particle_sys(def,x_pos,y_pos,z_pos);
 }
-
-void terraform_partsys_update(int idx, int status)
-{
-	if(particles_list[idx])
-		{
-			particles_list[idx]->particle_count=(float)status/255.0f*1600.0f;
-		}
-}
-
-terraform_struct * terr_map;//just for compiling ;)
 
 void terraform_control()
 {
@@ -364,11 +356,15 @@ void terraform_control()
 			for(x=0;x<tile_map_size_x;x++)
 				{
 					pos=y*tile_map_size_x+x;
-					if(terr_map[pos].into_tile!=tile_map[pos])
+					if(terr_map[pos].into_tile!=255 && terr_map[pos].into_tile!=tile_map[pos])
 						{
-							if(particles_list[terr_map[pos].index])
+							if(terr_map[pos].state==255)
 								{
-									terraform_partsys_update(terr_map[pos].index, terr_map[pos].state);
+									terraform(pos, terr_map[pos].into_tile);
+								}
+							else if(particles_list[terr_map[pos].index])
+								{
+									particles_list[terr_map[pos].index]->particle_count=(float)terr_map[pos].state/255.0f*2000.0f;
 								}
 							else
 								{

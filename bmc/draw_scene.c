@@ -444,6 +444,8 @@ Uint32 my_timer(unsigned int some_int)
 	thunder_control();
 	//check the rain
 	rain_control();
+	//check the terraforming
+	terraform_control();
 
 	if(is_raining)update_rain();
 	if(normal_animation_timer>2)
