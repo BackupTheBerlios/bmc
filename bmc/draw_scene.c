@@ -350,8 +350,8 @@ void Move()
 				}
 		}
     //check to see if we are out of the map
-    if(cx>-7.5f)cx=-7.5f;
-    if(cy>-7.5f)cy=-7.5f;/*
+    /*if(cx>-7.5f)cx=-7.5f;
+    if(cy>-7.5f)cy=-7.5f;
     if(cx<-(tile_map_size_x*3-7.9))cx=(float)-(tile_map_size_x*3-7.9);
     if(cy<-(tile_map_size_x*3-7.9))cy=(float)-(tile_map_size_x*3-7.9);*/
 

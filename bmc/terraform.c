@@ -314,3 +314,67 @@ void terraform(int pos, int type)
 
 	terraform_create(tiles, type, x, y);
 }
+
+int create_terraform_partsys(int x, int y, int from, int to, int state)
+{
+	float x_pos=x*3+1.5f, y_pos=y*3+1.5f, z_pos=0;
+	particle_sys_def *def=(particle_sys_def*)calloc(1,sizeof(particle_sys_def));
+
+	def->part_sys_type=4;
+	def->sblend=302;
+	def->dblend=303;
+
+	def->total_particle_no=(int)((float)state/255.0f*1600.0f);
+	def->ttl=-1;
+	def->part_texture=0;
+	def->part_size=1.8f;
+	def->random_func=0;
+	def->minx=    -1.50000f; def->miny=    -1.50000f; def->minz=     0.00000f;
+	def->maxx=     1.50000f; def->maxx= 	1.50000f; def->maxz=     0.00000f;
+	def->constrain_rad_sq=-1.0f;
+	def->vel_minx= 0.00000f; def->vel_miny=	0.00000f; def->vel_minz=-0.00150f;
+	def->vel_maxx= 0.00000f; def->vel_maxy=	0.00000f; def->vel_maxz= 0.00000f;
+	def->minr=     0.25000f; def->ming=	3.00000f; def->minb=     0.25000f; def->mina=-0.15000f;
+	def->maxr=     0.90000f; def->maxg=	0.90000f; def->maxb=     0.90000f; def->maxa= 0.10000f;
+	def->acc_minx=-0.00005f; def->acc_miny=-0.00005f; def->acc_minz=-0.01015f;
+	def->acc_maxx= 0.00000f; def->acc_maxy= 0.00000f; def->acc_maxz= 0.01150f;
+	def->mindr=   -0.01750f; def->mindg=   -0.09750f; def->mindb=   -0.01750f; def->minda=-0.03000f;
+	def->maxdr=    0.02000f; def->maxdg=	0.10000f; def->maxdb=    0.02000f; def->maxda= 0.02000f;
+	
+	return create_particle_sys(def,x_pos,y_pos,z_pos);
+}
+
+void terraform_partsys_update(int idx, int status)
+{
+	if(particles_list[idx])
+		{
+			particles_list[idx]->particle_count=(float)status/255.0f*1600.0f;
+		}
+}
+
+terraform_struct * terr_map;//just for compiling ;)
+
+void terraform_control()
+{
+	int x;
+	int y;
+	int pos;
+	for(y=0;y<tile_map_size_y;y++)
+		{
+			for(x=0;x<tile_map_size_x;x++)
+				{
+					pos=y*tile_map_size_x+x;
+					if(terr_map[pos].into_tile!=tile_map[pos])
+						{
+							if(particles_list[terr_map[pos].index])
+								{
+									terraform_partsys_update(terr_map[pos].index, terr_map[pos].state);
+								}
+							else
+								{
+									terr_map[pos].index=create_terraform_partsys(x, y, tile_map[pos], terr_map[pos].into_tile, terr_map[pos].state);
+								}
+						}
+				}
+		}
+}

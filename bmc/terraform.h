@@ -14,6 +14,11 @@
 #define SOUTHW	7		//	   7	|   6	|   5	
 #define WEST	8		//		|	|	 
 
+typedef struct {	
+	Uint8 into_tile;
+	Uint8 state;
+	Uint16 index; //The location in the particle system
+} terraform_struct;
 
 void terraform(int tile_pos, int type);
 
