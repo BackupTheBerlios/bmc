@@ -234,7 +234,6 @@ void get_tile_data(char *d)
 		d++;
 		sb=*(Uint8*)(d);
 		d++;
-	//	fb=fb<<4;
 		change_tile(fb,sb);
 	}
 }
