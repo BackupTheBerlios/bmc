@@ -67,6 +67,8 @@ extern char alt_on;
 
 extern int buttons_text;
 
+extern GLuint minimap_tex;
+
 int check_interface_buttons();
 void get_world_x_y();
 void Enter2DMode();

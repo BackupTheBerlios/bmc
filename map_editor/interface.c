@@ -746,7 +746,7 @@ void draw_minimap()
 	int minimap_x_start=window_width/2-128;
 	int scale;//looks ugly if it's accurate :)...
 
-	if(map_has_changed)
+	if(map_has_changed||!minimap_tex)
 		{
 			if(minimap_tex>0) glDeleteTextures(1,&minimap_tex);
 			minimap_tex=generate_minimap();
