@@ -154,27 +154,60 @@ int main(int argc, char **argv)
 	return 0;
 }
 
+
 #ifdef WINDOWS
+int makeargv(char *s, char *delimiters, char ***argvp)
+{
+	int i, numtokens;
+	char *snew, *t;
+	// comprobamos que no nos lleguen nulls
+	if ((s == NULL) || (delimiters == NULL) || (argvp == NULL))
+		return -1;
+	// obtenemos el tamaño total de la cadena y la copiamos en t
+	*argvp = NULL;
+	snew = s + strspn(s, delimiters);
+	if ((t = malloc(strlen(snew) + 1)) == NULL)
+		return -1;
+	strcpy(t, snew);
+	// contamos el numero de cadenas distintas que habran
+	numtokens = 0;
+	if (strtok(t, delimiters) != NULL)
+		for (numtokens = 1; strtok(NULL, delimiters) != NULL; numtokens++);
+	// pedimos memoria para tantas cadenas y comprobamos que no haya error
+	if ((*argvp = malloc((numtokens + 1)*sizeof(char *))) == NULL){
+		free(t);
+		return -1;
+	}
+	if (numtokens == 0) // esta vacio no hacemos nada
+		free(t);
+	else{	// hacemos que cada char* apunte a su sitio en t
+		strcpy(t, snew);
+		**argvp = strtok(t, delimiters);
+		for (i = 1; i < numtokens; i++)
+			*((*argvp) + i) = strtok(NULL, delimiters);
+	}
+	*((*argvp) + numtokens) = NULL;
+	return numtokens;
+}
+
+void freemakeargv(char **argv)
+{
+	if (argv == NULL)
+		return;
+	if (*argv != NULL)
+		free(*argv);
+	free(argv);
+}
+
 int APIENTRY WinMain (HINSTANCE hInst, HINSTANCE hPrev, LPSTR lpCmd, int nShow)
 {
-	LPWSTR *argv;
-	int	argc, i;
-	char **targv;
 
-	argv = CommandLineToArgvW(GetCommandLineW(), &argc);
-	targv=(char**)malloc(sizeof(char*)*argc);
+	char *k=GetCommandLine();
+	char **argv=NULL;
+	int argc=makeargv(k, " \t\n", &argv);
 
-	for(i=0;i<argc;i++){ //converting unicodes to char
-		targv[i]=(char*)calloc(sizeof(char), wcslen(argv[i])+1);
-		WideCharToMultiByte(CP_ACP, 0, argv[i], -1, targv[i], wcslen(argv[i]), " ", NULL);
-	}
-
-	Main(argc, (char **) targv);
-
-	for(i=0;i<argc;i++){
-		free(targv[i]);
-	}
-	free(targv);
+	Main(argc, (char **) argv);
+	freemakeargv(argv);
 
 	return 0;
 }
