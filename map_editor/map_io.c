@@ -601,8 +601,6 @@ void new_map(int m_x_size,int m_y_size)
 	//reset the camera coordinates
 	cx=0;
 	cy=0;
-
-
 }
 
 

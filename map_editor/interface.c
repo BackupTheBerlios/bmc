@@ -604,56 +604,61 @@ void display_heights_list()
 
 void check_mouse_minimap()
 {
-	int minimap_x_start;
+	int minimap_x_start=window_width/2-128;
 	int minimap_y_start;
 	int x_map_pos;
 	int y_map_pos;
+	int scale;
 
-	minimap_x_start=(window_width-tile_map_size_x*2)/2;
-	minimap_y_start=(window_height-tile_map_size_y*2)/2;
+	if(window_width<window_height) scale=window_width/256;
+	else scale=window_height/256;
+
+	minimap_x_start/=scale;
+	minimap_y_start=10*scale;
 
 	if(mouse_x<minimap_x_start || mouse_y<minimap_y_start
-	|| mouse_x>minimap_x_start+tile_map_size_x*2 || mouse_y>minimap_y_start+tile_map_size_y*2)return;
-
-	x_map_pos=((mouse_x-minimap_x_start)/2)*3;
-	y_map_pos=(tile_map_size_y-((mouse_y-minimap_y_start)/2))*3;
-	cx=-x_map_pos;
-	cy=-y_map_pos;
+	|| mouse_x>minimap_x_start+256*scale || mouse_y>minimap_y_start+256*scale) return;
+	x_map_pos=((float)(mouse_x-minimap_x_start)/(float)scale)*tile_map_size_x/256;
+	y_map_pos=tile_map_size_y-(((mouse_y-minimap_y_start))/(float)scale)*tile_map_size_y/256;
+	cx=-x_map_pos*3;
+	cy=-y_map_pos*3;
 	minimap_on=0;
-
 }
 
 void draw_mouse_minimap()
 {
-	int minimap_x_start;
+	int minimap_x_start=window_width/2-128;
 	int minimap_y_start;
 	int x_map_pos;
 	int y_map_pos;
-	int x,y;
+	int x,y, scale;
 
+	if(window_width<window_height) scale=window_width/256;
+	else scale=window_height/256;
 
-	minimap_x_start=(window_width-tile_map_size_x*2)/2;
-	minimap_y_start=(window_height-tile_map_size_y*2)/2;
-
+	minimap_x_start/=scale;
+	minimap_y_start=10*scale;
+										
 	if(mouse_x<minimap_x_start || mouse_y<minimap_y_start
-	|| mouse_x>minimap_x_start+tile_map_size_x*2 || mouse_y>minimap_y_start+tile_map_size_y*2)return;
+	|| mouse_x>minimap_x_start+256*scale || mouse_y>minimap_y_start+256*scale)return;
 
-	x_map_pos=((mouse_x-minimap_x_start)/2);
-	y_map_pos=(tile_map_size_y-((mouse_y-minimap_y_start)/2));
-	cx=-x_map_pos;
-	cy=-y_map_pos;
+	x_map_pos=((float)(mouse_x-minimap_x_start)/(float)scale)*tile_map_size_x/256;
+	y_map_pos=tile_map_size_y-(((mouse_y-minimap_y_start))/(float)scale)*tile_map_size_y/256;
+	cx=-x_map_pos*3;
+	cy=-y_map_pos*3;
 
 	for(x=-2;x!=2;x++){
-	  for(y=-2;y!=2;y++){
-	    if(y_map_pos+y>=0 && y_map_pos+y<tile_map_size_y && x_map_pos+x>=0 && x_map_pos+x<tile_map_size_x){
-	      tile_map[(int)(y_map_pos+y)*tile_map_size_x+(int)x_map_pos+x]=((cur_tool==tool_kill)?255:selected_tile);
-	      if(cur_tool==tool_kill || selected_tile == 0 || selected_tile == 20 || selected_tile == 21){
-		kill_height_map_at_texture_tile((int)(y_map_pos+y)*tile_map_size_x+(int)x_map_pos+x);
-	      }
-	    }
-	  }
-	}	
-
+		for(y=-2;y!=2;y++){
+			if(y_map_pos+y>=0 && y_map_pos+y<tile_map_size_y && x_map_pos+x>=0 && x_map_pos+x<tile_map_size_x){
+				tile_map[(int)(y_map_pos+y)*tile_map_size_x+(int)x_map_pos+x]=((cur_tool==tool_kill)?255:selected_tile);
+				if(cur_tool==tool_kill || selected_tile == 0 || selected_tile == 20 || selected_tile == 21){
+					kill_height_map_at_texture_tile((int)(y_map_pos+y)*tile_map_size_x+(int)x_map_pos+x);
+				}
+			}
+		}
+	}
+	
+	map_has_changed=1;
 }
 
 //Generates a minimap and returns the texture's integer value
