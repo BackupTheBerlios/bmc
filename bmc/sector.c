@@ -12,6 +12,8 @@ int current_sector=-1;
 Uint16 num_changes=0;
 #define NEEDED_CHANGES 500
 
+
+#ifndef MAP_EDITOR //added by Entropy, otherwise the map editor bitches about map_file_name
 void add_change(){
 	num_changes++;
 	if(num_changes==NEEDED_CHANGES){
@@ -19,6 +21,10 @@ void add_change(){
 		save_map(map_file_name);
 	}
 }
+#else//if the map editor is defined, add an empty prototype, or else we get undefiend stuff in the linker
+void add_change(){}
+#endif
+
 /* MISC SECTOR*/
 
 void sector_update_checksums(int sector)
@@ -385,7 +391,7 @@ void get_3d_objects_full_rotation(char *d)
 		d++;
 		o3dio.y_rot=*(Uint8*)d;
 		d++;
-	/*	
+	/*
 		o3dio.attributes=*(Uint32*)d;
 	*/
 
@@ -566,7 +572,7 @@ void replace_3d_object(char *d)
 	// add new object to sectors
 	sectors[sector].e3d_local[k]=n;
 	sector_update_objects_checksum(sector);
-	
+
 }
 
 
@@ -634,7 +640,7 @@ void replace_2d_object(char *d)
 	// add new object to sectors
 	sectors[sector].e2d_local[k]=n;
 	sector_update_objects_checksum(sector);
-	
+
 }
 
 
@@ -667,7 +673,7 @@ void add_lights(char *d)
 	lightio.flicker=*(Uint8*)d;
 	d++;
 	lightio.interval=*(Uint8*)d;
-	
+
 
 	k=add_light(sector_to_global_x(active_sector,lightio.x_pos),sector_to_global_y(active_sector,lightio.y_pos),
 	sector_to_global_z(lightio.z_pos),io_to_global_intensity(lightio.r),io_to_global_intensity(lightio.g),
@@ -746,7 +752,7 @@ void replace_particle(char *d)
 	n=add_particle_sys(partlist_getname(particlesio->object_type),sector_to_global_x(active_sector,particlesio->x_pos),sector_to_global_y(active_sector,particlesio->y_pos),
 	sector_to_global_z(particlesio->z_pos));
 	memcpy(&particles_list[k]->particleio,&particlesio,sizeof(particles_io));
-	
+
 	// destroy old object
 	free(particles_list[sectors[sector].particles_local[k]]);
 	particles_list[sectors[sector].particles_local[k]]=0;
@@ -754,7 +760,7 @@ void replace_particle(char *d)
 	// add new object to sectors
 	sectors[sector].particles_local[k]=n;
 	sector_update_objects_checksum(sector);
-	
+
 }
 
 #endif
