@@ -272,16 +272,16 @@ void destroy_all_particles()
 /*********************************************************************
  *          CREATION OF NEW PARTICLES AND SYSTEMS                    *
  *********************************************************************/
-int add_particle_sys(char *file_name,float x_pos,float y_pos,float z_pos)
+int add_particle_sys(char *file_name,float x_pos,float y_pos,float z_pos, particles_io *particleio)
 {
 	particle_sys_def *def=load_particle_def(file_name);
 	if(!def)return -1;
-	return create_particle_sys(def,x_pos,y_pos,z_pos);
+	return create_particle_sys(def,x_pos,y_pos,z_pos, particleio);
 }
 
 int add_particle_sys_at_tile(char *file_name,int x_tile,int y_tile)
 {
-  return add_particle_sys(file_name,(float)x_tile/2.0+0.25f,(float)y_tile/2.0+0.25f,-2.2f+height_map[y_tile*tile_map_size_x*6+x_tile]*0.2f);
+  return add_particle_sys(file_name,(float)x_tile/2.0+0.25f,(float)y_tile/2.0+0.25f,-2.2f+height_map[y_tile*tile_map_size_x*6+x_tile]*0.2f,0);
 }
 
 
@@ -326,7 +326,7 @@ void create_particle(particle_sys *sys,particle *result)
 	result->free=0;
 }
 
-int create_particle_sys(particle_sys_def *def,float x,float y,float z)
+int create_particle_sys(particle_sys_def *def,float x,float y,float z, particles_io *particleio)
 {
 	int	i,psys;
 	particle_sys *system_id;
@@ -364,6 +364,7 @@ int create_particle_sys(particle_sys_def *def,float x,float y,float z)
 	for(i=0,p=&system_id->particles[0];i<def->total_particle_no;i++,p++)create_particle(system_id,p);
 	unlock_particles_list();
 
+	if(particleio!=NULL)memcpy(&system_id->particleio,particleio,sizeof(particles_io));
 	return psys;
 }
 
@@ -931,7 +932,7 @@ void add_teleporters_from_list(Uint8 *teleport_list)
 			y=y+0.25f;
 
 
-			add_particle_sys("./particles/teleporter.part",x,y,z);
+			add_particle_sys("./particles/teleporter.part",x,y,z,0);
 			add_e3d("./3dobjects/misc_objects/portal1.e3d",x,y,z,0,0,0,1,0,1.0f,1.0f,1.0f);
 
 			//mark the teleporter as an unwalkable so that the pathfinder

@@ -67,6 +67,8 @@ typedef struct
 
 	particle particles[max_particles];
 
+	particles_io particleio;
+
 }particle_sys;
 
 extern SDL_mutex *particles_list_mutex;	//used for locking between the timer and main threads
@@ -86,8 +88,8 @@ extern void	init_particles_list();
 extern void	end_particles_list();
 
 //CREATION OF NEW PARTICLES AND SYSTEMS 
-int create_particle_sys(particle_sys_def *def,float x,float y,float z);
-int add_particle_sys(char *file_name,float x_pos,float y_pos,float z_pos);
+int create_particle_sys(particle_sys_def *def,float x,float y,float z, particles_io *particleio);
+int add_particle_sys(char *file_name,float x_pos,float y_pos,float z_pos, particles_io *particleio);
 int add_particle_sys_at_tile(char *file_name,int x_tile,int y_tile);
 
 //RENDERING FUNCTIONS
