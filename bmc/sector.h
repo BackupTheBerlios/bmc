@@ -12,6 +12,7 @@ typedef struct{
 
 extern map_sector *sectors;
 extern int num_sectors;
+extern Uint16 active_sector;
 
 Uint16 global_to_sector(float f);
 float sector_to_global_x(int sector, Uint16 f);
@@ -31,4 +32,6 @@ int sector_get(float x, float y);
 void sector_update_checksums(int sector);
 void sector_update_objects_checksum(int sector);
 void sector_update_tiles_checksum(int sector);
+
+void get_tile_data(char *d);
 #endif

@@ -737,6 +737,14 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 			}
 			break;
 
+		// BARREN MOON NEW MESSAGES
+		case THIS_IS_ACTIVE_SECTOR:
+			active_sector=*((Uint16 *)(in_data+3));
+			break;
+
+		case GET_TILE_DATA:
+			break;
+
 		default:
 			{
 				/* Unknown data type?? */;

@@ -175,25 +175,22 @@ int HandleEvent(SDL_Event *event)
 
 				if (key==K_TURNRIGHT)
 					{
+						/*GET_TILE_DATA test
 						char s[100];
 						actor *xxx=pf_get_our_actor();
 						active_sector=sector_get(xxx->x_pos,xxx->y_pos);
 						s[0]=4;
-
 						s[1]=3;
 						s[2]=2;
-
 						s[3]=2;
 						s[4]=3;
-
 						s[5]=1;
 						s[6]=4;
-
 						s[7]=4;
 						s[8]=7;
-
 						get_tile_data(s);
-							load_map_tiles();
+						load_map_tiles();
+						*/
 						if(!last_turn_around || last_turn_around+500<cur_time)
 							{
 								Uint8 str[2];

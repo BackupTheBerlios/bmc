@@ -2,6 +2,7 @@
 
 map_sector *sectors;
 int num_sectors;
+Uint16 active_sector;
 
 /* MISC SECTOR, AND CONVERTION FUNCS */
 
@@ -211,3 +212,29 @@ int sector_del_tile(int objectid)
 	return -1;
 }
 
+
+void change_tile(Uint8 nt, Uint8 t)
+{
+	int fy=active_sector/(tile_map_size_y/4)*4;
+	int fx=active_sector%(tile_map_size_x/4)*4;
+	fx+=nt/4;
+	fy+=nt%4;
+	tile_map[(fy*tile_map_size_x)+fx]=t;
+}
+
+
+// Functions that parse data from server
+void get_tile_data(char *d)
+{
+	int i;
+	Uint8 numtiles=*(Uint8*)d;
+	d++;
+	for(i=0;i<numtiles;i++){
+		Uint8 fb=*(Uint8*)(d), sb;
+		d++;
+		sb=*(Uint8*)(d);
+		d++;
+	//	fb=fb<<4;
+		change_tile(fb,sb);
+	}
+}
