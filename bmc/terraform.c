@@ -30,46 +30,58 @@ Which 2d or 3d objects are needed to improve the usage?
 #define is_west(I)		(I==tile_pos-1)
 
 #define get_2d_side_objects(t)\
-		{get_2d_objects_match(t, SIDE);\
-		if(!load_obj_2d_def_cache(object_2d_match)) load_obj_2d_def(object_2d_match);\
-			if(*object_2d_match)
+		get_2d_objects_match(t, SIDE);
 
 #define get_2d_corner_objects(t)\
-		{get_2d_objects_match(t, CORNER);\
-		if(!load_obj_2d_def_cache(object_2d_match)) load_obj_2d_def(object_2d_match);\
-			if(*object_2d_match)
+		get_2d_objects_match(t, CORNER);
 
 #define add_to_northwest(t,tile_id, X, Y)\
-		get_2d_corner_objects(t)\
-			add_to_nearby(tile_id, add_2d_obj(object_2d_match, X+0.372, Y+2.628, get_highest_2d_object(tile_id), 0, 0, 0));}
+		{\
+			get_2d_corner_objects(t)\
+			add_2d_obj(object_2d_match, X+0.372, Y+2.628, get_highest_2d_object(tile_id), 0, 0, 0);\
+		}
 
 #define add_to_north(t, tile_id)\
-		get_2d_side_objects(t)\
-			add_to_nearby(tile_id, add_2d_obj(object_2d_match, x+1.5, y+2.625, get_highest_2d_object(tile_id), 0, 0, 270));}
+		{\
+			get_2d_side_objects(t)\
+			add_2d_obj(object_2d_match, x+1.5, y+2.625, get_highest_2d_object(tile_id), 0, 0, 270);\
+		}
 
 #define add_to_northeast(t,tile_id, X, Y)\
-		get_2d_corner_objects(t)\
-			add_to_nearby(tile_id, add_2d_obj(object_2d_match, X + 2.637, Y+2.628, get_highest_2d_object(tile_id), 0, 0, 270));}
+		{\
+			get_2d_corner_objects(t)\
+			add_2d_obj(object_2d_match, X + 2.637, Y+2.628, get_highest_2d_object(tile_id), 0, 0, 270);\
+		}
 
 #define add_to_east(t, tile_id)\
-		get_2d_side_objects(t)\
-			add_to_nearby(tile_id, add_2d_obj(object_2d_match, x+2.625, y+1.5, get_highest_2d_object(tile_id), 0, 0, 180));}
+		{\
+			get_2d_side_objects(t)\
+			add_2d_obj(object_2d_match, x+2.625, y+1.5, get_highest_2d_object(tile_id), 0, 0, 180);\
+		}
 			
 #define add_to_west(t, tile_id)\
-		get_2d_side_objects(t)\
-			add_to_nearby(tile_id, add_2d_obj(object_2d_match, x+0.375, y+1.5, get_highest_2d_object(tile_id), 0, 0, 0));}
+		{\
+			get_2d_side_objects(t)\
+			add_2d_obj(object_2d_match, x+0.375, y+1.5, get_highest_2d_object(tile_id), 0, 0, 0);\
+		}
 
 #define add_to_southwest(t, tile_id, X, Y)\
-		get_2d_corner_objects(t)\
-			add_to_nearby(tile_id, add_2d_obj(object_2d_match, X+0.372, Y+0.372, get_highest_2d_object(tile_id), 0, 0, 90));}
+		{\
+			get_2d_corner_objects(t)\
+			add_2d_obj(object_2d_match, X+0.372, Y+0.372, get_highest_2d_object(tile_id), 0, 0, 90);\
+		}
 
 #define add_to_south(t, tile_id)\
-		get_2d_side_objects(t)\
-			add_to_nearby(tile_id, add_2d_obj(object_2d_match, x+1.5, y+0.375, get_highest_2d_object(tile_id), 0, 0, 90));}
+		{\
+			get_2d_side_objects(t)\
+			add_2d_obj(object_2d_match, x+1.5, y+0.375, get_highest_2d_object(tile_id), 0, 0, 90);\
+		}
 
 #define add_to_southeast(t, tile_id, X, Y)\
-		get_2d_corner_objects(t)\
-			add_to_nearby(tile_id, add_2d_obj(object_2d_match, X+2.637, Y+0.372, get_highest_2d_object(tile_id), 0, 0, 180));}
+		{\
+			get_2d_corner_objects(t)\
+			add_2d_obj(object_2d_match, X+2.637, Y+0.372, get_highest_2d_object(tile_id), 0, 0, 180);\
+		}
 
 #define del_northwest(tile)		destroy_nearby_2d_object(tile,NORTHW);
 #define del_from_north()		destroy_nearby_2d_object(NORTH,SOUTH);
@@ -88,18 +100,18 @@ int nearby_3d_objects[9][15];
 char object_2d_match[100];
 char object_3d_match[100];
 
-terraform_struct * terr_map;//just for compiling ;)
+terraform_struct * terr_map;
 
 void reset_nearby_2d_objects()
 {
 	int i,j;
-	for(i=0;i<9;i++) for (j=0;j<10;j++) nearby_2d_objects[i][j]=-1;
+	for(i=0;i<9;i++) for (j=0;j<15;j++) nearby_2d_objects[i][j]=-1;
 }
 
 void add_to_nearby(int pos, int object_id)
 {
 	int i;
-	for(i=0;i<10;i++)
+	for(i=0;i<15;i++)
 		{
 			if(nearby_2d_objects[pos][i]<0)
 				{
@@ -191,13 +203,13 @@ void get_2d_objects_match(int tile_id, int type)
 			case 11:
 			case 2:
 			case 1:
-				if (type==SIDE) sprintf(object_2d_match,"./2dobjects/%s",e2dlist[6+rand()%3].fn);
-				else if (type==CORNER) sprintf(object_2d_match,"./2dobjects/%s",e2dlist[57+rand()%4].fn);
-				return;
 			default:
-				*object_2d_match=0;
+				if (type==SIDE) strcpy(object_2d_match,e2dlist[13+rand()%3].fn);
+				else if (type==CORNER) strcpy(object_2d_match,e2dlist[87+rand()%4].fn);
 				return;
 		}
+	*object_2d_match=0;
+	return;
 }
 
 float get_highest_2d_object(int id)
@@ -250,7 +262,9 @@ void terraform_create(int * tiles, int type, int x, int y)//if tile type is infe
 			if(tiles[EAST]==type) {if (tiles[NORTHE]!=type)	add_to_northeast(type,CENTER,x,y);}
 			else if(tiles[NORTHE]==type) add_to_southeast(type,NORTH,x,y+3);
 		}
-	else add_to_north(type,CENTER);
+	else 	{
+			add_to_north(type,CENTER);
+		}
 	if(tiles[SOUTH]==type)//South
 		{
 			del_from_south();
@@ -329,7 +343,7 @@ int create_terraform_partsys(int x, int y, int from, int to, int state)
 	def->total_particle_no=(int)((float)state/255.0f*2000.0f);
 	def->ttl=-1;
 	def->part_texture=0;
-	def->part_size=1.8f;
+	def->part_size=2.8f;
 	def->random_func=0;
 	def->minx=    -1.50000f; def->miny=    -1.50000f; def->minz=     0.00000f;
 	def->maxx=     1.50000f; def->maxy= 	1.50000f; def->maxz=     0.00000f;

@@ -458,7 +458,17 @@ void test_for_console_command()
 			return;
 		}
 				
+	if(my_strncompare(text_loc,"2dadd",5)){
+		int id;
+		actor *me=pf_get_our_actor();
+		while(*text_loc && !isspace(*text_loc)) text_loc++;
+		while(*text_loc && isspace(*text_loc))  text_loc++;
+		
+		id=atoi(text_loc);
 
+		if(id>=0&&id<e2dlistsize) add_2d_obj(e2dlist[id].fn,me->x_pos,me->y_pos,0.002f,0,0,0);
+		return;
+	}
 /*End of test*/
 
 	send_input_text_line();//no command, send it to the server, as plain text

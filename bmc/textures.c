@@ -124,7 +124,7 @@ GLuint load_bmp8_color_key(char * FileName)
 	fclose (f);
 	//ok, now, hopefully, the file is loaded and converted...
 	//so, assign the texture, and such
-
+	
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);	//failsafe
 	bind_texture_id(texture);
