@@ -486,3 +486,4 @@ void new_map(int m_x_size,int m_y_size)
 
 
 }
+

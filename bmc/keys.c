@@ -381,3 +381,4 @@ Uint32 CRC32_continue(Uint32 result, unsigned char *data, int len)
     }
     return result;
 }
+
