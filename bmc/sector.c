@@ -68,25 +68,25 @@ void sector_update_objects_checksum(int sector)
 	//3d objects
 	for(i=0;i<MAX_3D_PER_SECTOR;i++){
 		if(sectors[sector].e3d_local[i]==-1)
-			break;
+			continue;
 		t=CRC32_continue(t,(unsigned char*)&objects_list[sectors[sector].e3d_local[i]]->o3dio,sizeof(object3d_io));
 	}
 	// 2d objects
 	for(i=0;i<MAX_2D_PER_SECTOR;i++){
 		if(sectors[sector].e2d_local[i]==-1)
-			break;
+			continue;
 		t=CRC32_continue(t,(unsigned char*)&obj_2d_list[sectors[sector].e2d_local[i]]->o2dio,sizeof(obj_2d_io));
 	}
 	//lights
 	for(i=0;i<MAX_LIGHTS_PER_SECTOR;i++){
 		if(sectors[sector].lights_local[i]==-1)
-			break;
+			continue;
 		t=CRC32_continue(t,(unsigned char*)&lights_list[sectors[sector].lights_local[i]]->lightio,sizeof(light_io));
 	}
 	//particles
 	for(i=0;i<MAX_PARTICLES_PER_SECTOR;i++){
 		if(sectors[sector].particles_local[i]==-1)
-			break;
+			continue;
 		t=CRC32_continue(t,(unsigned char*)&particles_list[sectors[sector].particles_local[i]]->particleio,sizeof(particles_io));
 	}
 

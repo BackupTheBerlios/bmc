@@ -254,18 +254,18 @@ void check_cursor_change()
 				}
 			//see if the object is a harvestable resource.
 			if(objects_list[object_under_mouse]->attributes&MINABLE||objects_list[object_under_mouse]->attributes&CUTTABLE||
-			   objects_list[object_under_mouse]->attributes&DIGGABLE)
+			   objects_list[object_under_mouse]->attributes&DIGGABLE || objects_list[object_under_mouse]->attributes&PICKABLE)
 				{
 					if(current_cursor!=CURSOR_HARVEST)change_cursor(CURSOR_HARVEST);
 					return;
 				}
-				
+/*
 			if(objects_list[object_under_mouse]->attributes&PICKABLE)
 				{
 					if(current_cursor!=CURSOR_PICK)change_cursor(CURSOR_PICK);
 					return;
 				}
-
+*/
 			//see if the object is an entrable resource.
 			if(objects_list[object_under_mouse]->attributes&ENTRABLE)
 				{
@@ -289,14 +289,14 @@ void check_cursor_change()
 			if(current_cursor!=CURSOR_TALK)change_cursor(CURSOR_TALK);
 			return;
 		}
-	
+
 	else if(thing_under_the_mouse==UNDER_MOUSE_PLAYER)
 		{
 			if(action_mode==action_use)
 				{
 					if(current_cursor!=CURSOR_USE)change_cursor(CURSOR_USE);
 					return;
-				}      
+				}
 			if(action_mode==action_look)
 				{
 					if(current_cursor!=CURSOR_EYE)change_cursor(CURSOR_EYE);
@@ -326,7 +326,7 @@ void check_cursor_change()
 				{
 					if(current_cursor!=CURSOR_USE)change_cursor(CURSOR_USE);
 					return;
-				}      
+				}
 			if(action_mode==action_look)
 				{
 					if(current_cursor!=CURSOR_EYE)change_cursor(CURSOR_EYE);

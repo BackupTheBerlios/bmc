@@ -428,7 +428,7 @@ void display_shadows()
 		for(j=sy;j<=ey;j++)
 			for(k=0;k<MAX_3D_PER_SECTOR;k++){
 				int l=sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k];
-				if(l==-1)break;
+				if(l==-1)continue;
 
 				if(objects_list[l])
 					{
@@ -476,7 +476,7 @@ void display_3d_ground_objects()
 		for(j=sy;j<=ey;j++)
 			for(k=0;k<MAX_3D_PER_SECTOR;k++){
 				int l=sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k];
-				if(l==-1)break;
+				if(l==-1)continue;
 
 				if(objects_list[l])
 					{

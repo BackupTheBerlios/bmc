@@ -339,14 +339,14 @@ void display_objects()
 		}
 
 	check_gl_errors();
-	
+
 	get_supersector(current_sector, &sx, &sy, &ex, &ey);
 	for(i=sx;i<=ex;i++)
 		for(j=sy;j<=ey;j++)
 			for(k=0;k<MAX_3D_PER_SECTOR;k++){
 				object3d	*object_id;
 				int l=sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k];
-				if(l==-1)break;
+				if(l==-1)continue;
 				object_id= objects_list[l];
 
 				if(object_id)

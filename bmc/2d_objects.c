@@ -417,9 +417,9 @@ int add_2d_obj(char * file_name, float x_pos, float y_pos, float z_pos,
 	sector=(y_pos/sector_size_y)*(map_meters_size_x/sector_size_x)
 		+(x_pos/sector_size_x);
 	our_object->sector=sector;
-	
+
 	our_object->tile=translate_coords(x_pos,y_pos);
-	
+
 	return i;
 }
 
@@ -436,7 +436,7 @@ void display_2d_objects()
 		for(j=sy;j<=ey;j++)
 			for(k=0;k<MAX_2D_PER_SECTOR;k++){
 				int l=sectors[(j*(tile_map_size_x>>2))+i].e2d_local[k];
-				if(l==-1)break;
+				if(l==-1)continue;
 				if(obj_2d_list[l])
 				{
 					int dist1;

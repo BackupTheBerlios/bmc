@@ -103,10 +103,10 @@ void draw_scene()
 	else glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
 
 	get_tmp_actor_data();
-	
+
 	if(interface_mode!=interface_game)
 		{
-			if(quickbar_relocatable && quickbar_win)//Hack 
+			if(quickbar_relocatable && quickbar_win)//Hack
 				{
 					if(windows_list.window[quickbar_win].cur_x<window_width-hud_x && window_height - windows_list.window[quickbar_win].cur_y>hud_y) windows_list.window[quickbar_win].displayed=0;
 				}
@@ -137,7 +137,7 @@ void draw_scene()
 					check_gl_errors();
 					return;
 				}
-		
+
 			if(interface_mode==interface_log_in)
 				{
 					Enter2DMode();
@@ -173,11 +173,11 @@ void draw_scene()
 							check_gl_errors();
 						}
 					SDL_Delay(20);
-					return;			
+					return;
 					check_gl_errors();
 				}
 		}
-	
+
 	if(!have_a_map)return;
 	if(yourself==-1)return;//we don't have ourselves
 	for(i=0; i<max_actors; i++)
@@ -186,7 +186,7 @@ void draw_scene()
 		}
 	if(i > max_actors) return;//we still don't have ourselves
 	main_count++;
-	
+
 	if(quickbar_win>0)windows_list.window[quickbar_win].displayed=1;
 
 	if(old_fps_average<5)
@@ -334,6 +334,11 @@ void draw_scene()
 			draw_string(10,0,str,1);
 		}
 
+
+			sprintf(str, "Object under mouse: %i",object_under_mouse);
+			glColor3f(1.0f,1.0f,1.0f);
+			draw_string(10,20,str,1);
+
 	check_gl_errors();
 	if(find_last_lines_time())
 		{
@@ -443,13 +448,13 @@ void update_camera()
 			if(zoom_level<3.75f){
 				new_zoom_level+=0.05f;
 				camera_zoom_frames--;
-			} else 
+			} else
 				camera_zoom_frames = 0;
 		} else {
 			if(zoom_level>1.75f){
 				new_zoom_level-=0.05f;
 				camera_zoom_frames--;
-			} else 
+			} else
 				camera_zoom_frames = 0;
 		}
 	}
@@ -467,7 +472,7 @@ Uint32 my_timer(unsigned int some_int)
 	// adjust the timer clock
 	if(my_timer_clock == 0)my_timer_clock=SDL_GetTicks();
 	else	my_timer_clock+=(TIMER_RATE-my_timer_adjust);
-	
+
 	e.type = SDL_USEREVENT;
 	e.user.code = EVENT_UPDATE_CAMERA;
 	SDL_PushEvent(&e);
