@@ -783,6 +783,38 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 			replace_3d_object(in_data+3);
 			break;
 
+		case ADD_2D_OBJECT:
+			add_2d_object(in_data+3);
+			break;
+
+		case DELETE_2D_OBJECT:
+			delete_2d_object(in_data+3);
+			break;
+
+		case REPLACE_2D_OBJECT:
+			replace_2d_object(in_data+3);
+			break;
+		
+		case ADD_LIGHT:
+			add_lights(in_data+3);
+			break;
+
+		case DELETE_LIGHT:
+			delete_light(in_data+3);
+			break;
+
+		case ADD_PARTICLE:
+			add_particle(in_data+3);
+			break;
+
+		case DELETE_PARTICLE:
+			delete_particle(in_data+3);
+			break;
+
+		case REPLACE_PARTICLE:
+			replace_particle(in_data+3);
+			break;
+
 		default:
 			{
 				/* Unknown data type?? */;

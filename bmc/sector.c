@@ -557,7 +557,8 @@ void get_particle_objects(char *d)
 
 
 
-//
+// add delete replace funcs
+
 void add_3d_object(char *d)
 {
 
@@ -621,6 +622,194 @@ void replace_3d_object(char *d)
 
 	// add new object to sectors
 	sectors[sector].e3d_local[k]=n;
+	sector_update_objects_checksum(sector);
+	
+}
+
+
+void add_2d_object(char *d)
+{
+
+	int k, sector;
+	obj_2d_io o2dio;
+
+	memset(&o2dio,0,sizeof(obj_2d_io));
+
+	sector=*(Uint16*)d;
+	d+=2;
+	o2dio.object_type=*(Uint16*)d;
+	d+=2;
+	o2dio.x_pos=*(Uint16*)d;
+	d+=2;
+	o2dio.y_pos=*(Uint16*)d;
+	d+=2;
+	o2dio.z_pos=*(Uint8*)d;
+	d++;
+	o2dio.z_rot=*(Uint8*)d;
+
+	k=add_2d_obj(e2dlist_getname(o2dio.object_type),sector_to_global_x(active_sector,o2dio.x_pos),sector_to_global_y(active_sector,o2dio.y_pos),
+	sector_to_global_z(o2dio.z_pos)+0.001,o2dio.x_rot*1.5,o2dio.y_rot*1.5,o2dio.z_rot*1.5);
+	memcpy(&obj_2d_list[k]->o2dio,&o2dio,sizeof(obj_2d_io));
+	sector_add_2do(k);
+	sector_update_objects_checksum(sector);
+}
+
+void delete_2d_object(char *d)
+{
+	int k, sector;
+	sector=*(Uint16*)d;
+	d+=2;
+	k=*(Uint8*)d;
+
+	free(obj_2d_list[sectors[sector].e2d_local[k]]);
+	obj_2d_list[sectors[sector].e2d_local[k]]=0;
+	sectors[sector].e2d_local[k]=-1;
+	sector_update_objects_checksum(sector);
+}
+
+void replace_2d_object(char *d)
+{
+	int k, sector, otype, n;
+	obj_2d_io *o2dio;
+	sector=*(Uint16*)d;
+	d+=2;
+	k=*(Uint8*)d;
+	d++;
+	otype=*(Uint16*)d;
+
+	o2dio=&obj_2d_list[sectors[sector].e2d_local[k]]->o2dio;
+	o2dio->object_type=otype;
+	// we create a new object
+	n=add_2d_obj(e2dlist_getname(o2dio->object_type),sector_to_global_x(active_sector,o2dio->x_pos),sector_to_global_y(active_sector,o2dio->y_pos),
+	sector_to_global_z(o2dio->z_pos)+0.001,o2dio->x_rot*1.5,o2dio->y_rot*1.5,o2dio->z_rot*1.5);
+	memcpy(&obj_2d_list[k]->o2dio,&o2dio,sizeof(obj_2d_io));
+
+	// destroy old object
+	free(obj_2d_list[sectors[sector].e2d_local[k]]);
+	obj_2d_list[sectors[sector].e2d_local[k]]=0;
+
+	// add new object to sectors
+	sectors[sector].e2d_local[k]=n;
+	sector_update_objects_checksum(sector);
+	
+}
+
+
+void add_lights(char *d)
+{
+
+	int k, sector;
+	light_io lightio;
+
+	memset(&lightio,0,sizeof(light_io));
+
+	sector=*(Uint16*)d;
+	d+=2;
+	lightio.x_pos=*(Uint16*)d;
+	d+=2;
+	lightio.y_pos=*(Uint16*)d;
+	d+=2;
+	lightio.z_pos=*(Uint16*)d;
+	d++;
+	lightio.r=*(Uint8*)d;
+	d++;
+	lightio.g=*(Uint8*)d;
+	d++;
+	lightio.b=*(Uint8*)d;
+	d++;
+	lightio.flags=*(Uint8*)d;
+	d++;
+	lightio.intensity=*(Uint8*)d;
+	d++;
+	lightio.flicker=*(Uint8*)d;
+	d++;
+	lightio.interval=*(Uint8*)d;
+	
+
+	k=add_light(sector_to_global_x(active_sector,lightio.x_pos),sector_to_global_y(active_sector,lightio.y_pos),
+	sector_to_global_z(lightio.z_pos),io_to_global_intensity(lightio.r),io_to_global_intensity(lightio.g),
+	io_to_global_intensity(lightio.b), 1.0f,lightio.flags, io_to_global_interval(lightio.interval), io_to_global_flicker(lightio.flicker));
+
+	memcpy(&lights_list[k]->lightio,&lightio,sizeof(light_io));
+	sector_add_light(k);
+	sector_update_objects_checksum(sector);
+}
+
+void delete_light(char *d)
+{
+	int k, sector;
+	sector=*(Uint16*)d;
+	d+=2;
+	k=*(Uint8*)d;
+
+	free(lights_list[sectors[sector].lights_local[k]]);
+	lights_list[sectors[sector].lights_local[k]]=0;
+	sectors[sector].lights_local[k]=-1;
+	sector_update_objects_checksum(sector);
+}
+
+
+void add_particle(char *d)
+{
+
+	int k, sector;
+	particles_io particlesio;
+
+	memset(&particlesio,0,sizeof(particles_io));
+
+	sector=*(Uint16*)d;
+	d+=2;
+	particlesio.object_type=*(Uint16*)d;
+	d+=2;
+	particlesio.x_pos=*(Uint16*)d;
+	d+=2;
+	particlesio.y_pos=*(Uint16*)d;
+	d+=2;
+	particlesio.z_pos=*(Uint8*)d;
+
+	k=add_particle_sys(partlist_getname(particlesio.object_type),sector_to_global_x(active_sector,particlesio.x_pos),sector_to_global_y(active_sector,particlesio.y_pos),
+	sector_to_global_z(particlesio.z_pos));
+	memcpy(&particles_list[k]->particleio,&particlesio,sizeof(particles_io));
+	sector_add_particle(k);
+	sector_update_objects_checksum(sector);
+}
+
+void delete_particle(char *d)
+{
+	int k, sector;
+	sector=*(Uint16*)d;
+	d+=2;
+	k=*(Uint8*)d;
+
+	free(particles_list[sectors[sector].particles_local[k]]);
+	particles_list[sectors[sector].particles_local[k]]=0;
+	sectors[sector].particles_local[k]=-1;
+	sector_update_objects_checksum(sector);
+}
+
+void replace_particle(char *d)
+{
+	int k, sector, otype, n;
+	particles_io *particlesio;
+	sector=*(Uint16*)d;
+	d+=2;
+	k=*(Uint8*)d;
+	d++;
+	otype=*(Uint16*)d;
+
+	particlesio=&particles_list[sectors[sector].particles_local[k]]->particleio;
+	particlesio->object_type=otype;
+	// we create a new object
+	n=add_particle_sys(partlist_getname(particlesio->object_type),sector_to_global_x(active_sector,particlesio->x_pos),sector_to_global_y(active_sector,particlesio->y_pos),
+	sector_to_global_z(particlesio->z_pos));
+	memcpy(&particles_list[k]->particleio,&particlesio,sizeof(particles_io));
+	
+	// destroy old object
+	free(particles_list[sectors[sector].particles_local[k]]);
+	particles_list[sectors[sector].particles_local[k]]=0;
+
+	// add new object to sectors
+	sectors[sector].particles_local[k]=n;
 	sector_update_objects_checksum(sector);
 	
 }

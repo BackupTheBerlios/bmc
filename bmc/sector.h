@@ -77,10 +77,17 @@ void send_superchecksum(int sector);
 void update_sector_objects(Uint16 sector);
 void update_sector_tiles(Uint16 sector);
 
-
-//
+// add delete replace funcs
 void add_3d_object(char *d);
 void delete_3d_object(char *d);
 void replace_3d_object(char *d);
+void add_2d_object(char *d);
+void delete_2d_object(char *d);
+void replace_2d_object(char *d);
+void add_lights(char *d);
+void delete_light(char *d);
+void add_particle(char *d);
+void delete_particle(char *d);
+void replace_particle(char *d);
 
 #endif
