@@ -430,25 +430,25 @@ int load_map(char * file_name)
 	// Updating positions from local to global
 	for(i=0;i<num_sectors;i++)
 	{
-		for(j=0;j<100;j++){
+		for(j=0;j<MAX_3D_PER_SECTOR;j++){
 			if(sectors[i].e3d_local[j]==-1)
 				break;
 			objects_list[sectors[i].e3d_local[j]]->x_pos=sector_to_global_x(i,objects_list[sectors[i].e3d_local[j]]->x_pos);
 			objects_list[sectors[i].e3d_local[j]]->y_pos=sector_to_global_y(i,objects_list[sectors[i].e3d_local[j]]->y_pos);;
 		}
-		for(j=0;j<20;j++){
+		for(j=0;j<MAX_2D_PER_SECTOR;j++){
 			if(sectors[i].e2d_local[j]==-1)
 				break;
 			obj_2d_list[sectors[i].e2d_local[j]]->x_pos=sector_to_global_x(i,obj_2d_list[sectors[i].e2d_local[j]]->x_pos);
 			obj_2d_list[sectors[i].e2d_local[j]]->y_pos=sector_to_global_y(i,obj_2d_list[sectors[i].e2d_local[j]]->y_pos);;
 		}
-		for(j=0;j<4;j++){
+		for(j=0;j<MAX_LIGHTS_PER_SECTOR;j++){
 			if(sectors[i].lights_local[j]==-1)
 				break;
 			lights_list[sectors[i].lights_local[j]]->pos_x=sector_to_global_x(i,lights_list[sectors[i].lights_local[j]]->pos_x);
 			lights_list[sectors[i].lights_local[j]]->pos_y=sector_to_global_y(i,lights_list[sectors[i].lights_local[j]]->pos_y);;
 		}
-		for(j=0;j<8;j++){
+		for(j=0;j<MAX_PARTICLES_PER_SECTOR;j++){
 			if(sectors[i].particles_local[j]==-1)
 				break;
 			if(sectors[i].particles_local[j]==0)continue; //Hmm, shouldn't happen in newer map formats

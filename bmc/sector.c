@@ -27,6 +27,23 @@ void add_change(){}
 
 /* MISC SECTOR*/
 
+void get_supersector(int sector, int *sx, int *sy, int *ex, int *ey)
+{
+	int tile_map_size_y_4=tile_map_size_y>>2;
+	int tile_map_size_x_4=tile_map_size_x>>2;
+	int fy=sector/(tile_map_size_y_4);
+	int fx=sector%(tile_map_size_x_4);
+
+	*sx=fx-1;
+	if(*sx<0)*sx=0;
+	*sy=fy-1;
+	if(*sy<0)*sy=0;
+	*ex=fx+1;
+	if(*ex==tile_map_size_x_4)*ex=tile_map_size_x_4-1;
+	*ey=fy+1;
+	if(*ey==tile_map_size_y_4)*ey=tile_map_size_y_4-1;
+}
+
 void sector_update_checksums(int sector)
 {
 	sector_update_objects_checksum(sector);
@@ -49,25 +66,25 @@ void sector_update_objects_checksum(int sector)
 	int i;
 	Uint32 t=0;
 	//3d objects
-	for(i=0;i<100;i++){
+	for(i=0;i<MAX_3D_PER_SECTOR;i++){
 		if(sectors[sector].e3d_local[i]==-1)
 			break;
 		t=CRC32_continue(t,(unsigned char*)&objects_list[sectors[sector].e3d_local[i]]->o3dio,sizeof(object3d_io));
 	}
 	// 2d objects
-	for(i=0;i<20;i++){
+	for(i=0;i<MAX_2D_PER_SECTOR;i++){
 		if(sectors[sector].e2d_local[i]==-1)
 			break;
 		t=CRC32_continue(t,(unsigned char*)&obj_2d_list[sectors[sector].e2d_local[i]]->o2dio,sizeof(obj_2d_io));
 	}
 	//lights
-	for(i=0;i<4;i++){
+	for(i=0;i<MAX_LIGHTS_PER_SECTOR;i++){
 		if(sectors[sector].lights_local[i]==-1)
 			break;
 		t=CRC32_continue(t,(unsigned char*)&lights_list[sectors[sector].lights_local[i]]->lightio,sizeof(light_io));
 	}
 	//particles
-	for(i=0;i<8;i++){
+	for(i=0;i<MAX_PARTICLES_PER_SECTOR;i++){
 		if(sectors[sector].particles_local[i]==-1)
 			break;
 		t=CRC32_continue(t,(unsigned char*)&particles_list[sectors[sector].particles_local[i]]->particleio,sizeof(particles_io));
@@ -96,14 +113,14 @@ void clear_sector(Uint16 sector)
 {
 	int i;
 	// 3d objects
-	for(i=0;i<100;i++){
+	for(i=0;i<MAX_3D_PER_SECTOR;i++){
 		if(sectors[sector].e3d_local[i]!=-1){
 			destroy_3d_object(sectors[sector].e3d_local[i]);
 			sectors[sector].e3d_local[i]=-1;
 		}
 	}
 	//2d objects
-	for(i=0;i<20;i++){
+	for(i=0;i<MAX_2D_PER_SECTOR;i++){
 		if(sectors[sector].e2d_local[i]!=-1){
 			free(obj_2d_list[i]);
 			obj_2d_list[i]=0;
@@ -111,7 +128,7 @@ void clear_sector(Uint16 sector)
 		}
 	}
 	//lights
-	for(i=0;i<4;i++){
+	for(i=0;i<MAX_LIGHTS_PER_SECTOR;i++){
 		if(sectors[sector].lights_local[i]!=-1){
 			free(lights_list[i]);
 			lights_list[i]=0;
@@ -119,7 +136,7 @@ void clear_sector(Uint16 sector)
 		}
 	}
 	//particles
-	for(i=0;i<8;i++){
+	for(i=0;i<MAX_PARTICLES_PER_SECTOR;i++){
 		if(sectors[sector].particles_local[i]!=-1){
 			free(particles_list[i]);
 			particles_list[i]=0;
@@ -136,7 +153,7 @@ int sector_add_3do(int objectid)
 
 	if(sector_no>=num_sectors) return -1;
 
-	for(i=0;i<100;i++){
+	for(i=0;i<MAX_3D_PER_SECTOR;i++){
 		if(sectors[sector_no].e3d_local[i]==-1){
 			sectors[sector_no].e3d_local[i]=objectid;
 			add_change();
@@ -154,7 +171,7 @@ int sector_add_2do(int objectid)
 
 	if(sector_no>=num_sectors) return -1;
 
-	for(i=0;i<20;i++){
+	for(i=0;i<MAX_2D_PER_SECTOR;i++){
 		if(sectors[sector_no].e2d_local[i]==-1){
 			sectors[sector_no].e2d_local[i]=objectid;
 			add_change();
@@ -172,7 +189,7 @@ int sector_add_light(int objectid)
 
 	if(sector_no>=num_sectors) return -1;
 
-	for(i=0;i<4;i++){
+	for(i=0;i<MAX_LIGHTS_PER_SECTOR;i++){
 		if(sectors[sector_no].lights_local[i]==-1){
 			sectors[sector_no].lights_local[i]=objectid;
 			add_change();
@@ -190,7 +207,7 @@ int sector_add_particle(int objectid)
 
 	if(sector_no>=num_sectors) return -1;
 
-	for(i=0;i<8;i++){
+	for(i=0;i<MAX_PARTICLES_PER_SECTOR;i++){
 		if(sectors[sector_no].particles_local[i]==-1){
 			sectors[sector_no].particles_local[i]=objectid;
 			add_change();
@@ -232,23 +249,6 @@ void check_sector()
 	}
 }
 #endif
-
-void get_supersector(int sector, int *sx, int *sy, int *ex, int *ey)
-{
-	int tile_map_size_y_4=tile_map_size_y>>2;
-	int tile_map_size_x_4=tile_map_size_x>>2;
-	int fy=sector/(tile_map_size_y_4);
-	int fx=sector%(tile_map_size_x_4);
-
-	*sx=fx-1;
-	if(*sx<0)*sx=0;
-	*sy=fy-1;
-	if(*sy<0)*sy=0;
-	*ex=fx+1;
-	if(*ex==tile_map_size_x_4)*ex=tile_map_size_x_4-1;
-	*ey=fy+1;
-	if(*ey==tile_map_size_y_4)*ey=tile_map_size_y_4-1;
-}
 
 
 // Functions that send data to server

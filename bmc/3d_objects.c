@@ -322,9 +322,6 @@ void display_objects()
 	int x,y;
 	int sx,sy,ex,ey,j,k;
 
-
-
-
 	x=-cx;
 	y=-cy;
 	check_gl_errors();
@@ -342,16 +339,17 @@ void display_objects()
 		}
 
 	check_gl_errors();
-
+	
 	get_supersector(current_sector, &sx, &sy, &ex, &ey);
 	for(i=sx;i<=ex;i++)
 		for(j=sy;j<=ey;j++)
-			for(k=0;k<100;k++){
+			for(k=0;k<MAX_3D_PER_SECTOR;k++){
 				object3d	*object_id;
-				if(sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]==-1)continue;
-				object_id= objects_list[sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]];
+				int l=sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k];
+				if(l==-1)break;
+				object_id= objects_list[l];
 
-			if(object_id)
+				if(object_id)
 				{
 					int dist1, dist2;
 
@@ -376,7 +374,7 @@ void display_objects()
                      				draw_3d_object(object_id);
 	//check_gl_errors();
 									if (read_mouse_now && mouse_in_sphere(object_id->x_pos, object_id->y_pos, object_id->z_pos, radius))
-										anything_under_the_mouse(i, UNDER_MOUSE_3D_OBJ);
+										anything_under_the_mouse(l, UNDER_MOUSE_3D_OBJ);
 	//check_gl_errors();
 								}
 						}

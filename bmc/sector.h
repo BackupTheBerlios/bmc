@@ -1,6 +1,11 @@
 #ifndef __SECTOR_H__
 #define __SECTOR_H__
 
+#define MAX_3D_PER_SECTOR 100
+#define MAX_2D_PER_SECTOR 20
+#define MAX_LIGHTS_PER_SECTOR 4
+#define MAX_PARTICLES_PER_SECTOR 8
+
 void add_change();
 
 //Conversion macros - no need to do function calls for so simple maths...
