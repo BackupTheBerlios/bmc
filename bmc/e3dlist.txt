@@ -1,3 +1,4 @@
+1176
 ./3dobjects/structures/door_elf2.e3d 0 128
 ./3dobjects/structures/door_elf3.e3d 1 128
 ./3dobjects/structures/cityentrance1.e3d 2 128
