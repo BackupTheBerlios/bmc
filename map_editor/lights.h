@@ -71,7 +71,7 @@ void draw_test_light();
 void disable_local_lights();
 void enable_local_lights();
 void draw_lights();
-int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity, light_io *lightio);
+int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity);
 void update_scene_lights();
 void init_lights();
 void reset_material();

@@ -87,7 +87,7 @@ int HandleEvent(SDL_Event *event)
 					case mode_3d:
 					{
 						object3d *o = (object3d *) undo_object;
-						add_e3d(o->file_name, o->x_pos, o->y_pos, o->z_pos, o->x_rot, o->y_rot, o->z_rot, o->self_lit, o->blended, o->r, o->g, o->b, &o->o3dio);
+						add_e3d(o->file_name, o->x_pos, o->y_pos, o->z_pos, o->x_rot, o->y_rot, o->z_rot, o->self_lit, o->blended, o->r, o->g, o->b);
 						free(undo_object);
 						undo_object = NULL;
 						break;
@@ -95,7 +95,7 @@ int HandleEvent(SDL_Event *event)
 					case mode_2d:
 					{
 						obj_2d *o = (obj_2d *) undo_object;
-						add_2d_obj(o->file_name, o->x_pos, o->y_pos, o->z_pos, o->x_rot, o->y_rot, o->z_rot, 0);
+						add_2d_obj(o->file_name, o->x_pos, o->y_pos, o->z_pos, o->x_rot, o->y_rot, o->z_rot);
 						free(undo_object);
 						undo_object = NULL;
 						break;
@@ -103,7 +103,7 @@ int HandleEvent(SDL_Event *event)
 					case mode_light:
 					{
 						light *o = (light *) undo_object;
-						add_light(o->pos_x, o->pos_y, o->pos_z, o->r, o->g, o->b, 1.0f, 0);
+						add_light(o->pos_x, o->pos_y, o->pos_z, o->r, o->g, o->b, 1.0f);
 						free(undo_object);
 						undo_object = NULL;
 						break;
@@ -111,7 +111,7 @@ int HandleEvent(SDL_Event *event)
 					case mode_particles:
 					{
 						particle_sys *o = (particle_sys *) undo_object;
-						create_particle_sys(o->def,o->x_pos,o->y_pos,o->z_pos,0);
+						create_particle_sys(o->def,o->x_pos,o->y_pos,o->z_pos);
 						free(undo_object);
 						undo_object = NULL;
 						break;

@@ -71,7 +71,7 @@ void draw_lights()
 
 }
 
-int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity, light_io *lightio)
+int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity)
 {
 	int i;
 	light *new_light;
@@ -95,7 +95,7 @@ int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, 
 					break;
 				}
 		}
-	if(lightio!=NULL)memcpy(&new_light->lightio,lightio,sizeof(light_io));
+
 	return i;
 }
 
