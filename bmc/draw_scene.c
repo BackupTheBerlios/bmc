@@ -1,4 +1,5 @@
 #include "global.h"
+#include <string.h>
 #include <math.h>
 
 float cx=0;
@@ -57,6 +58,34 @@ Uint32 last_clear_clouds=0;
 
 GLenum base_unit=GL_TEXTURE0_ARB,detail_unit=GL_TEXTURE1_ARB,shadow_unit=GL_TEXTURE2_ARB;
 
+void get_tmp_actor_data()
+{
+	int i;
+	lock_actors_lists();
+	for(i=0;i<max_actors;i++)
+		{
+		if(actors_list[i])
+			{
+				strcpy(actors_list[i]->tmp.cur_frame,actors_list[i]->cur_frame);
+
+				actors_list[i]->tmp.x_pos=actors_list[i]->x_pos;
+				actors_list[i]->tmp.y_pos=actors_list[i]->y_pos;
+				actors_list[i]->tmp.z_pos=actors_list[i]->z_pos;
+
+				actors_list[i]->tmp.x_tile_pos=actors_list[i]->x_tile_pos;
+				actors_list[i]->tmp.y_tile_pos=actors_list[i]->y_tile_pos;
+
+				actors_list[i]->tmp.x_rot=actors_list[i]->x_rot;
+				actors_list[i]->tmp.y_rot=actors_list[i]->y_rot;
+				actors_list[i]->tmp.z_rot=actors_list[i]->z_rot;
+
+				actors_list[i]->tmp.have_tmp=1;
+			}
+		}
+	unlock_actors_lists();
+}
+
+
 void draw_scene()
 {
 	unsigned char str [180];
@@ -72,6 +101,8 @@ void draw_scene()
 
 	if(!shadows_on || !have_stencil)glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
 	else glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT|GL_STENCIL_BUFFER_BIT);
+
+	get_tmp_actor_data();
 	
 	if(interface_mode!=interface_game)
 		{
@@ -335,11 +366,11 @@ void Move()
     int i;
 	for(i=0;i<max_actors;i++)
 		{
-			if(actors_list[i] && actors_list[i]->actor_id==yourself)
+			if(actors_list[i] && actors_list[i]->actor_id==yourself&& actors_list[i]->tmp.have_tmp)
 				{
-					float x=actors_list[i]->x_pos;
-					float y=actors_list[i]->y_pos;
-					float z=-2.2f+height_map[actors_list[i]->y_tile_pos*tile_map_size_x*6+actors_list[i]->x_tile_pos]*0.2f;
+					float x=actors_list[i]->tmp.x_pos;
+					float y=actors_list[i]->tmp.y_pos;
+					float z=-2.2f+height_map[actors_list[i]->tmp.y_tile_pos*tile_map_size_x*6+actors_list[i]->tmp.x_tile_pos]*0.2f;
 					//move near the actor, but smoothly
 					camera_x_speed=(x-(-cx))/16.0;
 					camera_x_frames=16;

@@ -745,10 +745,10 @@ void draw_game_map()
 	for(i=0;i<max_actors;i++)
 		{
 			if(actors_list[i])
-				if(actors_list[i]->actor_id==yourself)
+				if(actors_list[i]->actor_id==yourself && actors_list[i]->tmp.have_tmp)
 					{
-						int x=actors_list[i]->x_tile_pos;
-						int y=actors_list[i]->y_tile_pos;
+						int x=actors_list[i]->tmp.x_tile_pos;
+						int y=actors_list[i]->tmp.y_tile_pos;
 						screen_x=300-(50+200*x/(tile_map_size_x*6));
 						screen_y=0+200*y/(tile_map_size_y*6);
 						break;

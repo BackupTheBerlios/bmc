@@ -33,26 +33,26 @@ void draw_actor_reflection(actor * actor_id)
 		}
 	bind_texture_id(texture_id);
 
-	cur_frame=actor_id->cur_frame;
+	cur_frame=actor_id->tmp.cur_frame;
 
 	//now, go and find the current frame
 	i= get_frame_number(actor_id->model_data, cur_frame);
 	if(i<0)	return;	//nothing to draw
 
 	glPushMatrix();//we don't want to affect the rest of the scene
-	x_pos=actor_id->x_pos;
-	y_pos=actor_id->y_pos;
-	z_pos=actor_id->z_pos;
+	x_pos=actor_id->tmp.x_pos;
+	y_pos=actor_id->tmp.y_pos;
+	z_pos=actor_id->tmp.z_pos;
 
 	if(z_pos==0.0f)//actor is walking, as opposed to flying, get the height underneath
-		z_pos=-2.2f+height_map[actor_id->y_tile_pos*tile_map_size_x*6+actor_id->x_tile_pos]*0.2f;
+		z_pos=-2.2f+height_map[actor_id->tmp.y_tile_pos*tile_map_size_x*6+actor_id->tmp.x_tile_pos]*0.2f;
 	z_pos+=-water_deepth_offset*2;
 
 	glTranslatef(x_pos+0.25f, y_pos+0.25f, z_pos);
 
-	x_rot=actor_id->x_rot;
-	y_rot=actor_id->y_rot;
-	z_rot=actor_id->z_rot;
+	x_rot=actor_id->tmp.x_rot;
+	y_rot=actor_id->tmp.y_rot;
+	z_rot=actor_id->tmp.z_rot;
 	z_rot=-z_rot;
 	glRotatef(z_rot, 0.0f, 0.0f, 1.0f);
 	glRotatef(x_rot, 1.0f, 0.0f, 0.0f);
@@ -72,24 +72,24 @@ void draw_enhanced_actor_reflection(actor * actor_id)
 	char *cur_frame;
 
 	check_gl_errors();
-	cur_frame=actor_id->cur_frame;
+	cur_frame=actor_id->tmp.cur_frame;
 	texture_id=actor_id->texture_id;
 
 	bind_texture_id(texture_id);
 
 	glPushMatrix();//we don't want to affect the rest of the scene
-	x_pos=actor_id->x_pos;
-	y_pos=actor_id->y_pos;
-	z_pos=actor_id->z_pos;
+	x_pos=actor_id->tmp.x_pos;
+	y_pos=actor_id->tmp.y_pos;
+	z_pos=actor_id->tmp.z_pos;
 
 	if(z_pos==0.0f)//actor is walking, as opposed to flying, get the height underneath
-		z_pos=-2.2f+height_map[actor_id->y_tile_pos*tile_map_size_x*6+actor_id->x_tile_pos]*0.2f;
+		z_pos=-2.2f+height_map[actor_id->tmp.y_tile_pos*tile_map_size_x*6+actor_id->tmp.x_tile_pos]*0.2f;
 	z_pos+=-water_deepth_offset*2;
 
 	glTranslatef(x_pos+0.25f, y_pos+0.25f, z_pos);
-	x_rot=actor_id->x_rot;
-	y_rot=actor_id->y_rot;
-	z_rot=actor_id->z_rot;
+	x_rot=actor_id->tmp.x_rot;
+	y_rot=actor_id->tmp.y_rot;
+	z_rot=actor_id->tmp.z_rot;
 	z_rot+=180;//test
 	z_rot=-z_rot;
 	glRotatef(z_rot, 0.0f, 0.0f, 1.0f);
@@ -336,14 +336,14 @@ void display_3d_reflection()
 	glNormal3f(0.0f,0.0f,1.0f);
 	for(i=0;i<max_actors;i++)
 		{
-			if(actors_list[i])
+			if(actors_list[i] && actors_list[i]->tmp.have_tmp)
 			if(!actors_list[i]->ghost)
 				{
 					int dist1;
 					int dist2;
 
-					dist1=x-actors_list[i]->x_pos;
-					dist2=y-actors_list[i]->y_pos;
+					dist1=x-actors_list[i]->tmp.x_pos;
+					dist2=y-actors_list[i]->tmp.y_pos;
 					if(dist1*dist1+dist2*dist2<=100)
 							{
 								if(actors_list[i]->is_enhanced_model)

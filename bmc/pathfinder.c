@@ -253,7 +253,7 @@ int pf_is_tile_occupied(int x, int y)
 	int i;
 	
 	for (i = 0; i < max_actors; i++) {
-		if (actors_list[i]->x_tile_pos == x && actors_list[i]->y_tile_pos == y) {
+		if (actors_list[i]->tmp.have_tmp && actors_list[i]->tmp.x_tile_pos == x && actors_list[i]->tmp.y_tile_pos == y) {
 			return 1;
 		}
 	}

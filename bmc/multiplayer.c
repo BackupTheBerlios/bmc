@@ -318,9 +318,7 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 
 		case REMOVE_ACTOR:
 			{
-				lock_actors_lists();	//lock it to avoid timing issues
 				destroy_actor(*((short *)(in_data+3)));
-				unlock_actors_lists();	//unlock it
 			}
 			break;
 

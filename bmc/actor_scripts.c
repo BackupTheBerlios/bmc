@@ -31,10 +31,6 @@ void move_to_next_frame()
 	int frame_no;
 	int numFrames;
 	char frame_exists;
-/*
-#ifdef EXTRA_DEBUG
-	ERR();
-#endif*/
 
 	lock_actors_lists();
 	for(i=0;i<max_actors;i++)
@@ -59,6 +55,7 @@ void move_to_next_frame()
 						}
 					//get the frame number out of the frame name
 					l=strlen(actors_list[i]->cur_frame);
+					if(l<2)continue;
 					frame_no=atoi(&actors_list[i]->cur_frame[l-2]);
 					//get the frame name
 					for(k=0;k<l-2;k++)frame_name[k]=actors_list[i]->cur_frame[k];
@@ -115,8 +112,12 @@ void move_to_next_frame()
 									//frame_name has 2 extra numbers, at this point, due to the previous
 									//strcat. So, remove those 2 extra numbers
 									l=strlen(frame_name);
-									frame_name[l-2]=0;
-									my_strcat(frame_name,"01");
+									if(l>=2)
+										{
+											frame_name[l-2]=0;
+											my_strcat(frame_name,"01");
+										}
+									else frame_name[0]=0;
 								}
 						}
 
@@ -129,10 +130,7 @@ void move_to_next_frame()
 void animate_actors()
 {
 	int i;
-	/*
-#ifdef EXTRA_DEBUG
-	ERR();
-#endif*/
+	
 	// lock the actors_list so that nothing can interere with this look
 	lock_actors_lists();	//lock it to avoid timing issues
 	for(i=0;i<max_actors;i++)
@@ -292,10 +290,13 @@ void next_command()
 
 							switch(actors_list[i]->que[0]) {
 							case kill_me:
+#ifdef KILL_ME //This is obsolete...
 								if(actors_list[i]->remapped_colors)
 									glDeleteTextures(1,&actors_list[i]->texture_id);
+								
 								free(actors_list[i]);
 								actors_list[i]=0;
+#endif
 								break;
 							case die1:
 								my_strcp(actors_list[i]->cur_frame,actors_defs[actor_type].die1_frame);
@@ -508,12 +509,12 @@ void destroy_actor(int actor_id)
 	ERR();
 #endif
 
-	lock_actors_lists();	//lock it to avoid timing issues
 	for(i=0;i<max_actors;i++)
 		{
 			if(actors_list[i])
 				if(actors_list[i]->actor_id==actor_id)
 					{
+						lock_actors_lists();	//lock it to avoid timing issues
 						if(actors_list[i]->remapped_colors)glDeleteTextures(1,&actors_list[i]->texture_id);
 						if(actors_list[i]->is_enhanced_model)
 							{
@@ -530,10 +531,10 @@ void destroy_actor(int actor_id)
 								actors_list[i]=actors_list[max_actors];
 								actors_list[max_actors]=NULL;
 							}
+						unlock_actors_lists();	//unlock it since we are done
 						break;
 					}
 		}
-	unlock_actors_lists();	//unlock it since we are done
 }
 
 void destroy_all_actors()
@@ -586,17 +587,18 @@ void add_command_to_actor(int actor_id, char command)
 {
 	int i=0;
 	int k=0;
+	int have_actor=0;
 
 #ifdef EXTRA_DEBUG
 	ERR();
 #endif
 
-	lock_actors_lists();
 	while(i<max_actors)
 		{
 			if(actors_list[i])
 				if(actors_list[i]->actor_id==actor_id)
 					{
+						lock_actors_lists();
 						for(k=0;k<10;k++)
 							{
 								if(actors_list[i]->que[k]==nothing)
@@ -604,9 +606,7 @@ void add_command_to_actor(int actor_id, char command)
 										//we are SEVERLY behind, just update all the actors in range
 										if(k>8)
 											{
-												unlock_actors_lists();
-												update_all_actors();
-												return;
+												break;
 											}
 										else if(k>6)
 											{
@@ -639,17 +639,19 @@ void add_command_to_actor(int actor_id, char command)
 									}
 							}
 						unlock_actors_lists();
-						return;
+						have_actor=1;
+						break;
 					}
 			i++;
 		}
 	//if we got here, it means we don't have this actor, so get it from the server...
-	unlock_actors_lists();
+	if(!have_actor)
 		{
 			char	str[256];
 			sprintf(str, "%s %d - %d\b", cant_add_command, command, actor_id);
 			log_error(str);
 		}
+	else if (k>8) update_all_actors();
 	//update_all_actors();
 }
 
@@ -660,7 +662,6 @@ void get_actor_damage(int actor_id, Uint8 damage)
 #ifdef EXTRA_DEBUG
 	ERR()
 #endif
-	lock_actors_lists();
 	while(i<max_actors)
 		{
 			if(actors_list[i])
@@ -673,8 +674,6 @@ void get_actor_damage(int actor_id, Uint8 damage)
 					}
 			i++;
 		}
-	
-	unlock_actors_lists();
 	//if we got here, it means we don't have this actor, so get it from the server...
 }
 
@@ -685,8 +684,6 @@ void get_actor_heal(int actor_id, Uint8 quantity)
 #ifdef EXTRA_DEBUG
 	ERR();
 #endif
-
-	lock_actors_lists();
 	while(i<max_actors)
 		{
 			if(actors_list[i])
@@ -697,7 +694,6 @@ void get_actor_heal(int actor_id, Uint8 quantity)
 					}
 			i++;
 		}	
-	unlock_actors_lists();
 	//if we got here, it means we don't have this actor, so get it from the server...
 }
 
@@ -707,11 +703,11 @@ void move_self_forward()
 	int i,x,y,rot,tx,ty;
 	Uint8 str[10];
 
-	lock_actors_lists();
 	for(i=0;i<max_actors;i++)
 		{
 			if(actors_list[i] && actors_list[i]->actor_id==yourself)
 				{
+					lock_actors_lists();
 					x=actors_list[i]->x_tile_pos;
 					y=actors_list[i]->y_tile_pos;
 					rot=actors_list[i]->z_rot;
@@ -770,8 +766,6 @@ void move_self_forward()
 					return;
 				}
 		}
-	unlock_actors_lists();
-
 }
 
 

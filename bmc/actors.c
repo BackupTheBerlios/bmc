@@ -40,13 +40,6 @@ int add_actor(char * file_name,char * skin_name, char * frame_name,float x_pos,
 
 	our_actor = calloc(1, sizeof(actor));
 
-	//find a free spot, in the actors_list
-	lock_actors_lists();	//lock it to avoid timing issues
-	for(i=0;i<max_actors;i++)
-		{
-			if(!actors_list[i])break;
-		}
-
 	returned_md2=load_md2_cache(file_name);
 	if(!returned_md2)
 		{
@@ -110,9 +103,16 @@ int add_actor(char * file_name,char * skin_name, char * frame_name,float x_pos,
 	our_actor->stand_idle=0;
 	our_actor->sit_idle=0;
 
-	actors_list[i]=our_actor;
+	//find a free spot, in the actors_list
+	lock_actors_lists();	//lock it to avoid timing issues
+	for(i=0;i<max_actors;i++)
+		{
+			if(!actors_list[i])break;
+		}
 	if(i>=max_actors)max_actors=i+1;
-	unlock_actors_lists();	// release now that we are done
+
+	actors_list[i]=our_actor;
+	//Will be unlocked later
 	return i;
 }
 
@@ -566,22 +566,22 @@ void draw_actor(actor * actor_id)
 	bind_texture_id(texture_id);
 
 	//now, go and find the current frame
-	i=get_frame_number(actor_id->model_data, actor_id->cur_frame);
+	i=get_frame_number(actor_id->model_data, actor_id->tmp.cur_frame);
 	if(i >= 0)healtbar_z=actor_id->model_data->offsetFrames[i].box.max_z;
 
 	glPushMatrix();//we don't want to affect the rest of the scene
-	x_pos=actor_id->x_pos;
-	y_pos=actor_id->y_pos;
-	z_pos=actor_id->z_pos;
+	x_pos=actor_id->tmp.x_pos;
+	y_pos=actor_id->tmp.y_pos;
+	z_pos=actor_id->tmp.z_pos;
 
 	if(z_pos==0.0f)//actor is walking, as opposed to flying, get the height underneath
-		z_pos=-2.2f+height_map[actor_id->y_tile_pos*tile_map_size_x*6+actor_id->x_tile_pos]*0.2f;
+		z_pos=-2.2f+height_map[actor_id->tmp.y_tile_pos*tile_map_size_x*6+actor_id->tmp.x_tile_pos]*0.2f;
 
 	glTranslatef(x_pos+0.25f, y_pos+0.25f, z_pos);
 
-	x_rot=actor_id->x_rot;
-	y_rot=actor_id->y_rot;
-	z_rot=-actor_id->z_rot;
+	x_rot=actor_id->tmp.x_rot;
+	y_rot=actor_id->tmp.y_rot;
+	z_rot=-actor_id->tmp.z_rot;
 	glRotatef(z_rot, 0.0f, 0.0f, 1.0f);
 	glRotatef(x_rot, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_rot, 0.0f, 1.0f, 0.0f);
@@ -620,19 +620,18 @@ void display_actors()
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
 
-	lock_actors_lists();	//lock it to avoid timing issues
 	//display only the non ghosts
 	for(i=0;i<max_actors;i++)
 		{
 			actor *cur_actor= actors_list[i];
-			if(cur_actor) {
+			if(cur_actor && cur_actor->tmp.have_tmp) {
 				if(!cur_actor->ghost)
 					{
 						int dist1;
 						int dist2;
 
-						dist1=x-cur_actor->x_pos;
-						dist2=y-cur_actor->y_pos;
+						dist1=x-cur_actor->tmp.x_pos;
+						dist2=y-cur_actor->tmp.y_pos;
 						if(dist1*dist1+dist2*dist2<=12*12)
 							{
 								if(cur_actor->is_enhanced_model)
@@ -640,6 +639,7 @@ void display_actors()
 										draw_enhanced_actor(cur_actor);
 										//check for network data - reduces resyncs
 										get_message_from_server();
+										if(cur_actor==NULL)continue;
 									}
 								else
 									{
@@ -660,24 +660,24 @@ void display_actors()
 			}
 		}
 
-	//we don't need the light, for ghosts
-	glDisable(GL_LIGHTING);
-	//if any ghost has a glowing weapon, we need to reset the blend function each ghost actor.
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	if(has_ghosts){
+		//we don't need the light, for ghosts
+		glDisable(GL_LIGHTING);
 		//display only the ghosts
 		glEnable(GL_BLEND);
+		//if any ghost has a glowing weapon, we need to reset the blend function each ghost actor.
+		glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 		for(i=0;i<max_actors;i++)
 			{
 				actor *cur_actor= actors_list[i];
-				if(cur_actor)
+				if(cur_actor && cur_actor->tmp.have_tmp)
 					if(cur_actor->ghost)
 						{
 							int dist1;
 							int dist2;
 
-							dist1=x-cur_actor->x_pos;
-							dist2=y-cur_actor->y_pos;
+							dist1=x-cur_actor->tmp.x_pos;
+							dist2=y-cur_actor->tmp.y_pos;
 							if(dist1*dist1+dist2*dist2<=12*12)
 								{
 									if(cur_actor->is_enhanced_model)
@@ -697,10 +697,9 @@ void display_actors()
 								}
 						}
 			}
+		glDisable(GL_BLEND);
 	}
-	unlock_actors_lists();	//unlock it since we are done
 
-	glDisable(GL_BLEND);
 	ELglClientActiveTextureARB(base_unit);
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -805,9 +804,7 @@ void add_actor_from_server(char * in_data)
 			log_error(str);
 		}
 	}
-	//find out if there is another actor with that ID
-	//ideally this shouldn't happen, but just in case
-	lock_actors_lists();	//lock it to avoid timing issues
+	
 	for(i=0;i<max_actors;i++)
 		{
 			if(actors_list[i])

@@ -194,8 +194,7 @@ int add_enhanced_actor(enhanced_actor *this_actor,char * frame_name,float x_pos,
 	actors_list[i]=our_actor;
 	if(i>=max_actors)max_actors=i+1;
 	no_bounding_box=0;
-	unlock_actors_lists();	//unlock it
-
+	//We're unlocking it later
 	return i;
 }
 
@@ -212,25 +211,25 @@ void draw_enhanced_actor(actor * actor_id)
 	float healtbar_z=0;
 
 	bind_texture_id(actor_id->texture_id);
-	cur_frame=actor_id->cur_frame;
+	cur_frame=actor_id->tmp.cur_frame;
 
 	//now, go and find the current frame
 	i=get_frame_number(actor_id->body_parts->head, cur_frame);;
 	if(i >= 0)healtbar_z=actor_id->body_parts->head->offsetFrames[i].box.max_z;
 
 	glPushMatrix();//we don't want to affect the rest of the scene
-	x_pos=actor_id->x_pos;
-	y_pos=actor_id->y_pos;
-	z_pos=actor_id->z_pos;
+	x_pos=actor_id->tmp.x_pos;
+	y_pos=actor_id->tmp.y_pos;
+	z_pos=actor_id->tmp.z_pos;
 
 	if(z_pos==0.0f)//actor is walking, as opposed to flying, get the height underneath
-		z_pos=-2.2f+height_map[actor_id->y_tile_pos*tile_map_size_x*6+actor_id->x_tile_pos]*0.2f;
+		z_pos=-2.2f+height_map[actor_id->tmp.y_tile_pos*tile_map_size_x*6+actor_id->tmp.x_tile_pos]*0.2f;
 
 	glTranslatef(x_pos+0.25f, y_pos+0.25f, z_pos);
 
-	x_rot=actor_id->x_rot;
-	y_rot=actor_id->y_rot;
-	z_rot=actor_id->z_rot;
+	x_rot=actor_id->tmp.x_rot;
+	y_rot=actor_id->tmp.y_rot;
+	z_rot=actor_id->tmp.z_rot;
 	z_rot+=180;//test
 	z_rot=-z_rot;
 	glRotatef(z_rot, 0.0f, 0.0f, 1.0f);
@@ -529,7 +528,6 @@ void add_enhanced_actor_from_server(char * in_data)
 
 	//find out if there is another actor with that ID
 	//ideally this shouldn't happen, but just in case
-	lock_actors_lists();    //lock it to avoid timing issues
 	for(i=0;i<max_actors;i++)
 		{
 			if(actors_list[i])
@@ -552,7 +550,6 @@ void add_enhanced_actor_from_server(char * in_data)
 						}
 				}
 		}
-	unlock_actors_lists();  //unlock it
 
 	this_actor=calloc(1,sizeof(enhanced_actor));
 
@@ -618,7 +615,6 @@ void add_enhanced_actor_from_server(char * in_data)
 
 	i=add_enhanced_actor(this_actor,cur_frame,f_x_pos,f_y_pos,f_z_pos,f_z_rot,actor_id);
 
-	lock_actors_lists();    //lock it to avoid timing issues
 	actors_list[i]->x_tile_pos=x_pos;
 	actors_list[i]->y_tile_pos=y_pos;
 	actors_list[i]->actor_type=actor_type;

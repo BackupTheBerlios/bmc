@@ -32,6 +32,25 @@ typedef struct
 
 extern glow_color glow_colors[10];
 
+typedef struct //Data accessed by both the rendering and the timer threads...
+{
+	int have_tmp;
+
+	char cur_frame[16];
+
+	double x_pos;
+	double y_pos;
+	double z_pos;
+
+	short x_tile_pos;
+	short y_tile_pos;
+
+	float x_rot;
+	float y_rot;
+	float z_rot;
+} tmp_actor_data;
+
+
 typedef struct
 {
 	char legs_fn[32];
@@ -186,6 +205,8 @@ typedef struct
 	float x_rot;
 	float y_rot;
 	float z_rot;
+
+	tmp_actor_data tmp;
 
 	int boots;
 	int hair;
