@@ -27,23 +27,6 @@ void add_change(){}
 
 /* MISC SECTOR*/
 
-void get_supersector(int sector, int *sx, int *sy, int *ex, int *ey)
-{
-	int tile_map_size_y_4=tile_map_size_y>>2;
-	int tile_map_size_x_4=tile_map_size_x>>2;
-	int fy=sector/(tile_map_size_y_4);
-	int fx=sector%(tile_map_size_x_4);
-
-	*sx=fx-1;
-	if(*sx<0)*sx=0;
-	*sy=fy-1;
-	if(*sy<0)*sy=0;
-	*ex=fx+1;
-	if(*ex==tile_map_size_x_4)*ex=tile_map_size_x_4-1;
-	*ey=fy+1;
-	if(*ey==tile_map_size_y_4)*ey=tile_map_size_y_4-1;
-}
-
 void sector_update_checksums(int sector)
 {
 	sector_update_objects_checksum(sector);
@@ -249,6 +232,23 @@ void check_sector()
 	}
 }
 #endif
+
+void get_supersector(int sector, int *sx, int *sy, int *ex, int *ey)
+{
+	int tile_map_size_y_4=tile_map_size_y>>2;
+	int tile_map_size_x_4=tile_map_size_x>>2;
+	int fy=sector/(tile_map_size_y_4);
+	int fx=sector%(tile_map_size_x_4);
+
+	*sx=fx-1;
+	if(*sx<0)*sx=0;
+	*sy=fy-1;
+	if(*sy<0)*sy=0;
+	*ex=fx+1;
+	if(*ex==tile_map_size_x_4)*ex=tile_map_size_x_4-1;
+	*ey=fy+1;
+	if(*ey==tile_map_size_y_4)*ey=tile_map_size_y_4-1;
+}
 
 
 // Functions that send data to server
