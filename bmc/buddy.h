@@ -18,5 +18,7 @@ void init_buddy();
 void display_buddy();
 void add_buddy(char *n, int t, int len);
 void del_buddy(char *n, int len);
+void clear_buddy();
+
 #endif
 

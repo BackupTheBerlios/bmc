@@ -217,6 +217,30 @@ void display_buddy()
 		}
 }
 
+void add_buddy_server(char *name, Uint8 type)
+{
+	char msg[32];
+	int len=strlen(name);
+	msg[0]=ADD_BUDDY;
+	msg[1]=len;
+	strncpy(msg+2,name,len);
+	msg[2+len]=type;
+	my_tcp_send(my_socket,msg,3+len);
+
+}
+
+void del_buddy_server(char *name)
+{
+	char msg[32];
+	int len=strlen(name);
+	msg[0]=DELETE_BUDDY;
+	msg[1]=len;
+	strncpy(msg+2,name,len);
+	my_tcp_send(my_socket,msg,2+len);
+
+}
+
+
 void add_buddy(char *n, int t, int len)
 {
 	int i;
@@ -246,3 +270,9 @@ void del_buddy(char *n, int len)
 	}
 }
 
+void clear_buddy()
+{
+	int i;
+	for(i=0; i<MAX_BUDDY; i++)
+			buddy_list[i].type= 0xff;
+}

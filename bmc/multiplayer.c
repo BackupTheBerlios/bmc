@@ -732,9 +732,9 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 		case BUDDY_EVENT:
 			{
 				if(in_data[3]==1)
-					add_buddy(&in_data[5],in_data[4],data_lenght-3);
+					add_buddy(&in_data[5],in_data[4],data_lenght-5);
 				else if(in_data[3]==0)
-					del_buddy(&in_data[4],data_lenght-2);
+					del_buddy(&in_data[4],data_lenght-4);
 			}
 			break;
 
@@ -870,6 +870,8 @@ static void process_data_from_server()
 				log_to_console(c_red2, alt_x_quit);
 				in_data_used = 0;
 				disconnected = 1;
+				// clear buddy list
+				clear_buddy();
 			}
 		} while (3 <= in_data_used);
 
@@ -898,6 +900,8 @@ void get_message_from_server()
 			log_to_console(c_red2, alt_x_quit);
 			in_data_used = 0;
 			disconnected = 1;
+			// clear buddy list
+			clear_buddy();
 		}
 	}
 }

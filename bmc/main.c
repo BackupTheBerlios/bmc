@@ -155,8 +155,6 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-
-#ifdef WINDOWS
 // splits a char* into a char ** based on the delimiters
 int makeargv(char *s, char *delimiters, char ***argvp)
 {
@@ -200,6 +198,8 @@ void freemakeargv(char **argv)
 		free(*argv);
 	free(argv);
 }
+
+#ifdef WINDOWS
 
 int APIENTRY WinMain (HINSTANCE hInst, HINSTANCE hPrev, LPSTR lpCmd, int nShow)
 {
