@@ -81,6 +81,8 @@ int HandleEvent(SDL_Event *event)
 		if ( event->key.keysym.sym == SDLK_h && ctrl_on){
 			calhm = !calhm;
 		}
+		if ( event->key.keysym.sym == SDLK_a && ctrl_on && cur_mode==mode_3d)
+			toggle_attributes_window();
 		if ( event->key.keysym.sym == SDLK_z && ctrl_on){
 			if(undo_object != NULL){
 				switch (undo_type){
@@ -804,6 +806,30 @@ int HandleEvent(SDL_Event *event)
 												memcpy(&o3t,objects_list[ew_selected_object],sizeof(object3d));
 												selected_3d_object=-1;
 											}
+											else if(attributes_win>0 && windows_list.window[attributes_win].displayed)
+												{
+													if(aw_selected_object==selected_3d_object) 
+														{
+															objects_list[aw_selected_object]->blended^=AW_BLEND;
+															aw_selected_object=-1;
+														}
+													else if(aw_selected_object>=0)
+														
+														{
+															objects_list[aw_selected_object]->blended^=AW_BLEND;
+															aw_selected_object=selected_3d_object;
+															objects_list[aw_selected_object]->blended^=AW_BLEND;
+															selected_3d_object=-1;
+														}
+													else 
+														{
+															aw_selected_object=selected_3d_object;
+															aw_object_type=0;//For now, only 3d objects are supported...
+															objects_list[aw_selected_object]->blended^=AW_BLEND;
+															selected_3d_object=-1;
+														}
+													if(!windows_list.window[attributes_win].displayed)toggle_attributes_window();
+												}
 										}
 									}
 							}

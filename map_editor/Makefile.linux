@@ -14,7 +14,7 @@ GTK_LIBS =  $(shell gtk-config --libs)
 LIBS=$(shell sdl-config --libs) -lGL $(GTK_LIBS) $(shell xml2-config --libs)
 
 OBJS=2d_objects.o 3d_objects.o	\
-	asc.o colors.o browser.o draw_scene.o	\
+	attributes.c asc.o colors.o browser.o draw_scene.o	\
 	elconfig.o elwindows.o errors.o events.o font.o frustum.o	\
 	gl_init.o global.o gui.o gui_callbacks.o	\
 	init.o interface.o lights.o	\

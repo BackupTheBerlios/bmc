@@ -46,7 +46,8 @@ void draw_3d_object(object3d * object_id)
 	if(object_id->blended)
 		{
 			glEnable(GL_BLEND);
-			glBlendFunc(GL_ONE,GL_ONE);
+			if(object_id->blended==1)glBlendFunc(GL_ONE,GL_ONE);
+			else glBlendFunc(GL_ONE_MINUS_SRC_COLOR,GL_ONE);//Selected attribute object...
 		}
 
 	if(object_id->self_lit && (night_shadows_on || dungeon))

@@ -341,7 +341,8 @@ void init_stuff()
 	display_particles_window();
 	toggle_particles_window();
 	toggle_window(particles_window);
-
+	display_attributes_window();
+	toggle_attributes_window();
 }
 
 void resize_window()

@@ -120,7 +120,6 @@ typedef struct
 	float max_z;
 	char is_transparent;
 	char is_ground;
-
 }e3d_object;
 
 typedef struct
@@ -142,7 +141,7 @@ typedef struct
    e3d_object *e3d_data;
    unsigned int last_acessed_time;
 
-   Uint32 flags;//Let's just do this the easy way here, and use bitfields in the object3dio...
+   Uint32 attributes;//Let's just do this the easy way here, and use bitfields in the object3dio...
 
    object3d_io o3dio;
 }object3d;

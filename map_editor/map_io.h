@@ -1,6 +1,15 @@
 #ifndef __MAP_IO_H__
 #define __MAP_IO_H__
 
+#define MINABLE 1
+#define CUTTABLE 2
+#define DIGGABLE 4
+#define PICKABLE 8
+#define USABLE 16
+#define USE_WITH 32
+#define ATTACKABLE 64
+#define ENTRABLE 128
+
 typedef struct
 {
 	Uint16 object_type;//the object index
