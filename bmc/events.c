@@ -191,6 +191,27 @@ int HandleEvent(SDL_Event *event)
 						get_tile_data(s);
 						load_map_tiles();
 						*/
+						
+						/*//GET_3D_OBJECTS test
+						char s[100];
+						actor *xxx=pf_get_our_actor();
+						active_sector=sector_get(xxx->x_pos,xxx->y_pos);
+						s[0]=2;
+						*(Uint16*)&s[1]=2; //id
+						*(Uint16*)&s[3]=100; //x
+						*(Uint16*)&s[5]=100; //y
+						s[7]=0; // z
+						s[8]=25; // zrot
+
+						*(Uint16*)&s[9]=100; //id
+						*(Uint16*)&s[11]=100; //x
+						*(Uint16*)&s[13]=100; //y
+						s[15]=0; // z
+						s[16]=25; // zrot
+						s[17]=0;
+						get_3d_objects(s);
+						*/
+						
 						if(!last_turn_around || last_turn_around+500<cur_time)
 							{
 								Uint8 str[2];

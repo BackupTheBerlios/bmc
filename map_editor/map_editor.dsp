@@ -167,6 +167,10 @@ SOURCE=.\edit_window.c
 # End Source File
 # Begin Source File
 
+SOURCE=..\bmc\elconfig.c
+# End Source File
+# Begin Source File
+
 SOURCE=..\bmc\elwindows.c
 # End Source File
 # Begin Source File

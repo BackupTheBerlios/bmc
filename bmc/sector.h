@@ -34,4 +34,5 @@ void sector_update_objects_checksum(int sector);
 void sector_update_tiles_checksum(int sector);
 
 void get_tile_data(char *d);
+void get_3d_objects(char *d);
 #endif

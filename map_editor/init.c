@@ -1,5 +1,9 @@
 #include <stdio.h>
+
+#ifndef WINDOWS
 #include <dirent.h>
+#endif
+
 #include "global.h"
 
 char lang[10]={"en"};

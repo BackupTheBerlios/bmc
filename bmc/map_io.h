@@ -93,4 +93,12 @@ void destroy_map();
 int save_map(char * file_name);
 int load_map(char * file_name);
 void new_map(int m_x_size,int m_y_size);
+
+int e3dlist_getid(char *name);
+int e2dlist_getid(char *name);
+char *e3dlist_getname(int id);
+char *e2dlist_getname(int id);
+int partlist_getid(char *name);
+char *partlist_getname(int id);
+
 #endif

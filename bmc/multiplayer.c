@@ -743,7 +743,13 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 			break;
 
 		case GET_TILE_DATA:
+			get_tile_data(in_data);
 			break;
+		
+		case GET_3D_OBJECTS:
+			get_3d_objects(in_data);
+			break;
+
 
 		default:
 			{
