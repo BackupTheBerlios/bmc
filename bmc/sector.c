@@ -5,30 +5,7 @@ map_sector *sectors;
 int num_sectors;
 Uint16 active_sector;
 
-/* MISC SECTOR, AND CONVERTION FUNCS */
-
-Uint16 global_to_sector(float f)
-{
-	return /*(int)*/(((float)(f-(int)f)+(float)((int)f%12))/12)*65536;
-}
-
-float sector_to_global_x(int sector, Uint16 f)
-{
-	return (((float)f/65536)*12)+sector%(tile_map_size_x/4)*12.0f;
-}
-
-float sector_to_global_y(int sector, Uint16 f)
-{
-	return (((float)f/65536)*12)+sector/(tile_map_size_y/4)*12.0f;
-}
-
-//here there will be useful fuctions for calculating crcs, adding deleting objects etc
-int sector_get(float x, float y)
-{
-	int sx=x/12;
-	int sy=y/12;
-	return sy*(tile_map_size_x>>2)+sx;
-}
+/* MISC SECTOR*/
 
 void sector_update_checksums(int sector)
 {

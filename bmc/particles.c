@@ -1,7 +1,14 @@
 #include <stdlib.h>
 #include <math.h>
+#ifndef WINDOWS
+#include <locale.h>
+#endif
 #include "SDL_opengl.h"
+#ifdef MAP_EDITOR
+#include "../map_editor/global.h"
+#else
 #include "global.h"
+#endif
 #include "string.h"
 
 #define PART_SYS_VISIBLE_DIST_SQ 10*10
@@ -92,6 +99,9 @@ particle_sys_def *load_particle_def(const char *filename)
 	// System info
 	strncpy(def->file_name,cleanpath,79);
 	def->file_name[79]=0;
+#ifndef WINDOWS
+	setlocale(LC_NUMERIC,"en_US");
+#endif
 	fscanf(f,"%i\n",&def->part_sys_type);
 	fscanf(f,"%x,%x\n",&def->sblend,&def->dblend);
 	fscanf(f,"%i\n",&def->total_particle_no);
@@ -887,7 +897,11 @@ void update_particles() {
 					break;
 				}
 			  if(particles_list[i]->ttl>0)particles_list[i]->ttl--;
-			  if(!particles_list[i]->ttl && !particles_list[i]->particle_count)
+			  if(!particles_list[i]->ttl && !particles_list[i]->particle_count
+#ifdef MAP_EDITOR
+				&& particles_list[i]->def!=&def //Keep the system #1 alive
+#endif
+				)
 			  //if there are no more particles to add, and the TTL expired, then kill this evil system
 				{
 					free(particles_list[i]);

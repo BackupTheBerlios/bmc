@@ -393,7 +393,7 @@ int load_map(char * file_name)
 			fread(cur_2do_pointer, 1, obj_2d_io_size, f);
 
 			k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
-			cur_2d_obj_io.z_pos*0.04f-2.2f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
+			cur_2d_obj_io.z_pos*0.04f-2.199f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
 			memcpy(&obj_2d_list[k]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
 		}
 
@@ -446,7 +446,8 @@ int load_map(char * file_name)
 		for(j=0;j<8;j++){
 			if(sectors[i].particles_local[j]==-1)
 				break;
-			particles_list[sectors[i].particles_local[j]-1]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]-1]->x_pos);
+			if(sectors[i].particles_local[j]==0)continue; //Hmm, shouldn't happen in newer map formats
+			particles_list[sectors[i].particles_local[j]-1]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]-1]->x_pos);//The client does not have the particle editors default particle system, which is located as no. 0 in the particles_list - hence the particles for this map will always be 1 less than when it was saved in the map editor.
 			particles_list[sectors[i].particles_local[j]-1]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]-1]->y_pos);;
 		}
 
