@@ -347,7 +347,7 @@ int create_terraform_partsys(int x, int y, int from, int to, int state)
 }
 
 void terraform_control()
-{
+{/*
 	int x;
 	int y;
 	int pos;
@@ -356,7 +356,7 @@ void terraform_control()
 			for(x=0;x<tile_map_size_x;x++)
 				{
 					pos=y*tile_map_size_x+x;
-					if(terr_map[pos].into_tile!=255 && terr_map[pos].into_tile!=tile_map[pos])
+					if(terr_map[pos].into_tile && terr_map[pos].into_tile!=tile_map[pos])
 						{
 							if(terr_map[pos].state==255)
 								{
@@ -372,5 +372,5 @@ void terraform_control()
 								}
 						}
 				}
-		}
+		}*/
 }

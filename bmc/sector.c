@@ -269,6 +269,7 @@ void change_tile(Uint8 nt, Uint8 t)
 }
 
 
+#ifdef ELC
 void check_sector()
 {
 	int ns;
@@ -281,6 +282,7 @@ void check_sector()
 		send_superchecksum(current_sector);
 	}
 }
+#endif
 
 
 // Functions that send data to server
