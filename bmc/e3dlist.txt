@@ -1,1134 +1,1119 @@
-1133
-./3dobjects/structures/door_elf2.e3d 0
-./3dobjects/structures/door_elf3.e3d 1
-./3dobjects/structures/cityentrance1.e3d 2
-./3dobjects/structures/cityentrance2.e3d 3
-./3dobjects/structures/cityentrance3.e3d 4
-./3dobjects/structures/insidehouse_gnome1.e3d 5
-./3dobjects/structures/insidehouse_gnome2.e3d 6
-./3dobjects/structures/insidehouse_gnome4.e3d 7
-./3dobjects/structures/door1.e3d 8
-./3dobjects/structures/insidehouse_gnome5.e3d 9
-./3dobjects/structures/door2.e3d 10
-./3dobjects/structures/door3.e3d 11
-./3dobjects/structures/door4.e3d 12
-./3dobjects/structures/door5.e3d 13
-./3dobjects/structures/door6.e3d 14
-./3dobjects/structures/board1.e3d 15
-./3dobjects/structures/door7.e3d 16
-./3dobjects/structures/door8.e3d 17
-./3dobjects/structures/wall1.e3d 18
-./3dobjects/structures/wall2.e3d 19
-./3dobjects/structures/wall3.e3d 20
-./3dobjects/structures/citywall7_corner.e3d 21
-./3dobjects/structures/wall4.e3d 22
-./3dobjects/structures/wall5.e3d 23
-./3dobjects/structures/wall6.e3d 24
-./3dobjects/structures/citywall_stairs.e3d 25
-./3dobjects/structures/insidehouse6_7.e3d 26
-./3dobjects/structures/watchtower1.e3d 27
-./3dobjects/structures/doors9.e3d 28
-./3dobjects/structures/forgechimney1.e3d 29
-./3dobjects/structures/forgechimney2.e3d 30
-./3dobjects/structures/house_gnome1.e3d 31
-./3dobjects/structures/house_gnome2.e3d 32
-./3dobjects/structures/house_gnome3.e3d 33
-./3dobjects/structures/house_gnome4.e3d 34
-./3dobjects/structures/house_gnome5.e3d 35
-./3dobjects/structures/inside_igloo1.e3d 36
-./3dobjects/structures/inside_igloo2.e3d 37
-./3dobjects/structures/tent1.e3d 38
-./3dobjects/structures/tent2.e3d 39
-./3dobjects/structures/tent3.e3d 40
-./3dobjects/structures/bridge_elf1.e3d 41
-./3dobjects/structures/fountain4.e3d 42
-./3dobjects/structures/tent4.e3d 43
-./3dobjects/structures/sign_pkmaps.e3d 44
-./3dobjects/structures/fountain5.e3d 45
-./3dobjects/structures/fountain6.e3d 46
-./3dobjects/structures/fountain7.e3d 47
-./3dobjects/structures/fountain8.e3d 48
-./3dobjects/structures/door_magic1.e3d 49
-./3dobjects/structures/door_magic2.e3d 50
-./3dobjects/structures/door_magic3.e3d 51
-./3dobjects/structures/door_magic4.e3d 52
-./3dobjects/structures/insidehouse9_big.e3d 53
-./3dobjects/structures/house_elf10.e3d 54
-./3dobjects/structures/insidehouse10.e3d 55
-./3dobjects/structures/insidehouse11.e3d 56
-./3dobjects/structures/insidehouse12.e3d 57
-./3dobjects/structures/insidehouse13.e3d 58
-./3dobjects/structures/insidehouse14.e3d 59
-./3dobjects/structures/insidehouse15.e3d 60
-./3dobjects/structures/insidehouse16.e3d 61
-./3dobjects/structures/insidehouse17.e3d 62
-./3dobjects/structures/windmill1.e3d 63
-./3dobjects/structures/insidehouse18.e3d 64
-./3dobjects/structures/sign.e3d 65
-./3dobjects/structures/poll_wood1.e3d 66
-./3dobjects/structures/column1.e3d 67
-./3dobjects/structures/insidehouse22.e3d 68
-./3dobjects/structures/insidehouse23.e3d 69
-./3dobjects/structures/insidehouse24.e3d 70
-./3dobjects/structures/insidehouse25.e3d 71
-./3dobjects/structures/insidehouse26.e3d 72
-./3dobjects/structures/column7.e3d 73
-./3dobjects/structures/insidehouse27.e3d 74
-./3dobjects/structures/column8.e3d 75
-./3dobjects/structures/insidehouse28.e3d 76
-./3dobjects/structures/column9.e3d 77
-./3dobjects/structures/insidehouse29.e3d 78
-./3dobjects/structures/insidehouse30.e3d 79
-./3dobjects/structures/insidehouse31.e3d 80
-./3dobjects/structures/dock1.e3d 81
-./3dobjects/structures/insidehouse32.e3d 82
-./3dobjects/structures/dock2.e3d 83
-./3dobjects/structures/insidehouse33.e3d 84
-./3dobjects/structures/insidehouse34.e3d 85
-./3dobjects/structures/insidehouse35.e3d 86
-./3dobjects/structures/insidehouse36.e3d 87
-./3dobjects/structures/insidehouse37.e3d 88
-./3dobjects/structures/stable1.e3d 89
-./3dobjects/structures/elven_houses.e3d 90
-./3dobjects/structures/snowbrick1.e3d 91
-./3dobjects/structures/door13.e3d 92
-./3dobjects/structures/door14.e3d 93
-./3dobjects/structures/door15.e3d 94
-./3dobjects/structures/door16.e3d 95
-./3dobjects/structures/door17.e3d 96
-./3dobjects/structures/door18.e3d 97
-./3dobjects/structures/sign6_blacksmith.e3d 98
-./3dobjects/structures/stonewall1.e3d 99
-./3dobjects/structures/stonewall2.e3d 100
-./3dobjects/structures/sewer_grate1.e3d 101
-./3dobjects/structures/sewer_grate2.e3d 102
-./3dobjects/structures/sewer_grate3.e3d 103
-./3dobjects/structures/sign7_magic.e3d 104
-./3dobjects/structures/magicschool_wall1.e3d 105
-./3dobjects/structures/magicschool_wall2.e3d 106
-./3dobjects/structures/door_dwarf1.e3d 107
-./3dobjects/structures/building1.e3d 108
-./3dobjects/structures/door_dwarf2.e3d 109
-./3dobjects/structures/roadside1.e3d 110
-./3dobjects/structures/door_dwarf3.e3d 111
-./3dobjects/structures/roadside2.e3d 112
-./3dobjects/structures/door_dwarf4.e3d 113
-./3dobjects/structures/roadside3.e3d 114
-./3dobjects/structures/door_dwarf5.e3d 115
-./3dobjects/structures/roadside4.e3d 116
-./3dobjects/structures/roadside5.e3d 117
-./3dobjects/structures/roadside6.e3d 118
-./3dobjects/structures/sewer_floor1.e3d 119
-./3dobjects/structures/watchtower2_orchan.e3d 120
-./3dobjects/structures/house_elf1.e3d 121
-./3dobjects/structures/citywall_elf1.e3d 122
-./3dobjects/structures/house_elf2.e3d 123
-./3dobjects/structures/house_elf3.e3d 124
-./3dobjects/structures/tent_big1.e3d 125
-./3dobjects/structures/house_elf4.e3d 126
-./3dobjects/structures/tent_big2.e3d 127
-./3dobjects/structures/house_elf5.e3d 128
-./3dobjects/structures/tent_big3.e3d 129
-./3dobjects/structures/house_elf6.e3d 130
-./3dobjects/structures/tent_big4.e3d 131
-./3dobjects/structures/house_elf7.e3d 132
-./3dobjects/structures/house_elf8.e3d 133
-./3dobjects/structures/house_elf9.e3d 134
-./3dobjects/structures/magicschool1.e3d 135
-./3dobjects/structures/testerstairs.e3d 136
-./3dobjects/structures/tent_furinside1.e3d 137
-./3dobjects/structures/bridge1.e3d 138
-./3dobjects/structures/bridge2.e3d 139
-./3dobjects/structures/bridge3.e3d 140
-./3dobjects/structures/door_magics1.e3d 141
-./3dobjects/structures/door_magics2.e3d 142
-./3dobjects/structures/steps.e3d 143
-./3dobjects/structures/arch1.e3d 144
-./3dobjects/structures/arch2.e3d 145
-./3dobjects/structures/arch3.e3d 146
-./3dobjects/structures/arch4.e3d 147
-./3dobjects/structures/arch5.e3d 148
-./3dobjects/structures/arch6.e3d 149
-./3dobjects/structures/arch7.e3d 150
-./3dobjects/structures/hut1.e3d 151
-./3dobjects/structures/test.e3d 152
-./3dobjects/structures/hut2.e3d 153
-./3dobjects/structures/castleentrance1.e3d 154
-./3dobjects/structures/castleentrance2.e3d 155
-./3dobjects/structures/sewer_walkway1.e3d 156
-./3dobjects/structures/insidehouse20&21.e3d 157
-./3dobjects/structures/insidehouse9_small.e3d 158
-./3dobjects/structures/gangplank1.e3d 159
-./3dobjects/structures/ticketbooth.e3d 160
-./3dobjects/structures/insidehouse1.e3d 161
-./3dobjects/structures/magicschool_tower1.e3d 162
-./3dobjects/structures/insidehouse2.e3d 163
-./3dobjects/structures/insidehouse3.e3d 164
-./3dobjects/structures/insidehouse4.e3d 165
-./3dobjects/structures/insidehouse5.e3d 166
-./3dobjects/structures/citytower1.e3d 167
-./3dobjects/structures/citytower2.e3d 168
-./3dobjects/structures/citytower3.e3d 169
-./3dobjects/structures/insidehouse8.e3d 170
+./3dobjects/structures/door_elf2.e3d 0 128
+./3dobjects/structures/door_elf3.e3d 1 128
+./3dobjects/structures/cityentrance1.e3d 2 128
+./3dobjects/structures/cityentrance2.e3d 3 128
+./3dobjects/structures/cityentrance3.e3d 4 128
+./3dobjects/structures/insidehouse_gnome1.e3d 5 0
+./3dobjects/structures/insidehouse_gnome2.e3d 6 0
+./3dobjects/structures/insidehouse_gnome4.e3d 7 0
+./3dobjects/structures/door1.e3d 8 128
+./3dobjects/structures/insidehouse_gnome5.e3d 9 0
+./3dobjects/structures/door2.e3d 10 128
+./3dobjects/structures/door3.e3d 11 128
+./3dobjects/structures/door4.e3d 12 128
+./3dobjects/structures/door5.e3d 13 128
+./3dobjects/structures/door6.e3d 14 128
+./3dobjects/structures/board1.e3d 15 0
+./3dobjects/structures/door7.e3d 16 128
+./3dobjects/structures/door8.e3d 17 128
+./3dobjects/structures/wall1.e3d 18 0
+./3dobjects/structures/wall2.e3d 19 0
+./3dobjects/structures/wall3.e3d 20 0
+./3dobjects/structures/citywall7_corner.e3d 21 0
+./3dobjects/structures/wall4.e3d 22 0
+./3dobjects/structures/wall5.e3d 23 0
+./3dobjects/structures/wall6.e3d 24 0
+./3dobjects/structures/citywall_stairs.e3d 25 0
+./3dobjects/structures/insidehouse6_7.e3d 26 0
+./3dobjects/structures/watchtower1.e3d 27 0
+./3dobjects/structures/doors9.e3d 28 128
+./3dobjects/structures/forgechimney1.e3d 29 0
+./3dobjects/structures/forgechimney2.e3d 30 0
+./3dobjects/structures/house_gnome1.e3d 31 128
+./3dobjects/structures/house_gnome2.e3d 32 128
+./3dobjects/structures/house_gnome3.e3d 33 128
+./3dobjects/structures/house_gnome4.e3d 34 128
+./3dobjects/structures/house_gnome5.e3d 35 128
+./3dobjects/structures/inside_igloo1.e3d 36 128
+./3dobjects/structures/inside_igloo2.e3d 37 128
+./3dobjects/structures/tent1.e3d 38 0
+./3dobjects/structures/tent2.e3d 39 0
+./3dobjects/structures/tent3.e3d 40 0
+./3dobjects/structures/bridge_elf1.e3d 41 0
+./3dobjects/structures/fountain4.e3d 42 0
+./3dobjects/structures/tent4.e3d 43 0
+./3dobjects/structures/sign_pkmaps.e3d 44 0
+./3dobjects/structures/fountain5.e3d 45 0
+./3dobjects/structures/fountain6.e3d 46 0
+./3dobjects/structures/fountain7.e3d 47 0
+./3dobjects/structures/fountain8.e3d 48 0
+./3dobjects/structures/door_magic1.e3d 49 128
+./3dobjects/structures/door_magic2.e3d 50 128
+./3dobjects/structures/door_magic3.e3d 51 128
+./3dobjects/structures/door_magic4.e3d 52 128
+./3dobjects/structures/insidehouse9_big.e3d 53 0
+./3dobjects/structures/house_elf10.e3d 54 0
+./3dobjects/structures/insidehouse10.e3d 55 0
+./3dobjects/structures/insidehouse11.e3d 56 0
+./3dobjects/structures/insidehouse12.e3d 57 0
+./3dobjects/structures/insidehouse13.e3d 58 0
+./3dobjects/structures/insidehouse14.e3d 59 0
+./3dobjects/structures/insidehouse15.e3d 60 0
+./3dobjects/structures/insidehouse16.e3d 61 0
+./3dobjects/structures/insidehouse17.e3d 62 0
+./3dobjects/structures/windmill1.e3d 63 0
+./3dobjects/structures/insidehouse18.e3d 64 0
+./3dobjects/structures/sign.e3d 65 0
+./3dobjects/structures/poll_wood1.e3d 66 0
+./3dobjects/structures/column1.e3d 67 0
+./3dobjects/structures/insidehouse22.e3d 68 0
+./3dobjects/structures/insidehouse23.e3d 69 0
+./3dobjects/structures/insidehouse24.e3d 70 0
+./3dobjects/structures/insidehouse25.e3d 71 0
+./3dobjects/structures/insidehouse26.e3d 72 0
+./3dobjects/structures/column7.e3d 73 0
+./3dobjects/structures/insidehouse27.e3d 74 0
+./3dobjects/structures/column8.e3d 75 0
+./3dobjects/structures/insidehouse28.e3d 76 0
+./3dobjects/structures/column9.e3d 77 0
+./3dobjects/structures/insidehouse29.e3d 78 0
+./3dobjects/structures/insidehouse30.e3d 79 0
+./3dobjects/structures/insidehouse31.e3d 80 0
+./3dobjects/structures/dock1.e3d 81 0
+./3dobjects/structures/insidehouse32.e3d 82 0
+./3dobjects/structures/dock2.e3d 83 0
+./3dobjects/structures/insidehouse33.e3d 84 0
+./3dobjects/structures/insidehouse34.e3d 85 0
+./3dobjects/structures/insidehouse35.e3d 86 0
+./3dobjects/structures/insidehouse36.e3d 87 0
+./3dobjects/structures/insidehouse37.e3d 88 0
+./3dobjects/structures/stable1.e3d 89 0
+./3dobjects/structures/elven_houses.e3d 90 128
+./3dobjects/structures/snowbrick1.e3d 91 0
+./3dobjects/structures/door13.e3d 92 128
+./3dobjects/structures/door14.e3d 93 128
+./3dobjects/structures/door15.e3d 94 128
+./3dobjects/structures/door16.e3d 95 128
+./3dobjects/structures/door17.e3d 96 128
+./3dobjects/structures/door18.e3d 97 128
+./3dobjects/structures/sign6_blacksmith.e3d 98 0
+./3dobjects/structures/stonewall1.e3d 99 0
+./3dobjects/structures/stonewall2.e3d 100 0
+./3dobjects/structures/sewer_grate1.e3d 101 0
+./3dobjects/structures/sewer_grate2.e3d 102 0
+./3dobjects/structures/sewer_grate3.e3d 103 0
+./3dobjects/structures/sign7_magic.e3d 104 0
+./3dobjects/structures/magicschool_wall1.e3d 105 0
+./3dobjects/structures/magicschool_wall2.e3d 106 0
+./3dobjects/structures/door_dwarf1.e3d 107 128
+./3dobjects/structures/building1.e3d 108 128
+./3dobjects/structures/door_dwarf2.e3d 109 128
+./3dobjects/structures/roadside1.e3d 110 0
+./3dobjects/structures/door_dwarf3.e3d 111 128
+./3dobjects/structures/roadside2.e3d 112 0
+./3dobjects/structures/door_dwarf4.e3d 113 128
+./3dobjects/structures/roadside3.e3d 114 0
+./3dobjects/structures/door_dwarf5.e3d 115 128
+./3dobjects/structures/roadside4.e3d 116 0
+./3dobjects/structures/roadside5.e3d 117 0
+./3dobjects/structures/roadside6.e3d 118 0
+./3dobjects/structures/sewer_floor1.e3d 119 0
+./3dobjects/structures/watchtower2_orchan.e3d 120 0
+./3dobjects/structures/house_elf1.e3d 121 128
+./3dobjects/structures/citywall_elf1.e3d 122 0
+./3dobjects/structures/house_elf2.e3d 123 128
+./3dobjects/structures/house_elf3.e3d 124 128
+./3dobjects/structures/tent_big1.e3d 125 128
+./3dobjects/structures/house_elf4.e3d 126 128
+./3dobjects/structures/tent_big2.e3d 127 128
+./3dobjects/structures/house_elf5.e3d 128 128
+./3dobjects/structures/tent_big3.e3d 129 128
+./3dobjects/structures/house_elf6.e3d 130 128
+./3dobjects/structures/tent_big4.e3d 131 128
+./3dobjects/structures/house_elf7.e3d 132 128
+./3dobjects/structures/house_elf8.e3d 133 128
+./3dobjects/structures/house_elf9.e3d 134 128
+./3dobjects/structures/magicschool1.e3d 135 0
+./3dobjects/structures/tent_furinside1.e3d 137 0
+./3dobjects/structures/bridge1.e3d 138 0
+./3dobjects/structures/bridge2.e3d 139 0
+./3dobjects/structures/bridge3.e3d 140 0
+./3dobjects/structures/door_magics1.e3d 141 128
+./3dobjects/structures/door_magics2.e3d 142 128
+./3dobjects/structures/steps.e3d 143 0
+./3dobjects/structures/arch1.e3d 144 0
+./3dobjects/structures/arch2.e3d 145 0
+./3dobjects/structures/arch3.e3d 146 0
+./3dobjects/structures/arch4.e3d 147 0
+./3dobjects/structures/arch5.e3d 148 0
+./3dobjects/structures/arch6.e3d 149 0
+./3dobjects/structures/arch7.e3d 150 0
+./3dobjects/structures/hut1.e3d 151 128
+./3dobjects/structures/hut2.e3d 153 128
+./3dobjects/structures/castleentrance1.e3d 154 128
+./3dobjects/structures/castleentrance2.e3d 155 128
+./3dobjects/structures/sewer_walkway1.e3d 156 0
+./3dobjects/structures/insidehouse9_small.e3d 158 0
+./3dobjects/structures/gangplank1.e3d 159 0
+./3dobjects/structures/ticketbooth.e3d 160 0
+./3dobjects/structures/insidehouse1.e3d 161 0
+./3dobjects/structures/magicschool_tower1.e3d 162 0
+./3dobjects/structures/insidehouse2.e3d 163 0
+./3dobjects/structures/insidehouse3.e3d 164 0
+./3dobjects/structures/insidehouse4.e3d 165 0
+./3dobjects/structures/insidehouse5.e3d 166 0
+./3dobjects/structures/citytower1.e3d 167 0
+./3dobjects/structures/citytower2.e3d 168 0
+./3dobjects/structures/citytower3.e3d 169 0
+./3dobjects/structures/insidehouse8.e3d 170 0
 ./3dobjects/structures/citytower4.e3d 171
-./3dobjects/structures/insidehouse9.e3d 172
-./3dobjects/structures/citytower5.e3d 173
-./3dobjects/structures/citytower6.e3d 174
-./3dobjects/structures/citytower7.e3d 175
-./3dobjects/structures/temple1.e3d 176
-./3dobjects/structures/ladder.e3d 177
-./3dobjects/structures/door_gnome1.e3d 178
-./3dobjects/structures/door_gnome2.e3d 179
-./3dobjects/structures/magicschool_stairs1.e3d 180
-./3dobjects/structures/well1.e3d 181
-./3dobjects/structures/well2.e3d 182
-./3dobjects/structures/well3.e3d 183
-./3dobjects/structures/well4.e3d 184
-./3dobjects/structures/crypt1.e3d 185
-./3dobjects/structures/crypt2.e3d 186
-./3dobjects/structures/stairs1.e3d 187
-./3dobjects/structures/insidetreehouse1.e3d 188
-./3dobjects/structures/insidetreehouse2.e3d 189
-./3dobjects/structures/insidetreehouse3.e3d 190
-./3dobjects/structures/house_dwarf10.e3d 191
-./3dobjects/structures/watchtower_wooden.e3d 192
-./3dobjects/structures/house_orchan1.e3d 193
-./3dobjects/structures/house_orchan2.e3d 194
-./3dobjects/structures/house_orchan3.e3d 195
-./3dobjects/structures/house_orchan4.e3d 196
-./3dobjects/structures/house_orchan5.e3d 197
-./3dobjects/structures/igloo1.e3d 198
-./3dobjects/structures/igloo2.e3d 199
-./3dobjects/structures/sign8_bank.e3d 200
-./3dobjects/structures/citywall_stairs2.e3d 201
-./3dobjects/structures/citywall_stairs3.e3d 202
-./3dobjects/structures/treehouse_half.e3d 203
-./3dobjects/structures/chimney1.e3d 204
-./3dobjects/structures/post1.e3d 205
-./3dobjects/structures/rock_house1.e3d 206
-./3dobjects/structures/post2.e3d 207
-./3dobjects/structures/rock_house2.e3d 208
-./3dobjects/structures/post3.e3d 209
-./3dobjects/structures/rock_house3.e3d 210
-./3dobjects/structures/post4.e3d 211
-./3dobjects/structures/rock_house4.e3d 212
-./3dobjects/structures/post5.e3d 213
-./3dobjects/structures/rock_house5.e3d 214
-./3dobjects/structures/insidehouse_orchan1.e3d 215
-./3dobjects/structures/insidehouse_orchan2.e3d 216
-./3dobjects/structures/insidehouse_orchan3.e3d 217
-./3dobjects/structures/igloo_entrance1.e3d 218
-./3dobjects/structures/insidehouse_orchan4.e3d 219
-./3dobjects/structures/igloo_entrance2.e3d 220
-./3dobjects/structures/ship1.e3d 221
-./3dobjects/structures/insidehouse_orchan5.e3d 222
-./3dobjects/structures/ship2.e3d 223
-./3dobjects/structures/testertower.e3d 224
-./3dobjects/structures/ship3.e3d 225
-./3dobjects/structures/sewer_wall1.e3d 226
-./3dobjects/structures/tent_fur1.e3d 227
-./3dobjects/structures/window1.e3d 228
-./3dobjects/structures/window2.e3d 229
-./3dobjects/structures/woodwall1.e3d 230
-./3dobjects/structures/fence_iron1.e3d 231
-./3dobjects/structures/oar1.e3d 232
-./3dobjects/structures/portculis.e3d 233
-./3dobjects/structures/sewer_column1.e3d 234
-./3dobjects/structures/window_magics1.e3d 235
-./3dobjects/structures/window_magics2.e3d 236
-./3dobjects/structures/window_magics3.e3d 237
-./3dobjects/structures/trough_water.e3d 238
-./3dobjects/structures/stonebrick4.e3d 239
-./3dobjects/structures/stonebrick5.e3d 240
-./3dobjects/structures/house_snow1.e3d 241
-./3dobjects/structures/house_snow2.e3d 242
-./3dobjects/structures/house_snow3.e3d 243
-./3dobjects/structures/house_snow4.e3d 244
-./3dobjects/structures/house_snow5.e3d 245
-./3dobjects/structures/wagon1.e3d 246
-./3dobjects/structures/wagon2.e3d 247
-./3dobjects/structures/insidetemple1.e3d 248
-./3dobjects/structures/wagon3.e3d 249
-./3dobjects/structures/banner10.e3d 250
-./3dobjects/structures/banner11.e3d 251
-./3dobjects/structures/banner12.e3d 252
-./3dobjects/structures/banner13.e3d 253
-./3dobjects/structures/banner14.e3d 254
-./3dobjects/structures/citywall10.e3d 255
-./3dobjects/structures/insidehouse20_21.e3d 256
-./3dobjects/structures/awning1.e3d 257
-./3dobjects/structures/awning2.e3d 258
-./3dobjects/structures/awning3.e3d 259
-./3dobjects/structures/awning4.e3d 260
-./3dobjects/structures/awning5.e3d 261
-./3dobjects/structures/awning6.e3d 262
-./3dobjects/structures/awning7.e3d 263
-./3dobjects/structures/banner1.e3d 264
-./3dobjects/structures/banner2.e3d 265
-./3dobjects/structures/banner3.e3d 266
-./3dobjects/structures/banner4.e3d 267
-./3dobjects/structures/insideroom1.e3d 268
-./3dobjects/structures/outhouse1.e3d 269
-./3dobjects/structures/banner5.e3d 270
-./3dobjects/structures/insideroom2.e3d 271
-./3dobjects/structures/castletower1.e3d 272
-./3dobjects/structures/banner6.e3d 273
-./3dobjects/structures/castletower2.e3d 274
-./3dobjects/structures/banner7.e3d 275
-./3dobjects/structures/sign5_grocer.e3d 276
-./3dobjects/structures/banner8.e3d 277
-./3dobjects/structures/banner9.e3d 278
-./3dobjects/structures/house1.e3d 279
-./3dobjects/structures/house2.e3d 280
-./3dobjects/structures/house3.e3d 281
-./3dobjects/structures/house4.e3d 282
-./3dobjects/structures/house5.e3d 283
-./3dobjects/structures/citytower_elf1.e3d 284
-./3dobjects/structures/house6.e3d 285
-./3dobjects/structures/citytower_elf2.e3d 286
-./3dobjects/structures/house7.e3d 287
-./3dobjects/structures/citytower_elf3.e3d 288
-./3dobjects/structures/house8.e3d 289
-./3dobjects/structures/citytower_elf4.e3d 290
-./3dobjects/structures/house9.e3d 291
-./3dobjects/structures/staircase1.e3d 292
-./3dobjects/structures/bucket2.e3d 293
-./3dobjects/structures/trough_flowers.e3d 294
-./3dobjects/structures/treehouse1.e3d 295
-./3dobjects/structures/insidebuilding1.e3d 296
-./3dobjects/structures/treehouse2.e3d 297
-./3dobjects/structures/treehouse3.e3d 298
-./3dobjects/structures/insidehallway1.e3d 299
-./3dobjects/structures/sign9_herbs.e3d 300
-./3dobjects/structures/insidehallway2.e3d 301
-./3dobjects/structures/insidetent1.e3d 302
-./3dobjects/structures/insidetent2.e3d 303
-./3dobjects/structures/insidetent3.e3d 304
-./3dobjects/structures/designpiece1.e3d 305
-./3dobjects/structures/designpiece2.e3d 306
-./3dobjects/structures/designpiece3.e3d 307
-./3dobjects/structures/designpiece4.e3d 308
-./3dobjects/structures/designpiece5.e3d 309
-./3dobjects/structures/designpiece6.e3d 310
-./3dobjects/structures/sign1.e3d 311
-./3dobjects/structures/chimneytop1.e3d 312
-./3dobjects/structures/sign2.e3d 313
-./3dobjects/structures/sign3.e3d 314
-./3dobjects/structures/sewer_ladder1.e3d 315
-./3dobjects/structures/sewer_ladder2.e3d 316
-./3dobjects/structures/column10.e3d 317
-./3dobjects/structures/column11.e3d 318
-./3dobjects/structures/column12.e3d 319
-./3dobjects/structures/window_evilcastle1.e3d 320
-./3dobjects/structures/sewer_archway1.e3d 321
-./3dobjects/structures/window_evilcastle2.e3d 322
-./3dobjects/structures/insidehouse_dwarf1.e3d 323
-./3dobjects/structures/sewer_archway2.e3d 324
-./3dobjects/structures/insidehut1.e3d 325
-./3dobjects/structures/insidehouse_dwarf2.e3d 326
-./3dobjects/structures/insidehut2.e3d 327
-./3dobjects/structures/insidehouse_dwarf3.e3d 328
-./3dobjects/structures/insidehouse_dwarf4.e3d 329
-./3dobjects/structures/insidehouse_dwarf5.e3d 330
-./3dobjects/structures/boat1.e3d 331
-./3dobjects/structures/boat2.e3d 332
-./3dobjects/structures/door_orchan1.e3d 333
-./3dobjects/structures/citywall1.e3d 334
-./3dobjects/structures/boat3.e3d 335
-./3dobjects/structures/door_orchan2.e3d 336
-./3dobjects/structures/citywall2.e3d 337
-./3dobjects/structures/door_orchan3.e3d 338
-./3dobjects/structures/citywall3.e3d 339
-./3dobjects/structures/citywall4.e3d 340
-./3dobjects/structures/citywall5.e3d 341
-./3dobjects/structures/citywall6.e3d 342
-./3dobjects/structures/citywall7.e3d 343
-./3dobjects/structures/sign4_tavern.e3d 344
-./3dobjects/structures/citywall8.e3d 345
-./3dobjects/structures/citywall9.e3d 346
-./3dobjects/structures/doors10.e3d 347
-./3dobjects/structures/doors11.e3d 348
-./3dobjects/structures/doors12.e3d 349
-./3dobjects/structures/marketstall1.e3d 350
-./3dobjects/structures/marketstall2.e3d 351
-./3dobjects/structures/house10.e3d 352
-./3dobjects/structures/house11.e3d 353
-./3dobjects/structures/house12.e3d 354
-./3dobjects/structures/gazebo_elven1.e3d 355
-./3dobjects/structures/house13.e3d 356
-./3dobjects/structures/house14.e3d 357
-./3dobjects/structures/house15.e3d 358
-./3dobjects/structures/house16.e3d 359
-./3dobjects/structures/house17.e3d 360
-./3dobjects/structures/house18.e3d 361
-./3dobjects/structures/house19.e3d 362
-./3dobjects/structures/house20.e3d 363
-./3dobjects/structures/house21.e3d 364
-./3dobjects/structures/house22.e3d 365
-./3dobjects/structures/house23.e3d 366
-./3dobjects/structures/elven_house.e3d 367
-./3dobjects/structures/house24.e3d 368
-./3dobjects/structures/house25.e3d 369
-./3dobjects/structures/house26.e3d 370
-./3dobjects/structures/house27.e3d 371
-./3dobjects/structures/house28.e3d 372
-./3dobjects/structures/house29.e3d 373
-./3dobjects/structures/fence1.e3d 374
-./3dobjects/structures/house30.e3d 375
-./3dobjects/structures/fence2.e3d 376
-./3dobjects/structures/house31.e3d 377
-./3dobjects/structures/fence3.e3d 378
-./3dobjects/structures/house32.e3d 379
-./3dobjects/structures/fence4.e3d 380
-./3dobjects/structures/house33.e3d 381
-./3dobjects/structures/fence5.e3d 382
-./3dobjects/structures/house34.e3d 383
-./3dobjects/structures/fence6.e3d 384
-./3dobjects/structures/house35.e3d 385
-./3dobjects/structures/fence7.e3d 386
-./3dobjects/structures/house36.e3d 387
-./3dobjects/structures/fence8.e3d 388
-./3dobjects/structures/house37.e3d 389
-./3dobjects/structures/fence9.e3d 390
-./3dobjects/structures/house38.e3d 391
-./3dobjects/structures/house39.e3d 392
-./3dobjects/structures/house111.e3d 393
-./3dobjects/structures/house_dwarf1.e3d 394
-./3dobjects/structures/house_dwarf2.e3d 395
-./3dobjects/structures/house_dwarf3.e3d 396
-./3dobjects/structures/house_dwarf4.e3d 397
-./3dobjects/structures/insidehouse_elf1.e3d 398
-./3dobjects/structures/house_dwarf5.e3d 399
-./3dobjects/structures/insidehouse_elf2.e3d 400
-./3dobjects/structures/house_dwarf6.e3d 401
-./3dobjects/structures/insidehouse_elf3.e3d 402
-./3dobjects/structures/house_dwarf7.e3d 403
-./3dobjects/structures/insidehouse_elf4.e3d 404
-./3dobjects/structures/house_dwarf8.e3d 405
-./3dobjects/structures/insidehouse_elf5.e3d 406
-./3dobjects/structures/house_dwarf9.e3d 407
-./3dobjects/structures/insidehouse_elf6.e3d 408
-./3dobjects/structures/insidehouse_elf7.e3d 409
-./3dobjects/structures/castleside1.e3d 410
-./3dobjects/structures/castleside2.e3d 411
-./3dobjects/structures/insidehouse_snow1.e3d 412
-./3dobjects/structures/insidehouse_snow2.e3d 413
-./3dobjects/structures/insidehouse_snow3.e3d 414
-./3dobjects/structures/insidehouse_snow4.e3d 415
-./3dobjects/structures/insidehouse_snow5.e3d 416
-./3dobjects/structures/cityhouse1.e3d 417
-./3dobjects/structures/cityhouse2.e3d 418
-./3dobjects/structures/sewer_drain1.e3d 419
-./3dobjects/structures/door_elf1.e3d 420
-./3dobjects/rocks/ice_rockbig1.e3d 421
-./3dobjects/rocks/ice_rockbig2.e3d 422
-./3dobjects/rocks/ice_rockbig3.e3d 423
-./3dobjects/rocks/gold1.e3d 424
-./3dobjects/rocks/gold2.e3d 425
-./3dobjects/rocks/ice_rockhuge1.e3d 426
-./3dobjects/rocks/ice_rockhuge2.e3d 427
-./3dobjects/rocks/ice_rockhuge3.e3d 428
-./3dobjects/rocks/snowcave1.e3d 429
-./3dobjects/rocks/snowcave2.e3d 430
-./3dobjects/rocks/snow_rockbig1.e3d 431
-./3dobjects/rocks/snow_rockbig2.e3d 432
-./3dobjects/rocks/snow_rockbig3.e3d 433
-./3dobjects/rocks/iceburg1.e3d 434
-./3dobjects/rocks/iceburg2.e3d 435
-./3dobjects/rocks/iceburg3.e3d 436
-./3dobjects/rocks/iceburg4.e3d 437
-./3dobjects/rocks/iceburg5.e3d 438
-./3dobjects/rocks/iceburg6.e3d 439
-./3dobjects/rocks/rock_small1.e3d 440
-./3dobjects/rocks/rock_small2.e3d 441
-./3dobjects/rocks/rock_small3.e3d 442
-./3dobjects/rocks/rock_small4.e3d 443
-./3dobjects/rocks/rock_small5.e3d 444
-./3dobjects/rocks/rock_small6.e3d 445
-./3dobjects/rocks/rock_small7.e3d 446
-./3dobjects/rocks/rock_small8.e3d 447
-./3dobjects/rocks/rock_small9.e3d 448
-./3dobjects/rocks/coal1.e3d 449
-./3dobjects/rocks/coal2.e3d 450
-./3dobjects/rocks/dragon_icestatue1.e3d 451
-./3dobjects/rocks/dragon_icestatue2.e3d 452
-./3dobjects/rocks/icewall1.e3d 453
-./3dobjects/rocks/icewall2.e3d 454
-./3dobjects/rocks/rock_big10.e3d 455
-./3dobjects/rocks/rock_big11.e3d 456
-./3dobjects/rocks/rock_big12.e3d 457
-./3dobjects/rocks/rock_big13.e3d 458
-./3dobjects/rocks/rock_big14.e3d 459
-./3dobjects/rocks/rock_big15.e3d 460
-./3dobjects/rocks/rock_big16.e3d 461
-./3dobjects/rocks/ice_obelisk1.e3d 462
-./3dobjects/rocks/ice_obelisk2.e3d 463
-./3dobjects/rocks/rock_big1.e3d 464
-./3dobjects/rocks/rock_big2.e3d 465
-./3dobjects/rocks/rock_big3.e3d 466
-./3dobjects/rocks/rock_big4.e3d 467
-./3dobjects/rocks/rock_big5.e3d 468
-./3dobjects/rocks/rock_big6.e3d 469
-./3dobjects/rocks/rock_big7.e3d 470
-./3dobjects/rocks/rock_big8.e3d 471
-./3dobjects/rocks/rock_big9.e3d 472
-./3dobjects/rocks/sulfur1.e3d 473
-./3dobjects/rocks/sulfur2.e3d 474
-./3dobjects/rocks/snowarch1.e3d 475
-./3dobjects/rocks/snowarch2.e3d 476
-./3dobjects/rocks/snowarch3.e3d 477
-./3dobjects/rocks/snowarch4.e3d 478
-./3dobjects/rocks/snowarch5.e3d 479
-./3dobjects/rocks/snowarch6.e3d 480
-./3dobjects/rocks/stalagmite1.e3d 481
-./3dobjects/rocks/stalagmite2.e3d 482
-./3dobjects/rocks/arch_cliff1.e3d 483
-./3dobjects/rocks/stalagmite3.e3d 484
-./3dobjects/rocks/arch_cliff2.e3d 485
-./3dobjects/rocks/arch_cliff3.e3d 486
-./3dobjects/rocks/cliff_low1.e3d 487
-./3dobjects/rocks/arch_cliff4.e3d 488
-./3dobjects/rocks/cliff_low2.e3d 489
-./3dobjects/rocks/mound_snow1.e3d 490
-./3dobjects/rocks/mound_snow2.e3d 491
-./3dobjects/rocks/mound_snow3.e3d 492
-./3dobjects/rocks/mound_snow4.e3d 493
-./3dobjects/rocks/iron1.e3d 494
-./3dobjects/rocks/iron2.e3d 495
-./3dobjects/rocks/arch_bridge1.e3d 496
-./3dobjects/rocks/snow_rockhuge1.e3d 497
-./3dobjects/rocks/snow_rockhuge2.e3d 498
-./3dobjects/rocks/snow_rockhuge3.e3d 499
-./3dobjects/rocks/snow_rockhuge4.e3d 500
-./3dobjects/rocks/snow_rockhuge5.e3d 501
-./3dobjects/rocks/snow_rockhuge6.e3d 502
-./3dobjects/rocks/snow_rockhuge7.e3d 503
-./3dobjects/rocks/snow_rockhuge8.e3d 504
-./3dobjects/rocks/icicle1.e3d 505
-./3dobjects/rocks/snow_rockhuge9.e3d 506
-./3dobjects/rocks/icicle2.e3d 507
-./3dobjects/rocks/icicle3.e3d 508
-./3dobjects/rocks/rock_small10.e3d 509
-./3dobjects/rocks/rock_small11.e3d 510
-./3dobjects/rocks/rock_huge1.e3d 511
-./3dobjects/rocks/rock_small12.e3d 512
-./3dobjects/rocks/rock_huge2.e3d 513
-./3dobjects/rocks/rock_small13.e3d 514
-./3dobjects/rocks/rock_huge3.e3d 515
-./3dobjects/rocks/rock_small14.e3d 516
-./3dobjects/rocks/rock_huge4.e3d 517
-./3dobjects/rocks/rock_huge5.e3d 518
-./3dobjects/rocks/rock_huge6.e3d 519
-./3dobjects/rocks/rock_huge7.e3d 520
-./3dobjects/rocks/rock_huge8.e3d 521
-./3dobjects/rocks/rock_huge9.e3d 522
-./3dobjects/rocks/silver1.e3d 523
-./3dobjects/rocks/silver2.e3d 524
-./3dobjects/rocks/titanium1.e3d 525
-./3dobjects/rocks/titanium2.e3d 526
-./3dobjects/rocks/mountain1.e3d 527
-./3dobjects/rocks/mountain2.e3d 528
-./3dobjects/rocks/mountain3.e3d 529
-./3dobjects/rocks/mountain4.e3d 530
-./3dobjects/rocks/mountain5.e3d 531
-./3dobjects/rocks/rock_huge10.e3d 532
-./3dobjects/rocks/rock_huge11.e3d 533
-./3dobjects/rocks/rock_huge12.e3d 534
-./3dobjects/rocks/rock_huge13.e3d 535
-./3dobjects/rocks/rock_huge14.e3d 536
-./3dobjects/rocks/rock_huge15.e3d 537
-./3dobjects/rocks/rock_huge16.e3d 538
-./3dobjects/rocks/rock_huge17.e3d 539
-./3dobjects/rocks/ice_brick.e3d 540
-./3dobjects/rocks/cave1.e3d 541
-./3dobjects/rocks/cave2.e3d 542
-./3dobjects/ruins/wall_small1.e3d 543
-./3dobjects/ruins/wall_small2.e3d 544
-./3dobjects/ruins/wall_small3.e3d 545
-./3dobjects/ruins/wall_small4.e3d 546
-./3dobjects/ruins/wall_small5.e3d 547
-./3dobjects/ruins/wall_small6.e3d 548
-./3dobjects/ruins/wall_small7.e3d 549
-./3dobjects/ruins/wall_small8.e3d 550
-./3dobjects/ruins/monument.e3d 551
-./3dobjects/ruins/wall_door1.e3d 552
-./3dobjects/ruins/wall_door2.e3d 553
-./3dobjects/ruins/wall_door3.e3d 554
-./3dobjects/ruins/wall_door4.e3d 555
-./3dobjects/ruins/rubble1.e3d 556
-./3dobjects/ruins/rubble2.e3d 557
-./3dobjects/ruins/rubble3.e3d 558
-./3dobjects/ruins/rubble4.e3d 559
-./3dobjects/ruins/rubble5.e3d 560
-./3dobjects/ruins/rubble6.e3d 561
-./3dobjects/ruins/wall_long1.e3d 562
-./3dobjects/ruins/wall_long2.e3d 563
-./3dobjects/ruins/wall_tall1.e3d 564
-./3dobjects/ruins/wall_tall2.e3d 565
-./3dobjects/ruins/wall_tall3.e3d 566
-./3dobjects/ruins/wall_tall4.e3d 567
-./3dobjects/ruins/wall_win1.e3d 568
-./3dobjects/ruins/wall_win2.e3d 569
-./3dobjects/ruins/wall_win3.e3d 570
-./3dobjects/ruins/wall_win4.e3d 571
-./3dobjects/trees/ivy.e3d 572
-./3dobjects/trees/bush1.e3d 573
-./3dobjects/trees/bush2.e3d 574
-./3dobjects/trees/bush3.e3d 575
-./3dobjects/trees/bush4.e3d 576
-./3dobjects/trees/bush5.e3d 577
-./3dobjects/trees/bush6.e3d 578
-./3dobjects/trees/hedge1.e3d 579
-./3dobjects/trees/hedge2.e3d 580
-./3dobjects/trees/bush_snow1.e3d 581
-./3dobjects/trees/bush_snow2.e3d 582
-./3dobjects/trees/treeflower1.e3d 583
-./3dobjects/trees/treeflower2.e3d 584
-./3dobjects/trees/treeleaves10.e3d 585
-./3dobjects/trees/treeleaves12.e3d 586
-./3dobjects/trees/treeleaves13.e3d 587
-./3dobjects/trees/treeleaves14.e3d 588
-./3dobjects/trees/treeleaves15.e3d 589
-./3dobjects/trees/treeleaves16.e3d 590
-./3dobjects/trees/treeleaves17.e3d 591
-./3dobjects/trees/treeleaves18.e3d 592
-./3dobjects/trees/treeleaves19.e3d 593
-./3dobjects/trees/treeleaves20.e3d 594
-./3dobjects/trees/treeleaves21.e3d 595
-./3dobjects/trees/treeleaves22.e3d 596
-./3dobjects/trees/treeleaves23.e3d 597
-./3dobjects/trees/treeleaves24.e3d 598
-./3dobjects/trees/treeleaves25.e3d 599
-./3dobjects/trees/treeleaves26.e3d 600
-./3dobjects/trees/treeleaves27.e3d 601
-./3dobjects/trees/treeleaves28.e3d 602
-./3dobjects/trees/treeleaves29.e3d 603
-./3dobjects/trees/treeleaves30.e3d 604
-./3dobjects/trees/treeleaves31.e3d 605
-./3dobjects/trees/treeleaves32.e3d 606
-./3dobjects/trees/branch1.e3d 607
-./3dobjects/trees/tree_snow1.e3d 608
-./3dobjects/trees/treeleaves1.e3d 609
-./3dobjects/trees/branch2.e3d 610
-./3dobjects/trees/tree_snow2.e3d 611
-./3dobjects/trees/treeleaves2.e3d 612
-./3dobjects/trees/branch3.e3d 613
-./3dobjects/trees/tree_snow3.e3d 614
-./3dobjects/trees/treeleaves3.e3d 615
-./3dobjects/trees/branch4.e3d 616
-./3dobjects/trees/tree10.e3d 617
-./3dobjects/trees/tree_snow4.e3d 618
-./3dobjects/trees/treeleaves4.e3d 619
-./3dobjects/trees/branch5.e3d 620
-./3dobjects/trees/tree11.e3d 621
-./3dobjects/trees/tree_snow5.e3d 622
-./3dobjects/trees/treeleaves5.e3d 623
-./3dobjects/trees/branch6.e3d 624
-./3dobjects/trees/tree12.e3d 625
-./3dobjects/trees/treeleaves6.e3d 626
-./3dobjects/trees/branch7.e3d 627
-./3dobjects/trees/tree13.e3d 628
-./3dobjects/trees/treeleaves7.e3d 629
-./3dobjects/trees/tree14.e3d 630
-./3dobjects/trees/treeleaves8.e3d 631
-./3dobjects/trees/tree15.e3d 632
-./3dobjects/trees/treeleaves9.e3d 633
-./3dobjects/trees/tree16.e3d 634
-./3dobjects/trees/tree17.e3d 635
-./3dobjects/trees/tree18.e3d 636
-./3dobjects/trees/tree19.e3d 637
-./3dobjects/trees/tree20.e3d 638
-./3dobjects/trees/tree21.e3d 639
-./3dobjects/trees/vineleaves1.e3d 640
-./3dobjects/trees/vineleaves2.e3d 641
-./3dobjects/trees/vineleaves3.e3d 642
-./3dobjects/trees/treetest.e3d 643
-./3dobjects/trees/test.e3d 644
-./3dobjects/trees/leaves_bigtree.e3d 645
-./3dobjects/trees/tree_small1.e3d 646
-./3dobjects/trees/tree_small2.e3d 647
-./3dobjects/trees/tree_small3.e3d 648
-./3dobjects/trees/testfence.e3d 649
-./3dobjects/trees/vine1.e3d 650
-./3dobjects/trees/vine2.e3d 651
-./3dobjects/trees/vine3.e3d 652
-./3dobjects/trees/tree1.e3d 653
-./3dobjects/trees/tree2.e3d 654
-./3dobjects/trees/tree3.e3d 655
-./3dobjects/trees/tree4.e3d 656
-./3dobjects/trees/tree5.e3d 657
-./3dobjects/trees/tree6.e3d 658
-./3dobjects/trees/tree7.e3d 659
-./3dobjects/trees/tree8.e3d 660
-./3dobjects/trees/tree9.e3d 661
-./3dobjects/trees/plant1.e3d 662
-./3dobjects/trees/firespit1.e3d 663
-./3dobjects/trees/leaves1.e3d 664
-./3dobjects/trees/leaves2.e3d 665
-./3dobjects/trees/tree_xmas.e3d 666
-./3dobjects/trees/log1.e3d 667
-./3dobjects/trees/log2.e3d 668
-./3dobjects/trees/stump1.e3d 669
-./3dobjects/trees/stump2.e3d 670
-./3dobjects/trees/stump3.e3d 671
-./3dobjects/trees/firewood1.e3d 672
-./3dobjects/trees/firewood2.e3d 673
-./3dobjects/trees/treebig1.e3d 674
-./3dobjects/trees/treebig2.e3d 675
-./3dobjects/trees/treebig3.e3d 676
-./3dobjects/trees/stick1.e3d 677
-./3dobjects/trees/stick2.e3d 678
-./3dobjects/misc_objects/fishingnet1.e3d 679
-./3dobjects/misc_objects/crystalball1.e3d 680
-./3dobjects/misc_objects/fishingnet2.e3d 681
-./3dobjects/misc_objects/crystalball2.e3d 682
-./3dobjects/misc_objects/fishingnet3.e3d 683
-./3dobjects/misc_objects/crystalball3.e3d 684
-./3dobjects/misc_objects/crystalball4.e3d 685
-./3dobjects/misc_objects/fish1.e3d 686
-./3dobjects/misc_objects/fish2.e3d 687
-./3dobjects/misc_objects/fish3.e3d 688
-./3dobjects/misc_objects/fish4.e3d 689
-./3dobjects/misc_objects/jaildoor.e3d 690
-./3dobjects/misc_objects/chest1.e3d 691
-./3dobjects/misc_objects/rope1.e3d 692
-./3dobjects/misc_objects/rope2.e3d 693
-./3dobjects/misc_objects/food_tomatoe.e3d 694
-./3dobjects/misc_objects/clothes_towelpink.e3d 695
-./3dobjects/misc_objects/crystalball_stand.e3d 696
-./3dobjects/misc_objects/brazier1.e3d 697
-./3dobjects/misc_objects/brazier2.e3d 698
-./3dobjects/misc_objects/feather1.e3d 699
-./3dobjects/misc_objects/feather2.e3d 700
-./3dobjects/misc_objects/vialcork1.e3d 701
-./3dobjects/misc_objects/feather3.e3d 702
-./3dobjects/misc_objects/feather4.e3d 703
-./3dobjects/misc_objects/food_bread1.e3d 704
-./3dobjects/misc_objects/food_bread2.e3d 705
-./3dobjects/misc_objects/lantern1.e3d 706
-./3dobjects/misc_objects/lantern2.e3d 707
-./3dobjects/misc_objects/lantern3.e3d 708
-./3dobjects/misc_objects/coffin2_lid.e3d 709
-./3dobjects/misc_objects/bone_dragonskull.e3d 710
-./3dobjects/misc_objects/vial10.e3d 711
-./3dobjects/misc_objects/spellbook1.e3d 712
-./3dobjects/misc_objects/fountain1.e3d 713
-./3dobjects/misc_objects/vial11.e3d 714
-./3dobjects/misc_objects/spellbook2.e3d 715
-./3dobjects/misc_objects/fountain2.e3d 716
-./3dobjects/misc_objects/vial12.e3d 717
-./3dobjects/misc_objects/spellbook3.e3d 718
-./3dobjects/misc_objects/fountain3.e3d 719
-./3dobjects/misc_objects/coffin1.e3d 720
-./3dobjects/misc_objects/statue_base1.e3d 721
-./3dobjects/misc_objects/coffin2.e3d 722
-./3dobjects/misc_objects/statue_base2.e3d 723
-./3dobjects/misc_objects/statue_base3.e3d 724
-./3dobjects/misc_objects/food_carrot.e3d 725
-./3dobjects/misc_objects/meat1.e3d 726
-./3dobjects/misc_objects/meat2.e3d 727
-./3dobjects/misc_objects/meat3.e3d 728
-./3dobjects/misc_objects/mug1.e3d 729
-./3dobjects/misc_objects/column1.e3d 730
-./3dobjects/misc_objects/column2.e3d 731
-./3dobjects/misc_objects/column3.e3d 732
-./3dobjects/misc_objects/column4.e3d 733
-./3dobjects/misc_objects/column5.e3d 734
-./3dobjects/misc_objects/column6.e3d 735
-./3dobjects/misc_objects/plate1.e3d 736
-./3dobjects/misc_objects/cookingpot1.e3d 737
-./3dobjects/misc_objects/sled1.e3d 738
-./3dobjects/misc_objects/bottle1.e3d 739
-./3dobjects/misc_objects/bottle2.e3d 740
-./3dobjects/misc_objects/bottle3.e3d 741
-./3dobjects/misc_objects/stove1.e3d 742
-./3dobjects/misc_objects/food_grapes.e3d 743
-./3dobjects/misc_objects/stove2.e3d 744
-./3dobjects/misc_objects/ice_column1.e3d 745
-./3dobjects/misc_objects/ice_column2.e3d 746
-./3dobjects/misc_objects/pan1.e3d 747
-./3dobjects/misc_objects/clothes_pantsbrown1.e3d 748
-./3dobjects/misc_objects/clothes_pantsbrown2.e3d 749
-./3dobjects/misc_objects/clothes_towelyellow.e3d 750
-./3dobjects/misc_objects/crystal1.e3d 751
-./3dobjects/misc_objects/crystal2.e3d 752
-./3dobjects/misc_objects/crystal3.e3d 753
-./3dobjects/misc_objects/crystal4.e3d 754
-./3dobjects/misc_objects/crystal5.e3d 755
-./3dobjects/misc_objects/crystal6.e3d 756
-./3dobjects/misc_objects/track1.e3d 757
-./3dobjects/misc_objects/track2.e3d 758
-./3dobjects/misc_objects/pot_cooking1.e3d 759
-./3dobjects/misc_objects/testobject.e3d 760
-./3dobjects/misc_objects/candle1.e3d 761
-./3dobjects/misc_objects/candle2.e3d 762
-./3dobjects/misc_objects/candle3.e3d 763
-./3dobjects/misc_objects/tapestry4.e3d 764
-./3dobjects/misc_objects/tapestry5.e3d 765
-./3dobjects/misc_objects/book_open1.e3d 766
-./3dobjects/misc_objects/newspaper1.e3d 767
-./3dobjects/misc_objects/suspensionbridge1.e3d 768
-./3dobjects/misc_objects/newspaper2.e3d 769
-./3dobjects/misc_objects/newspaper3.e3d 770
-./3dobjects/misc_objects/newspaper4.e3d 771
-./3dobjects/misc_objects/mortar.e3d 772
-./3dobjects/misc_objects/egg1.e3d 773
-./3dobjects/misc_objects/nest1.e3d 774
-./3dobjects/misc_objects/egg2.e3d 775
-./3dobjects/misc_objects/pot1.e3d 776
-./3dobjects/misc_objects/pot2.e3d 777
-./3dobjects/misc_objects/pot3.e3d 778
-./3dobjects/misc_objects/pot4.e3d 779
-./3dobjects/misc_objects/test.e3d 780
-./3dobjects/misc_objects/statue1.e3d 781
-./3dobjects/misc_objects/statue2.e3d 782
-./3dobjects/misc_objects/statue3.e3d 783
-./3dobjects/misc_objects/chimneystovetop1.e3d 784
-./3dobjects/misc_objects/statue4.e3d 785
-./3dobjects/misc_objects/statue5.e3d 786
-./3dobjects/misc_objects/statue6.e3d 787
-./3dobjects/misc_objects/statue7.e3d 788
-./3dobjects/misc_objects/statue8.e3d 789
-./3dobjects/misc_objects/statue9.e3d 790
-./3dobjects/misc_objects/food_pumpkin.e3d 791
-./3dobjects/misc_objects/map1.e3d 792
-./3dobjects/misc_objects/bone_dragonjaw.e3d 793
-./3dobjects/misc_objects/crate2.e3d 794
-./3dobjects/misc_objects/shovel.e3d 795
-./3dobjects/misc_objects/crate.e3d 796
-./3dobjects/misc_objects/inkwell1.e3d 797
-./3dobjects/misc_objects/pitchfork.e3d 798
-./3dobjects/misc_objects/clothes_towelpurple.e3d 799
-./3dobjects/misc_objects/light1.e3d 800
-./3dobjects/misc_objects/light2.e3d 801
-./3dobjects/misc_objects/light3.e3d 802
-./3dobjects/misc_objects/sack1.e3d 803
-./3dobjects/misc_objects/sack2.e3d 804
-./3dobjects/misc_objects/bone_skull.e3d 805
-./3dobjects/misc_objects/pedstle.e3d 806
-./3dobjects/misc_objects/lock1_open.e3d 807
-./3dobjects/misc_objects/ice_obelisk3.e3d 808
-./3dobjects/misc_objects/magedesk1.e3d 809
-./3dobjects/misc_objects/barrel1.e3d 810
-./3dobjects/misc_objects/barrel2.e3d 811
-./3dobjects/misc_objects/vial_holder1.e3d 812
-./3dobjects/misc_objects/scroll1.e3d 813
-./3dobjects/misc_objects/scroll2.e3d 814
-./3dobjects/misc_objects/quillpen1.e3d 815
-./3dobjects/misc_objects/torch.e3d 816
-./3dobjects/misc_objects/bellows1.e3d 817
-./3dobjects/misc_objects/coffin1_lid.e3d 818
-./3dobjects/misc_objects/desk1.e3d 819
-./3dobjects/misc_objects/desk2.e3d 820
-./3dobjects/misc_objects/torch_holder.e3d 821
-./3dobjects/misc_objects/books1.e3d 822
-./3dobjects/misc_objects/books2.e3d 823
-./3dobjects/misc_objects/books3.e3d 824
-./3dobjects/misc_objects/books4.e3d 825
-./3dobjects/misc_objects/cart1.e3d 826
-./3dobjects/misc_objects/bone1.e3d 827
-./3dobjects/misc_objects/bone2.e3d 828
-./3dobjects/misc_objects/bone3.e3d 829
-./3dobjects/misc_objects/bone4.e3d 830
-./3dobjects/misc_objects/food_pear.e3d 831
-./3dobjects/misc_objects/stonebrick1.e3d 832
-./3dobjects/misc_objects/stonebrick2.e3d 833
-./3dobjects/misc_objects/stonebrick3.e3d 834
-./3dobjects/misc_objects/gargoyle1.e3d 835
-./3dobjects/misc_objects/gargoyle2.e3d 836
-./3dobjects/misc_objects/gargoyle3.e3d 837
-./3dobjects/misc_objects/anvil1.e3d 838
-./3dobjects/misc_objects/anvil2.e3d 839
-./3dobjects/misc_objects/vial1.e3d 840
-./3dobjects/misc_objects/vial2.e3d 841
-./3dobjects/misc_objects/vial3.e3d 842
-./3dobjects/misc_objects/vial4.e3d 843
-./3dobjects/misc_objects/vial5.e3d 844
-./3dobjects/misc_objects/vial6.e3d 845
-./3dobjects/misc_objects/vial7.e3d 846
-./3dobjects/misc_objects/vial8.e3d 847
-./3dobjects/misc_objects/vial9.e3d 848
-./3dobjects/misc_objects/throne1.e3d 849
-./3dobjects/misc_objects/bag1.e3d 850
-./3dobjects/misc_objects/clothes_towelwhite.e3d 851
-./3dobjects/misc_objects/dragon_head.e3d 852
-./3dobjects/misc_objects/tomb1.e3d 853
-./3dobjects/misc_objects/tomb2.e3d 854
-./3dobjects/misc_objects/seashell1.e3d 855
-./3dobjects/misc_objects/tomb3.e3d 856
-./3dobjects/misc_objects/seashell2.e3d 857
-./3dobjects/misc_objects/tomb4.e3d 858
-./3dobjects/misc_objects/seashell3.e3d 859
-./3dobjects/misc_objects/tomb5.e3d 860
-./3dobjects/misc_objects/clothes_shirtorange.e3d 861
-./3dobjects/misc_objects/seashell4.e3d 862
-./3dobjects/misc_objects/tomb6.e3d 863
-./3dobjects/misc_objects/seashell5.e3d 864
-./3dobjects/misc_objects/seashell6.e3d 865
-./3dobjects/misc_objects/paperburnt1.e3d 866
-./3dobjects/misc_objects/seashell7.e3d 867
-./3dobjects/misc_objects/paperburnt2.e3d 868
-./3dobjects/misc_objects/seashell8.e3d 869
-./3dobjects/misc_objects/horseshoe1.e3d 870
-./3dobjects/misc_objects/fryingpan1.e3d 871
-./3dobjects/misc_objects/lock1.e3d 872
-./3dobjects/misc_objects/lock2.e3d 873
-./3dobjects/misc_objects/lock3.e3d 874
-./3dobjects/misc_objects/lock4.e3d 875
-./3dobjects/misc_objects/obelisk_blackmarble1.e3d 876
-./3dobjects/misc_objects/bucket1.e3d 877
-./3dobjects/misc_objects/portal1.e3d 878
-./3dobjects/misc_objects/gemstone1.e3d 879
-./3dobjects/misc_objects/gemstone2.e3d 880
-./3dobjects/misc_objects/clothes_towelorange.e3d 881
-./3dobjects/misc_objects/gemstone3.e3d 882
-./3dobjects/misc_objects/gemstone4.e3d 883
-./3dobjects/misc_objects/clothes_towelred.e3d 884
-./3dobjects/misc_objects/badobject.e3d 885
-./3dobjects/misc_objects/book1.e3d 886
-./3dobjects/misc_objects/book2.e3d 887
-./3dobjects/misc_objects/book3.e3d 888
-./3dobjects/misc_objects/book4.e3d 889
-./3dobjects/misc_objects/clothes_towelgreen.e3d 890
-./3dobjects/misc_objects/pot1.e3de 891
-./3dobjects/misc_objects/food_apple.e3d 892
-./3dobjects/misc_objects/web1.e3d 893
-./3dobjects/misc_objects/web2.e3d 894
-./3dobjects/misc_objects/web3.e3d 895
-./3dobjects/misc_objects/web4.e3d 896
-./3dobjects/misc_objects/jailbars.e3d 897
-./3dobjects/misc_objects/test2.e3d 898
-./3dobjects/misc_objects/test3.e3d 899
-./3dobjects/misc_objects/broom1.e3d 900
-./3dobjects/misc_objects/clothes_shirtblue.e3d 901
-./3dobjects/misc_objects/basket1.e3d 902
-./3dobjects/misc_objects/basket2.e3d 903
-./3dobjects/misc_objects/basket3.e3d 904
-./3dobjects/misc_objects/basket4.e3d 905
-./3dobjects/misc_objects/basket5.e3d 906
-./3dobjects/misc_objects/basket6.e3d 907
-./3dobjects/misc_objects/food_banana.e3d 908
-./3dobjects/misc_objects/food_orange.e3d 909
-./3dobjects/misc_objects/candle_stand.e3d 910
-./3dobjects/misc_objects/hammer1.e3d 911
-./3dobjects/misc_objects/clothesline1.e3d 912
-./3dobjects/misc_objects/clothesline2.e3d 913
-./3dobjects/misc_objects/clothesline3.e3d 914
-./3dobjects/misc_objects/paper1.e3d 915
-./3dobjects/misc_objects/fishingpole1.e3d 916
-./3dobjects/misc_objects/paper2.e3d 917
-./3dobjects/misc_objects/goldcoin1.e3d 918
-./3dobjects/misc_objects/goldcoin2.e3d 919
-./3dobjects/ground_objs/cattails.e3d 920
-./3dobjects/ground_objs/bush_poisonivy.e3d 921
-./3dobjects/ground_objs/shrub1.e3d 922
-./3dobjects/ground_objs/shrub2.e3d 923
-./3dobjects/ground_objs/shrub3.e3d 924
-./3dobjects/ground_objs/herb_yarrow.e3d 925
-./3dobjects/ground_objs/bush7.e3d 926
-./3dobjects/ground_objs/bush8.e3d 927
-./3dobjects/ground_objs/flowerpink1.e3d 928
-./3dobjects/ground_objs/flower_dandelion.e3d 929
-./3dobjects/ground_objs/flowerorange1.e3d 930
-./3dobjects/ground_objs/flowerorange2.e3d 931
-./3dobjects/ground_objs/flowerorange3.e3d 932
-./3dobjects/ground_objs/mushroom1.e3d 933
-./3dobjects/ground_objs/mushroom2.e3d 934
-./3dobjects/ground_objs/mushroom3.e3d 935
-./3dobjects/ground_objs/mushroom4.e3d 936
-./3dobjects/ground_objs/mushroom5.e3d 937
-./3dobjects/ground_objs/mushroom6.e3d 938
-./3dobjects/ground_objs/mushroom7.e3d 939
-./3dobjects/ground_objs/mushroom8.e3d 940
-./3dobjects/ground_objs/herb_wormwood.e3d 941
-./3dobjects/ground_objs/thornbush1.e3d 942
-./3dobjects/ground_objs/thornbush2.e3d 943
-./3dobjects/ground_objs/flowerpurple1.e3d 944
-./3dobjects/ground_objs/flowerpurple2.e3d 945
-./3dobjects/ground_objs/cactus1.e3d 946
-./3dobjects/ground_objs/flowerpurple3.e3d 947
-./3dobjects/ground_objs/cactus2.e3d 948
-./3dobjects/ground_objs/herb_mugwort.e3d 949
-./3dobjects/ground_objs/cactus3.e3d 950
-./3dobjects/ground_objs/bush_redberry.e3d 951
-./3dobjects/ground_objs/plant6_fern.e3d 952
-./3dobjects/ground_objs/road10.e3d 953
-./3dobjects/ground_objs/road11.e3d 954
-./3dobjects/ground_objs/herb_nightshade.e3d 955
-./3dobjects/ground_objs/haystack1.e3d 956
-./3dobjects/ground_objs/haystack2.e3d 957
-./3dobjects/ground_objs/triste1.e3d 958
-./3dobjects/ground_objs/triste2.e3d 959
-./3dobjects/ground_objs/grass1.e3d 960
-./3dobjects/ground_objs/grass2.e3d 961
-./3dobjects/ground_objs/grass3.e3d 962
-./3dobjects/ground_objs/grass4.e3d 963
-./3dobjects/ground_objs/grass5.e3d 964
-./3dobjects/ground_objs/grass6.e3d 965
-./3dobjects/ground_objs/grass7.e3d 966
-./3dobjects/ground_objs/grass8.e3d 967
-./3dobjects/ground_objs/grass9.e3d 968
-./3dobjects/ground_objs/wheat1.e3d 969
-./3dobjects/ground_objs/wheat2.e3d 970
-./3dobjects/ground_objs/mound_dirt1.e3d 971
-./3dobjects/ground_objs/mound_dirt2.e3d 972
-./3dobjects/ground_objs/mound_dirt3.e3d 973
-./3dobjects/ground_objs/mound_dirt4.e3d 974
-./3dobjects/ground_objs/cotton1.e3d 975
-./3dobjects/ground_objs/waterbank1.e3d 976
-./3dobjects/ground_objs/cotton2.e3d 977
-./3dobjects/ground_objs/waterbank2.e3d 978
-./3dobjects/ground_objs/plant2.e3d 979
-./3dobjects/ground_objs/waterbank3.e3d 980
-./3dobjects/ground_objs/plant3.e3d 981
-./3dobjects/ground_objs/waterbank4.e3d 982
-./3dobjects/ground_objs/plant4.e3d 983
-./3dobjects/ground_objs/waterbank5.e3d 984
-./3dobjects/ground_objs/plant5.e3d 985
-./3dobjects/ground_objs/waterbank6.e3d 986
-./3dobjects/ground_objs/waterbank7.e3d 987
-./3dobjects/ground_objs/plant7.e3d 988
-./3dobjects/ground_objs/waterbank8.e3d 989
-./3dobjects/ground_objs/waterbank9.e3d 990
-./3dobjects/ground_objs/mound_sand1.e3d 991
-./3dobjects/ground_objs/mound_sand2.e3d 992
-./3dobjects/ground_objs/moss.e3d 993
-./3dobjects/ground_objs/mound_sand3.e3d 994
-./3dobjects/ground_objs/mound_sand4.e3d 995
-./3dobjects/ground_objs/mound_sand5.e3d 996
-./3dobjects/ground_objs/mound_sand6.e3d 997
-./3dobjects/ground_objs/mound_sand7.e3d 998
-./3dobjects/ground_objs/mound_sand8.e3d 999
-./3dobjects/ground_objs/mound_sand9.e3d 1000
-./3dobjects/ground_objs/herb_valerian.e3d 1001
-./3dobjects/ground_objs/flower_daffodils.e3d 1002
-./3dobjects/ground_objs/lillypad1.e3d 1003
-./3dobjects/ground_objs/lillypad2.e3d 1004
-./3dobjects/ground_objs/lillypad3.e3d 1005
-./3dobjects/ground_objs/waterbank10.e3d 1006
-./3dobjects/ground_objs/waterbank11.e3d 1007
-./3dobjects/ground_objs/grass10.e3d 1008
-./3dobjects/ground_objs/grass11.e3d 1009
-./3dobjects/ground_objs/grass12.e3d 1010
-./3dobjects/ground_objs/hay.e3d 1011
-./3dobjects/ground_objs/road_stone1.e3d 1012
-./3dobjects/ground_objs/road_stone2.e3d 1013
-./3dobjects/ground_objs/sanddune1.e3d 1014
-./3dobjects/ground_objs/flowerwhite1.e3d 1015
-./3dobjects/ground_objs/flowerwhite2.e3d 1016
-./3dobjects/ground_objs/flowerwhite3.e3d 1017
-./3dobjects/ground_objs/flowerred1.e3d 1018
-./3dobjects/ground_objs/herb_henbane.e3d 1019
-./3dobjects/ground_objs/mound_grass1.e3d 1020
-./3dobjects/ground_objs/mound_grass2.e3d 1021
-./3dobjects/ground_objs/mound_grass3.e3d 1022
-./3dobjects/ground_objs/mound_grass4.e3d 1023
-./3dobjects/ground_objs/mound_sand10.e3d 1024
-./3dobjects/ground_objs/mound_sand11.e3d 1025
-./3dobjects/ground_objs/mound_sand12.e3d 1026
-./3dobjects/ground_objs/mound_sand13.e3d 1027
-./3dobjects/ground_objs/mound_sand14.e3d 1028
-./3dobjects/ground_objs/mound_sand15.e3d 1029
-./3dobjects/ground_objs/mound_sand16.e3d 1030
-./3dobjects/ground_objs/flowerblue1.e3d 1031
-./3dobjects/ground_objs/flowerblue2.e3d 1032
-./3dobjects/ground_objs/flowersun1.e3d 1033
-./3dobjects/ground_objs/flowersun2.e3d 1034
-./3dobjects/ground_objs/cabbage.e3d 1035
-./3dobjects/ground_objs/herb_mullein.e3d 1036
-./3dobjects/ground_objs/flower_poppies.e3d 1037
-./3dobjects/ground_objs/flower_tulips1.e3d 1038
-./3dobjects/ground_objs/flower_tulips2.e3d 1039
-./3dobjects/ground_objs/flower_tulips3.e3d 1040
-./3dobjects/ground_objs/herb_rue.e3d 1041
-./3dobjects/ground_objs/plant8_fern.e3d 1042
-./3dobjects/ground_objs/corn1.e3d 1043
-./3dobjects/ground_objs/corn2.e3d 1044
-./3dobjects/ground_objs/corn3.e3d 1045
-./3dobjects/ground_objs/corn4.e3d 1046
-./3dobjects/ground_objs/grasstall1.e3d 1047
-./3dobjects/ground_objs/grasstall2.e3d 1048
-./3dobjects/ground_objs/grasstall3.e3d 1049
-./3dobjects/ground_objs/grasstall4.e3d 1050
-./3dobjects/ground_objs/grasstall5.e3d 1051
-./3dobjects/ground_objs/road1.e3d 1052
-./3dobjects/ground_objs/road2.e3d 1053
-./3dobjects/ground_objs/road3.e3d 1054
-./3dobjects/ground_objs/road4.e3d 1055
-./3dobjects/ground_objs/road5.e3d 1056
-./3dobjects/ground_objs/road6.e3d 1057
-./3dobjects/ground_objs/road7.e3d 1058
-./3dobjects/ground_objs/road8.e3d 1059
-./3dobjects/ground_objs/road9.e3d 1060
-./3dobjects/ground_objs/road_snow1.e3d 1061
-./3dobjects/ground_objs/road_snow2.e3d 1062
-./3dobjects/ground_objs/road_snow3.e3d 1063
-./3dobjects/ground_objs/tomatoeplant1.e3d 1064
-./3dobjects/ground_objs/tomatoeplant2.e3d 1065
-./3dobjects/ground_objs/bush_blueberry.e3d 1066
-./3dobjects/ground_objs/flowerbush1.e3d 1067
-./3dobjects/ground_objs/flowerbush2.e3d 1068
-./3dobjects/ground_objs/flowerbush3.e3d 1069
-./3dobjects/ground_objs/flowerbush4.e3d 1070
-./3dobjects/ground_objs/flowerbush5.e3d 1071
-./3dobjects/ground_objs/flowerbush6.e3d 1072
-./3dobjects/weapons/sword1.e3d 1073
-./3dobjects/weapons/sword2.e3d 1074
-./3dobjects/weapons/sword3.e3d 1075
-./3dobjects/weapons/sword4.e3d 1076
-./3dobjects/weapons/sword5.e3d 1077
-./3dobjects/weapons/sword6.e3d 1078
-./3dobjects/weapons/sword7.e3d 1079
-./3dobjects/weapons/shield1.e3d 1080
-./3dobjects/weapons/shield2.e3d 1081
-./3dobjects/weapons/shield3.e3d 1082
-./3dobjects/weapons/shield4.e3d 1083
-./3dobjects/interiors/shelves2.e3d 1084
-./3dobjects/interiors/cupboard1.e3d 1085
-./3dobjects/interiors/cupboard2.e3d 1086
-./3dobjects/interiors/drawers1.e3d 1087
-./3dobjects/interiors/drawers2.e3d 1088
-./3dobjects/interiors/chair1.e3d 1089
-./3dobjects/interiors/chair2.e3d 1090
-./3dobjects/interiors/chair3.e3d 1091
-./3dobjects/interiors/chair4.e3d 1092
-./3dobjects/interiors/fur_rug1.e3d 1093
-./3dobjects/interiors/fur_rug2.e3d 1094
-./3dobjects/interiors/fur_rug3.e3d 1095
-./3dobjects/interiors/fur_rug4.e3d 1096
-./3dobjects/interiors/fur_rug5.e3d 1097
-./3dobjects/interiors/bed1.e3d 1098
-./3dobjects/interiors/bed2.e3d 1099
-./3dobjects/interiors/bed3.e3d 1100
-./3dobjects/interiors/bed4.e3d 1101
-./3dobjects/interiors/bed5.e3d 1102
-./3dobjects/interiors/bed6.e3d 1103
-./3dobjects/interiors/bed7.e3d 1104
-./3dobjects/interiors/rug1.e3d 1105
-./3dobjects/interiors/rug2.e3d 1106
-./3dobjects/interiors/rug3.e3d 1107
-./3dobjects/interiors/rug4.e3d 1108
-./3dobjects/interiors/rug5.e3d 1109
-./3dobjects/interiors/rug6.e3d 1110
-./3dobjects/interiors/rug7.e3d 1111
-./3dobjects/interiors/rug8.e3d 1112
-./3dobjects/interiors/rug9.e3d 1113
-./3dobjects/interiors/stool1.e3d 1114
-./3dobjects/interiors/stool2.e3d 1115
-./3dobjects/interiors/tapestry1.e3d 1116
-./3dobjects/interiors/tapestry2.e3d 1117
-./3dobjects/interiors/tapestry3.e3d 1118
-./3dobjects/interiors/armoire1.e3d 1119
-./3dobjects/interiors/armoire2.e3d 1120
-./3dobjects/interiors/test.e3d 1121
-./3dobjects/interiors/table1.e3d 1122
-./3dobjects/interiors/table2.e3d 1123
-./3dobjects/interiors/table3.e3d 1124
-./3dobjects/interiors/table4.e3d 1125
-./3dobjects/interiors/pulpit1.e3d 1126
-./3dobjects/interiors/rug10.e3d 1127
-./3dobjects/interiors/rug_big1.e3d 1128
-./3dobjects/interiors/rug_big2.e3d 1129
-./3dobjects/interiors/counter1.e3d 1130
-./3dobjects/interiors/counter2.e3d 1131
-./3dobjects/interiors/bench1.e3d 1132
+./3dobjects/structures/insidehouse9.e3d 172 0
+./3dobjects/structures/citytower5.e3d 173 128
+./3dobjects/structures/citytower6.e3d 174 0
+./3dobjects/structures/citytower7.e3d 175 0
+./3dobjects/structures/temple1.e3d 176 128
+./3dobjects/structures/ladder.e3d 177 128
+./3dobjects/structures/door_gnome1.e3d 178 128
+./3dobjects/structures/door_gnome2.e3d 179 128
+./3dobjects/structures/magicschool_stairs1.e3d 180 0
+./3dobjects/structures/well1.e3d 181 0
+./3dobjects/structures/well2.e3d 182 0
+./3dobjects/structures/well3.e3d 183 0
+./3dobjects/structures/well4.e3d 184 0
+./3dobjects/structures/crypt1.e3d 185 128
+./3dobjects/structures/crypt2.e3d 186 128
+./3dobjects/structures/stairs1.e3d 187 0
+./3dobjects/structures/insidetreehouse1.e3d 188 0
+./3dobjects/structures/insidetreehouse2.e3d 189 0
+./3dobjects/structures/insidetreehouse3.e3d 190 0
+./3dobjects/structures/house_dwarf10.e3d 191 128
+./3dobjects/structures/watchtower_wooden.e3d 192 0
+./3dobjects/structures/house_orchan1.e3d 193 128
+./3dobjects/structures/house_orchan2.e3d 194 128
+./3dobjects/structures/house_orchan3.e3d 195 128
+./3dobjects/structures/house_orchan4.e3d 196 128
+./3dobjects/structures/house_orchan5.e3d 197 128
+./3dobjects/structures/igloo1.e3d 198 128
+./3dobjects/structures/igloo2.e3d 199 128
+./3dobjects/structures/sign8_bank.e3d 200 0
+./3dobjects/structures/citywall_stairs2.e3d 201 0
+./3dobjects/structures/citywall_stairs3.e3d 202 0
+./3dobjects/structures/treehouse_half.e3d 203 128
+./3dobjects/structures/chimney1.e3d 204 0
+./3dobjects/structures/post1.e3d 205 0
+./3dobjects/structures/rock_house1.e3d 206 128
+./3dobjects/structures/post2.e3d 207 0
+./3dobjects/structures/rock_house2.e3d 208 128
+./3dobjects/structures/post3.e3d 209 0
+./3dobjects/structures/rock_house3.e3d 210 128
+./3dobjects/structures/post4.e3d 211 0
+./3dobjects/structures/rock_house4.e3d 212 128
+./3dobjects/structures/post5.e3d 213 0
+./3dobjects/structures/rock_house5.e3d 214 128
+./3dobjects/structures/insidehouse_orchan1.e3d 215 0
+./3dobjects/structures/insidehouse_orchan2.e3d 216 0
+./3dobjects/structures/insidehouse_orchan3.e3d 217 0
+./3dobjects/structures/igloo_entrance1.e3d 218 0
+./3dobjects/structures/insidehouse_orchan4.e3d 219 0
+./3dobjects/structures/igloo_entrance2.e3d 220 0
+./3dobjects/structures/ship1.e3d 221 0
+./3dobjects/structures/insidehouse_orchan5.e3d 222 0
+./3dobjects/structures/ship2.e3d 223 0
+./3dobjects/structures/ship3.e3d 225 0
+./3dobjects/structures/sewer_wall1.e3d 226 0
+./3dobjects/structures/tent_fur1.e3d 227 0
+./3dobjects/structures/window1.e3d 228 0
+./3dobjects/structures/window2.e3d 229 0
+./3dobjects/structures/woodwall1.e3d 230 0
+./3dobjects/structures/fence_iron1.e3d 231 0
+./3dobjects/structures/oar1.e3d 232 0
+./3dobjects/structures/portculis.e3d 233 0
+./3dobjects/structures/sewer_column1.e3d 234 0
+./3dobjects/structures/window_magics1.e3d 235 0
+./3dobjects/structures/window_magics2.e3d 236 0
+./3dobjects/structures/window_magics3.e3d 237 0
+./3dobjects/structures/trough_water.e3d 238 0
+./3dobjects/structures/stonebrick4.e3d 239 0
+./3dobjects/structures/stonebrick5.e3d 240 0
+./3dobjects/structures/house_snow1.e3d 241 128
+./3dobjects/structures/house_snow2.e3d 242 128
+./3dobjects/structures/house_snow3.e3d 243 128
+./3dobjects/structures/house_snow4.e3d 244 128
+./3dobjects/structures/house_snow5.e3d 245 128
+./3dobjects/structures/wagon1.e3d 246 0
+./3dobjects/structures/wagon2.e3d 247 0
+./3dobjects/structures/insidetemple1.e3d 248 0
+./3dobjects/structures/wagon3.e3d 249 0
+./3dobjects/structures/banner10.e3d 250 128
+./3dobjects/structures/banner11.e3d 251 128
+./3dobjects/structures/banner12.e3d 252 128
+./3dobjects/structures/banner13.e3d 253 128
+./3dobjects/structures/banner14.e3d 254 128
+./3dobjects/structures/citywall10.e3d 255 0
+./3dobjects/structures/insidehouse20_21.e3d 256 0
+./3dobjects/structures/awning1.e3d 257 0
+./3dobjects/structures/awning2.e3d 258 0
+./3dobjects/structures/awning3.e3d 259 0
+./3dobjects/structures/awning4.e3d 260 0
+./3dobjects/structures/awning5.e3d 261 0
+./3dobjects/structures/awning6.e3d 262 0
+./3dobjects/structures/awning7.e3d 263 0
+./3dobjects/structures/banner1.e3d 264 128
+./3dobjects/structures/banner2.e3d 265 128
+./3dobjects/structures/banner3.e3d 266 128
+./3dobjects/structures/banner4.e3d 267 128
+./3dobjects/structures/insideroom1.e3d 268 0
+./3dobjects/structures/outhouse1.e3d 269 0
+./3dobjects/structures/banner5.e3d 270 128
+./3dobjects/structures/insideroom2.e3d 271 0
+./3dobjects/structures/castletower1.e3d 272 0
+./3dobjects/structures/banner6.e3d 273 128
+./3dobjects/structures/castletower2.e3d 274 0
+./3dobjects/structures/banner7.e3d 275 128
+./3dobjects/structures/sign5_grocer.e3d 276 0
+./3dobjects/structures/banner8.e3d 277 128
+./3dobjects/structures/banner9.e3d 278 128
+./3dobjects/structures/house1.e3d 279 128
+./3dobjects/structures/house2.e3d 280 128
+./3dobjects/structures/house3.e3d 281 128
+./3dobjects/structures/house4.e3d 282 128
+./3dobjects/structures/house5.e3d 283 128
+./3dobjects/structures/citytower_elf1.e3d 284 0
+./3dobjects/structures/house6.e3d 285 128
+./3dobjects/structures/citytower_elf2.e3d 286 0
+./3dobjects/structures/house7.e3d 287 128
+./3dobjects/structures/citytower_elf3.e3d 288 0
+./3dobjects/structures/house8.e3d 289 128
+./3dobjects/structures/citytower_elf4.e3d 290 0
+./3dobjects/structures/house9.e3d 291 128
+./3dobjects/structures/staircase1.e3d 292 0
+./3dobjects/structures/bucket2.e3d 293 0
+./3dobjects/structures/trough_flowers.e3d 294 0
+./3dobjects/structures/treehouse1.e3d 295 128
+./3dobjects/structures/insidebuilding1.e3d 296 0
+./3dobjects/structures/treehouse2.e3d 297 128
+./3dobjects/structures/treehouse3.e3d 298 128
+./3dobjects/structures/insidehallway1.e3d 299 0
+./3dobjects/structures/sign9_herbs.e3d 300 0
+./3dobjects/structures/insidehallway2.e3d 301 0
+./3dobjects/structures/insidetent1.e3d 302 0
+./3dobjects/structures/insidetent2.e3d 303 0
+./3dobjects/structures/insidetent3.e3d 304 0
+./3dobjects/structures/designpiece1.e3d 305 0
+./3dobjects/structures/designpiece2.e3d 306 0
+./3dobjects/structures/designpiece3.e3d 307 0
+./3dobjects/structures/designpiece4.e3d 308 0
+./3dobjects/structures/designpiece5.e3d 309 0
+./3dobjects/structures/designpiece6.e3d 310 0
+./3dobjects/structures/sign1.e3d 311 0
+./3dobjects/structures/chimneytop1.e3d 312 0
+./3dobjects/structures/sign2.e3d 313 0
+./3dobjects/structures/sign3.e3d 314 0
+./3dobjects/structures/sewer_ladder1.e3d 315 128
+./3dobjects/structures/sewer_ladder2.e3d 316 128
+./3dobjects/structures/column10.e3d 317 0
+./3dobjects/structures/column11.e3d 318 0
+./3dobjects/structures/column12.e3d 319 0
+./3dobjects/structures/window_evilcastle1.e3d 320 0
+./3dobjects/structures/sewer_archway1.e3d 321 0
+./3dobjects/structures/window_evilcastle2.e3d 322 0
+./3dobjects/structures/insidehouse_dwarf1.e3d 323 0
+./3dobjects/structures/sewer_archway2.e3d 324 0
+./3dobjects/structures/insidehut1.e3d 325 0
+./3dobjects/structures/insidehouse_dwarf2.e3d 326 0
+./3dobjects/structures/insidehut2.e3d 327 0
+./3dobjects/structures/insidehouse_dwarf3.e3d 328 0
+./3dobjects/structures/insidehouse_dwarf4.e3d 329 0
+./3dobjects/structures/insidehouse_dwarf5.e3d 330 0
+./3dobjects/structures/boat1.e3d 331 0
+./3dobjects/structures/boat2.e3d 332 0
+./3dobjects/structures/door_orchan1.e3d 333 128
+./3dobjects/structures/citywall1.e3d 334 0
+./3dobjects/structures/boat3.e3d 335 0
+./3dobjects/structures/door_orchan2.e3d 336 128
+./3dobjects/structures/citywall2.e3d 337 0
+./3dobjects/structures/door_orchan3.e3d 338 128
+./3dobjects/structures/citywall3.e3d 339 0
+./3dobjects/structures/citywall4.e3d 340 0
+./3dobjects/structures/citywall5.e3d 341 0
+./3dobjects/structures/citywall6.e3d 342 0
+./3dobjects/structures/citywall7.e3d 343 0
+./3dobjects/structures/sign4_tavern.e3d 344 0
+./3dobjects/structures/citywall8.e3d 345 0
+./3dobjects/structures/citywall9.e3d 346 0
+./3dobjects/structures/doors10.e3d 347 128
+./3dobjects/structures/doors11.e3d 348 128
+./3dobjects/structures/doors12.e3d 349 128
+./3dobjects/structures/marketstall1.e3d 350 0
+./3dobjects/structures/marketstall2.e3d 351 0
+./3dobjects/structures/house10.e3d 352 128
+./3dobjects/structures/house11.e3d 353 128
+./3dobjects/structures/house12.e3d 354 128
+./3dobjects/structures/gazebo_elven1.e3d 355 0
+./3dobjects/structures/house13.e3d 356 128
+./3dobjects/structures/house14.e3d 357 128
+./3dobjects/structures/house15.e3d 358 128
+./3dobjects/structures/house16.e3d 359 128
+./3dobjects/structures/house17.e3d 360 128
+./3dobjects/structures/house18.e3d 361 128
+./3dobjects/structures/house19.e3d 362 128
+./3dobjects/structures/house20.e3d 363 128
+./3dobjects/structures/house21.e3d 364 128
+./3dobjects/structures/house22.e3d 365 128
+./3dobjects/structures/house23.e3d 366 128
+./3dobjects/structures/elven_house.e3d 367 128
+./3dobjects/structures/house24.e3d 368 128
+./3dobjects/structures/house25.e3d 369 128
+./3dobjects/structures/house26.e3d 370 128
+./3dobjects/structures/house27.e3d 371 128
+./3dobjects/structures/house28.e3d 372 128
+./3dobjects/structures/house29.e3d 373 128
+./3dobjects/structures/fence1.e3d 374 0
+./3dobjects/structures/house30.e3d 375 128
+./3dobjects/structures/fence2.e3d 376 0
+./3dobjects/structures/house31.e3d 377 128
+./3dobjects/structures/fence3.e3d 378 0
+./3dobjects/structures/house32.e3d 379 128
+./3dobjects/structures/fence4.e3d 380 0
+./3dobjects/structures/house33.e3d 381 128
+./3dobjects/structures/fence5.e3d 382 0
+./3dobjects/structures/house34.e3d 383 128
+./3dobjects/structures/fence6.e3d 384 0
+./3dobjects/structures/house35.e3d 385 128
+./3dobjects/structures/fence7.e3d 386 0
+./3dobjects/structures/house36.e3d 387 128
+./3dobjects/structures/fence8.e3d 388 0
+./3dobjects/structures/house37.e3d 389 128
+./3dobjects/structures/fence9.e3d 390 0
+./3dobjects/structures/house38.e3d 391 128
+./3dobjects/structures/house39.e3d 392 128
+./3dobjects/structures/house111.e3d 393 128
+./3dobjects/structures/house_dwarf1.e3d 394 128
+./3dobjects/structures/house_dwarf2.e3d 395 128
+./3dobjects/structures/house_dwarf3.e3d 396 128
+./3dobjects/structures/house_dwarf4.e3d 397 128
+./3dobjects/structures/insidehouse_elf1.e3d 398 0
+./3dobjects/structures/house_dwarf5.e3d 399 128
+./3dobjects/structures/insidehouse_elf2.e3d 400 0
+./3dobjects/structures/house_dwarf6.e3d 401 128
+./3dobjects/structures/insidehouse_elf3.e3d 402 0
+./3dobjects/structures/house_dwarf7.e3d 403 128
+./3dobjects/structures/insidehouse_elf4.e3d 404 0
+./3dobjects/structures/house_dwarf8.e3d 405 128
+./3dobjects/structures/insidehouse_elf5.e3d 406 0
+./3dobjects/structures/house_dwarf9.e3d 407 128
+./3dobjects/structures/insidehouse_elf6.e3d 408 0
+./3dobjects/structures/insidehouse_elf7.e3d 409 0
+./3dobjects/structures/castleside1.e3d 410 0
+./3dobjects/structures/castleside2.e3d 411 0
+./3dobjects/structures/insidehouse_snow1.e3d 412 0
+./3dobjects/structures/insidehouse_snow2.e3d 413 0
+./3dobjects/structures/insidehouse_snow3.e3d 414 0
+./3dobjects/structures/insidehouse_snow4.e3d 415 0
+./3dobjects/structures/insidehouse_snow5.e3d 416 0
+./3dobjects/structures/cityhouse1.e3d 417 0
+./3dobjects/structures/cityhouse2.e3d 418 0
+./3dobjects/structures/sewer_drain1.e3d 419 0
+./3dobjects/structures/door_elf1.e3d 420 128
+./3dobjects/rocks/ice_rockbig1.e3d 421 0
+./3dobjects/rocks/ice_rockbig2.e3d 422 0
+./3dobjects/rocks/ice_rockbig3.e3d 423 0
+./3dobjects/rocks/gold1.e3d 424 1
+./3dobjects/rocks/gold2.e3d 425 1
+./3dobjects/rocks/ice_rockhuge1.e3d 426 0
+./3dobjects/rocks/ice_rockhuge2.e3d 427 0
+./3dobjects/rocks/ice_rockhuge3.e3d 428 0
+./3dobjects/rocks/snowcave1.e3d 429 128
+./3dobjects/rocks/snowcave2.e3d 430 128
+./3dobjects/rocks/snow_rockbig1.e3d 431 0
+./3dobjects/rocks/snow_rockbig2.e3d 432 0
+./3dobjects/rocks/snow_rockbig3.e3d 433 0
+./3dobjects/rocks/iceburg1.e3d 434 0
+./3dobjects/rocks/iceburg2.e3d 435 0
+./3dobjects/rocks/iceburg3.e3d 436 0
+./3dobjects/rocks/iceburg4.e3d 437 0
+./3dobjects/rocks/iceburg5.e3d 438 0
+./3dobjects/rocks/iceburg6.e3d 439 0
+./3dobjects/rocks/rock_small1.e3d 440 0
+./3dobjects/rocks/rock_small2.e3d 441 0
+./3dobjects/rocks/rock_small3.e3d 442 0
+./3dobjects/rocks/rock_small4.e3d 443 0
+./3dobjects/rocks/rock_small5.e3d 444 0
+./3dobjects/rocks/rock_small6.e3d 445 0
+./3dobjects/rocks/rock_small7.e3d 446 0
+./3dobjects/rocks/rock_small8.e3d 447 0
+./3dobjects/rocks/rock_small9.e3d 448 0
+./3dobjects/rocks/coal1.e3d 449 1
+./3dobjects/rocks/coal2.e3d 450 1
+./3dobjects/rocks/dragon_icestatue1.e3d 451 0
+./3dobjects/rocks/dragon_icestatue2.e3d 452 0
+./3dobjects/rocks/icewall1.e3d 453 0
+./3dobjects/rocks/icewall2.e3d 454 0
+./3dobjects/rocks/rock_big10.e3d 455 0
+./3dobjects/rocks/rock_big11.e3d 456 0
+./3dobjects/rocks/rock_big12.e3d 457 0
+./3dobjects/rocks/rock_big13.e3d 458 0
+./3dobjects/rocks/rock_big14.e3d 459 0
+./3dobjects/rocks/rock_big15.e3d 460 0
+./3dobjects/rocks/rock_big16.e3d 461 0
+./3dobjects/rocks/ice_obelisk1.e3d 462 0
+./3dobjects/rocks/ice_obelisk2.e3d 463 0
+./3dobjects/rocks/rock_big1.e3d 464 0
+./3dobjects/rocks/rock_big2.e3d 465 0
+./3dobjects/rocks/rock_big3.e3d 466 0
+./3dobjects/rocks/rock_big4.e3d 467 0
+./3dobjects/rocks/rock_big5.e3d 468 0
+./3dobjects/rocks/rock_big6.e3d 469 0
+./3dobjects/rocks/rock_big7.e3d 470 0
+./3dobjects/rocks/rock_big8.e3d 471 0
+./3dobjects/rocks/rock_big9.e3d 472 0
+./3dobjects/rocks/sulfur1.e3d 473 1
+./3dobjects/rocks/sulfur2.e3d 474 1
+./3dobjects/rocks/snowarch1.e3d 475 0
+./3dobjects/rocks/snowarch2.e3d 476 0
+./3dobjects/rocks/snowarch3.e3d 477 0
+./3dobjects/rocks/snowarch4.e3d 478 0
+./3dobjects/rocks/snowarch5.e3d 479 0
+./3dobjects/rocks/snowarch6.e3d 480 0
+./3dobjects/rocks/stalagmite1.e3d 481 0
+./3dobjects/rocks/stalagmite2.e3d 482 0
+./3dobjects/rocks/arch_cliff1.e3d 483 0
+./3dobjects/rocks/stalagmite3.e3d 484 0
+./3dobjects/rocks/arch_cliff2.e3d 485 0
+./3dobjects/rocks/arch_cliff3.e3d 486 0
+./3dobjects/rocks/cliff_low1.e3d 487 0
+./3dobjects/rocks/arch_cliff4.e3d 488 0
+./3dobjects/rocks/cliff_low2.e3d 489 0
+./3dobjects/rocks/mound_snow1.e3d 490 0
+./3dobjects/rocks/mound_snow2.e3d 491 0
+./3dobjects/rocks/mound_snow3.e3d 492 0
+./3dobjects/rocks/mound_snow4.e3d 493 0
+./3dobjects/rocks/iron1.e3d 494 1
+./3dobjects/rocks/iron2.e3d 495 1
+./3dobjects/rocks/arch_bridge1.e3d 496 0
+./3dobjects/rocks/snow_rockhuge1.e3d 497 0
+./3dobjects/rocks/snow_rockhuge2.e3d 498 0
+./3dobjects/rocks/snow_rockhuge3.e3d 499 0
+./3dobjects/rocks/snow_rockhuge4.e3d 500 0
+./3dobjects/rocks/snow_rockhuge5.e3d 501 0
+./3dobjects/rocks/snow_rockhuge6.e3d 502 0
+./3dobjects/rocks/snow_rockhuge7.e3d 503 0
+./3dobjects/rocks/snow_rockhuge8.e3d 504 0
+./3dobjects/rocks/icicle1.e3d 505 0
+./3dobjects/rocks/snow_rockhuge9.e3d 506 0
+./3dobjects/rocks/icicle2.e3d 507 0
+./3dobjects/rocks/icicle3.e3d 508 0
+./3dobjects/rocks/rock_small10.e3d 509 0
+./3dobjects/rocks/rock_small11.e3d 510 0
+./3dobjects/rocks/rock_huge1.e3d 511 0
+./3dobjects/rocks/rock_small12.e3d 512 0
+./3dobjects/rocks/rock_huge2.e3d 513 0
+./3dobjects/rocks/rock_small13.e3d 514 0
+./3dobjects/rocks/rock_huge3.e3d 515 0
+./3dobjects/rocks/rock_small14.e3d 516 0
+./3dobjects/rocks/rock_huge4.e3d 517 0
+./3dobjects/rocks/rock_huge5.e3d 518 0
+./3dobjects/rocks/rock_huge6.e3d 519 0
+./3dobjects/rocks/rock_huge7.e3d 520 0
+./3dobjects/rocks/rock_huge8.e3d 521 0
+./3dobjects/rocks/rock_huge9.e3d 522 0
+./3dobjects/rocks/silver1.e3d 523 1
+./3dobjects/rocks/silver2.e3d 524 1
+./3dobjects/rocks/titanium1.e3d 525 1
+./3dobjects/rocks/titanium2.e3d 526 1
+./3dobjects/rocks/mountain1.e3d 527 0
+./3dobjects/rocks/mountain2.e3d 528 0
+./3dobjects/rocks/mountain3.e3d 529 0
+./3dobjects/rocks/mountain4.e3d 530 0
+./3dobjects/rocks/mountain5.e3d 531 0
+./3dobjects/rocks/rock_huge10.e3d 532 0
+./3dobjects/rocks/rock_huge11.e3d 533 0
+./3dobjects/rocks/rock_huge12.e3d 534 0
+./3dobjects/rocks/rock_huge13.e3d 535 0
+./3dobjects/rocks/rock_huge14.e3d 536 0
+./3dobjects/rocks/rock_huge15.e3d 537 0
+./3dobjects/rocks/rock_huge16.e3d 538 0
+./3dobjects/rocks/rock_huge17.e3d 539 0
+./3dobjects/rocks/ice_brick.e3d 540 0
+./3dobjects/rocks/cave1.e3d 541 128
+./3dobjects/rocks/cave2.e3d 542 128
+./3dobjects/ruins/wall_small1.e3d 543 0
+./3dobjects/ruins/wall_small2.e3d 544 0
+./3dobjects/ruins/wall_small3.e3d 545 0
+./3dobjects/ruins/wall_small4.e3d 546 0
+./3dobjects/ruins/wall_small5.e3d 547 0
+./3dobjects/ruins/wall_small6.e3d 548 0
+./3dobjects/ruins/wall_small7.e3d 549 0
+./3dobjects/ruins/wall_small8.e3d 550 0
+./3dobjects/ruins/monument.e3d 551 0
+./3dobjects/ruins/wall_door1.e3d 552 0
+./3dobjects/ruins/wall_door2.e3d 553 0
+./3dobjects/ruins/wall_door3.e3d 554 0
+./3dobjects/ruins/wall_door4.e3d 555 0
+./3dobjects/ruins/rubble1.e3d 556 0
+./3dobjects/ruins/rubble2.e3d 557 0
+./3dobjects/ruins/rubble3.e3d 558 0
+./3dobjects/ruins/rubble4.e3d 559 0
+./3dobjects/ruins/rubble5.e3d 560 0
+./3dobjects/ruins/rubble6.e3d 561 0
+./3dobjects/ruins/wall_long1.e3d 562 0
+./3dobjects/ruins/wall_long2.e3d 563 0
+./3dobjects/ruins/wall_tall1.e3d 564 0
+./3dobjects/ruins/wall_tall2.e3d 565 0
+./3dobjects/ruins/wall_tall3.e3d 566 0
+./3dobjects/ruins/wall_tall4.e3d 567 0
+./3dobjects/ruins/wall_win1.e3d 568 0
+./3dobjects/ruins/wall_win2.e3d 569 0
+./3dobjects/ruins/wall_win3.e3d 570 0
+./3dobjects/ruins/wall_win4.e3d 571 0
+./3dobjects/trees/ivy.e3d 572 0
+./3dobjects/trees/bush1.e3d 573 0
+./3dobjects/trees/bush2.e3d 574 0
+./3dobjects/trees/bush3.e3d 575 0
+./3dobjects/trees/bush4.e3d 576 0
+./3dobjects/trees/bush5.e3d 577 0
+./3dobjects/trees/bush6.e3d 578 0
+./3dobjects/trees/hedge1.e3d 579 0
+./3dobjects/trees/hedge2.e3d 580 0
+./3dobjects/trees/bush_snow1.e3d 581 0
+./3dobjects/trees/bush_snow2.e3d 582 0
+./3dobjects/trees/treeflower1.e3d 583 2
+./3dobjects/trees/treeflower2.e3d 584 2
+./3dobjects/trees/treeleaves10.e3d 585 2
+./3dobjects/trees/treeleaves12.e3d 586 2
+./3dobjects/trees/treeleaves13.e3d 587 2
+./3dobjects/trees/treeleaves14.e3d 588 2
+./3dobjects/trees/treeleaves15.e3d 589 2
+./3dobjects/trees/treeleaves16.e3d 590 2
+./3dobjects/trees/treeleaves17.e3d 591 2
+./3dobjects/trees/treeleaves18.e3d 592 2
+./3dobjects/trees/treeleaves19.e3d 593 2
+./3dobjects/trees/treeleaves20.e3d 594 2
+./3dobjects/trees/treeleaves21.e3d 595 2
+./3dobjects/trees/treeleaves22.e3d 596 2
+./3dobjects/trees/treeleaves23.e3d 597 2
+./3dobjects/trees/treeleaves24.e3d 598 2
+./3dobjects/trees/treeleaves25.e3d 599 2
+./3dobjects/trees/treeleaves26.e3d 600 2
+./3dobjects/trees/treeleaves27.e3d 601 2
+./3dobjects/trees/treeleaves28.e3d 602 2
+./3dobjects/trees/treeleaves29.e3d 603 2
+./3dobjects/trees/treeleaves30.e3d 604 2
+./3dobjects/trees/treeleaves31.e3d 605 2
+./3dobjects/trees/treeleaves32.e3d 606 2
+./3dobjects/trees/branch1.e3d 607 0
+./3dobjects/trees/tree_snow1.e3d 608 2
+./3dobjects/trees/treeleaves1.e3d 609 2
+./3dobjects/trees/branch2.e3d 610 0
+./3dobjects/trees/tree_snow2.e3d 611 2
+./3dobjects/trees/treeleaves2.e3d 612 2
+./3dobjects/trees/branch3.e3d 613 0
+./3dobjects/trees/tree_snow3.e3d 614 2
+./3dobjects/trees/treeleaves3.e3d 615 2
+./3dobjects/trees/branch4.e3d 616 0
+./3dobjects/trees/tree10.e3d 617 2
+./3dobjects/trees/tree_snow4.e3d 618 2
+./3dobjects/trees/treeleaves4.e3d 619 2
+./3dobjects/trees/branch5.e3d 620 0
+./3dobjects/trees/tree11.e3d 621 2
+./3dobjects/trees/tree_snow5.e3d 622 2
+./3dobjects/trees/treeleaves5.e3d 623 2
+./3dobjects/trees/branch6.e3d 624 0
+./3dobjects/trees/tree12.e3d 625 2
+./3dobjects/trees/treeleaves6.e3d 626 2
+./3dobjects/trees/branch7.e3d 627 0
+./3dobjects/trees/tree13.e3d 628 2
+./3dobjects/trees/treeleaves7.e3d 629 2
+./3dobjects/trees/tree14.e3d 630 2
+./3dobjects/trees/treeleaves8.e3d 631 2
+./3dobjects/trees/tree15.e3d 632 2
+./3dobjects/trees/treeleaves9.e3d 633 2
+./3dobjects/trees/tree16.e3d 634 2
+./3dobjects/trees/tree17.e3d 635 2
+./3dobjects/trees/tree18.e3d 636 2
+./3dobjects/trees/tree19.e3d 637 2
+./3dobjects/trees/tree20.e3d 638 2
+./3dobjects/trees/tree21.e3d 639 2
+./3dobjects/trees/vineleaves1.e3d 640 0
+./3dobjects/trees/vineleaves2.e3d 641 0
+./3dobjects/trees/vineleaves3.e3d 642 0
+./3dobjects/trees/leaves_bigtree.e3d 645 0
+./3dobjects/trees/tree_small1.e3d 646 2
+./3dobjects/trees/tree_small2.e3d 647 2
+./3dobjects/trees/tree_small3.e3d 648 2
+./3dobjects/trees/vine1.e3d 650 0
+./3dobjects/trees/vine2.e3d 651 0
+./3dobjects/trees/vine3.e3d 652 0
+./3dobjects/trees/tree1.e3d 653 2
+./3dobjects/trees/tree2.e3d 654 2
+./3dobjects/trees/tree3.e3d 655 2
+./3dobjects/trees/tree4.e3d 656 2
+./3dobjects/trees/tree5.e3d 657 2
+./3dobjects/trees/tree6.e3d 658 2
+./3dobjects/trees/tree7.e3d 659 2
+./3dobjects/trees/tree8.e3d 660 2
+./3dobjects/trees/tree9.e3d 661 2
+./3dobjects/trees/plant1.e3d 662 0
+./3dobjects/trees/firespit1.e3d 663 0
+./3dobjects/trees/tree_xmas.e3d 666 2
+./3dobjects/trees/log1.e3d 667 0
+./3dobjects/trees/log2.e3d 668 0
+./3dobjects/trees/stump1.e3d 669 0
+./3dobjects/trees/stump2.e3d 670 0
+./3dobjects/trees/stump3.e3d 671 0
+./3dobjects/trees/firewood1.e3d 672 0
+./3dobjects/trees/firewood2.e3d 673 0
+./3dobjects/trees/treebig1.e3d 674 2
+./3dobjects/trees/treebig2.e3d 675 2
+./3dobjects/trees/treebig3.e3d 676 2
+./3dobjects/trees/stick1.e3d 677 0
+./3dobjects/trees/stick2.e3d 678 0
+./3dobjects/misc_objects/fishingnet1.e3d 679 0
+./3dobjects/misc_objects/crystalball1.e3d 680 0
+./3dobjects/misc_objects/fishingnet2.e3d 681 0
+./3dobjects/misc_objects/crystalball2.e3d 682 0
+./3dobjects/misc_objects/fishingnet3.e3d 683 0
+./3dobjects/misc_objects/crystalball3.e3d 684 0
+./3dobjects/misc_objects/crystalball4.e3d 685 0
+./3dobjects/misc_objects/fish1.e3d 686 0
+./3dobjects/misc_objects/fish2.e3d 687 0
+./3dobjects/misc_objects/fish3.e3d 688 0
+./3dobjects/misc_objects/fish4.e3d 689 0
+./3dobjects/misc_objects/jaildoor.e3d 690 128
+./3dobjects/misc_objects/chest1.e3d 691 256
+./3dobjects/misc_objects/rope1.e3d 692 0
+./3dobjects/misc_objects/rope2.e3d 693 0
+./3dobjects/misc_objects/food_tomatoe.e3d 694 8
+./3dobjects/misc_objects/clothes_towelpink.e3d 695 0
+./3dobjects/misc_objects/crystalball_stand.e3d 696 0
+./3dobjects/misc_objects/brazier1.e3d 697 0
+./3dobjects/misc_objects/brazier2.e3d 698 0
+./3dobjects/misc_objects/feather1.e3d 699 0
+./3dobjects/misc_objects/feather2.e3d 700 0
+./3dobjects/misc_objects/vialcork1.e3d 701 0
+./3dobjects/misc_objects/feather3.e3d 702 0
+./3dobjects/misc_objects/feather4.e3d 703 0
+./3dobjects/misc_objects/food_bread1.e3d 704 8
+./3dobjects/misc_objects/food_bread2.e3d 705 8
+./3dobjects/misc_objects/lantern1.e3d 706 0
+./3dobjects/misc_objects/lantern2.e3d 707 0
+./3dobjects/misc_objects/lantern3.e3d 708 0
+./3dobjects/misc_objects/coffin2_lid.e3d 709 0
+./3dobjects/misc_objects/bone_dragonskull.e3d 710 0
+./3dobjects/misc_objects/vial10.e3d 711 0
+./3dobjects/misc_objects/spellbook1.e3d 712 0
+./3dobjects/misc_objects/fountain1.e3d 713 0
+./3dobjects/misc_objects/vial11.e3d 714 0
+./3dobjects/misc_objects/spellbook2.e3d 715 0
+./3dobjects/misc_objects/fountain2.e3d 716 0
+./3dobjects/misc_objects/vial12.e3d 717 0
+./3dobjects/misc_objects/spellbook3.e3d 718 0
+./3dobjects/misc_objects/fountain3.e3d 719 0
+./3dobjects/misc_objects/coffin1.e3d 720 0
+./3dobjects/misc_objects/statue_base1.e3d 721 0
+./3dobjects/misc_objects/coffin2.e3d 722 0
+./3dobjects/misc_objects/statue_base2.e3d 723 0
+./3dobjects/misc_objects/statue_base3.e3d 724 0
+./3dobjects/misc_objects/food_carrot.e3d 725 0
+./3dobjects/misc_objects/meat1.e3d 726 8
+./3dobjects/misc_objects/meat2.e3d 727 8
+./3dobjects/misc_objects/meat3.e3d 728 8
+./3dobjects/misc_objects/mug1.e3d 729 0
+./3dobjects/misc_objects/column1.e3d 730 0
+./3dobjects/misc_objects/column2.e3d 731 0
+./3dobjects/misc_objects/column3.e3d 732 0
+./3dobjects/misc_objects/column4.e3d 733 0
+./3dobjects/misc_objects/column5.e3d 734 0
+./3dobjects/misc_objects/column6.e3d 735 0
+./3dobjects/misc_objects/plate1.e3d 736 0
+./3dobjects/misc_objects/cookingpot1.e3d 737 0
+./3dobjects/misc_objects/sled1.e3d 738 0
+./3dobjects/misc_objects/bottle1.e3d 739 0
+./3dobjects/misc_objects/bottle2.e3d 740 0
+./3dobjects/misc_objects/bottle3.e3d 741 0
+./3dobjects/misc_objects/stove1.e3d 742 0
+./3dobjects/misc_objects/food_grapes.e3d 743 8
+./3dobjects/misc_objects/stove2.e3d 744 0
+./3dobjects/misc_objects/ice_column1.e3d 745 0
+./3dobjects/misc_objects/ice_column2.e3d 746 0
+./3dobjects/misc_objects/pan1.e3d 747 0
+./3dobjects/misc_objects/clothes_pantsbrown1.e3d 748 0
+./3dobjects/misc_objects/clothes_pantsbrown2.e3d 749 0
+./3dobjects/misc_objects/clothes_towelyellow.e3d 750 0
+./3dobjects/misc_objects/crystal1.e3d 751 1
+./3dobjects/misc_objects/crystal2.e3d 752 1
+./3dobjects/misc_objects/crystal3.e3d 753 1
+./3dobjects/misc_objects/crystal4.e3d 754 1
+./3dobjects/misc_objects/crystal5.e3d 755 1
+./3dobjects/misc_objects/crystal6.e3d 756 1
+./3dobjects/misc_objects/track1.e3d 757 0
+./3dobjects/misc_objects/track2.e3d 758 0
+./3dobjects/misc_objects/pot_cooking1.e3d 759 0
+./3dobjects/misc_objects/candle1.e3d 761 0
+./3dobjects/misc_objects/candle2.e3d 762 0
+./3dobjects/misc_objects/candle3.e3d 763 0
+./3dobjects/misc_objects/tapestry4.e3d 764 0
+./3dobjects/misc_objects/tapestry5.e3d 765 0
+./3dobjects/misc_objects/book_open1.e3d 766 0
+./3dobjects/misc_objects/newspaper1.e3d 767 0
+./3dobjects/misc_objects/suspensionbridge1.e3d 768 0
+./3dobjects/misc_objects/newspaper2.e3d 769 0
+./3dobjects/misc_objects/newspaper3.e3d 770 0
+./3dobjects/misc_objects/newspaper4.e3d 771 0
+./3dobjects/misc_objects/mortar.e3d 772 0
+./3dobjects/misc_objects/egg1.e3d 773 8
+./3dobjects/misc_objects/nest1.e3d 774 0
+./3dobjects/misc_objects/egg2.e3d 775 8
+./3dobjects/misc_objects/pot1.e3d 776 0
+./3dobjects/misc_objects/pot2.e3d 777 0
+./3dobjects/misc_objects/pot3.e3d 778 0
+./3dobjects/misc_objects/pot4.e3d 779 0
+./3dobjects/misc_objects/statue1.e3d 781 0
+./3dobjects/misc_objects/statue2.e3d 782 0
+./3dobjects/misc_objects/statue3.e3d 783 0
+./3dobjects/misc_objects/chimneystovetop1.e3d 784 0
+./3dobjects/misc_objects/statue4.e3d 785 0
+./3dobjects/misc_objects/statue5.e3d 786 0
+./3dobjects/misc_objects/statue6.e3d 787 0
+./3dobjects/misc_objects/statue7.e3d 788 0
+./3dobjects/misc_objects/statue8.e3d 789 0
+./3dobjects/misc_objects/statue9.e3d 790 0
+./3dobjects/misc_objects/food_pumpkin.e3d 791 8
+./3dobjects/misc_objects/map1.e3d 792 0
+./3dobjects/misc_objects/bone_dragonjaw.e3d 793 0
+./3dobjects/misc_objects/crate2.e3d 794 0
+./3dobjects/misc_objects/shovel.e3d 795 0
+./3dobjects/misc_objects/crate.e3d 796 0
+./3dobjects/misc_objects/inkwell1.e3d 797 0
+./3dobjects/misc_objects/pitchfork.e3d 798 0
+./3dobjects/misc_objects/clothes_towelpurple.e3d 799 0
+./3dobjects/misc_objects/light1.e3d 800 0
+./3dobjects/misc_objects/light2.e3d 801 0
+./3dobjects/misc_objects/light3.e3d 802 0
+./3dobjects/misc_objects/sack1.e3d 803 0
+./3dobjects/misc_objects/sack2.e3d 804 0
+./3dobjects/misc_objects/bone_skull.e3d 805 0
+./3dobjects/misc_objects/pedstle.e3d 806 0
+./3dobjects/misc_objects/lock1_open.e3d 807 0
+./3dobjects/misc_objects/ice_obelisk3.e3d 808 0
+./3dobjects/misc_objects/magedesk1.e3d 809 0
+./3dobjects/misc_objects/barrel1.e3d 810 0
+./3dobjects/misc_objects/barrel2.e3d 811 0
+./3dobjects/misc_objects/vial_holder1.e3d 812 0
+./3dobjects/misc_objects/scroll1.e3d 813 0
+./3dobjects/misc_objects/scroll2.e3d 814 0
+./3dobjects/misc_objects/quillpen1.e3d 815 0
+./3dobjects/misc_objects/torch.e3d 816 0
+./3dobjects/misc_objects/bellows1.e3d 817 0
+./3dobjects/misc_objects/coffin1_lid.e3d 818 0
+./3dobjects/misc_objects/desk1.e3d 819 0
+./3dobjects/misc_objects/desk2.e3d 820 0
+./3dobjects/misc_objects/torch_holder.e3d 821 0
+./3dobjects/misc_objects/books1.e3d 822 0
+./3dobjects/misc_objects/books2.e3d 823 0
+./3dobjects/misc_objects/books3.e3d 824 0
+./3dobjects/misc_objects/books4.e3d 825 0
+./3dobjects/misc_objects/cart1.e3d 826 8
+./3dobjects/misc_objects/bone1.e3d 827 8
+./3dobjects/misc_objects/bone2.e3d 828 8
+./3dobjects/misc_objects/bone3.e3d 829 8
+./3dobjects/misc_objects/bone4.e3d 830 8
+./3dobjects/misc_objects/food_pear.e3d 831 8
+./3dobjects/misc_objects/stonebrick1.e3d 832 0
+./3dobjects/misc_objects/stonebrick2.e3d 833 0
+./3dobjects/misc_objects/stonebrick3.e3d 834 0
+./3dobjects/misc_objects/gargoyle1.e3d 835 0
+./3dobjects/misc_objects/gargoyle2.e3d 836 0
+./3dobjects/misc_objects/gargoyle3.e3d 837 0
+./3dobjects/misc_objects/anvil1.e3d 838 0
+./3dobjects/misc_objects/anvil2.e3d 839 0
+./3dobjects/misc_objects/vial1.e3d 840 0
+./3dobjects/misc_objects/vial2.e3d 841 0
+./3dobjects/misc_objects/vial3.e3d 842 0
+./3dobjects/misc_objects/vial4.e3d 843 0
+./3dobjects/misc_objects/vial5.e3d 844 0
+./3dobjects/misc_objects/vial6.e3d 845 0
+./3dobjects/misc_objects/vial7.e3d 846 0
+./3dobjects/misc_objects/vial8.e3d 847 0
+./3dobjects/misc_objects/vial9.e3d 848 0
+./3dobjects/misc_objects/throne1.e3d 849 0
+./3dobjects/misc_objects/bag1.e3d 850 0
+./3dobjects/misc_objects/clothes_towelwhite.e3d 851 0
+./3dobjects/misc_objects/dragon_head.e3d 852 0
+./3dobjects/misc_objects/tomb1.e3d 853 0
+./3dobjects/misc_objects/tomb2.e3d 854 0
+./3dobjects/misc_objects/seashell1.e3d 855 0
+./3dobjects/misc_objects/tomb3.e3d 856 0
+./3dobjects/misc_objects/seashell2.e3d 857 0
+./3dobjects/misc_objects/tomb4.e3d 858 0
+./3dobjects/misc_objects/seashell3.e3d 859 0
+./3dobjects/misc_objects/tomb5.e3d 860 0
+./3dobjects/misc_objects/clothes_shirtorange.e3d 861 0
+./3dobjects/misc_objects/seashell4.e3d 862 0
+./3dobjects/misc_objects/tomb6.e3d 863 0
+./3dobjects/misc_objects/seashell5.e3d 864 0
+./3dobjects/misc_objects/seashell6.e3d 865 0
+./3dobjects/misc_objects/paperburnt1.e3d 866 0
+./3dobjects/misc_objects/seashell7.e3d 867 0
+./3dobjects/misc_objects/paperburnt2.e3d 868 0
+./3dobjects/misc_objects/seashell8.e3d 869 0
+./3dobjects/misc_objects/horseshoe1.e3d 870 0
+./3dobjects/misc_objects/fryingpan1.e3d 871 0
+./3dobjects/misc_objects/lock1.e3d 872 0
+./3dobjects/misc_objects/lock2.e3d 873 0
+./3dobjects/misc_objects/lock3.e3d 874 0
+./3dobjects/misc_objects/lock4.e3d 875 0
+./3dobjects/misc_objects/obelisk_blackmarble1.e3d 876 0
+./3dobjects/misc_objects/bucket1.e3d 877 0
+./3dobjects/misc_objects/portal1.e3d 878 0
+./3dobjects/misc_objects/gemstone1.e3d 879 1
+./3dobjects/misc_objects/gemstone2.e3d 880 1
+./3dobjects/misc_objects/clothes_towelorange.e3d 881 0
+./3dobjects/misc_objects/gemstone3.e3d 882 1
+./3dobjects/misc_objects/gemstone4.e3d 883 1
+./3dobjects/misc_objects/clothes_towelred.e3d 884 0
+./3dobjects/misc_objects/badobject.e3d 885 0
+./3dobjects/misc_objects/book1.e3d 886 0
+./3dobjects/misc_objects/book2.e3d 887 0
+./3dobjects/misc_objects/book3.e3d 888 0
+./3dobjects/misc_objects/book4.e3d 889 0
+./3dobjects/misc_objects/clothes_towelgreen.e3d 890 0
+./3dobjects/misc_objects/pot1.e3de 891 0
+./3dobjects/misc_objects/food_apple.e3d 892 8
+./3dobjects/misc_objects/web1.e3d 893 0
+./3dobjects/misc_objects/web2.e3d 894 0
+./3dobjects/misc_objects/web3.e3d 895 0
+./3dobjects/misc_objects/web4.e3d 896 0
+./3dobjects/misc_objects/jailbars.e3d 897 0
+./3dobjects/misc_objects/broom1.e3d 900 0
+./3dobjects/misc_objects/clothes_shirtblue.e3d 901 0
+./3dobjects/misc_objects/basket1.e3d 902 0
+./3dobjects/misc_objects/basket2.e3d 903 0
+./3dobjects/misc_objects/basket3.e3d 904 0
+./3dobjects/misc_objects/basket4.e3d 905 0
+./3dobjects/misc_objects/basket5.e3d 906 0
+./3dobjects/misc_objects/basket6.e3d 907 0
+./3dobjects/misc_objects/food_banana.e3d 908 8
+./3dobjects/misc_objects/food_orange.e3d 909 8
+./3dobjects/misc_objects/candle_stand.e3d 910 0
+./3dobjects/misc_objects/hammer1.e3d 911 0
+./3dobjects/misc_objects/clothesline1.e3d 912 0
+./3dobjects/misc_objects/clothesline2.e3d 913 0
+./3dobjects/misc_objects/clothesline3.e3d 914 0
+./3dobjects/misc_objects/paper1.e3d 915 0
+./3dobjects/misc_objects/fishingpole1.e3d 916 0
+./3dobjects/misc_objects/paper2.e3d 917 0
+./3dobjects/misc_objects/goldcoin1.e3d 918 8
+./3dobjects/misc_objects/goldcoin2.e3d 919 8
+./3dobjects/ground_objs/cattails.e3d 920 0
+./3dobjects/ground_objs/bush_poisonivy.e3d 921 8
+./3dobjects/ground_objs/shrub1.e3d 922 0
+./3dobjects/ground_objs/shrub2.e3d 923 0
+./3dobjects/ground_objs/shrub3.e3d 924 0
+./3dobjects/ground_objs/herb_yarrow.e3d 925 8
+./3dobjects/ground_objs/bush7.e3d 926 0
+./3dobjects/ground_objs/bush8.e3d 927 0
+./3dobjects/ground_objs/flowerpink1.e3d 928 8
+./3dobjects/ground_objs/flower_dandelion.e3d 929 8
+./3dobjects/ground_objs/flowerorange1.e3d 930 8
+./3dobjects/ground_objs/flowerorange2.e3d 931 8
+./3dobjects/ground_objs/flowerorange3.e3d 932 8
+./3dobjects/ground_objs/mushroom1.e3d 933 8
+./3dobjects/ground_objs/mushroom2.e3d 934 8
+./3dobjects/ground_objs/mushroom3.e3d 935 8
+./3dobjects/ground_objs/mushroom4.e3d 936 8
+./3dobjects/ground_objs/mushroom5.e3d 937 8
+./3dobjects/ground_objs/mushroom6.e3d 938 8
+./3dobjects/ground_objs/mushroom7.e3d 939 8
+./3dobjects/ground_objs/mushroom8.e3d 940 8
+./3dobjects/ground_objs/herb_wormwood.e3d 941 8
+./3dobjects/ground_objs/thornbush1.e3d 942 0
+./3dobjects/ground_objs/thornbush2.e3d 943 0
+./3dobjects/ground_objs/flowerpurple1.e3d 944 8
+./3dobjects/ground_objs/flowerpurple2.e3d 945 8
+./3dobjects/ground_objs/cactus1.e3d 946 8
+./3dobjects/ground_objs/flowerpurple3.e3d 947 8
+./3dobjects/ground_objs/cactus2.e3d 948 8
+./3dobjects/ground_objs/herb_mugwort.e3d 949 8
+./3dobjects/ground_objs/cactus3.e3d 950 8
+./3dobjects/ground_objs/bush_redberry.e3d 951 8
+./3dobjects/ground_objs/plant6_fern.e3d 952 0
+./3dobjects/ground_objs/road10.e3d 953 0
+./3dobjects/ground_objs/road11.e3d 954 0
+./3dobjects/ground_objs/herb_nightshade.e3d 955 8
+./3dobjects/ground_objs/haystack1.e3d 956 0
+./3dobjects/ground_objs/haystack2.e3d 957 0
+./3dobjects/ground_objs/triste1.e3d 958 0
+./3dobjects/ground_objs/triste2.e3d 959 0
+./3dobjects/ground_objs/grass1.e3d 960 0
+./3dobjects/ground_objs/grass2.e3d 961 0
+./3dobjects/ground_objs/grass3.e3d 962 0
+./3dobjects/ground_objs/grass4.e3d 963 0
+./3dobjects/ground_objs/grass5.e3d 964 0
+./3dobjects/ground_objs/grass6.e3d 965 0
+./3dobjects/ground_objs/grass7.e3d 966 0
+./3dobjects/ground_objs/grass8.e3d 967 0
+./3dobjects/ground_objs/grass9.e3d 968 0
+./3dobjects/ground_objs/wheat1.e3d 969 8
+./3dobjects/ground_objs/wheat2.e3d 970 8
+./3dobjects/ground_objs/mound_dirt1.e3d 971 0
+./3dobjects/ground_objs/mound_dirt2.e3d 972 0
+./3dobjects/ground_objs/mound_dirt3.e3d 973 0
+./3dobjects/ground_objs/mound_dirt4.e3d 974 0
+./3dobjects/ground_objs/cotton1.e3d 975 8
+./3dobjects/ground_objs/waterbank1.e3d 976 0
+./3dobjects/ground_objs/cotton2.e3d 977 8
+./3dobjects/ground_objs/waterbank2.e3d 978 0
+./3dobjects/ground_objs/plant2.e3d 979 0
+./3dobjects/ground_objs/waterbank3.e3d 980 0
+./3dobjects/ground_objs/plant3.e3d 981 0
+./3dobjects/ground_objs/waterbank4.e3d 982 0
+./3dobjects/ground_objs/plant4.e3d 983 0
+./3dobjects/ground_objs/waterbank5.e3d 984 0
+./3dobjects/ground_objs/plant5.e3d 985 0
+./3dobjects/ground_objs/waterbank6.e3d 986 0
+./3dobjects/ground_objs/waterbank7.e3d 987 0
+./3dobjects/ground_objs/plant7.e3d 988 0
+./3dobjects/ground_objs/waterbank8.e3d 989 0
+./3dobjects/ground_objs/waterbank9.e3d 990 0
+./3dobjects/ground_objs/mound_sand1.e3d 991 0
+./3dobjects/ground_objs/mound_sand2.e3d 992 0
+./3dobjects/ground_objs/moss.e3d 993 0
+./3dobjects/ground_objs/mound_sand3.e3d 994 0
+./3dobjects/ground_objs/mound_sand4.e3d 995 0
+./3dobjects/ground_objs/mound_sand5.e3d 996 0
+./3dobjects/ground_objs/mound_sand6.e3d 997 0
+./3dobjects/ground_objs/mound_sand7.e3d 998 0
+./3dobjects/ground_objs/mound_sand8.e3d 999 0
+./3dobjects/ground_objs/mound_sand9.e3d 1000 0
+./3dobjects/ground_objs/herb_valerian.e3d 1001 8
+./3dobjects/ground_objs/flower_daffodils.e3d 1002 8
+./3dobjects/ground_objs/lillypad1.e3d 1003 0
+./3dobjects/ground_objs/lillypad2.e3d 1004 0
+./3dobjects/ground_objs/lillypad3.e3d 1005 0
+./3dobjects/ground_objs/waterbank10.e3d 1006 0
+./3dobjects/ground_objs/waterbank11.e3d 1007 0
+./3dobjects/ground_objs/grass10.e3d 1008 0
+./3dobjects/ground_objs/grass11.e3d 1009 0
+./3dobjects/ground_objs/grass12.e3d 1010 0
+./3dobjects/ground_objs/hay.e3d 1011 0
+./3dobjects/ground_objs/road_stone1.e3d 1012 0
+./3dobjects/ground_objs/road_stone2.e3d 1013 0
+./3dobjects/ground_objs/sanddune1.e3d 1014 0
+./3dobjects/ground_objs/flowerwhite1.e3d 1015 8
+./3dobjects/ground_objs/flowerwhite2.e3d 1016 8
+./3dobjects/ground_objs/flowerwhite3.e3d 1017 8
+./3dobjects/ground_objs/flowerred1.e3d 1018 8
+./3dobjects/ground_objs/herb_henbane.e3d 1019 8
+./3dobjects/ground_objs/mound_grass1.e3d 1020 0
+./3dobjects/ground_objs/mound_grass2.e3d 1021 0
+./3dobjects/ground_objs/mound_grass3.e3d 1022 0
+./3dobjects/ground_objs/mound_grass4.e3d 1023 0
+./3dobjects/ground_objs/mound_sand10.e3d 1024 0
+./3dobjects/ground_objs/mound_sand11.e3d 1025 0
+./3dobjects/ground_objs/mound_sand12.e3d 1026 0
+./3dobjects/ground_objs/mound_sand13.e3d 1027 0
+./3dobjects/ground_objs/mound_sand14.e3d 1028 0
+./3dobjects/ground_objs/mound_sand15.e3d 1029 0
+./3dobjects/ground_objs/mound_sand16.e3d 1030 0
+./3dobjects/ground_objs/flowerblue1.e3d 1031 8
+./3dobjects/ground_objs/flowerblue2.e3d 1032 8
+./3dobjects/ground_objs/flowersun1.e3d 1033 8
+./3dobjects/ground_objs/flowersun2.e3d 1034 8
+./3dobjects/ground_objs/cabbage.e3d 1035 8
+./3dobjects/ground_objs/herb_mullein.e3d 1036 8
+./3dobjects/ground_objs/flower_poppies.e3d 1037 8
+./3dobjects/ground_objs/flower_tulips1.e3d 1038 8
+./3dobjects/ground_objs/flower_tulips2.e3d 1039 8
+./3dobjects/ground_objs/flower_tulips3.e3d 1040 8
+./3dobjects/ground_objs/herb_rue.e3d 1041 8
+./3dobjects/ground_objs/plant8_fern.e3d 1042 0
+./3dobjects/ground_objs/corn1.e3d 1043 8
+./3dobjects/ground_objs/corn2.e3d 1044 8
+./3dobjects/ground_objs/corn3.e3d 1045 8
+./3dobjects/ground_objs/corn4.e3d 1046 8
+./3dobjects/ground_objs/grasstall1.e3d 1047 0
+./3dobjects/ground_objs/grasstall2.e3d 1048 0
+./3dobjects/ground_objs/grasstall3.e3d 1049 0
+./3dobjects/ground_objs/grasstall4.e3d 1050 0
+./3dobjects/ground_objs/grasstall5.e3d 1051 0
+./3dobjects/ground_objs/road1.e3d 1052 0
+./3dobjects/ground_objs/road2.e3d 1053 0
+./3dobjects/ground_objs/road3.e3d 1054 0
+./3dobjects/ground_objs/road4.e3d 1055 0
+./3dobjects/ground_objs/road5.e3d 1056 0
+./3dobjects/ground_objs/road6.e3d 1057 0
+./3dobjects/ground_objs/road7.e3d 1058 0
+./3dobjects/ground_objs/road8.e3d 1059 0
+./3dobjects/ground_objs/road9.e3d 1060 0
+./3dobjects/ground_objs/road_snow1.e3d 1061 0
+./3dobjects/ground_objs/road_snow2.e3d 1062 0
+./3dobjects/ground_objs/road_snow3.e3d 1063 0
+./3dobjects/ground_objs/tomatoeplant1.e3d 1064 8
+./3dobjects/ground_objs/tomatoeplant2.e3d 1065 8
+./3dobjects/ground_objs/bush_blueberry.e3d 1066 8
+./3dobjects/ground_objs/flowerbush1.e3d 1067 8
+./3dobjects/ground_objs/flowerbush2.e3d 1068 8
+./3dobjects/ground_objs/flowerbush3.e3d 1069 8
+./3dobjects/ground_objs/flowerbush4.e3d 1070 8
+./3dobjects/ground_objs/flowerbush5.e3d 1071 8
+./3dobjects/ground_objs/flowerbush6.e3d 1072 8
+./3dobjects/weapons/sword1.e3d 1073 0
+./3dobjects/weapons/sword2.e3d 1074 0
+./3dobjects/weapons/sword3.e3d 1075 0
+./3dobjects/weapons/sword4.e3d 1076 0
+./3dobjects/weapons/sword5.e3d 1077 0
+./3dobjects/weapons/sword6.e3d 1078 0
+./3dobjects/weapons/sword7.e3d 1079 0
+./3dobjects/weapons/shield1.e3d 1080 0
+./3dobjects/weapons/shield2.e3d 1081 0
+./3dobjects/weapons/shield3.e3d 1082 0
+./3dobjects/weapons/shield4.e3d 1083 0
+./3dobjects/interiors/shelves2.e3d 1084 0
+./3dobjects/interiors/cupboard1.e3d 1085 0
+./3dobjects/interiors/cupboard2.e3d 1086 0
+./3dobjects/interiors/drawers1.e3d 1087 0
+./3dobjects/interiors/drawers2.e3d 1088 0
+./3dobjects/interiors/chair1.e3d 1089 0
+./3dobjects/interiors/chair2.e3d 1090 0
+./3dobjects/interiors/chair3.e3d 1091 0
+./3dobjects/interiors/chair4.e3d 1092 0
+./3dobjects/interiors/fur_rug1.e3d 1093 0
+./3dobjects/interiors/fur_rug2.e3d 1094 0
+./3dobjects/interiors/fur_rug3.e3d 1095 0
+./3dobjects/interiors/fur_rug4.e3d 1096 0
+./3dobjects/interiors/fur_rug5.e3d 1097 0
+./3dobjects/interiors/bed1.e3d 1098 0
+./3dobjects/interiors/bed2.e3d 1099 0
+./3dobjects/interiors/bed3.e3d 1100 0
+./3dobjects/interiors/bed4.e3d 1101 0
+./3dobjects/interiors/bed5.e3d 1102 0
+./3dobjects/interiors/bed6.e3d 1103 0
+./3dobjects/interiors/bed7.e3d 1104 0
+./3dobjects/interiors/rug1.e3d 1105 0
+./3dobjects/interiors/rug2.e3d 1106 0
+./3dobjects/interiors/rug3.e3d 1107 0
+./3dobjects/interiors/rug4.e3d 1108 0
+./3dobjects/interiors/rug5.e3d 1109 0
+./3dobjects/interiors/rug6.e3d 1110 0
+./3dobjects/interiors/rug7.e3d 1111 0
+./3dobjects/interiors/rug8.e3d 1112 0
+./3dobjects/interiors/rug9.e3d 1113 0
+./3dobjects/interiors/stool1.e3d 1114 0
+./3dobjects/interiors/stool2.e3d 1115 0
+./3dobjects/interiors/tapestry1.e3d 1116 0
+./3dobjects/interiors/tapestry2.e3d 1117 0
+./3dobjects/interiors/tapestry3.e3d 1118 0
+./3dobjects/interiors/armoire1.e3d 1119 0
+./3dobjects/interiors/armoire2.e3d 1120 0
+./3dobjects/interiors/table1.e3d 1122 0
+./3dobjects/interiors/table2.e3d 1123 0
+./3dobjects/interiors/table3.e3d 1124 0
+./3dobjects/interiors/table4.e3d 1125 0
+./3dobjects/interiors/pulpit1.e3d 1126 0
+./3dobjects/interiors/rug10.e3d 1127 0
+./3dobjects/interiors/rug_big1.e3d 1128 0
+./3dobjects/interiors/rug_big2.e3d 1129 0
+./3dobjects/interiors/counter1.e3d 1130 0
+./3dobjects/interiors/counter2.e3d 1131 0
+./3dobjects/interiors/bench1.e3d 1132 0
