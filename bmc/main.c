@@ -91,6 +91,7 @@ int start_rendering()
 			//see if we need to exit
 			if(exit_now)break;
 		}
+	save_map(map_file_name);
 	have_music=0;
 	SDL_WaitThread(music_thread,&done);
 	if(pm_log.ppl)free_pm_log();

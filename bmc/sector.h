@@ -1,6 +1,8 @@
 #ifndef __SECTOR_H__
 #define __SECTOR_H__
 
+void add_change();
+
 //Conversion macros - no need to do function calls for so simple maths...
 #define FTI 5461.333333333f //65536/12
 #define ITF    0.000183105f //12/65536
@@ -52,15 +54,10 @@ extern int current_sector;
 void check_sector();
 
 int sector_add_3do(int objectid);
-int sector_del_3do(int objectid);
 int sector_add_2do(int objectid);
-int sector_del_2do(int objectid);
 int sector_add_light(int objectid);
-int sector_del_light(int objectid);
 int sector_add_particle(int objectid);
-int sector_del_particle(int objectid);
 int sector_add_tile(int objectid);
-int sector_del_tile(int objectid);
 void sector_update_checksums(int sector);
 void sector_update_objects_checksum(int sector);
 void sector_update_tiles_checksum(int sector);

@@ -409,6 +409,9 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 
 		case CHANGE_MAP:
 			{
+				current_sector=-1;
+				if(map_file_name[0]!=0)
+					save_map(map_file_name);
 				object_under_mouse=-1;//to prevent a nasty crash, while looking for bags, when we change the map
 				close_dialogue();	// close the dialogue window if open
 				destroy_all_particles();

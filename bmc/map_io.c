@@ -112,7 +112,6 @@ void destroy_map()
 	destroy_all_particles();
 }
 
-//fix z_pos
 int save_map(char * file_name)
 {
 	int i,j;
@@ -144,8 +143,8 @@ int save_map(char * file_name)
 
 	FILE *f = NULL;
 
-	memset(sectors,-1,num_sectors*sizeof(map_sector));
-/*	sector_add_map(); */
+//	memset(sectors,-1,num_sectors*sizeof(map_sector));
+//	sector_add_map();
 	//get the sizes of structures (they might change in the future)
 	obj_3d_io_size=sizeof(object3d_io);
 	obj_2d_io_size=sizeof(obj_2d_io);
@@ -159,14 +158,14 @@ int save_map(char * file_name)
 	for(i=0;i<max_lights;i++)if(lights_list[i])lights_no++;
 	// We ignore temporary particle systems (i.e. ones with a ttl)
 	for(i=0;i<max_particle_systems;i++){
-		if(particles_list[i] && particles_list[i]->def)
+		if(particles_list[i])
 			particles_no++;
 	}
 	sector_no=num_sectors;
 
 	//ok, now build the header...
 	//clear the header
-	for(i=0;i<sizeof(map_header);i++)
+	for(i=0;i<(int)sizeof(map_header);i++)
 		mem_map_header[i]=0;
 
 	//build the file signature
@@ -214,7 +213,7 @@ int save_map(char * file_name)
 	j=0;
 	for(i=0;i<max_obj_3d;i++){
 
-		if(j>obj_3d_no)break;
+		if(j>=obj_3d_no)break;
 		if(objects_list[i]){
 			fwrite(&objects_list[i]->o3dio, sizeof(object3d_io), 1, f);
 			j++;
@@ -224,7 +223,7 @@ int save_map(char * file_name)
 	//write the 2d objects
 	j=0;
 	for(i=0;i<max_obj_2d;i++){
-		if(j>obj_2d_no)break;
+		if(j>=obj_2d_no)break;
 		if(obj_2d_list[i]){
 			fwrite(&obj_2d_list[i]->o2dio, sizeof(obj_2d_io), 1, f);
 			j++;
@@ -234,7 +233,7 @@ int save_map(char * file_name)
 	//write the lights
 	j=0;
 	for(i=0;i<max_lights;i++){
-		if(j>lights_no)break;
+		if(j>=lights_no)break;
 		if(lights_list[i]){
 			fwrite(&lights_list[i]->lightio, sizeof(light_io), 1, f);
 			j++;
@@ -245,8 +244,8 @@ int save_map(char * file_name)
 	j=0;
 	for(i=0;i<max_particle_systems;i++)
 	{
-		if(j>particles_no)break;
-		if(particles_list[i] && particles_list[i]->def){	
+		if(j>=particles_no)break;
+		if(particles_list[i]){	
 			fwrite(&particles_list[i]->particleio,sizeof(particles_io),1,f);
 			j++;
 		}
@@ -258,10 +257,9 @@ int save_map(char * file_name)
 	fclose(f);
 
 	return 1;
-
 }
 
-//fix z_pos
+
 int load_map(char * file_name)
 {
 	int i,j;
@@ -295,6 +293,7 @@ int load_map(char * file_name)
 	FILE *f = NULL;
 	f=fopen(file_name, "rb");
 	if(!f)return 0;
+
 
 	destroy_map();
 

@@ -9,7 +9,16 @@ map_sector *sectors;
 int num_sectors;
 Uint16 active_sector;
 int current_sector=-1;
+Uint16 num_changes=0;
+#define NEEDED_CHANGES 500
 
+void add_change(){
+	num_changes++;
+	if(num_changes==NEEDED_CHANGES){
+		num_changes=0;
+		save_map(map_file_name);
+	}
+}
 /* MISC SECTOR*/
 
 void sector_update_checksums(int sector)
@@ -124,28 +133,13 @@ int sector_add_3do(int objectid)
 	for(i=0;i<100;i++){
 		if(sectors[sector_no].e3d_local[i]==-1){
 			sectors[sector_no].e3d_local[i]=objectid;
+			add_change();
 			return i;
 		}
 	}
 	return -1;
 }
 
-int sector_del_3do(int objectid)
-{
-	int i;
-	int sector_no=sector_get(objects_list[objectid]->x_pos, objects_list[objectid]->y_pos);
-
-	if(sector_no>=num_sectors) return -1;
-
-	for(i=0;i<100;i++){
-		if(sectors[sector_no].e3d_local[i]==objectid){
-			memmove(&sectors[sector_no].e3d_local[i], &sectors[sector_no].e3d_local[i+1], (99-i)*sizeof(short));
-			sectors[sector_no].e3d_local[99]=-1;//if the list was full we can get a bad value here
-			return i;
-		}
-	}
-	return -1;
-}
 
 int sector_add_2do(int objectid)
 {
@@ -157,28 +151,13 @@ int sector_add_2do(int objectid)
 	for(i=0;i<20;i++){
 		if(sectors[sector_no].e2d_local[i]==-1){
 			sectors[sector_no].e2d_local[i]=objectid;
+			add_change();
 			return i;
 		}
 	}
 	return -1;
 }
 
-int sector_del_2do(int objectid)
-{
-	int i;
-	int sector_no=sector_get(obj_2d_list[objectid]->x_pos, obj_2d_list[objectid]->y_pos);
-
-	if(sector_no>=num_sectors) return -1;
-
-	for(i=0;i<20;i++){
-		if(sectors[sector_no].e2d_local[i]==objectid){
-			memmove(&sectors[sector_no].e2d_local[i], &sectors[sector_no].e2d_local[i+1], (19-i)*sizeof(short));
-			sectors[sector_no].e2d_local[19]=-1;//if the list was full we can get a bad value here
-			return i;
-		}
-	}
-	return -1;
-}
 
 int sector_add_light(int objectid)
 {
@@ -190,28 +169,13 @@ int sector_add_light(int objectid)
 	for(i=0;i<4;i++){
 		if(sectors[sector_no].lights_local[i]==-1){
 			sectors[sector_no].lights_local[i]=objectid;
+			add_change();
 			return i;
 		}
 	}
 	return -1;
 }
 
-int sector_del_light(int objectid)
-{
-	int i;
-	int sector_no=sector_get(lights_list[objectid]->pos_x, lights_list[objectid]->pos_y);
-
-	if(sector_no>=num_sectors) return -1;
-
-	for(i=0;i<4;i++){
-		if(sectors[sector_no].lights_local[i]==objectid){
-			memmove(&sectors[sector_no].lights_local[i], &sectors[sector_no].lights_local[i+1], (3-i)*sizeof(short));
-			sectors[sector_no].lights_local[3]=-1;//if the list was full we can get a bad value here
-			return i;
-		}
-	}
-	return -1;
-}
 
 int sector_add_particle(int objectid)
 {
@@ -223,38 +187,17 @@ int sector_add_particle(int objectid)
 	for(i=0;i<8;i++){
 		if(sectors[sector_no].particles_local[i]==-1){
 			sectors[sector_no].particles_local[i]=objectid;
+			add_change();
 			return i;
 		}
 	}
 	return -1;
 }
 
-int sector_del_particle(int objectid)
-{
-	int i;
-	int sector_no=sector_get(particles_list[objectid]->x_pos, particles_list[objectid]->y_pos);
-
-	if(sector_no>=num_sectors) return -1;
-
-	for(i=0;i<8;i++){
-		if(sectors[sector_no].particles_local[i]==objectid){
-			memmove(&sectors[sector_no].particles_local[i], &sectors[sector_no].particles_local[i+1], (3-i)*sizeof(short));
-			sectors[sector_no].particles_local[7]=-1;//if the list was full we can get a bad value here
-			return i;
-		}
-	}
-	return -1;
-}
 
 int sector_add_tile(int objectid)
 {
 	//only crc calc here
-	return -1;
-}
-
-int sector_del_tile(int objectid)
-{
-	//crc recalc
 	return -1;
 }
 
