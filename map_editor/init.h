@@ -28,4 +28,14 @@ typedef struct{
 extern e2d_list *e2dlist;
 extern int e2dlistsize;
 
+// partlist
+void load_part_list();
+void unload_part_list();
+typedef struct{
+	int id;
+	char *fn;
+}part_list;
+extern part_list *partlist;
+extern int partlistsize;
+
 #endif

@@ -334,6 +334,10 @@ SOURCE=.\replace_window.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\sector.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\shadows.c
 
 !IF  "$(CFG)" == "map_editor - Win32 Release"
@@ -473,6 +477,10 @@ SOURCE=.\replace_window.h
 # Begin Source File
 
 SOURCE=.\SDL_opengl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\sector.h
 # End Source File
 # Begin Source File
 
