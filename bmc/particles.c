@@ -90,7 +90,7 @@ particle_sys_def *load_particle_def(const char *filename)
 		}
 
 	// System info
-	strncpy(def->file_name,filename,79);
+	strncpy(def->file_name,cleanpath,79);
 	def->file_name[79]=0;
 	fscanf(f,"%i\n",&def->part_sys_type);
 	fscanf(f,"%x,%x\n",&def->sblend,&def->dblend);

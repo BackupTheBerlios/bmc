@@ -202,9 +202,10 @@ extern char	reg_error_str[15],
 		/*font.c*/
 		cant_load_font[30],
 		/*init.c*/
+		no_part_list[50],
 		no_e3d_list[50],
 		no_e2d_list[50],
-			fatal_error_str[10],
+		fatal_error_str[10],
 #ifdef ELC
 		/*gl_init.c*/
 		no_stencil_str[150],

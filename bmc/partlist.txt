@@ -1,0 +1,11 @@
+10
+./particles/bag_in.part 0
+./particles/bag_out.part 1
+./particles/circular_burst.part 2
+./particles/fire_small.part 3
+./particles/fountain.part 4
+./particles/smoke.part 5
+./particles/spherical_burst.part 6
+./particles/teleporter.part 7
+./particles/teleport_in.part 8
+./particles/teleport_out.part 9

@@ -280,6 +280,7 @@ char	reg_error_str[15],
 	/*init.c*/
 	no_e3d_list[50],
 	no_e2d_list[50],
+	no_part_list[50],
 	fatal_error_str[10],
 #ifdef ELC
 	no_stencil_str[150],
@@ -544,6 +545,7 @@ void init_errors()
 	group_id * particles=&(errors[0]);
 	group_id * load=&(errors[0]);
 #endif
+	add_xml_identifier(load,"nopart",no_part_list,"Couldn't read partlist.txt",50);
 	add_xml_identifier(load,"noe3d",no_e3d_list,"Couldn't read e3dlist.txt",50);
 	add_xml_identifier(load,"noe2d",no_e2d_list,"Couldn't read e2dlist.txt",50);
 	add_xml_identifier(load,"fatal",fatal_error_str,"Fatal",10);
