@@ -5,7 +5,7 @@ int e3dlist_getid(char *name)
 	int i;
 	for(i=0;i<e3dlistsize;i++)
 		if(strstr(name,e3dlist[i].fn+1))
-			return i;
+			return e3dlist[i].id;
 	return -1;
 }
 
@@ -14,7 +14,7 @@ int e2dlist_getid(char *name)
 	int i;
 	for(i=0;i<e2dlistsize;i++)
 		if(strstr(name,e2dlist[i].fn+1))
-			return i;
+			return e2dlist[i].id;
 	return -1;
 }
 
@@ -41,7 +41,7 @@ int partlist_getid(char *name)
 	int i;
 	for(i=0;i<partlistsize;i++)
 		if(strstr(name,partlist[i].fn+1))
-			return i;
+			return partlist[i].id;
 	return -1;
 }
 
@@ -149,11 +149,11 @@ void sector_add_map()
 			objects_list[i]->o3dio.x_pos=global_to_sector(objects_list[i]->x_pos);
 			objects_list[i]->o3dio.y_pos=global_to_sector(objects_list[i]->y_pos);
 			objects_list[i]->o3dio.z_pos=global_to_sector_z(objects_list[i]->z_pos);
-	
+
 			objects_list[i]->o3dio.x_rot=global_to_sector_rot(objects_list[i]->x_rot);
 			objects_list[i]->o3dio.y_rot=global_to_sector_rot(objects_list[i]->y_rot);
 			objects_list[i]->o3dio.z_rot=global_to_sector_rot(objects_list[i]->z_rot);
-	
+
 			objects_list[i]->o3dio.flags=0;
 			objects_list[i]->o3dio.flags|=(objects_list[i]->self_lit<<0);
 			objects_list[i]->o3dio.flags|=(objects_list[i]->blended<<1);
@@ -163,7 +163,7 @@ void sector_add_map()
 			objects_list[i]->o3dio.r=objects_list[i]->r*255;
 			objects_list[i]->o3dio.g=objects_list[i]->g*255;
 			objects_list[i]->o3dio.b=objects_list[i]->b*255;
-			
+
 			sector_add_3do(i);
 			j++;
 		}
@@ -200,7 +200,7 @@ void sector_add_map()
 			lights_list[i]->lightio.r=lights_list[i]->r*50;
 			lights_list[i]->lightio.g=lights_list[i]->g*50;
 			lights_list[i]->lightio.b=lights_list[i]->b*50;
-			
+
 			lights_list[i]->lightio.flags=lights_list[i]->flags;
 			lights_list[i]->lightio.intensity=global_to_io_intensity(lights_list[i]->intensity);
 			lights_list[i]->lightio.interval=global_to_io_interval(lights_list[i]->interval);//each step is 0.5s
@@ -365,7 +365,7 @@ int save_map(char * file_name)
 	for(i=0;i<max_particle_systems;i++)
 	{
 		if(j>=particles_no)break;
-		if(particles_list[i] && particles_list[i]->def && particles_list[i]->def != &def){	
+		if(particles_list[i] && particles_list[i]->def && particles_list[i]->def != &def){
 			fwrite(&particles_list[i]->particleio,sizeof(particles_io),1,f);
 			j++;
 		}
@@ -418,13 +418,13 @@ int load_map(char * file_name)
 	fread(mem_map_header, 1, sizeof(cur_map_header), f);//header only
 
 	//verify if we have a valid file
-	if(cur_map_header.file_sig[0]!='b' || cur_map_header.file_sig[1]!='m' || 
-		cur_map_header.file_sig[2]!='m' || cur_map_header.file_sig[3]!='f') 
+	if(cur_map_header.file_sig[0]!='b' || cur_map_header.file_sig[1]!='m' ||
+		cur_map_header.file_sig[2]!='m' || cur_map_header.file_sig[3]!='f')
 		{
 			fclose(f);
 			return 0;//Not a map file..
 		}
-	
+
 	destroy_map();
 
 	//get the map size
@@ -515,7 +515,7 @@ int load_map(char * file_name)
 			int k;
 			fread(cur_2do_pointer, 1, obj_2d_io_size, f);
 
-			if(cur_2d_obj_io.object_type<e2dlistsize) 
+			if(cur_2d_obj_io.object_type<e2dlistsize)
 				{
 					k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type), cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
 					sector_to_global_z(cur_2d_obj_io.z_pos)+0.001f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
@@ -546,7 +546,7 @@ int load_map(char * file_name)
 					memcpy(&particles_list[k]->particleio,&cur_particles_io,sizeof(particles_io));
 				}
 		}
-	
+
 	sectors=(map_sector*)malloc(sizeof(map_sector)*num_sectors);
 	fread(sectors,sizeof(map_sector),num_sectors,f);
 	fclose(f);
@@ -623,7 +623,7 @@ void new_virtual_object()
 	int i;
 	destroy_map();
 	tile_map=(unsigned char *)calloc(128*128,sizeof(char));
-	
+
 	memset(tile_map,255,128*128);
 
 	tile_map_size_x=tile_map_size_y=128;
@@ -633,7 +633,7 @@ void new_virtual_object()
 	memset(height_map,11,128*128*6*6);
 
 	load_map_tiles();
-	
+
 	cx=cy=0;
 
 	view_grid=1;
