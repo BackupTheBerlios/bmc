@@ -465,6 +465,12 @@ void test_for_console_command()
 			my_tcp_send(my_socket,&msg,1);
 			return;
 		}
+	if (my_strncompare (text_loc, "list_buddy", 11))
+		{
+			char msg=LIST_BUDDY;
+			my_tcp_send(my_socket,&msg,1);
+			return;
+		}
 
 /* Terraform test, remove later!! */
 
