@@ -14,8 +14,6 @@ extern int buddy_menu_x_len;
 extern int buddy_menu_y_len;
 extern int buddy_win;
 
-void add_buddy_server(char *name, Uint8 type);
-void del_buddy_server(char *name);
 void init_buddy();
 void display_buddy();
 void add_buddy(char *n, int t, int len);

@@ -439,39 +439,6 @@ void test_for_console_command()
 				}
 		}
 
-	if (my_strncompare (text_loc, "add_buddy ", 9))
-		{
-			char **k;
-			int numarg=makeargv(text_loc+10," \t\n",&k);
-			if(numarg!=2)return;
-			if((strlen(k[0])>15) || (strlen(k[1])!=1))return;
-			add_buddy_server(k[0],(Uint8)atoi(k[1]));
-			freemakeargv(k);
-			return;
-		}
-	if (my_strncompare (text_loc, "del_buddy ", 9))
-		{
-			char **k;
-			int numarg=makeargv(text_loc+10," \t\n",&k);
-			if(numarg!=1)return;
-			if((strlen(k[0])>15))return;
-			del_buddy_server(k[0]);
-			freemakeargv(k);
-			return;
-		}
-	if (my_strncompare (text_loc, "clear_buddy", 11))
-		{
-			char msg=CLEAR_BUDDY;
-			my_tcp_send(my_socket,&msg,1);
-			return;
-		}
-	if (my_strncompare (text_loc, "list_buddy", 11))
-		{
-			char msg=LIST_BUDDY;
-			my_tcp_send(my_socket,&msg,1);
-			return;
-		}
-
 /* Terraform test, remove later!! */
 
 	if(my_strncompare(text_loc,"tile",4))
