@@ -256,30 +256,6 @@ int HandleEvent(SDL_Event *event)
 						break;
 					}
 
-				if(key==K_REPEATSPELL)	// REPEAT spell command
-					{
-						if(get_show_window(sigil_win))
-							{
-								if(!get_show_window(trade_win))
-									{
-										repeat_spell();
-									}
-							}
-						break;
-					}
-
-				if(key==K_SIGILS)
-					{
-						view_window(&sigil_win,-1);
-						break;
-					}
-
-				if(key==K_MANUFACTURE)
-					{
-						view_window(&manufacture_win,-1);
-						break;
-					}
-
 				if(key==K_ITEMS)
 					{
 						view_window(&items_win,-1);

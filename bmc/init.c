@@ -275,14 +275,8 @@ void read_bin_cfg()
 	trade_menu_x=cfg_mem.trade_menu_x;
 	trade_menu_y=cfg_mem.trade_menu_y;
 
-	sigil_menu_x=cfg_mem.sigil_menu_x;
-	sigil_menu_y=cfg_mem.sigil_menu_y;
-
 	dialogue_menu_x=cfg_mem.dialogue_menu_x;
 	dialogue_menu_y=cfg_mem.dialogue_menu_y;
-
-	manufacture_menu_x=cfg_mem.manufacture_menu_x;
-	manufacture_menu_y=cfg_mem.manufacture_menu_y;
 
 	attrib_menu_x=cfg_mem.attrib_menu_x;
 	attrib_menu_y=cfg_mem.attrib_menu_y;
@@ -299,14 +293,6 @@ void read_bin_cfg()
 	questlog_menu_x=cfg_mem.questlog_menu_x;
 	questlog_menu_y=cfg_mem.questlog_menu_y;
 
-	if(quickbar_relocatable>0)
-		{
-			if((quickbar_x=cfg_mem.quickbar_x)>window_width||quickbar_x<=0)quickbar_x=34;
-			if((quickbar_y=cfg_mem.quickbar_y)>window_height||quickbar_y<=0)quickbar_y=64;
-			if((quickbar_dir=cfg_mem.quickbar_flags&0xFF)!=HORIZONTAL)quickbar_dir=VERTICAL;
-			if((quickbar_draggable=(cfg_mem.quickbar_flags&0xFF00)>>8)!=1)quickbar_draggable=0;
-			draw_quickbar();
-		}
 
 	watch_this_stat=cfg_mem.watch_this_stat;
 	if(watch_this_stat<0 || watch_this_stat>=NUM_WATCH_STAT)
@@ -346,14 +332,8 @@ void save_bin_cfg()
 	cfg_mem.trade_menu_x=trade_menu_x;
 	cfg_mem.trade_menu_y=trade_menu_y;
 
-	cfg_mem.sigil_menu_x=sigil_menu_x;
-	cfg_mem.sigil_menu_y=sigil_menu_y;
-
 	cfg_mem.dialogue_menu_x=dialogue_menu_x;
 	cfg_mem.dialogue_menu_y=dialogue_menu_y;
-
-	cfg_mem.manufacture_menu_x=manufacture_menu_x;
-	cfg_mem.manufacture_menu_y=manufacture_menu_y;
 
 	cfg_mem.attrib_menu_x=attrib_menu_x;
 	cfg_mem.attrib_menu_y=attrib_menu_y;
@@ -394,14 +374,6 @@ void save_bin_cfg()
 		cfg_mem.trade_menu_y=trade_menu_y;
 	}
 
-	if(sigil_win) {
-		cfg_mem.sigil_menu_x=windows_list.window[sigil_win].cur_x;
-		cfg_mem.sigil_menu_y=windows_list.window[sigil_win].cur_y;
-	} else {
-		cfg_mem.sigil_menu_x=sigil_menu_x;
-		cfg_mem.sigil_menu_y=sigil_menu_y;
-	}
-
 	if(dialogue_win) {
 		cfg_mem.dialogue_menu_x=windows_list.window[dialogue_win].cur_x;
 		cfg_mem.dialogue_menu_y=windows_list.window[dialogue_win].cur_y;
@@ -409,15 +381,6 @@ void save_bin_cfg()
 		cfg_mem.dialogue_menu_x=dialogue_menu_x;
 		cfg_mem.dialogue_menu_y=dialogue_menu_y;
 	}
-
-	if(manufacture_win) {
-		cfg_mem.manufacture_menu_x=windows_list.window[manufacture_win].cur_x;
-		cfg_mem.manufacture_menu_y=windows_list.window[manufacture_win].cur_y;
-	} else {
-		cfg_mem.manufacture_menu_x=manufacture_menu_x;
-		cfg_mem.manufacture_menu_y=manufacture_menu_y;
-	}
-
 	if(stats_win) {
 		cfg_mem.attrib_menu_x=windows_list.window[stats_win].cur_x;
 		cfg_mem.attrib_menu_y=windows_list.window[stats_win].cur_y;
@@ -457,19 +420,6 @@ void save_bin_cfg()
 		cfg_mem.questlog_menu_x=questlog_menu_x;
 		cfg_mem.questlog_menu_y=questlog_menu_y;
 	}
-
-	if(quickbar_relocatable>0)
-		{
-			if(quickbar_win){
-				cfg_mem.quickbar_x=window_width-windows_list.window[quickbar_win].cur_x;
-				cfg_mem.quickbar_y=windows_list.window[quickbar_win].cur_y;
-				cfg_mem.quickbar_flags=quickbar_dir|(quickbar_draggable<<8);
-			} else {
-				cfg_mem.quickbar_x=quickbar_x;
-				cfg_mem.quickbar_y=quickbar_y;
-				cfg_mem.quickbar_flags=VERTICAL;
-			}
-		}
 
 	cfg_mem.watch_this_stat=watch_this_stat;
 
@@ -631,8 +581,6 @@ void init_stuff()
 	portraits3_tex=load_texture_cache("./textures/portraits3.bmp",0);
 	portraits4_tex=load_texture_cache("./textures/portraits4.bmp",0);
 	portraits5_tex=load_texture_cache("./textures/portraits5.bmp",0);
-
-	sigils_text=load_texture_cache("./textures/sigils.bmp",0);
 	halo_tex=load_texture_cache("./textures/halo.bmp",0);
 
 	if(have_multitexture)ground_detail_text=load_texture_cache("./textures/ground_detail.bmp",255);
@@ -640,7 +588,6 @@ void init_stuff()
 	create_char_error_str[0]=0;
 	init_opening_interface();
 	init_hud_interface();
-	make_sigils_list();
 
 	if(SDLNet_Init()<0)
  		{

@@ -26,8 +26,6 @@ int	mouseover_icons_handler(window_info *win, int mx, int my);
 int	display_stats_bar_handler(window_info *win);
 int	display_misc_handler(window_info *win);
 int	click_misc_handler(window_info *win, int mx, int my, Uint32 flags);
-int	display_quickbar_handler(window_info *win);
-int	click_quickbar_handler(window_info *win, int mx, int my, Uint32 flags);
 int	mouseover_stats_bar_handler(window_info *win, int mx, int my);
 
 int hud_x= 64;
@@ -37,7 +35,6 @@ int view_digital_clock= 0;
 int	icons_win= -1;
 int	stats_bar_win= -1;
 int	misc_win= -1;
-int	quickbar_win= -1;
 int show_help_text=1;
 
 int show_stats_in_hud=0;
@@ -49,7 +46,6 @@ void init_hud_interface()
 	init_peace_icons();
 	init_misc_display();
 	init_stats_display();
-	init_quickbar();
 }
 
 // draw everything related to the hud
@@ -84,20 +80,12 @@ void init_hud_frame()
 	horizontal_bar_v_end= (float)(window_width-hud_x)/256;
 }
 
-float logo_u_start=(float)64/256;
-float logo_v_start=1.0f-(float)128/256;
-
-float logo_u_end=(float)127/256;
-float logo_v_end=1.0f-(float)191/256;
-
 void draw_hud_frame()
 {
 	get_and_set_texture_id(hud_text);
 	glBegin(GL_QUADS);
 	draw_2d_thing(vertical_bar_u_start, vertical_bar_v_start, vertical_bar_u_end, vertical_bar_v_end,window_width-hud_x, 0, window_width, window_height);
 	draw_2d_thing_r(horizontal_bar_u_start, horizontal_bar_v_start, horizontal_bar_u_end, horizontal_bar_v_end,0,window_height,window_width-hud_x , window_height-hud_y);
-	//draw the logo
-	draw_2d_thing(logo_u_start, logo_v_start, logo_u_end, logo_v_end,window_width-hud_x, 0, window_width, 64);
 	glEnd();
 }
 
@@ -133,23 +121,11 @@ float stand_icon_v_start=1.0f-(float)32/256;
 float colored_stand_icon_u_start=(float)64/256;
 float colored_stand_icon_v_start=1.0f-(float)96/256;
 
-float spell_icon_u_start=(float)32/256;
-float spell_icon_v_start=1.0f-(float)32/256;
-
-float colored_spell_icon_u_start=(float)96/256;
-float colored_spell_icon_v_start=1.0f-(float)96/256;
-
 float inventory_icon_u_start=(float)96/256;
 float inventory_icon_v_start=1.0f-(float)32/256;
 
 float colored_inventory_icon_u_start=(float)160/256;
 float colored_inventory_icon_v_start=1.0f-(float)96/256;
-
-float manufacture_icon_u_start=(float)128/256;
-float manufacture_icon_v_start=1.0f-(float)32/256;
-
-float colored_manufacture_icon_u_start=(float)0/256;
-float colored_manufacture_icon_v_start=1.0f-(float)128/256;
 
 float stats_icon_u_start=(float)160/256;
 float stats_icon_v_start=1.0f-(float)32/256;
@@ -252,14 +228,14 @@ void init_peace_icons()
 
 	icons.y=0;
 	icons.x=0;
-	
+
 	add_icon(walk_icon_u_start, walk_icon_v_start, colored_walk_icon_u_start, colored_walk_icon_v_start, tt_walk, switch_action_mode, &type, DATA_ACTIONMODE);
-	
+
 	if(you_sit)
 		add_icon(stand_icon_u_start, stand_icon_v_start, colored_stand_icon_u_start, colored_stand_icon_v_start, tt_stand, sit_button_pressed, NULL, DATA_NONE);
 	else
 		add_icon(sit_icon_u_start, sit_icon_v_start, colored_sit_icon_u_start, colored_sit_icon_v_start, tt_sit, sit_button_pressed, NULL, DATA_NONE);
-	
+
 	type=action_look;
 	add_icon(eye_icon_u_start, eye_icon_v_start, colored_eye_icon_u_start, colored_eye_icon_v_start, tt_look, switch_action_mode, &type, DATA_ACTIONMODE);
 
@@ -273,27 +249,23 @@ void init_peace_icons()
 	add_icon(attack_icon_u_start, attack_icon_v_start, colored_attack_icon_u_start, colored_attack_icon_v_start, tt_attack, switch_action_mode, &type, DATA_ACTIONMODE);
 
 	//done with the integer variables - now for the windows
-	
+
 	add_icon(inventory_icon_u_start, inventory_icon_v_start, colored_inventory_icon_u_start, colored_inventory_icon_v_start, tt_inventory, view_window, &items_win, DATA_WINDOW);
-	
-	add_icon(spell_icon_u_start, spell_icon_v_start, colored_spell_icon_u_start, colored_spell_icon_v_start, tt_spell, view_window, &sigil_win, DATA_WINDOW);
-	
-	add_icon(manufacture_icon_u_start, manufacture_icon_v_start, colored_manufacture_icon_u_start, colored_manufacture_icon_v_start, tt_manufacture, view_window, &manufacture_win, DATA_WINDOW);
-	
+
 	add_icon(stats_icon_u_start, stats_icon_v_start, colored_stats_icon_u_start, colored_stats_icon_v_start, tt_stats, view_window, &stats_win, DATA_WINDOW);
-	
+
 	add_icon(knowledge_icon_u_start, knowledge_icon_v_start, colored_knowledge_icon_u_start, colored_knowledge_icon_v_start, tt_knowledge, view_window, &knowledge_win, DATA_WINDOW);
-	
+
 	add_icon(encyclopedia_icon_u_start, encyclopedia_icon_v_start, colored_encyclopedia_icon_u_start, colored_encyclopedia_icon_v_start, tt_encyclopedia, view_window, &encyclopedia_win, DATA_WINDOW);
-	
+
 	add_icon(questlog_icon_u_start, questlog_icon_v_start, colored_questlog_icon_u_start, colored_questlog_icon_v_start, tt_questlog, view_window, &questlog_win, DATA_WINDOW);
-	
+
 	add_icon(map_icon_u_start, map_icon_v_start, colored_map_icon_u_start, colored_map_icon_v_start, tt_mapwin, view_map_win, &map_win, DATA_WINDOW);
-	
+
 	add_icon(console_icon_u_start, console_icon_v_start, colored_console_icon_u_start, colored_console_icon_v_start, tt_console, view_console_win, &console_win, DATA_WINDOW);
-	
+
 	add_icon(buddy_icon_u_start, buddy_icon_v_start, colored_buddy_icon_u_start, colored_buddy_icon_v_start, tt_buddy, view_window, &buddy_win, DATA_WINDOW);
-	
+
 	add_icon(options_icon_u_start, options_icon_v_start, colored_options_icon_u_start, colored_options_icon_v_start, tt_options, view_window, &options_win, DATA_WINDOW);
 }
 
@@ -373,27 +345,27 @@ int	display_icons_handler(window_info *win)
 					else icons.icon[i]->state=0;
 				}
 		}
-	
+
 	if(mouse_in_window(win->window_id, mouse_x, mouse_y))
 		{
 			state=icon_cursor_x/32;//Icons must be 32 pixels wide...
 			if(state<icons.no)icons.icon[state]->state|=0x01;//Set the state to be mouseover
 			else state=-1;
 		}
-	
+
 	get_and_set_texture_id(icons_text);
 	glColor3f(1.0f,1.0f,1.0f);
 	glBegin(GL_QUADS);
-	
+
 	for(i=0;i<icons.no;i++)
 		{
 			draw_2d_thing(
 				icons.icon[i]->u[STATE(i)],
-				icons.icon[i]->v[STATE(i)], 
+				icons.icon[i]->v[STATE(i)],
 				icons.icon[i]->u[STATE(i)]+(float)31/256,
 				icons.icon[i]->v[STATE(i)]-(float)31/256,
-				icons.x+i*32, 
-				icons.y, 
+				icons.x+i*32,
+				icons.y,
 				icons.x+i*32+31,
 				icons.y+32
 				);
@@ -412,7 +384,7 @@ void sit_button_pressed(void * none, int id)
 		{
 			Uint8 str[4];
 			you_stand_up();
-			//Send message to server...	
+			//Send message to server...
 			str[0]=SIT_DOWN;
 			str[1]=0;
 			my_tcp_send(my_socket,str,2);
@@ -489,7 +461,7 @@ void view_map_win(int * win, int id)
 
 void view_window(int * window, int id)
 {
-	if(window==&items_win||window==&sigil_win||window==&manufacture_win)
+	if(window==&items_win)
 		{
 			if(get_show_window(trade_win))
 				{
@@ -501,8 +473,6 @@ void view_window(int * window, int id)
 		{
 			//OK, the window has not been created yet - use the standard functions
 			if(window==&items_win)display_items_menu();
-			else if(window==&sigil_win) display_sigils_menu();
-			else if(window==&manufacture_win) display_manufacture_menu();
 			else if(window==&options_win) display_options_menu();
 			else if(window==&stats_win) display_stats(your_info);
 			else if(window==&knowledge_win) display_knowledge();
@@ -550,9 +520,9 @@ void show_help(char *help_message, int x, int y)
 	Uint8 str[125];
 	int len=strlen(help_message)*8+1;
 	int width=window_width-80;
-	
+
 	if(x+len>width) x-=(x+len)-width;
-	
+
 	glColor4f(0.0f,0.0f,0.0f,0.5f);
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -563,10 +533,10 @@ void show_help(char *help_message, int x, int y)
 	glVertex3i(x+len,y,0);
 	glVertex3i(x+len,y+15,0);
 	glEnd();
-	
+
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	
+
 	glColor3f(1.0f,1.0f,1.0f);
 	strcpy(str,help_message);
 	draw_string_small(x, y,help_message,1);
@@ -693,7 +663,7 @@ int	display_stats_bar_handler(window_info *win)
 	draw_stats_bar(mana_bar_start_x, mana_bar_start_y, your_info.ethereal_points.cur, mana_adjusted_x_len, 0.2f, 0.2f, 1.0f, 0.2f, 0.2f, 0.5f);
 	draw_stats_bar(load_bar_start_x, load_bar_start_y, your_info.carry_capacity.base-your_info.carry_capacity.cur, load_adjusted_x_len, 0.6f, 0.4f, 0.4f, 0.4f, 0.2f, 0.2f);
 	if(win->len_x>640-64) draw_exp_display();
-	
+
 	if(show_help_text)
 		{
         		if(mouse_in_window(win->window_id, mouse_x, mouse_y))
@@ -851,308 +821,6 @@ int	click_misc_handler(window_info *win, int mx, int my, Uint32 flags)
 	return 0;
 }
 
-int quickbar_x_len= 30;
-int quickbar_y_len= 6*30;
-int quickbar_x=34;
-int quickbar_y=64;
-int quickbar_draggable=0;
-int quickbar_dir=VERTICAL;
-int quickbar_relocatable=0;
-
-
-//quickbar section
-void init_quickbar() {
-	quickbar_x_len= 30;
-	quickbar_y_len= 6*30+1;
-	if(quickbar_win <= 0)
-		{
-			if(quickbar_dir==VERTICAL)
-				quickbar_win= create_window("Quickbar", 0, 0, window_width-quickbar_x, quickbar_y, quickbar_x_len, quickbar_y_len, quickbar_draggable?ELW_TITLE_BAR|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST|ELW_DRAGGABLE:ELW_TITLE_NONE|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST);
-			else
-				quickbar_win= create_window("Quickbar", 0, 0, window_width-quickbar_x, quickbar_y, quickbar_y_len, quickbar_x_len, quickbar_draggable?ELW_TITLE_BAR|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST|ELW_DRAGGABLE:ELW_TITLE_NONE|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST);
-			set_window_handler(quickbar_win, ELW_HANDLER_DISPLAY, &display_quickbar_handler);
-			set_window_handler(quickbar_win, ELW_HANDLER_CLICK, &click_quickbar_handler);
-		}
-	else
-		{
-			if(quickbar_draggable) show_window(quickbar_win);
-			else if(quickbar_y>window_height||quickbar_x>window_width) move_window(quickbar_win, 0, 0, 200, 64);//The player has done something stupid... let him/her correct it
-			else move_window(quickbar_win, 0, 0, window_width-quickbar_x, quickbar_y);
-		}
-}
-
-void draw_quickbar() {
-	// failsafe until better integrated
-	if(quickbar_dir==VERTICAL) {
-		init_window(quickbar_win, 0, 0, window_width-quickbar_x, quickbar_y, quickbar_x_len, quickbar_y_len);
-		if(quickbar_draggable) change_flags(quickbar_win, (ELW_TITLE_BAR|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST|ELW_DRAGGABLE));
-	}
-	else if(quickbar_dir==HORIZONTAL) {
-		init_window(quickbar_win, 0, 0, window_width-quickbar_x, quickbar_y, quickbar_y_len, quickbar_x_len);
-		if(quickbar_draggable) change_flags(quickbar_win, (ELW_TITLE_BAR|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST|ELW_DRAGGABLE));
-
-	} 
-	display_window(quickbar_win);
-}
-
-int	display_quickbar_handler(window_info *win)
-{
-	Uint8 str[80];
-	int y, i;
-
-	glDisable(GL_TEXTURE_2D);
-	glBegin(GL_LINES);
-	use_window_color(quickbar_win, ELW_COLOR_LINE);
-	//draw the grid
-	if(quickbar_dir==VERTICAL)
-		{
-			for(y=1;y<6;y++)
-				{
-					glVertex3i(0, y*30+1, 0);
-					glVertex3i(quickbar_x_len, y*30+1, 0);
-				}
-		}
-	else
-		{
-			for(y=1;y<6;y++)
-				{
-					glVertex3i(y*30+1, 0, 0);
-					glVertex3i(y*30+1, quickbar_x_len, 0);
-				}
-		}
-	glEnd();
-	glEnable(GL_TEXTURE_2D);
-	glColor3f(1.0f,1.0f,1.0f);
-	//ok, now let's draw the objects...
-	for(i=0;i<ITEM_NUM_ITEMS;i++)
-		{
-			if(item_list[i].quantity > 0)
-				{
-					float u_start,v_start,u_end,v_end;
-					int this_texture,cur_item,cur_pos;
-					int x_start,x_end,y_start,y_end;
-
-					//get the UV coordinates.
-					cur_item=item_list[i].image_id%25;
-					u_start=0.2f*(cur_item%5);
-					u_end=u_start+(float)50/256;
-					v_start=(1.0f+((float)50/256)/256.0f)-((float)50/256*(cur_item/5));
-					v_end=v_start-(float)50/256;
-
-					//get the x and y
-					cur_pos=item_list[i].pos;
-					if(cur_pos<6)//don't even check worn items
-						{
-							x_start= 1;
-							x_end= x_start+29;
-							y_start= 30*(cur_pos%6)+1;
-							y_end= y_start+29;
-
-							//get the texture this item belongs to
-							this_texture=item_list[i].image_id/25;
-							switch(this_texture) {
-							case 0:
-								this_texture=items_text_1;break;
-							case 1:
-								this_texture=items_text_2;break;
-							case 2:
-								this_texture=items_text_3;break;
-							case 3:
-								this_texture=items_text_4;break;
-							case 4:
-								this_texture=items_text_5;break;
-							case 5:
-								this_texture=items_text_6;break;
-							case 6:
-								this_texture=items_text_7;break;
-							case 7:
-								this_texture=items_text_8;break;
-							case 8:
-								this_texture=items_text_9;break;
-							}
-
-							get_and_set_texture_id(this_texture);
-							glBegin(GL_QUADS);
-							if(quickbar_dir==VERTICAL)
-								{
-									draw_2d_thing(u_start,v_start,u_end,v_end,x_start,y_start,x_end,y_end);
-								}
-							else
-								{
-									draw_2d_thing(u_start,v_start,u_end,v_end,y_start+1,x_start+1,y_end-1,x_end-1);
-								}
-							glEnd();
-							sprintf(str,"%i",item_list[i].quantity);
-							if(quickbar_dir==VERTICAL) draw_string_small(x_start,y_end-15,str,1);
-							else draw_string_small(y_start,x_end-15,str,1);
-						}
-				}
-		}
-	return 1;
-}
-
-int check_quickbar() {
-	return(click_in_window(quickbar_win, mouse_x, mouse_y, 0));
-}
-
-int	click_quickbar_handler(window_info *win, int mx, int my, Uint32 flags)
-{
-	int i,y;
-	int x_screen,y_screen;
-	Uint8 str[100];
-	int trigger=ELW_LEFT_MOUSE|ELW_CTRL|ELW_SHIFT;//flags we'll use for the quickbar relocation handling
-
-	// no in window check needed, already done
-	//see if we clicked on any item in the main category
-	for(y=0;y<6;y++)
-		{
-			if(quickbar_dir==VERTICAL)
-				{
-					x_screen=0;
-					y_screen=y*30;
-				}
-			else
-				{
-					x_screen=y*30;
-					y_screen=0;
-				}
-			if(mx>x_screen && mx<x_screen+30 && my>y_screen && my<y_screen+30)
-				{
-					//see if there is an empty space to drop this item over.
-					if(item_dragged!=-1)//we have to drop this item
-						{
-							int any_item=0;
-							for(i=0;i<ITEM_NUM_ITEMS;i++)
-								{
-									if(item_list[i].quantity && item_list[i].pos==y)
-										{
-											any_item=1;
-											if(item_dragged==i)//drop the item only over itself
-												item_dragged=-1;
-											return 1;
-										}
-								}
-							if(!any_item)
-								{
-									//send the drop info to the server
-									str[0]=MOVE_INVENTORY_ITEM;
-									str[1]=item_list[item_dragged].pos;
-									str[2]=y;
-									my_tcp_send(my_socket,str,3);
-									item_dragged=-1;
-									return 1;
-								}
-						}
-					if(quickbar_relocatable>0)
-						{
-							if((flags&trigger)==(ELW_LEFT_MOUSE|ELW_CTRL))
-								{
-									//toggle draggable
-									if((get_flags(quickbar_win)!=(ELW_TITLE_BAR|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST|ELW_DRAGGABLE)))
-										{
-											change_flags(quickbar_win, (ELW_TITLE_BAR|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST|ELW_DRAGGABLE));
-											quickbar_draggable=1;
-										}
-									else 
-										{
-											change_flags(quickbar_win, (ELW_TITLE_NONE|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST));
-											quickbar_draggable=0;
-											quickbar_x=window_width-windows_list.window[quickbar_win].cur_x;
-											quickbar_y=windows_list.window[quickbar_win].cur_y;
-										}
-								}
-							else if (((flags&trigger)==(ELW_LEFT_MOUSE|ELW_SHIFT)) && (get_flags(quickbar_win)==(ELW_TITLE_BAR|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST|ELW_DRAGGABLE)))
-								{
-									//toggle vertical/horisontal
-									flip_quickbar();
-								}
-							else if (((flags&trigger)==trigger))
-								{
-									//reset
-									reset_quickbar();
-								}
-						}
-					//see if there is any item there
-					for(i=0;i<ITEM_NUM_ITEMS;i++)
-						{
-							//should we get the info for it?
-							if(item_list[i].quantity && item_list[i].pos==y)
-								{
-
-									if(action_mode==action_look || (flags&ELW_RIGHT_MOUSE))
-										{
-											if(cur_time<(click_time+click_speed))
-												if(item_list[i].use_with_inventory)
-													{
-														str[0]=USE_INVENTORY_ITEM;
-														str[1]=item_list[i].pos;
-														my_tcp_send(my_socket,str,2);
-														return 1;
-													}
-											click_time=cur_time;
-											str[0]=LOOK_AT_INVENTORY_ITEM;
-											str[1]=item_list[i].pos;
-											my_tcp_send(my_socket,str,2);
-										}
-									else if(action_mode==action_use)
-										{
-											if(item_list[i].use_with_inventory)
-												{
-													str[0]=USE_INVENTORY_ITEM;
-													str[1]=item_list[i].pos;
-													my_tcp_send(my_socket,str,2);
-													return 1;
-												}
-											return 1;
-										}
-									else//we might test for other things first, like use or drop
-										{
-											if(item_dragged==-1)//we have to drag this item
-												{
-													item_dragged=i;
-												}
-										}
-
-									return 1;
-								}
-						}
-				}
-		}
-	return 1;
-}
-
-/*Change the quickbar from vertical to horizontal, or vice versa*/
-void flip_quickbar() 
-{
-	if (quickbar_dir==VERTICAL) 
-		{
-			quickbar_dir=HORIZONTAL;
-			init_window(quickbar_win, 0, 0, windows_list.window[quickbar_win].cur_x, windows_list.window[quickbar_win].cur_y, quickbar_y_len, quickbar_x_len);
-		}      
-	else if (quickbar_dir==HORIZONTAL) 
-		{
-			quickbar_dir=VERTICAL;
-			init_window(quickbar_win, 0, 0, windows_list.window[quickbar_win].cur_x, windows_list.window[quickbar_win].cur_y, quickbar_x_len, quickbar_y_len);
-		}
-}
-
-/*Return the quickbar to it's Built-in position*/
-void reset_quickbar() 
-{
-	//Necessary Variables
-	quickbar_x_len= 30;
-	quickbar_y_len= 6*30+1;
-	quickbar_x= quickbar_x_len+4;
-	quickbar_y= 64;
-	//Re-set to default orientation
-	quickbar_dir=VERTICAL;
-	quickbar_draggable=0;
-	init_window(quickbar_win, 0, 0, quickbar_x, quickbar_y, quickbar_x_len, quickbar_y_len);
-	//Re-set  Flags
-	change_flags(quickbar_win, ELW_TITLE_NONE|ELW_SHOW|ELW_USE_BACKGROUND|ELW_USE_BORDER|ELW_SHOW_LAST);   
-	//NEED x_offset
-	move_window(quickbar_win, 0, 0, window_width-quickbar_x, 64);
-}
 
 
 Uint32 exp_lev[140];
@@ -1198,16 +866,10 @@ void draw_stats()
 	sprintf(str,"%-4s %2i",attributes.alchemy_skill.shortname,your_info.alchemy_skill.base);
 	draw_string_small(x, y, str, 1);
 	y-=15;
-	sprintf(str,"%-4s %2i",attributes.magic_skill.shortname,your_info.magic_skill.base);
-	draw_string_small(x, y, str, 1);
-	y-=15;
 	sprintf(str,"%-4s %2i",attributes.potion_skill.shortname,your_info.potion_skill.base);
 	draw_string_small(x, y, str, 1);
 	y-=15;
 	sprintf(str,"%-4s %2i",attributes.summoning_skill.shortname,your_info.summoning_skill.base);
-	draw_string_small(x, y, str, 1);
-	y-=15;
-	sprintf(str,"%-4s %2i",attributes.manufacturing_skill.shortname,your_info.manufacturing_skill.base);
 	draw_string_small(x, y, str, 1);
 	y-=15;
 	sprintf(str,"%-4s %2i",attributes.crafting_skill.shortname,your_info.crafting_skill.base);
@@ -1246,11 +908,6 @@ void draw_exp_display()
 		baselev = your_info.alchemy_skill.base;
 		name = attributes.alchemy_skill.name;
 		break;
-	case 5: // magic
-		cur_exp = your_info.magic_exp;
-		baselev = your_info.magic_skill.base;
-		name = attributes.magic_skill.name;
-		break;
 	case 6: // potion
 		cur_exp = your_info.potion_exp;
 		baselev = your_info.potion_skill.base;
@@ -1260,11 +917,6 @@ void draw_exp_display()
 		cur_exp = your_info.summoning_exp;
 		baselev = your_info.summoning_skill.base;
 		name = attributes.summoning_skill.name;
-		break;
-	case 8: // manufacture
-		cur_exp = your_info.manufacturing_exp;
-		baselev = your_info.manufacturing_skill.base;
-		name = attributes.manufacturing_skill.name;
 		break;
 	case 9: // crafting
 		cur_exp = your_info.crafting_exp;
@@ -1299,7 +951,7 @@ void draw_exp_display()
 /*Flag manipulation-I hate doing this by hand*/
 /*Change flags*/
 void change_flags(int win_id, Uint32 flags) {
-	windows_list.window[win_id].flags=flags;     
+	windows_list.window[win_id].flags=flags;
 }
 
 /*Return flags*/

@@ -573,8 +573,6 @@ void get_your_trade_objects(Uint8 *data)
 
 	//we have to close the inventory and manufacture windows, otherwise bad things can happen.
 	hide_window(items_win);
-	hide_window(manufacture_win);
-	hide_window(sigil_win);
 }
 
 void put_item_on_trade(Uint8 *data)

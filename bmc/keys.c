@@ -21,9 +21,6 @@ Uint32 K_WALK=CTRL|'w';
 Uint32 K_LOOK=CTRL|'l';
 Uint32 K_USE=CTRL|'u';
 Uint32 K_OPTIONS=CTRL|'o';
-Uint32 K_REPEATSPELL=CTRL|'r';
-Uint32 K_SIGILS=CTRL|'s';
-Uint32 K_MANUFACTURE=CTRL|'m';
 Uint32 K_ITEMS=CTRL|'i';
 Uint32 K_MAP=9;
 Uint32 K_ROTATELEFT=276;
@@ -110,12 +107,6 @@ void read_key_config()
 		K_USE = parse_key_string(&file_mem[t]);
 	if((t=get_string_occurance("#K_OPTIONS",file_mem,key_file_size,0))!=-1)
 		K_OPTIONS = parse_key_string(&file_mem[t]);
-	if((t=get_string_occurance("#K_REPEATSPELL",file_mem,key_file_size,0))!=-1)
-		K_REPEATSPELL = parse_key_string(&file_mem[t]);
-	if((t=get_string_occurance("#K_SIGILS",file_mem,key_file_size,0))!=-1)
-		K_SIGILS = parse_key_string(&file_mem[t]);
-	if((t=get_string_occurance("#K_MANUFACTURE",file_mem,key_file_size,0))!=-1)
-		K_MANUFACTURE = parse_key_string(&file_mem[t]);
 	if((t=get_string_occurance("#K_ITEMS",file_mem,key_file_size,0))!=-1)
 		K_ITEMS = parse_key_string(&file_mem[t]);
 	if((t=get_string_occurance("#K_MAP",file_mem,key_file_size,0))!=-1)

@@ -84,7 +84,6 @@ typedef struct
 void init_console(void);
 void init_help(void);
 void init_options(void);
-void init_spells(void);
 void init_stats(void);
 #endif
 void init_errors(void);
@@ -100,7 +99,6 @@ char	tt_walk[30],
 	tt_trade[30],
 	tt_attack[30],
 	tt_inventory[30],
-	tt_spell[30],
 	tt_manufacture[30],
 	tt_stats[30],
 	tt_knowledge[30],
@@ -130,38 +128,6 @@ dichar	opt_shadows,
 char 	switch_video_mode[50],
 	opt_options[20],
 	opt_vidmode[20];
-#endif
-
-#ifdef ELC
-//Sigils
-char 	sig_too_few_sigs[50];
-
-dichar	sig_change,
-	sig_restore,
-	sig_space,
-	sig_increase,
-	sig_decrease,
-	sig_temp,
-	sig_perm,
-	sig_move,
-	sig_local,
-	sig_global,
-	sig_fire,
-	sig_water,
-	sig_air,
-	sig_earth,
-	sig_spirit,
-	sig_matter,
-	sig_energy,
-	sig_magic,
-	sig_destroy,
-	sig_create,
-	sig_knowledge,
-	sig_protection,
-	sig_remove,
-	sig_health,
-	sig_life,
-	sig_death;
 #endif
 
 #ifdef ELC
@@ -373,7 +339,6 @@ char	reg_error_str[15],
 #define ERRORS 6
 #define HELP_STR 4
 #define OPTIONS_STR 1
-#define SIGILS_STR 1
 #define STATS_STR 5
 #define STATS_EXTRA 1
 #endif
@@ -387,7 +352,6 @@ group_id * errors;
 group_id * console_str;
 group_id * help_str;
 group_id_di * options_str;
-group_id_di * sigils_str;
 group_stat * stats_str;
 group_id * stats_extra;
 #endif
@@ -399,7 +363,6 @@ void init_groups()
 	errors=add_xml_group(GROUP,ERRORS,"actors","load","misc","particles","snd","video");
 	help_str=add_xml_group(GROUP,HELP_STR,"afk","misc","new","tooltips");
 	options_str=add_xml_group(DIGROUP,OPTIONS_STR,"options");
-	sigils_str=add_xml_group(DIGROUP,SIGILS_STR,"sigils");
 	stats_str=add_xml_group(STAT_GROUP,STATS_STR,"base","cross","misc","nexus","skills");
 	stats_extra=add_xml_group(GROUP,STATS_EXTRA,"extra");
 #endif
@@ -488,7 +451,6 @@ void init_translatables()
 	init_console();
 	init_help();
 	init_options();
-	init_spells();
 	init_stats();
 #endif
 }
@@ -687,7 +649,6 @@ void init_help()
 	add_xml_identifier(misc,"license",license_check,"Entropy says: U R 2 g00d 2 r34d +h3 license.txt?\nBTW, that license.txt file is actually there for a reason.",20);
 	add_xml_identifier(misc,"quantity",quantity_str,"Quantity",30);
 	add_xml_identifier(misc,"abort",abort_str,"Abort",6);
-	add_xml_identifier(misc,"sigils",sig_too_few_sigs,"This spell requires at least 2 sigils",50);
 	add_xml_identifier(misc,"switch",switch_video_mode,"Switches to video mode %s",50);
 	add_xml_identifier(misc,"cache",cache_size_str,"Cache size",20);
 
@@ -716,8 +677,6 @@ void init_help()
 	add_xml_identifier(tooltips,"trade",tt_trade,"Trade",30);
 	add_xml_identifier(tooltips,"attack",tt_attack,"Attack",30);
 	add_xml_identifier(tooltips,"invent",tt_inventory,"View inventory",30);
-	add_xml_identifier(tooltips,"spell",tt_spell,"View spell window",30);
-	add_xml_identifier(tooltips,"manu",tt_manufacture,"View manufacture window",30);
 	add_xml_identifier(tooltips,"stats",tt_stats,"View stats",30);
 	add_xml_identifier(tooltips,"know",tt_knowledge,"View knowledge window",30);
 	add_xml_identifier(tooltips,"ency",tt_encyclopedia,"View encyclopedia window",30);
@@ -748,38 +707,6 @@ void init_options()
 }
 #endif
 
-#ifdef ELC
-void init_spells()
-{
-	//Sigils
-	add_xml_distringid(sigils_str,"change",&sig_change,"Change","");
-	add_xml_distringid(sigils_str,"restore",&sig_restore,"Restore","");
-	add_xml_distringid(sigils_str,"space",&sig_space,"Space","");
-	add_xml_distringid(sigils_str,"increase",&sig_increase,"Increase","");
-	add_xml_distringid(sigils_str,"decrease",&sig_decrease,"Decrease","");
-	add_xml_distringid(sigils_str,"temporary",&sig_temp,"Temporary","");
-	add_xml_distringid(sigils_str,"permanent",&sig_perm,"Permanent","");
-	add_xml_distringid(sigils_str,"move",&sig_move,"Move","");
-	add_xml_distringid(sigils_str,"local",&sig_local,"Local","");
-	add_xml_distringid(sigils_str,"global",&sig_global,"Global","");
-	add_xml_distringid(sigils_str,"fire",&sig_fire,"Fire","");
-	add_xml_distringid(sigils_str,"water",&sig_water,"Water","");
-	add_xml_distringid(sigils_str,"air",&sig_air,"Air","");
-	add_xml_distringid(sigils_str,"earth",&sig_earth,"Earth","");
-	add_xml_distringid(sigils_str,"spirit",&sig_spirit,"Spirit","");
-	add_xml_distringid(sigils_str,"matter",&sig_matter,"Matter","");
-	add_xml_distringid(sigils_str,"energy",&sig_energy,"Energy","");
-	add_xml_distringid(sigils_str,"magic",&sig_magic,"Magic","");
-	add_xml_distringid(sigils_str,"destroy",&sig_destroy,"Destroy","");
-	add_xml_distringid(sigils_str,"create",&sig_create,"Create","");
-	add_xml_distringid(sigils_str,"knowledge",&sig_knowledge,"Knowledge","");
-	add_xml_distringid(sigils_str,"protection",&sig_protection,"Protection","");
-	add_xml_distringid(sigils_str,"remove",&sig_remove,"Remove","");
-	add_xml_distringid(sigils_str,"health",&sig_health,"Health","");
-	add_xml_distringid(sigils_str,"life",&sig_life,"Life","");
-	add_xml_distringid(sigils_str,"death",&sig_death,"Death","");
-}
-#endif
 
 #ifdef ELC
 void init_stats()
@@ -844,7 +771,6 @@ void parse_errors(xmlNode * in);
 void parse_console(xmlNode * in);
 void parse_help(xmlNode * in);
 void parse_options(xmlNode * in);
-void parse_spells(xmlNode * in);
 void parse_stats(xmlNode * in);
 #endif
 
@@ -912,17 +838,6 @@ void load_translatables()
 		}
 #endif
 #ifdef ELC
-	file = load_strings("spells.xml");
-	if(file.file!=NULL)
-		{
-			parse_spells(file.root);
-#ifdef WRITE_XML
-			save_strings(file.file,"spells.xml");
-#endif
-			xmlFreeDoc(file.file);
-		}
-#endif
-#ifdef ELC
 	file = load_strings("stats.xml");
 	if(file.file!=NULL)
 		{
@@ -939,7 +854,6 @@ void load_translatables()
 	free_xml_parser(GROUP,console_str,CONSOLE_STR);
 	free_xml_parser(GROUP,help_str,HELP_STR);
 	free_xml_parser(DIGROUP,options_str,OPTIONS_STR);
-	free_xml_parser(DIGROUP,sigils_str,SIGILS_STR);
 	free_xml_parser(STAT_GROUP,stats_str,STATS_STR);
 	free_xml_parser(GROUP,stats_extra,STATS_EXTRA);
 #endif
@@ -1303,20 +1217,11 @@ void parse_options(xmlNode * in)
 }
 #endif
 
-#ifdef ELC
-void parse_spells(xmlNode * in)
-{
-	parse_groups(in, sigils_str, SIGILS_STR, DIGROUP);
-}
-#endif
-
-#ifdef ELC
 void parse_stats(xmlNode * in)
 {
 	parse_groups(in, stats_extra, STATS_EXTRA, GROUP);
 	parse_groups(in, stats_str, STATS_STR, STAT_GROUP);
 }
-#endif
 
 void free_xml_parser(int type, void * gPtr, int no)
 {

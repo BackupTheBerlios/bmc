@@ -106,10 +106,6 @@ void draw_scene()
 
 	if(interface_mode!=interface_game)
 		{
-			if(quickbar_relocatable && quickbar_win)//Hack
-				{
-					if(windows_list.window[quickbar_win].cur_x<window_width-hud_x && window_height - windows_list.window[quickbar_win].cur_y>hud_y) windows_list.window[quickbar_win].displayed=0;
-				}
 			if(interface_mode==interface_console)
 				{
 					// are we actively drawing things?
@@ -187,7 +183,6 @@ void draw_scene()
 	if(i > max_actors) return;//we still don't have ourselves
 	main_count++;
 
-	if(quickbar_win>0)windows_list.window[quickbar_win].displayed=1;
 
 	if(old_fps_average<5)
 		{

@@ -38,7 +38,7 @@ int my_tcp_send(TCPsocket my_socket, Uint8 *str, int len)
 	if(disconnected)return 0;
 	//check to see if we have too many packets being sent of the same to reduce server flood
 	if(len < 256)	// only if it fits
-	if(str[0]==MOVE_TO || str[0]==RUN_TO || str[0]==SIT_DOWN || str[0]==HARVEST || str[0]==MANUFACTURE_THIS || str[0]==CAST_SPELL || str[0]==RESPOND_TO_NPC || str[0]==ATTACK_SOMEONE || str[0]==SEND_PM || str[0]==RAW_TEXT)
+	if(str[0]==MOVE_TO || str[0]==RUN_TO || str[0]==SIT_DOWN || str[0]==HARVEST || str[0]==MANUFACTURE_THIS || str[0]==RESPOND_TO_NPC || str[0]==ATTACK_SOMEONE || str[0]==SEND_PM || str[0]==RAW_TEXT)
 		{
 			Uint32	time_limit=600;
 			if( str[0]==SEND_PM || str[0]==RAW_TEXT)time_limit=1500;
@@ -382,17 +382,10 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 		case INVENTORY_ITEM_TEXT:
 			{
 				put_small_text_in_box(&in_data[3],data_lenght-3,6*51+100,items_string);
-				if(!(get_show_window(items_win)||get_show_window(manufacture_win)||get_show_window(trade_win)))
+				if(!(get_show_window(items_win)||get_show_window(trade_win)))
 					{
 						put_text_in_buffer(&in_data[3],data_lenght-3,0);
 					}
-			}
-			break;
-
-		case SPELL_ITEM_TEXT:
-			{
-				put_small_text_in_box(&in_data[3],data_lenght-3,6*51+100,spell_text);
-				have_error_message=1;
 			}
 			break;
 
@@ -675,30 +668,6 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 			}
 			break;
 
-		case GET_YOUR_SIGILS:
-			{
-				get_sigils_we_have(*((Uint32 *)(in_data+3)));
-			}
-			break;
-
-		case GET_ACTIVE_SPELL:
-			{
-				get_active_spell(in_data[3],in_data[4]);
-			}
-			break;
-
-		case REMOVE_ACTIVE_SPELL:
-			{
-				remove_active_spell(in_data[3]);
-			}
-			break;
-
-		case GET_ACTIVE_SPELL_LIST:
-			{
-				get_active_spell_list(&in_data[3]);
-			}
-			break;
-
 		case GET_ACTOR_DAMAGE:
 			{
 				get_actor_damage(*((Uint16 *)(in_data+3)),in_data[5]);
@@ -729,7 +698,7 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 					get_actor_ptr_from_id( *((Uint16 *)(in_data+3)) ), in_data+5 );
 			}
 			break;
-			
+
 		case BUDDY_EVENT:
 			{
 				if(in_data[3]==1)
@@ -747,7 +716,7 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 		case GET_TILE_DATA:
 			get_tile_data(in_data+3);
 			break;
-		
+
 		case GET_3D_OBJECTS:
 			get_3d_objects(in_data+3);
 			break;
@@ -802,7 +771,7 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 		case REPLACE_2D_OBJECT:
 			replace_2d_object(in_data+3);
 			break;
-		
+
 		case ADD_LIGHT:
 			add_lights(in_data+3);
 			break;
@@ -838,10 +807,10 @@ static void process_data_from_server()
 	if (3 <= in_data_used) {
 		Uint8   *pData  = in_data;
 		Uint16   size;
-		
+
 		do { /* while (3 <= in_data_used) (enough data present for the length field) */
 			static const int foo = 1; /* used for run-time byteorder check */
-			
+
 			/* make a copy of the length field...watch alignment/byteorder */
 			if (*(char *)&foo) { /* little-endian ? */
 				((Uint8 *)&size)[0] = pData[1];
@@ -851,16 +820,16 @@ static void process_data_from_server()
 				((Uint8 *)&size)[0] = pData[2];
 				((Uint8 *)&size)[1] = pData[1];
 			}
-			
+
 			if (sizeof (in_data) - 3 >= size) { /* buffer big enough ? */
 				size += 2; /* add length field size */
-				
+
 				if (size <= in_data_used) { /* do we have a complete message ? */
 					process_message_from_server(pData, size);
 
 					if (log_conn_data)
 						log_conn(pData, size);
-		
+
 					/* advance to next message */
 					pData         += size;
 					in_data_used  -= size;
@@ -870,7 +839,7 @@ static void process_data_from_server()
 			}
 			else { /* sizeof (in_data) - 3 < size */
 				log_to_console(c_red2, packet_overrun);
-	    
+
 				log_to_console(c_red2, disconnected_from_server);
 				log_to_console(c_red2, alt_x_quit);
 				in_data_used = 0;
@@ -894,13 +863,13 @@ void get_message_from_server()
 
 		if (0 < (received = SDLNet_TCP_Recv(my_socket, &in_data[in_data_used], sizeof (in_data) - in_data_used))) {
 			in_data_used += received;
-      
+
 			process_data_from_server();
 		}
 		else { /* 0 >= received (EOF or some error) */
 			if (received)
 				log_to_console(c_red2, SDLNet_GetError()); //XXX: SDL[Net]_GetError used by timer thread ? i bet its not reentrant...
-		 
+
 			log_to_console(c_red2, disconnected_from_server);
 			log_to_console(c_red2, alt_x_quit);
 			in_data_used = 0;

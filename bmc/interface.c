@@ -650,7 +650,6 @@ void draw_ingame_interface()
 	draw_hud_frame();
 	display_windows(1);	// Display all the windows handled by the window manager
 	//draw_hud_interface();
-    display_spells_we_have();
     if(item_dragged!=-1)drag_item();
 
 }

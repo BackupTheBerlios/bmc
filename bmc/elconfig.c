@@ -328,7 +328,6 @@ void init_vars()
 	add_var(BOOL,"view_digital_clock","digit",&view_digital_clock,change_var,1);
 	add_var(BOOL,"show_stats_in_hud","sstats",&show_stats_in_hud,change_var,0);
 	add_var(BOOL,"show_help_text","shelp",&show_help_text,change_var,1);
-	add_var(BOOL,"relocate_quickbar","requick",&quickbar_relocatable,change_var,0);
 	add_var(SPECINT,"compass_north","comp",&compass_direction,change_compass_direction,1);
 
 	add_var(SPECINT,"auto_afk_time","afkt",&afk_time,set_afk_time,5*60000);

@@ -3,7 +3,6 @@
 #include "elwindows.h"
 
 item item_list[ITEM_NUM_ITEMS];
-item manufacture_list[ITEM_NUM_ITEMS];
 ground_item ground_item_list[50];
 bag bag_list[200];
 
@@ -42,11 +41,6 @@ int ground_items_menu_x_len=6*33;
 int ground_items_menu_y_len=10*33;
 //int ground_items_menu_dragged=0;
 
-int manufacture_menu_x=10;
-int manufacture_menu_y=20;
-int manufacture_menu_x_len=12*33+20;
-int manufacture_menu_y_len=6*33;
-//int manufacture_menu_dragged=0;
 
 int trade_menu_x=10;
 int trade_menu_y=20;
@@ -265,7 +259,6 @@ void get_your_items(Uint8 *data)
 			if((flags&ITEM_INVENTORY_USABLE))item_list[i].use_with_inventory=1;
 			else item_list[i].use_with_inventory=0;
 		}
-	build_manufacture_list();
 }
 
 
@@ -502,7 +495,6 @@ void remove_item_from_inventory(int pos)
 				if(item_list[i].pos==pos)
 					{
 						item_list[i].quantity=0;
-						build_manufacture_list();
 						return;
 					}
 		}
@@ -535,7 +527,6 @@ void get_new_inventory_item(Uint8 *data)
 						item_list[i].image_id=image_id;
 						item_list[i].quantity=quantity;
 						item_list[i].pos=pos;
-						build_manufacture_list();
 						return;
 					}
 		}
@@ -553,8 +544,6 @@ void get_new_inventory_item(Uint8 *data)
 					else item_list[i].is_reagent=0;
 					if((flags&ITEM_INVENTORY_USABLE))item_list[i].use_with_inventory=1;
 					else item_list[i].use_with_inventory=0;
-
-					build_manufacture_list();
 					return;
 				}
 		}
