@@ -211,6 +211,56 @@ int HandleEvent(SDL_Event *event)
 						s[17]=0;
 						get_3d_objects(s);
 						*/
+
+						/*//GET_2D_OBJECTS test
+						char s[100];
+						actor *xxx=pf_get_our_actor();
+						active_sector=sector_get(xxx->x_pos,xxx->y_pos);
+						s[0]=2;
+						*(Uint16*)&s[1]=1; //id
+						*(Uint16*)&s[3]=100; //x
+						*(Uint16*)&s[5]=100; //y
+						s[7]=0; // z
+						s[8]=25; // zrot
+
+						*(Uint16*)&s[9]=3; //id
+						*(Uint16*)&s[11]=250; //x
+						*(Uint16*)&s[13]=250; //y
+						s[15]=0; // z
+						s[16]=50; // zrot
+						s[17]=0;
+						get_2d_objects(s);
+						*/
+
+						/*//GET_LIGHT_OBJECTS test
+						char s[100];
+						actor *xxx=pf_get_our_actor();
+						active_sector=sector_get(xxx->x_pos,xxx->y_pos);
+						s[0]=1;
+						*(Uint16*)&s[1]=2; //id
+						*(Uint16*)&s[3]=100; //x
+						*(Uint16*)&s[5]=100; //y
+						s[7]=0; // z
+						s[8]=255; // r
+						s[9]=0; // g
+						s[10]=0; // b
+						s[11]=0;
+						get_light_objects(s);
+						*/
+					
+						/*//GET_PARTICLE_OBJECTS test
+						char s[100];
+						actor *xxx=pf_get_our_actor();
+						active_sector=sector_get(xxx->x_pos,xxx->y_pos);
+						s[0]=1;
+						*(Uint16*)&s[1]=5; //id
+						*(Uint16*)&s[3]=100; //x
+						*(Uint16*)&s[5]=100; //y
+						s[7]=0; // z
+						s[8]=0;
+						get_particle_objects(s);
+						*/
+									
 						
 						if(!last_turn_around || last_turn_around+500<cur_time)
 							{

@@ -750,6 +750,17 @@ void process_message_from_server(unsigned char *in_data, int data_lenght)
 			get_3d_objects(in_data);
 			break;
 
+		case GET_2D_OBJECTS:
+			get_2d_objects(in_data);
+			break;
+
+		case GET_LIGHT_OBJECTS:
+			get_light_objects(in_data);
+			break;
+
+		case GET_PARTICLE_OBJECTS:
+			get_particle_objects(in_data);
+			break;
 
 		default:
 			{
