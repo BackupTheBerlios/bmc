@@ -7,14 +7,12 @@ Uint16 global_to_sector(float f)
 {
 	return /*(int)*/(((float)(f-(int)f)+(float)((int)f%12))/12)*65536;
 }
-/*
-int fy=sector/(tile_map_size_y/4)*4;
-	int fx=sector%(tile_map_size_x/4)*12;
-*/
+
 float sector_to_global_x(int sector, Uint16 f)
 {
 	return (((float)f/65536)*12)+sector%(tile_map_size_x/4)*12.0f;
 }
+
 float sector_to_global_y(int sector, Uint16 f)
 {
 	return (((float)f/65536)*12)+sector/(tile_map_size_y/4)*12.0f;

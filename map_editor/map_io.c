@@ -110,7 +110,7 @@ void destroy_map()
 	destroy_all_particles();
 }
 
-/*fix:object data is not properly saved, transform global data to sector data */
+//fix z_pos
 int save_map(char * file_name)
 {
 	int i,j;
@@ -328,8 +328,7 @@ int save_map(char * file_name)
 
 }
 
-/*fix: load sector data first, and transform sector data to global data*/
-
+//fix z_pos
 int load_map(char * file_name)
 {
 	int i,j;
