@@ -144,6 +144,8 @@ typedef struct
 
    e3d_object *e3d_data;
    unsigned int last_acessed_time;
+
+   object3d_io o3dio;
 }object3d;
 
 

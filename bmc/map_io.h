@@ -5,57 +5,49 @@ extern char map_file_name[60];
 
 typedef struct
 {
-	char file_name[80];
-	float x_pos;
-	float y_pos;
-	float z_pos;
-
-	float x_rot;
-	float y_rot;
-	float z_rot;
-
-	char self_lit;
-	char blended;
-	float r,g,b;
-	char reserved[24];
-
+	Uint16 object_type;//the object index
+	Uint16 x_pos;
+	Uint16 y_pos;
+	Sint8 z_pos;
+	Uint8 x_rot;
+	Uint8 y_rot;
+	Uint8 z_rot;
+	Uint8 flags;//self_lit or blended
+	Uint8 r,g,b;//real color (float) is 255/color
 }object3d_io;
 
 typedef struct
 {
-	char file_name[80];
-	float x_pos;
-	float y_pos;
-	float z_pos;
-	float x_rot;
-	float y_rot;
-	float z_rot;
-	char reserved[24];
+	Uint16 object_type;//the object index
+	Uint16 x_pos;
+	Uint16 y_pos;
+	Sint8 z_pos;
+	Uint8 x_rot;
+	Uint8 y_rot;
+	Uint8 z_rot;
 }obj_2d_io;
 
 typedef struct
 {
-	float pos_x;
-	float pos_y;
-	float pos_z;
-	float r;
-	float g;
-	float b;
-	char reserved[15];
+	Uint16 x_pos;
+	Uint16 y_pos;
+	Sint8 z_pos;
+	Uint8 r,g,b;//real color (float) is 255/color
+	Uint8 flags;//flags
 }light_io;
 
 typedef struct
 {
-	char file_name[80];
-	float x_pos;
-	float y_pos;
-	float z_pos;
-	char reserved[10];
+	Uint16 object_type;
+	Uint16 x_pos;
+	Uint16 y_pos;
+	Sint8 z_pos;
 }particles_io;
+
 
 typedef struct
 {
-	char file_sig[4];//should be "elmf", or else the map is invalid
+	char file_sig[4];//should be "bmmf", or else the map is invalid
 	int tile_map_x_len;
 	int tile_map_y_len;
 	int tile_map_offset;
@@ -79,8 +71,9 @@ typedef struct
 	int particles_struct_len;
 	int particles_no;
 	int particles_offset;
-	int reserved_8;
-	int reserved_9;
+	int sector_struct_len;
+	int sectors_no;
+	int sectors_offset;
 	int reserved_10;
 	int reserved_11;
 	int reserved_12;
@@ -89,8 +82,6 @@ typedef struct
 	int reserved_15;
 	int reserved_16;
 	int reserved_17;
-
-
 }map_header;
 
 extern char dungeon;//no sun

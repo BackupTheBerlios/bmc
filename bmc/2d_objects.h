@@ -37,6 +37,7 @@ typedef struct
 	short sector;
 	short tile;
 	obj_2d_def *obj_pointer;
+	obj_2d_io o2dio;
 }obj_2d;
 
 typedef struct

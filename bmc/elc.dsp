@@ -712,6 +712,10 @@ SOURCE=.\reflection.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\sector.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\shadows.c
 
 !IF  "$(CFG)" == "elc - Win32 Release"
@@ -1052,6 +1056,10 @@ SOURCE=.\reflection.h
 # Begin Source File
 
 SOURCE=.\SDL_opengl.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\sector.h
 # End Source File
 # Begin Source File
 

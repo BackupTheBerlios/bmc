@@ -347,7 +347,7 @@ int HandleEvent(SDL_Event *event)
 				  have_point_sprite=!have_point_sprite;
 				if(event->key.keysym.sym==SDLK_F9) {
 				  actor *me=get_actor_ptr_from_id(yourself);
-				  add_particle_sys("./particles/fire_small.part",me->x_pos+0.25f,me->y_pos+0.25f,-2.2f+height_map[me->y_tile_pos*tile_map_size_x*6+me->x_tile_pos]*0.2f+0.1f,0);
+				  add_particle_sys("./particles/fire_small.part",me->x_pos+0.25f,me->y_pos+0.25f,-2.2f+height_map[me->y_tile_pos*tile_map_size_x*6+me->x_tile_pos]*0.2f+0.1f);
 				}
 				if(event->key.keysym.sym==SDLK_F6)
 					{

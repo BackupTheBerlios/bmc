@@ -272,11 +272,11 @@ void destroy_all_particles()
 /*********************************************************************
  *          CREATION OF NEW PARTICLES AND SYSTEMS                    *
  *********************************************************************/
-int add_particle_sys(char *file_name,float x_pos,float y_pos,float z_pos, particles_io *particleio)
+int add_particle_sys(char *file_name,float x_pos,float y_pos,float z_pos)
 {
 	particle_sys_def *def=load_particle_def(file_name);
 	if(!def)return -1;
-	return create_particle_sys(def,x_pos,y_pos,z_pos, particleio);
+	return create_particle_sys(def,x_pos,y_pos,z_pos);
 }
 
 int add_particle_sys_at_tile(char *file_name,int x_tile,int y_tile)
@@ -326,7 +326,7 @@ void create_particle(particle_sys *sys,particle *result)
 	result->free=0;
 }
 
-int create_particle_sys(particle_sys_def *def,float x,float y,float z, particles_io *particleio)
+int create_particle_sys(particle_sys_def *def,float x,float y,float z)
 {
 	int	i,psys;
 	particle_sys *system_id;
@@ -364,7 +364,6 @@ int create_particle_sys(particle_sys_def *def,float x,float y,float z, particles
 	for(i=0,p=&system_id->particles[0];i<def->total_particle_no;i++,p++)create_particle(system_id,p);
 	unlock_particles_list();
 
-	if(particleio!=NULL)memcpy(&system_id->particleio,particleio,sizeof(particles_io));
 	return psys;
 }
 

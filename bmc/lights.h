@@ -9,7 +9,7 @@ typedef struct
 	float r;
 	float g;
 	float b;
-
+	light_io lightio;
 }light;
 
 typedef struct

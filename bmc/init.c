@@ -39,6 +39,9 @@ int e3dlistsize=0;
 e2d_list *e2dlist=NULL;
 int e2dlistsize=0;
 
+part_list *partlist=NULL;
+int partlistsize=0;
+
 void unload_e3d_list()
 {
 	int i;
@@ -108,6 +111,43 @@ void load_e2d_list()
 		e2dlist[i].fn=(char*)malloc(strlen(temp)+1);
 		strcpy(e2dlist[i].fn,temp);
 		e2dlist[i].id=id;
+	}
+	fclose(fp);
+	return;
+}
+
+void unload_part_list()
+{
+	int i;
+	for(i=0;i<partlistsize;i++)
+		free(partlist[i].fn);
+	free(partlist);
+}
+
+void load_part_list()
+{
+	FILE *fp;
+	int i=0;
+
+	fp=fopen("partlist.txt","r");
+	if(!fp){
+		char str[120];
+		sprintf(str, "%s: %s\n",fatal_error_str,no_part_list);
+		log_error(str);
+		SDL_Quit();
+		exit(1);
+	}
+
+	fscanf(fp,"%d",&partlistsize);
+	partlist=(part_list*)malloc(sizeof(part_list)*partlistsize);
+
+	for(i=0;i<partlistsize;i++){
+		char temp[256];
+		int id;
+		fscanf(fp,"%s %d",temp,&id);
+		partlist[i].fn=(char*)malloc(strlen(temp)+1);
+		strcpy(partlist[i].fn,temp);
+		partlist[i].id=id;
 	}
 	fclose(fp);
 	return;
@@ -560,6 +600,7 @@ void init_stuff()
 	load_harvestable_list();
 	load_e3d_list();
 	load_e2d_list();
+	load_part_list();
 	load_entrable_list();
 	load_knowledge_list();
 	load_cursors();

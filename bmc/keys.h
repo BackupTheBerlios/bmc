@@ -46,6 +46,7 @@ extern Uint32 K_AFK;
 
 void read_key_config();
 unsigned int CRC32(unsigned char *, int);
+Uint32 CRC32_continue(Uint32 result, unsigned char *data, int len);
 unsigned short get_key_code(char *);
 unsigned int parse_key_string(char *s);
 void add_key(unsigned int *key,unsigned int n);

@@ -40,6 +40,7 @@
 #include <vorbis/vorbisfile.h>
 #endif	//NO_MUSIC
 
+#include "sector.h"
 #include "cache.h"
 #include "encyclopedia.h"
 #include "questlog.h"
@@ -52,6 +53,7 @@
 #include "new_actors.h"
 #include "actor_scripts.h"
 #include "pathfinder.h"
+#include "map_io.h"
 #include "e3d.h"
 #include "errors.h"
 #include "2d_objects.h"
@@ -63,7 +65,6 @@
 #include "text.h"
 #include "interface.h"
 #include "hud.h"
-#include "map_io.h"
 #include "reflection.h"
 #include "shadows.h"
 #include "particles.h"
