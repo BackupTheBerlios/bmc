@@ -399,6 +399,7 @@ int load_map(char * file_name)
 
 	fread(mem_map_header, 1, sizeof(cur_map_header), f);//header only
 
+	//verify if we have a valid file
 	if(cur_map_header.file_sig[0]!='b' || cur_map_header.file_sig[1]!='m' || 
 		cur_map_header.file_sig[2]!='m' || cur_map_header.file_sig[3]!='f') 
 		{
@@ -462,12 +463,6 @@ int load_map(char * file_name)
 
 	//this is useful if we go in/out a dungeon
 	new_minute();
-
-	//verify if we have a valid file
-	if(cur_map_header.file_sig[0]!='b')return 0;
-	if(cur_map_header.file_sig[1]!='m')return 0;
-	if(cur_map_header.file_sig[2]!='m')return 0;
-	if(cur_map_header.file_sig[3]!='f')return 0;
 
 	//read the tiles map
 	fread(tile_map, 1, tile_map_size_x*tile_map_size_y, f);
