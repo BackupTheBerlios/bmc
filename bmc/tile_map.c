@@ -15,23 +15,13 @@ char map_file_name[60];
 
 int is_water_tile(int tile)
 {
-	switch(tile)
-		{
-			case 200:
-			case 201: 
-			case 202:
-			case 203: return 1;
-		}
+	if(tile>=200&&tile<220) return 1;
 	return 0;
 }
 
 int is_reflecting(int tile)
 {
-	switch(tile)
-		{
-			case 200:
-			case 201: return 1;
-		}
+	if(tile<210) return 1;
 	return 0;
 }
 
