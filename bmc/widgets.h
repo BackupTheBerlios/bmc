@@ -50,7 +50,7 @@ typedef struct {
 }progressbar;
 
 typedef struct {
-	int pos, pos_inc;
+	int pos, pos_inc, bar_len;
 }vscrollbar;
 
 // Common widget functions
@@ -100,13 +100,13 @@ float progressbar_get_progress(Uint32 window_id, Uint32 widget_id);
 int progressbar_set_progress(Uint32 window_id, Uint32 widget_id, float progress);
 
 // Vertical Scrollbar
-int vscrollbar_add_extended(Uint32 window_id, Uint32 wid,  int (*OnInit)(), Uint16 x, Uint16 y, Uint16 lx, Uint16 ly, Uint32 Flags, float size, float r, float g, float b, int pos, int pos_inc);
+int vscrollbar_add_extended(Uint32 window_id, Uint32 wid,  int (*OnInit)(), Uint16 x, Uint16 y, Uint16 lx, Uint16 ly, Uint32 Flags, float size, float r, float g, float b, int pos, int pos_inc, int bar_len);
 int vscrollbar_add(Uint32 window_id, int (*OnInit)(), Uint16 x, Uint16 y, Uint16 lx, Uint16 ly);
 int vscrollbar_draw(widget_list *W);
 int vscrollbar_click(widget_list *W, int x, int y);
 int vscrollbar_drag(widget_list *W, int dx, int dy);
 int vscrollbar_set_pos_inc(Uint32 window_id, Uint32 widget_id, int pos_inc);
-
+int vscrollbar_get_pos(Uint32 window_id, Uint32 widget_id);
 
 // XML Windows
 int AddXMLWindow(char *fn);
