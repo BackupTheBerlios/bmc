@@ -3,6 +3,23 @@
 map_sector *sectors;
 int num_sectors;
 
+Uint16 global_to_sector(float f)
+{
+	return /*(int)*/(((float)(f-(int)f)+(float)((int)f%12))/12)*65536;
+}
+/*
+int fy=sector/(tile_map_size_y/4)*4;
+	int fx=sector%(tile_map_size_x/4)*12;
+*/
+float sector_to_global_x(int sector, Uint16 f)
+{
+	return (((float)f/65536)*12)+sector%(tile_map_size_x/4)*12.0f;
+}
+float sector_to_global_y(int sector, Uint16 f)
+{
+	return (((float)f/65536)*12)+sector/(tile_map_size_y/4)*12.0f;
+}
+
 //here there will be useful fuctions for calculating crcs, adding deleting objects etc
 int sector_get(float x, float y)
 {
@@ -19,37 +36,36 @@ void sector_update_checksums(int sector)
 
 void sector_update_objects_checksum(int sector)
 {
-
-//	sectors[sector].objects_checksum=CRC32((unsigned char*)sectors[sector].e3d_local, 264);
 	int i;
 	Uint32 t=0;
+	//maybe crc file names too?
 	//3d objects
 	for(i=0;i<100;i++){
 		if(sectors[sector].e3d_local[i]==-1)
 			break;
 		//we only crc xpos,ypos,zpos,xrot,yrot,zrot,blended,selflit
-		t=CRC32_continue(t,(unsigned char*)objects_list[i]+80,sizeof(6*sizeof(float)+2*sizeof(char)));
+		t=CRC32_continue(t,(unsigned char*)objects_list[sectors[sector].e3d_local[i]]+80,sizeof(6*sizeof(float)+2*sizeof(char)));
 	}
 	// 2d objects
 	for(i=0;i<20;i++){
-		if(sectors[sector].e3d_local[i]==-1)
+		if(sectors[sector].e2d_local[i]==-1)
 			break;
 		//we only crc xpos,ypos,zpos,xrot,yrot,zrot
-		t=CRC32_continue(t,(unsigned char*)obj_2d_list[i]+80,sizeof(6*sizeof(float)));
+		t=CRC32_continue(t,(unsigned char*)obj_2d_list[sectors[sector].e2d_local[i]]+80,sizeof(6*sizeof(float)));
 	}
 	//lights
 	for(i=0;i<4;i++){
-		if(sectors[sector].e3d_local[i]==-1)
+		if(sectors[sector].lights_local[i]==-1)
 			break;
 		// crc whole struct
-		t=CRC32_continue(t,(unsigned char*)lights_list[i],sizeof(light));
+		t=CRC32_continue(t,(unsigned char*)lights_list[sectors[sector].lights_local[i]],sizeof(light));
 	}
 	//particles
-	for(i=0;i<4;i++){
-		if(sectors[sector].e3d_local[i]==-1)
+	for(i=0;i<8;i++){
+		if(sectors[sector].particles_local[i]==-1)
 			break;
 		// crc position only
-		t=CRC32_continue(t,(unsigned char*)particles_list[i]+8,sizeof(sizeof(float)*3));
+		t=CRC32_continue(t,(unsigned char*)particles_list[sectors[sector].particles_local[i]]+8,sizeof(sizeof(float)*3));
 	}
 
 	sectors[sector].objects_checksum = t ? ~t : t;

@@ -110,6 +110,7 @@ void destroy_map()
 	destroy_all_particles();
 }
 
+/*fix:object data is not properly saved, transform global data to sector data */
 int save_map(char * file_name)
 {
 	int i,j;
@@ -141,6 +142,7 @@ int save_map(char * file_name)
 
 	FILE *f = NULL;
 
+	memset(sectors,-1,num_sectors*sizeof(map_sector));
 	sector_add_map();
 	//get the sizes of structures (they might change in the future)
 	obj_3d_io_size=sizeof(object3d_io);
@@ -221,20 +223,20 @@ int save_map(char * file_name)
 					for(k=0;k<sizeof(object3d_io);k++)cur_3do_pointer[k]=0;
 
 					cur_3d_obj_io.object_type=e3dlist_getid(objects_list[i]->file_name);
-					cur_3d_obj_io.x_pos=objects_list[i]->x_pos;
-					cur_3d_obj_io.y_pos=objects_list[i]->y_pos;
+					cur_3d_obj_io.x_pos=global_to_sector(objects_list[i]->x_pos);
+					cur_3d_obj_io.y_pos=global_to_sector(objects_list[i]->y_pos);
 					cur_3d_obj_io.z_pos=objects_list[i]->z_pos;
 
-					cur_3d_obj_io.x_rot=objects_list[i]->x_rot;
-					cur_3d_obj_io.y_rot=objects_list[i]->y_rot;
-					cur_3d_obj_io.z_rot=objects_list[i]->z_rot;
+					cur_3d_obj_io.x_rot=objects_list[i]->x_rot/1.5;
+					cur_3d_obj_io.y_rot=objects_list[i]->y_rot/1.5;
+					cur_3d_obj_io.z_rot=objects_list[i]->z_rot/1.5;
 
 					cur_3d_obj_io.flags|=(objects_list[i]->self_lit<<0);
 					cur_3d_obj_io.flags|=(objects_list[i]->blended<<1);
 
-					cur_3d_obj_io.r=objects_list[i]->r;
-					cur_3d_obj_io.g=objects_list[i]->g;
-					cur_3d_obj_io.b=objects_list[i]->b;
+					cur_3d_obj_io.r=objects_list[i]->r*255;
+					cur_3d_obj_io.g=objects_list[i]->g*255;
+					cur_3d_obj_io.b=objects_list[i]->b*255;
 
 					fwrite(cur_3do_pointer, sizeof(object3d_io), 1, f);
 
@@ -257,13 +259,13 @@ int save_map(char * file_name)
 					for(k=0;k<sizeof(obj_2d_io);k++)cur_2do_pointer[k]=0;
 
 					cur_2d_obj_io.object_type=e2dlist_getid(obj_2d_list[i]->file_name);
-					cur_2d_obj_io.x_pos=obj_2d_list[i]->x_pos;
-					cur_2d_obj_io.y_pos=obj_2d_list[i]->y_pos;
+					cur_2d_obj_io.x_pos=global_to_sector(obj_2d_list[i]->x_pos);
+					cur_2d_obj_io.y_pos=global_to_sector(obj_2d_list[i]->y_pos);
 					cur_2d_obj_io.z_pos=obj_2d_list[i]->z_pos;
 
-					cur_2d_obj_io.x_rot=obj_2d_list[i]->x_rot;
-					cur_2d_obj_io.y_rot=obj_2d_list[i]->y_rot;
-					cur_2d_obj_io.z_rot=obj_2d_list[i]->z_rot;
+					cur_2d_obj_io.x_rot=obj_2d_list[i]->x_rot/1.5;
+					cur_2d_obj_io.y_rot=obj_2d_list[i]->y_rot/1.5;
+					cur_2d_obj_io.z_rot=obj_2d_list[i]->z_rot/1.5;
 
 					fwrite(cur_2do_pointer, sizeof(obj_2d_io), 1, f);
 
@@ -284,13 +286,13 @@ int save_map(char * file_name)
 					//clear the object
 					for(k=0;k<sizeof(light_io);k++)cur_light_pointer[k]=0;
 
-					cur_light_io.x_pos=lights_list[i]->pos_x;
-					cur_light_io.y_pos=lights_list[i]->pos_y;
+					cur_light_io.x_pos=global_to_sector(lights_list[i]->pos_x);
+					cur_light_io.y_pos=global_to_sector(lights_list[i]->pos_y);
 					cur_light_io.z_pos=lights_list[i]->pos_z;
 
-					cur_light_io.r=lights_list[i]->r;
-					cur_light_io.g=lights_list[i]->g;
-					cur_light_io.b=lights_list[i]->b;
+					cur_light_io.r=lights_list[i]->r*255;
+					cur_light_io.g=lights_list[i]->g*255;
+					cur_light_io.b=lights_list[i]->b*255;
 
 					fwrite(cur_light_pointer, sizeof(light_io), 1, f);
 
@@ -309,8 +311,8 @@ int save_map(char * file_name)
 					Uint32 k=0;
 					for(k=0;k<sizeof(particles_io);k++)cur_particles_pointer[k]=0;
 					cur_particles_io.object_type=partlist_getid(particles_list[i]->def->file_name);
-					cur_particles_io.x_pos=particles_list[i]->x_pos;
-					cur_particles_io.y_pos=particles_list[i]->y_pos;
+					cur_particles_io.x_pos=global_to_sector(particles_list[i]->x_pos);
+					cur_particles_io.y_pos=global_to_sector(particles_list[i]->y_pos);
 					cur_particles_io.z_pos=particles_list[i]->z_pos;
 					fwrite(cur_particles_pointer,sizeof(particles_io),1,f);
 					j++;
@@ -325,6 +327,8 @@ int save_map(char * file_name)
 	return 1;
 
 }
+
+/*fix: load sector data first, and transform sector data to global data*/
 
 int load_map(char * file_name)
 {
@@ -443,8 +447,8 @@ int load_map(char * file_name)
 			fread(cur_3do_pointer, 1, obj_3d_io_size, f);
 
 			add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
-			cur_3d_obj_io.z_pos,cur_3d_obj_io.x_rot,cur_3d_obj_io.y_rot,cur_3d_obj_io.z_rot,
-			cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r,cur_3d_obj_io.g,cur_3d_obj_io.b);
+			cur_3d_obj_io.z_pos,cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
+			cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f);
 
 		}
 
@@ -455,7 +459,7 @@ int load_map(char * file_name)
 			fread(cur_2do_pointer, 1, obj_2d_io_size, f);
 
 			add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
-			cur_2d_obj_io.z_pos,cur_2d_obj_io.x_rot,cur_2d_obj_io.y_rot,cur_2d_obj_io.z_rot);
+			cur_2d_obj_io.z_pos,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
 		}
 
 
@@ -464,7 +468,7 @@ int load_map(char * file_name)
 		{
 			char * cur_light_pointer=(char *)&cur_light_io;
 			fread(cur_light_pointer, 1, lights_io_size, f);
-			add_light(cur_light_io.x_pos,cur_light_io.y_pos,cur_light_io.z_pos,cur_light_io.r,cur_light_io.g,cur_light_io.b,1.0f);
+			add_light(cur_light_io.x_pos,cur_light_io.y_pos,cur_light_io.z_pos,cur_light_io.r/255.0f,cur_light_io.g/255.0f,cur_light_io.b/255.0f,1.0f);
 		}
 
 	//read particle systems
@@ -480,6 +484,36 @@ int load_map(char * file_name)
 	fread(sectors,sizeof(map_sector),num_sectors,f);
 	fclose(f);
 
+	// Updating positions from local to global
+	for(i=0;i<num_sectors;i++)
+	{
+		for(j=0;j<100;j++){
+			if(sectors[i].e3d_local[j]==-1)
+				break;
+			objects_list[sectors[i].e3d_local[j]]->x_pos=sector_to_global_x(i,objects_list[sectors[i].e3d_local[j]]->x_pos);
+			objects_list[sectors[i].e3d_local[j]]->y_pos=sector_to_global_y(i,objects_list[sectors[i].e3d_local[j]]->y_pos);;
+		}
+		for(j=0;j<20;j++){
+			if(sectors[i].e2d_local[j]==-1)
+				break;
+			obj_2d_list[sectors[i].e2d_local[j]]->x_pos=sector_to_global_x(i,obj_2d_list[sectors[i].e2d_local[j]]->x_pos);
+			obj_2d_list[sectors[i].e2d_local[j]]->y_pos=sector_to_global_y(i,obj_2d_list[sectors[i].e2d_local[j]]->y_pos);;
+		}
+		for(j=0;j<4;j++){
+			if(sectors[i].lights_local[j]==-1)
+				break;
+			lights_list[sectors[i].lights_local[j]]->pos_x=sector_to_global_x(i,lights_list[sectors[i].lights_local[j]]->pos_x);
+			lights_list[sectors[i].lights_local[j]]->pos_y=sector_to_global_y(i,lights_list[sectors[i].lights_local[j]]->pos_y);;
+		}
+		for(j=0;j<8;j++){
+			if(sectors[i].particles_local[j]==-1)
+				break;
+			particles_list[sectors[i].particles_local[j]-1]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]-1]->x_pos);
+			particles_list[sectors[i].particles_local[j]-1]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]-1]->y_pos);;
+		}
+
+
+	}
 	return 1;
 
 }
