@@ -397,9 +397,16 @@ int load_map(char * file_name)
 	f=fopen(file_name, "rb");
 	if(!f)return 0;
 
-	destroy_map();
-
 	fread(mem_map_header, 1, sizeof(cur_map_header), f);//header only
+
+	if(cur_map_header.file_sig[0]!='b' || cur_map_header.file_sig[1]!='m' || 
+		cur_map_header.file_sig[2]!='m' || cur_map_header.file_sig[3]!='f') 
+		{
+			fclose(f);
+			return 0;//Not a map file..
+		}
+	
+	destroy_map();
 
 	//get the map size
 	tile_map_size_x=cur_map_header.tile_map_x_len;
@@ -456,8 +463,6 @@ int load_map(char * file_name)
 	//this is useful if we go in/out a dungeon
 	new_minute();
 
-
-
 	//verify if we have a valid file
 	if(cur_map_header.file_sig[0]!='b')return 0;
 	if(cur_map_header.file_sig[1]!='m')return 0;
@@ -480,10 +485,13 @@ int load_map(char * file_name)
 			int k;
 			fread(cur_3do_pointer, 1, obj_3d_io_size, f);
 
-			k=add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
-			cur_3d_obj_io.z_pos*0.04f-2.2f,cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
-			cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f);
-			memcpy(&objects_list[k]->o3dio,&cur_3d_obj_io,sizeof(object3d_io));
+			if(cur_3d_obj_io.object_type<e3dlistsize)
+				{
+					k=add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
+					cur_3d_obj_io.z_pos*0.04f-2.2f,cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
+					cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f);
+					memcpy(&objects_list[k]->o3dio,&cur_3d_obj_io,sizeof(object3d_io));
+				}
 		}
 
 	//read the 2d objects
@@ -493,9 +501,12 @@ int load_map(char * file_name)
 			int k;
 			fread(cur_2do_pointer, 1, obj_2d_io_size, f);
 
-			k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
-			cur_2d_obj_io.z_pos*0.04f-2.2f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
-			memcpy(&obj_2d_list[k]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
+			if(cur_2d_obj_io.object_type<e2dlistsize) 
+				{
+					k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
+					cur_2d_obj_io.z_pos*0.04f-2.2f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
+					memcpy(&obj_2d_list[k]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
+				}
 		}
 
 
@@ -515,8 +526,11 @@ int load_map(char * file_name)
 			char *cur_particles_pointer=(char *)&cur_particles_io;
 			int k;
 			fread(cur_particles_pointer,1,particles_io_size,f);
-			k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,cur_particles_io.z_pos*0.04f-2.2f);
-			memcpy(&particles_list[k]->particleio,&cur_particles_io,sizeof(particles_io));
+			if(cur_particles_io.object_type<partlistsize)
+				{
+					k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,cur_particles_io.z_pos*0.04f-2.2f);
+					memcpy(&particles_list[k]->particleio,&cur_particles_io,sizeof(particles_io));
+				}
 		}
 	
 	sectors=(map_sector*)malloc(sizeof(map_sector)*num_sectors);
@@ -529,12 +543,14 @@ int load_map(char * file_name)
 		for(j=0;j<100;j++){
 			if(sectors[i].e3d_local[j]==-1)
 				break;
+			if(objects_list[sectors[i].e3d_local[j]]==NULL)continue;
 			objects_list[sectors[i].e3d_local[j]]->x_pos=sector_to_global_x(i,objects_list[sectors[i].e3d_local[j]]->x_pos);
 			objects_list[sectors[i].e3d_local[j]]->y_pos=sector_to_global_y(i,objects_list[sectors[i].e3d_local[j]]->y_pos);;
 		}
 		for(j=0;j<20;j++){
 			if(sectors[i].e2d_local[j]==-1)
 				break;
+			if(obj_2d_list[sectors[i].e3d_local[j]]==NULL)continue;
 			obj_2d_list[sectors[i].e2d_local[j]]->x_pos=sector_to_global_x(i,obj_2d_list[sectors[i].e2d_local[j]]->x_pos);
 			obj_2d_list[sectors[i].e2d_local[j]]->y_pos=sector_to_global_y(i,obj_2d_list[sectors[i].e2d_local[j]]->y_pos);;
 		}
@@ -547,6 +563,7 @@ int load_map(char * file_name)
 		for(j=0;j<8;j++){
 			if(sectors[i].particles_local[j]==-1)
 				break;
+			if(particles_list[sectors[i].e3d_local[j]]==NULL)continue;
 			particles_list[sectors[i].particles_local[j]-1]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]-1]->x_pos);
 			particles_list[sectors[i].particles_local[j]-1]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]-1]->y_pos);;
 		}
