@@ -4,7 +4,7 @@ int e3dlist_getid(char *name)
 {
 	int i;
 	for(i=0;i<e3dlistsize;i++)
-		if(!strcmp(name,e3dlist[i].fn))
+		if(strstr(name,e3dlist[i].fn+1))
 			return i;
 	return -1;
 }
@@ -13,7 +13,7 @@ int e2dlist_getid(char *name)
 {
 	int i;
 	for(i=0;i<e2dlistsize;i++)
-		if(!strcmp(name,e2dlist[i].fn))
+		if(strstr(name,e2dlist[i].fn+1))
 			return i;
 	return -1;
 }
@@ -40,7 +40,7 @@ int partlist_getid(char *name)
 {
 	int i;
 	for(i=0;i<partlistsize;i++)
-		if(!strcmp(name,partlist[i].fn))
+		if(strstr(name,partlist[i].fn+1))
 			return i;
 	return -1;
 }
@@ -503,8 +503,8 @@ int load_map(char * file_name)
 
 			if(cur_2d_obj_io.object_type<e2dlistsize) 
 				{
-					k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
-					cur_2d_obj_io.z_pos*0.04f-2.2f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
+					k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type), cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
+					cur_2d_obj_io.z_pos*0.04f-2.199f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
 					memcpy(&obj_2d_list[k]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
 				}
 		}
@@ -550,7 +550,7 @@ int load_map(char * file_name)
 		for(j=0;j<20;j++){
 			if(sectors[i].e2d_local[j]==-1)
 				break;
-			if(obj_2d_list[sectors[i].e3d_local[j]]==NULL)continue;
+			if(obj_2d_list[sectors[i].e2d_local[j]]==NULL)continue;
 			obj_2d_list[sectors[i].e2d_local[j]]->x_pos=sector_to_global_x(i,obj_2d_list[sectors[i].e2d_local[j]]->x_pos);
 			obj_2d_list[sectors[i].e2d_local[j]]->y_pos=sector_to_global_y(i,obj_2d_list[sectors[i].e2d_local[j]]->y_pos);;
 		}
@@ -563,7 +563,7 @@ int load_map(char * file_name)
 		for(j=0;j<8;j++){
 			if(sectors[i].particles_local[j]==-1)
 				break;
-			if(particles_list[sectors[i].e3d_local[j]]==NULL)continue;
+			if(particles_list[sectors[i].particles_local[j]]==NULL)continue;
 			particles_list[sectors[i].particles_local[j]-1]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]-1]->x_pos);
 			particles_list[sectors[i].particles_local[j]-1]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]-1]->y_pos);;
 		}
