@@ -108,6 +108,8 @@ void destroy_map()
 		}
 
 	destroy_all_particles();
+	toggle_particles_window();
+	check_particle_sys_alive();
 }
 
 
@@ -562,7 +564,6 @@ int load_map(char * file_name)
 			particles_list[sectors[i].particles_local[j]]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]]->x_pos);
 			particles_list[sectors[i].particles_local[j]]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]]->y_pos);;
 		}
-
 
 	}
 	return 1;

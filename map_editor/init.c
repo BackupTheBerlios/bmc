@@ -332,6 +332,7 @@ void init_stuff()
 	display_edit_window();
 	toggle_window(edit_window_win);
 	display_particles_window();
+	toggle_particles_window();
 	toggle_window(particles_window);
 
 }
