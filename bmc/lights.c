@@ -312,7 +312,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=(rand()%2>0)?1:-1;
+													int sign=-1+(rand()&2);
 													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
 													last_flicker=cur_time;
 												}
@@ -354,7 +354,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=(rand()%2>0)?1:-1;
+													int sign=-1+(rand()&2);
 													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
 													last_flicker=cur_time;
 												}
@@ -396,7 +396,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=(rand()%2>0)?1:-1;
+													int sign=-1+(rand()&2);
 													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
 													last_flicker=cur_time;
 												}
@@ -438,7 +438,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=(rand()%2>0)?1:-1;
+													int sign=-1+(rand()&2);
 													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
 													last_flicker=cur_time;
 												}
@@ -477,9 +477,13 @@ void update_scene_lights()
 									float intensity=1;
 									if(lights_list[i]->flags&FLICKER && cur_time-last_flicker>100)
 										{
-											int sign=(rand()%2>0)?1:-1;
-											intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
-											last_flicker=cur_time;
+											intensity=lights_list[i]->intensity;
+											if(cur_time-last_flicker>100)
+												{
+													int sign=-1+(rand()&2);
+													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
+													last_flicker=cur_time;
+												}
 										}
 									if(lights_list[i]->flags&PULSATE && lights_list[i]->interval)
 										{
@@ -518,7 +522,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=(rand()%2>0)?1:-1;
+													int sign=-1+(rand()&2);
 													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
 													last_flicker=cur_time;
 												}
@@ -560,7 +564,7 @@ void update_scene_lights()
 											intensity=lights_list[i]->intensity;
 											if(cur_time-last_flicker>100)
 												{
-													int sign=(rand()%2>0)?1:-1;
+													int sign=-1+(rand()&2);
 													lights_list[i]->intensity=intensity=1.0f+sign*(float)rand()/(float)(RAND_MAX)*0.5f;
 													last_flicker=cur_time;
 												}
