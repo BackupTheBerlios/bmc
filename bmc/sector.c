@@ -262,7 +262,7 @@ void get_3d_objects(char *d)
 		d++;
 
 		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos),sector_to_global_y(active_sector,o3dio.y_pos),
-		o3dio.z_pos,o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
+		o3dio.z_pos*0.04f-2.2f,o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
 		o3dio.flags&0x1,o3dio.flags&0x2,o3dio.r/255.0f,o3dio.g/255.0f,o3dio.b/255.0f);
 		memcpy(&objects_list[k]->o3dio,&o3dio,sizeof(object3d_io));
 		sector_add_3do(k);
@@ -296,7 +296,7 @@ void get_3d_objects_full_rotation(char *d)
 		d++;
 
 		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos),sector_to_global_y(active_sector,o3dio.y_pos),
-		o3dio.z_pos,o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
+		o3dio.z_pos*0.04f-2.2f,o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
 		o3dio.flags&0x1,o3dio.flags&0x2,o3dio.r/255.0f,o3dio.g/255.0f,o3dio.b/255.0f);
 		memcpy(&objects_list[k]->o3dio,&o3dio,sizeof(object3d_io));
 		sector_add_3do(k);
@@ -327,7 +327,7 @@ void get_2d_objects(char *d)
 		d++;
 
 		k=add_2d_obj(e2dlist_getname(o2dio.object_type),sector_to_global_x(active_sector,o2dio.x_pos),sector_to_global_y(active_sector,o2dio.y_pos),
-		o2dio.z_pos,o2dio.x_rot*1.5,o2dio.y_rot*1.5,o2dio.z_rot*1.5);
+		o2dio.z_pos*0.04f-2.2f,o2dio.x_rot*1.5,o2dio.y_rot*1.5,o2dio.z_rot*1.5);
 		memcpy(&obj_2d_list[k]->o2dio,&o2dio,sizeof(obj_2d_io));
 		sector_add_2do(k);
 	}
@@ -360,7 +360,7 @@ void get_light_objects(char *d)
 		d++;
 
 		k=add_light(sector_to_global_x(active_sector,lightio.x_pos),sector_to_global_y(active_sector,lightio.y_pos),
-		lightio.z_pos,lightio.r/255.0f,lightio.g/255.0f,lightio.b/255.0f, 1.0f);
+		lightio.z_pos*0.04f-2.2f,lightio.r/255.0f,lightio.g/255.0f,lightio.b/255.0f, 1.0f);
 		memcpy(&lights_list[k]->lightio,&lightio,sizeof(light_io));
 		sector_add_light(k);
 	}
@@ -387,7 +387,7 @@ void get_particle_objects(char *d)
 		d++;
 
 		k=add_particle_sys(partlist_getname(particlesio.object_type),sector_to_global_x(active_sector,particlesio.x_pos),sector_to_global_y(active_sector,particlesio.y_pos),
-		particlesio.z_pos);
+		particlesio.z_pos*0.04f-2.2f);
 		memcpy(&particles_list[k]->particleio,&particlesio,sizeof(particles_io));
 		sector_add_particle(k);
 	}
