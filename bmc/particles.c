@@ -281,7 +281,7 @@ int add_particle_sys(char *file_name,float x_pos,float y_pos,float z_pos)
 
 int add_particle_sys_at_tile(char *file_name,int x_tile,int y_tile)
 {
-  return add_particle_sys(file_name,(float)x_tile/2.0+0.25f,(float)y_tile/2.0+0.25f,-2.2f+height_map[y_tile*tile_map_size_x*6+x_tile]*0.2f,0);
+  return add_particle_sys(file_name,(float)x_tile/2.0+0.25f,(float)y_tile/2.0+0.25f,-2.2f+height_map[y_tile*tile_map_size_x*6+x_tile]*0.2f);
 }
 
 
