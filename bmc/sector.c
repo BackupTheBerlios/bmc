@@ -295,6 +295,7 @@ void get_checksums(char *d, int sector)
 			d+=4;
 			if(*(Uint32*)d != sectors[(j*(tile_map_size_x/4))+i].tiles_checksum)
 				update_sector_tiles((j*(tile_map_size_x/4))+i);
+			d+=4;
 		}
 	}
 
