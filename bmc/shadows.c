@@ -40,11 +40,16 @@ int floor_pow2(int n)
 
 void set_shadow_map_size()
 {
+
 	int max=floor_pow2(max_shadow_map_size);
 	depth_map_width=floor_pow2(window_width);
 	depth_map_height=floor_pow2(window_height);
+
+	/*
 	while(depth_map_width>max)depth_map_width/=2;
-	while(depth_map_height>max)depth_map_height/=2;	
+	while(depth_map_height>max)depth_map_height/=2;
+	*/
+
 }
 
 void calc_light_frustum(float light_xrot)
@@ -56,7 +61,7 @@ void calc_light_frustum(float light_xrot)
 	//TODO: Optimize this function a bit.
 	//Assuming a max zoom_level of 3.75 and near/far distances of 20.0, we'll set the hscale to the radius of a circle that
 	//can just contain the view frustum of the player. To simplify things, we'll assume the view frustum is horizontal.
-	light_view_hscale=sqrt(window_ratio*window_ratio*3.75f*3.75f+20.0f*20.0f);
+	light_view_hscale=sqrt(window_ratio*window_ratio*3.75f*3.75f+8.0f*8.0f);
 	// For the others, we can just use the parametric ellipse formula to find the value for this angle
 	x=light_view_hscale*sin(light_xrot);
 	y=max_height*cos(light_xrot);
@@ -71,6 +76,7 @@ void calc_light_frustum(float light_xrot)
 	light_view_near=-sqrt(x*x+y*y);
 }
 
+
 void calc_shadow_matrix()
 {
 	if(use_shadow_mapping)
@@ -81,7 +87,7 @@ void calc_shadow_matrix()
 					  0.0,0.0,0.0,0.0,
 					  0.5,0.0,0.0,0.0,
 					  0.5,0.0,0.0,1.0};
-			
+
 			float div_length=1.0f/sqrt(sun_position[0]*sun_position[0]+sun_position[1]*sun_position[1]+sun_position[2]*sun_position[2]);
 			sun_position[0]*=div_length;
 			sun_position[1]*=div_length;
@@ -682,7 +688,7 @@ void setup_shadow_mapping()
 	glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_COMBINE_EXT);
 	glTexEnvi(GL_TEXTURE_ENV,GL_COMBINE_RGB_EXT,GL_INTERPOLATE_EXT);
 	glTexEnvi(GL_TEXTURE_ENV,GL_SOURCE0_RGB_EXT,GL_PREVIOUS_EXT);
-	glTexEnvi(GL_TEXTURE_ENV,GL_OPERAND0_RGB_EXT,GL_SRC_COLOR);			
+	glTexEnvi(GL_TEXTURE_ENV,GL_OPERAND0_RGB_EXT,GL_SRC_COLOR);
 	glTexEnvi(GL_TEXTURE_ENV,GL_SOURCE1_RGB_EXT,GL_CONSTANT_EXT);
 	glTexEnvfv(GL_TEXTURE_ENV,GL_TEXTURE_ENV_COLOR,sun_ambient_light);
 	glTexEnvi(GL_TEXTURE_ENV,GL_OPERAND1_RGB_EXT,GL_SRC_COLOR);

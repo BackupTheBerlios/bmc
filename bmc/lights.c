@@ -108,7 +108,7 @@ void draw_light_halo(light * l)
 	float x_rot,y_rot,z_rot;
 	float render_x_start,render_y_start,u_start=0.0f,v_start=0.0f,u_end=1.0f,v_end=1.0f;//Change if inside a bitmap...
 	float scale=0.25f;
-	
+
 	if(l->r>l->g)
 		{
 			if(l->r>l->b) scale+=l->r*0.25f;
@@ -129,9 +129,9 @@ void draw_light_halo(light * l)
 			if(pos<=0) scale+=(-(float)pos/(float)interval)*l->intensity*0.25f;
 			else scale+=((float)pos/(float)interval)*l->intensity*0.25f;
 		}
-	
+
 	x_pos=l->pos_x; y_pos=l->pos_y; z_pos=l->pos_z;
-	
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	glDisable(GL_LIGHTING);
@@ -149,7 +149,7 @@ void draw_light_halo(light * l)
 	glTexCoord2f(u_end,v_end);	glVertex2f(scale,scale);
 	glEnd();
 	glPopMatrix();
-	
+
 	glEnable(GL_LIGHTING);
 	glDisable(GL_BLEND);
 }
@@ -202,7 +202,7 @@ int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, 
 	new_light->r=r;
 	new_light->g=g;
 	new_light->b=b;
-	
+
 	new_light->intensity=intensity;
 	new_light->interval=interval;
 	new_light->flicker=flicker;
@@ -708,9 +708,9 @@ void draw_global_light()
 	difuse_light[1]=global_lights[i][1]+(float)thunder_light_offset/60-0.15f;
 	difuse_light[2]=global_lights[i][2]+(float)thunder_light_offset/15-0.15f;
 	//the ambient light should be half of the difuse light
-	sun_ambient_light[0]=difuse_light[0]/1.5f+0.15f;
-	sun_ambient_light[1]=difuse_light[1]/1.5f+0.15f;
-	sun_ambient_light[2]=difuse_light[2]/1.5f+0.15f;
+	sun_ambient_light[0]=difuse_light[0]/3.5f+0.15f;
+	sun_ambient_light[1]=difuse_light[1]/3.5f+0.15f;
+	sun_ambient_light[2]=difuse_light[2]/3.5f+0.15f;
 	sun_ambient_light[3]=1.0f;
 	glLightfv(GL_LIGHT7,GL_AMBIENT,sun_ambient_light);
 	//We add (0.2,0.2,0.2) because that's the global ambient color, and we need it for shadows
@@ -742,7 +742,7 @@ void draw_dungeon_light()
 
 }
 
-void make_gradient_light(int start,int steps,float *light_table, float r_start, 
+void make_gradient_light(int start,int steps,float *light_table, float r_start,
 						 float g_start, float b_start, float r_end, float g_end, float b_end)
 {
 	int i,j;
