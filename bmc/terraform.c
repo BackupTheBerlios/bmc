@@ -15,17 +15,6 @@ Which tiles can we handle using this system?
 Which 2d or 3d objects are needed to improve the usage?
 */
 
-//Defines for readability...	//	       Tile Matrix
-#define CENTER	0		//		|	|	
-#define NORTHW	1		//	   1	|   2	|   3	
-#define NORTH	2		//	________|_______|_______
-#define NORTHE	3		//		|	|	
-#define EAST	4		//	   8	|   0	|   4	
-#define SOUTHE	5		//	________|_______|_______
-#define SOUTH	6		//		|	|	
-#define SOUTHW	7		//	   7	|   6	|   5	
-#define WEST	8		//		|	|	 
-
 #define SIDE 0
 #define CORNER 1
 

@@ -90,6 +90,8 @@ int sector_add_3do(int objectid)
 	int i;
 	int sector_no=sector_get(objects_list[objectid]->x_pos, objects_list[objectid]->y_pos);
 
+	if(sector_no>=num_sectors) return -1;
+
 	for(i=0;i<100;i++){
 		if(sectors[sector_no].e3d_local[i]==-1){
 			sectors[sector_no].e3d_local[i]=objectid;
@@ -103,6 +105,8 @@ int sector_del_3do(int objectid)
 {
 	int i;
 	int sector_no=sector_get(objects_list[objectid]->x_pos, objects_list[objectid]->y_pos);
+
+	if(sector_no>=num_sectors) return -1;
 
 	for(i=0;i<100;i++){
 		if(sectors[sector_no].e3d_local[i]==objectid){
@@ -119,6 +123,8 @@ int sector_add_2do(int objectid)
 	int i;
 	int sector_no=sector_get(obj_2d_list[objectid]->x_pos, obj_2d_list[objectid]->y_pos);
 
+	if(sector_no>=num_sectors) return -1;
+
 	for(i=0;i<20;i++){
 		if(sectors[sector_no].e2d_local[i]==-1){
 			sectors[sector_no].e2d_local[i]=objectid;
@@ -132,6 +138,8 @@ int sector_del_2do(int objectid)
 {
 	int i;
 	int sector_no=sector_get(obj_2d_list[objectid]->x_pos, obj_2d_list[objectid]->y_pos);
+
+	if(sector_no>=num_sectors) return -1;
 
 	for(i=0;i<20;i++){
 		if(sectors[sector_no].e2d_local[i]==objectid){
@@ -148,6 +156,8 @@ int sector_add_light(int objectid)
 	int i;
 	int sector_no=sector_get(lights_list[objectid]->pos_x, lights_list[objectid]->pos_y);
 
+	if(sector_no>=num_sectors) return -1;
+
 	for(i=0;i<4;i++){
 		if(sectors[sector_no].lights_local[i]==-1){
 			sectors[sector_no].lights_local[i]=objectid;
@@ -161,6 +171,8 @@ int sector_del_light(int objectid)
 {
 	int i;
 	int sector_no=sector_get(lights_list[objectid]->pos_x, lights_list[objectid]->pos_y);
+
+	if(sector_no>=num_sectors) return -1;
 
 	for(i=0;i<4;i++){
 		if(sectors[sector_no].lights_local[i]==objectid){
@@ -177,6 +189,8 @@ int sector_add_particle(int objectid)
 	int i;
 	int sector_no=sector_get(particles_list[objectid]->x_pos, particles_list[objectid]->y_pos);
 
+	if(sector_no>=num_sectors) return -1;
+
 	for(i=0;i<4;i++){
 		if(sectors[sector_no].particles_local[i]==-1){
 			sectors[sector_no].particles_local[i]=objectid;
@@ -190,6 +204,8 @@ int sector_del_particle(int objectid)
 {
 	int i;
 	int sector_no=sector_get(particles_list[objectid]->x_pos, particles_list[objectid]->y_pos);
+
+	if(sector_no>=num_sectors) return -1;
 
 	for(i=0;i<4;i++){
 		if(sectors[sector_no].particles_local[i]==objectid){
@@ -224,6 +240,7 @@ void change_tile(Uint8 nt, Uint8 t)
 }
 
 
+#ifdef ELC
 
 // Functions that send data to server
 void send_superchecksum(int sector)
@@ -270,7 +287,6 @@ void update_sector_tiles(Uint16 sector)
 	my_tcp_send(my_socket,msg,3);
 }
 
-
 // Functions that parse data from server
 
 void get_checksums(char *d, int sector)
@@ -300,6 +316,8 @@ void get_checksums(char *d, int sector)
 	}
 
 }
+#endif
+
 
 
 void get_tile_data(char *d)
