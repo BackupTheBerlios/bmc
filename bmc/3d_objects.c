@@ -251,7 +251,7 @@ e3d_object * load_e3d_cache(char * file_name)
 
 int add_e3d(char * file_name, float x_pos, float y_pos, float z_pos,
 			float x_rot, float y_rot, float z_rot, char self_lit, char blended,
-			float r, float g, float b)
+			float r, float g, float b, Uint32 attributes)
 {
 	int i;
 	char fname[128];
@@ -302,6 +302,8 @@ int add_e3d(char * file_name, float x_pos, float y_pos, float z_pos,
 
 	our_object->self_lit=self_lit;
 	our_object->blended=blended;
+
+	our_object->attributes=attributes;
 
 	our_object->e3d_data=returned_e3d;
 

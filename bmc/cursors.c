@@ -237,12 +237,12 @@ void check_cursor_change()
 		}
 	if(thing_under_the_mouse==UNDER_MOUSE_3D_OBJ && objects_list[object_under_mouse])
 		{
-			//see if it is a bag. (bag1.e3d)
+		/*	//see if it is a bag. (bag1.e3d)
 			if(get_string_occurance("bag1.e3d",objects_list[object_under_mouse]->file_name, 80,0)!=-1)
 				{
 					if(current_cursor!=CURSOR_PICK)change_cursor(CURSOR_PICK);
 					return;
-				}
+				}*/ //Bags have the pickable flag set
 
 			if(action_mode==action_look)
 				{
@@ -255,25 +255,24 @@ void check_cursor_change()
 					return;
 				}
 			//see if the object is a harvestable resource.
-			for(i=0;i<100;i++)
+			if(objects_list[object_under_mouse]->attributes&MINABLE||objects_list[object_under_mouse]->attributes&CUTTABLE||
+			   objects_list[object_under_mouse]->attributes&DIGGABLE)
 				{
-					if(!harvestable_objects[i].name[0])break;//end of the objects
-					if(get_string_occurance(harvestable_objects[i].name,objects_list[object_under_mouse]->file_name, 80,0)!=-1)
-						{
-							if(current_cursor!=CURSOR_HARVEST)change_cursor(CURSOR_HARVEST);
-							return;
-						}
+					if(current_cursor!=CURSOR_HARVEST)change_cursor(CURSOR_HARVEST);
+					return;
+				}
+				
+			if(objects_list[object_under_mouse]->attributes&PICKABLE)
+				{
+					if(current_cursor!=CURSOR_PICK)change_cursor(CURSOR_PICK);
+					return;
 				}
 
 			//see if the object is an entrable resource.
-			for(i=0;i<100;i++)
+			if(objects_list[object_under_mouse]->attributes&ENTRABLE)
 				{
-					if(!entrable_objects[i].name[0])break;//end of the objects
-					if(get_string_occurance(entrable_objects[i].name,objects_list[object_under_mouse]->file_name, 80,0)!=-1)
-						{
-							if(current_cursor!=CURSOR_ENTER)change_cursor(CURSOR_ENTER);
-							return;
-						}
+					if(current_cursor!=CURSOR_ENTER)change_cursor(CURSOR_ENTER);
+					return;
 				}
 
 			//hmm, no usefull object, so select walk....

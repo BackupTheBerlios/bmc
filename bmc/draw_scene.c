@@ -268,6 +268,7 @@ void draw_scene()
 	check_gl_errors();
 	if(is_raining)render_rain();
 	check_gl_errors();
+	draw_light_halos();
 	//we do this because we don't want the rain/particles to mess with our cursor
 
 	Enter2DMode();

@@ -704,7 +704,7 @@ void put_bag_on_ground(int bag_x,int bag_y,int bag_id)
 	//center the object
 	x=x+0.25f;
 	y=y+0.25f;
-	obj_3d_id=add_e3d("./3dobjects/misc_objects/bag1.e3d",x,y,z,0,0,0,1,0,1.0f,1.0f,1.0f);
+	obj_3d_id=add_e3d("./3dobjects/misc_objects/bag1.e3d",x,y,z,0,0,0,1,0,1.0f,1.0f,1.0f,PICKABLE);
 
 	//now, find a place into the bags list, so we can destroy the bag properly
 	bag_list[bag_id].x=bag_x;
@@ -736,7 +736,7 @@ void add_bags_from_list(Uint8 *data)
 			x=x+0.25f;
 			y=y+0.25f;
 
-			obj_3d_id=add_e3d("./3dobjects/misc_objects/bag1.e3d",x,y,z,0,0,0,1,0,1.0f,1.0f,1.0f);
+			obj_3d_id=add_e3d("./3dobjects/misc_objects/bag1.e3d",x,y,z,0,0,0,1,0,1.0f,1.0f,1.0f,PICKABLE);
 			//now, find a place into the bags list, so we can destroy the bag properly
 
 			bag_list[bag_id].x=bag_x;
