@@ -434,7 +434,9 @@ int load_map(char * file_name)
 	{
 		for(j=0;j<MAX_3D_PER_SECTOR;j++){
 			if(sectors[i].e3d_local[j]==-1)
-				break;
+				continue;
+			if(objects_list[sectors[i].e3d_local[j]]==0)
+				continue;
 			objects_list[sectors[i].e3d_local[j]]->x_pos=sector_to_global_x(i,objects_list[sectors[i].e3d_local[j]]->x_pos);
 			objects_list[sectors[i].e3d_local[j]]->y_pos=sector_to_global_y(i,objects_list[sectors[i].e3d_local[j]]->y_pos);;
 		}
