@@ -267,7 +267,7 @@ int save_map(char * file_name)
 
 	//ok, now build the header...
 	//clear the header
-	for(i=0;i<sizeof(map_header);i++)
+	for(i=0;i<(int)sizeof(map_header);i++)
 		mem_map_header[i]=0;
 
 	//build the file signature

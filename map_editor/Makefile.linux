@@ -2,7 +2,7 @@
 
 CC=gcc
 
-OPTIONS=-DLINUX -DMAP_EDITOR
+OPTIONS=-DLINUX -DMAP_EDITOR #-DX86_64
 GTK_CFLAGS = $(shell gtk-config --cflags)
 
 CFLAGS=$(OPTIONS) $(GTK_CFLAGS) $(shell sdl-config --cflags)  $(shell xml2-config --cflags) -g -W
@@ -19,7 +19,7 @@ OBJS=2d_objects.o 3d_objects.o	\
 	global.o gui.o gui_callbacks.o	\
 	init.o interface.o lights.o	\
 	main.o map_io.o misc.o o3dow.o reflection.o	\
-	shadows.o\
+	sector.o shadows.o\
 	textures.o tile_map.o translate.o \
 	replace_window.o edit_window.o particles.o particles_window.o
 
@@ -29,11 +29,14 @@ mapedit.x86.linux.bin: $(OBJS)
 release:
 	make -f Makefile.linux 'CFLAGS=$(_CFLAGS)'
 
-particles.o: ../elc/particles.c ../elc/particles.h
-	$(CC) $(CFLAGS) -c ../elc/particles.c
+particles.o: ../bmc/particles.c ../bmc/particles.h
+	$(CC) $(CFLAGS) -c ../bmc/particles.c
 
-translate.o: ../elc/translate.c ../elc/translate.h
-	$(CC) $(CFLAGS) -c ../elc/translate.c
+sector.o: ../bmc/sector.c ../bmc/sector.h
+	$(CC) $(CFLAGS) -c ../bmc/sector.c
+
+translate.o: ../bmc/translate.c ../bmc/translate.h
+	$(CC) $(CFLAGS) -c ../bmc/translate.c
 
 %.o:	%.c %.h
 	$(CC) $(CFLAGS) -c $*.c

@@ -1095,7 +1095,7 @@ void open_3d_obj_continued()
   if (selected_file)
     {
 
-		selected_3d_object=add_e3d(selected_file,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0,0);
+		selected_3d_object=add_e3d(selected_file,scene_mouse_x,scene_mouse_y,0,0,0,0,0,0,0,0,0);
 		cur_tool=tool_select;//change the current tool
 		particles_list[selected_particles_object]->ttl=-1; // we dont want the particle sys to disapear
     }
@@ -1113,7 +1113,7 @@ void open_particles_obj_continued()
   if (selected_file)
     {
 
-		selected_particles_object=add_particle_sys(selected_file,scene_mouse_x,scene_mouse_y,0.0,0);
+		selected_particles_object=add_particle_sys(selected_file,scene_mouse_x,scene_mouse_y,0.0);
 		cur_tool=tool_select;//change the current tool
     }
 }
@@ -1130,7 +1130,7 @@ void open_2d_obj_continued()
 {
   if (selected_file)
     {
-		selected_2d_object=add_2d_obj(selected_file,scene_mouse_x,scene_mouse_y,0.001f,0,0,0,0);
+		selected_2d_object=add_2d_obj(selected_file,scene_mouse_x,scene_mouse_y,0.001f,0,0,0);
 		cur_tool=tool_select;//change the current tool
     }
 }
