@@ -334,7 +334,7 @@ SOURCE=.\replace_window.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\sector.c
+SOURCE=..\bmc\sector.c
 # End Source File
 # Begin Source File
 
@@ -473,10 +473,6 @@ SOURCE=.\replace_window.h
 # Begin Source File
 
 SOURCE=.\SDL_opengl.h
-# End Source File
-# Begin Source File
-
-SOURCE=.\sector.h
 # End Source File
 # Begin Source File
 
