@@ -396,7 +396,10 @@ int HandleEvent(SDL_Event *event)
 			}
 
 
-  		if(ch=='m')minimap_on=!minimap_on;
+  		if(ch=='m')
+			{
+				map_has_changed=(minimap_on=!minimap_on);
+			}
 
 
 		break;

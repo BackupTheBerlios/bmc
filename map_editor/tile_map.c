@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include "global.h"
 
+img_struct map_tiles[256]={{NULL,0,0}};
+
+void destroy_map_tiles()
+{
+	int i=0;
+	for(;i<255;i++) if(map_tiles[i].img) free(map_tiles[i].img);
+}
+
 void draw_tile_map()
 {
 	int x_start,x_end,y_start,y_end;
@@ -120,7 +128,7 @@ void load_map_tiles()
 		cur_tile=tile_map[i];
 		//check to see if we already have the current tile loaded
 		if(!tile_list[cur_tile] && cur_tile && cur_tile!=255)//if it is 255, it's a null tile, don't load it
-															 //if it is 0, it's a lake tile, don't load it
+															 //IF it is 0, it's a lake tile, don't load it
 			{
 				//tile not loaded, so load it
 				sprintf(str,"./tiles/tile%i.bmp",cur_tile);

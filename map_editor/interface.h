@@ -16,6 +16,8 @@
 #define tool_select 2
 #define tool_clone 3
 
+extern int map_has_changed;
+
 extern int mouse_x;
 extern int mouse_y;
 extern int mouse_delta_x;
@@ -27,6 +29,8 @@ extern int middle_click;
 extern float scene_mouse_x;
 extern float scene_mouse_y;
 
+//For the minimap
+extern char* minimap;
 
 extern int cur_mode;
 extern int cur_tool;

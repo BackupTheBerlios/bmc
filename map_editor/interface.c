@@ -1,4 +1,5 @@
 #include "global.h"
+#include "../bmc/terraform.h"
 #include <math.h>
 
 int check_interface_buttons()
@@ -655,95 +656,126 @@ void draw_mouse_minimap()
 
 }
 
-void draw_minimap()
+//Generates a minimap and returns the texture's integer value
+GLuint generate_minimap()
 {
-	int minimap_x_start;
-	int minimap_y_start;
+	int x=0,y=0,i,j,offset,offset2;
+	float scale=(float)256/tile_map_size_x,addy=0,addx=0;//Set the scale...
+	img_struct * cur_img;
+	int last_tile=256;
+	GLuint texture;
+	int written=0;
+	int lasty=0;
 
-	//now, draw all the tiles, on the screen...
-	int x,y;
-	int sx;
-	int sy=tile_map_size_y;
-	int x_scaled,y_scaled;
-	int cur_texture;
-	int i;
+	char map[256*256*4]={0};
 
-	minimap_x_start=(window_width-tile_map_size_x*2)/2;
-	minimap_y_start=(window_height-tile_map_size_y*2)/2;
-
-
-	//we have the axes inverted, btw they go from 0 to -255
-	glColor3f(1.0f,1.0f,1.0f);
-	glBegin(GL_QUADS);
-	for(y=0;y<tile_map_size_y;y++)
+	if(scale>=1)
 		{
-			sy--;
-			y_scaled=(int)(sy*2.0);
-			sx=0;
-			for(x=0;x<tile_map_size_x;x++)
+			for(y=0;y<tile_map_size_y;y++)
 				{
-					sx++;
-					x_scaled=(int)(sx*2.0);
-					if(!tile_map[y*tile_map_size_x+x])//water
+				for(x=0;x<tile_map_size_x;x++)
+					{
+					//Scale up
+					for(i=0;i<scale;i++)
 						{
-							glColor3f(0.0f,0.5f,1.0f);
-							glEnd();
-
-							glDisable(GL_TEXTURE_2D);
-							glBegin(GL_QUADS);
-
-	 						glVertex3i(minimap_x_start+x_scaled,minimap_y_start+y_scaled+2, 0);
-							glVertex3i(minimap_x_start+x_scaled,minimap_y_start+y_scaled, 0);
-							glVertex3i(minimap_x_start+x_scaled+2, minimap_y_start+y_scaled,0);
-							glVertex3i(minimap_x_start+x_scaled+2, minimap_y_start+y_scaled+2,0);
-
-							glEnd();
-							glEnable(GL_TEXTURE_2D);
-
-							glBegin(GL_QUADS);
-							glColor3f(1.0f,1.0f,1.0f);
-							continue;
+						for(j=0;j<scale;j++)
+							{
+								if((cur_img=&map_tiles[tile_map[x*tile_map_size_y+y]])==NULL) break;//fuck, drop it
+								*((Uint32 *)(map+(((x*(int)scale+j)+(i+y*(int)scale)*256)*4)))=*((Uint32 *)(cur_img->img+(((i+y*(int)scale)&(cur_img->y-1))*cur_img->x+((j+x*(int)scale)&(cur_img->x-1)))*4));
+							}
 						}
-					if(tile_map[y*tile_map_size_x+x]==255)continue;//null, skip
-					cur_texture=get_texture_id(tile_list[tile_map[y*tile_map_size_x+x]]);
-					if(last_texture!=cur_texture)
-						{
-							glEnd();
-							glBindTexture(GL_TEXTURE_2D, cur_texture);
-							glBegin(GL_QUADS);
-							last_texture=cur_texture;
-						}
-
- 					glTexCoord2f(0, 1.0f);
-	 				glVertex3i(minimap_x_start+x_scaled,minimap_y_start+y_scaled+2, 0);
-					glTexCoord2f(0, 0);
-					glVertex3i(minimap_x_start+x_scaled,minimap_y_start+y_scaled, 0);
-					glTexCoord2f(1.0f, 0);
-					glVertex3i(minimap_x_start+x_scaled+2, minimap_y_start+y_scaled,0);
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex3i(minimap_x_start+x_scaled+2, minimap_y_start+y_scaled+2,0);
+					}
 				}
 		}
-	glEnd();
-
-	//draw the objects as red points
-	glBegin(GL_POINTS);
-	glColor3f(1.0f,0.0f,0.0f);
+	else
+		{
+			//Maps are not available at 256x256 yet... should they be supported?
+			/*
+			scale=(float)1/scale;
+			for(y=0;y<tile_map_size_y;y++)
+				{
+					for(x=0;x<tile_map_size_x;x+=scale)
+						{
+							cur_img=&map_tiles[tile_map[x*tile_map_size_y+y]];
+							*((Uint32*)(map+(((x*(int)scale+j)+(i+y*(int)scale)*256)*4))=*((Uint32 *)(cur_img->img+(((i+y*(int)scale)&(cur_img->y-1))*cur_img->x+((j+x*(int)scale)&(cur_img->x-1)))*4));;
+						}
+					
+				}*/
+		}
+	
+	//OK, now check the 3d objects... we want 
+	
+        scale=(float)3/scale;//Change the scale for 3d objects...
+	
 	for(i=0;i<max_obj_3d;i++)
 		{
-			if(objects_list[i])
-			     {
-			         int x;
-			         int y;
-
-			         x=(int)objects_list[i]->x_pos/3;
-			         y=(int)objects_list[i]->y_pos/3;
-			         glVertex3i(minimap_x_start+x*2, minimap_y_start+(tile_map_size_y-y)*2,0);
-                 }
+		if(objects_list[i])
+			{
+				x=(float)objects_list[i]->x_pos/scale;
+				y=(float)objects_list[i]->y_pos/scale;
+				x&=255;//Just in case...
+				y&=255;
+				*((Uint32*)(map+4*(x*256+y)))=0xFF0000F1;
+			}
 		}
+	
+	glGenTextures(1, &texture);
+	
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	
+	if(have_arb_compression)
+		{
+			if(have_s3_compression)
+				glTexImage2D(GL_TEXTURE_2D, 0, COMPRESSED_RGBA_S3TC_DXT5_EXT, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, map);
+			else
+				glTexImage2D(GL_TEXTURE_2D, 0, COMPRESSED_RGBA_ARB, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, map);
+		}
+	else glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA, GL_UNSIGNED_BYTE, map);
+
+	return texture;
+}
+
+int map_has_changed=1;
+GLuint minimap_tex;
+
+void draw_minimap()
+{
+	int minimap_x_start=window_width/2-128;
+	int scale;//looks ugly if it's accurate :)...
+
+	if(map_has_changed)
+		{
+			if(minimap_tex>0) glDeleteTextures(1,&minimap_tex);
+			minimap_tex=generate_minimap();
+		}
+	map_has_changed=0;
+
+	//We have the map, display the texture
+
+	if((Uint32)last_texture!=minimap_tex) 
+		{
+			glBindTexture(GL_TEXTURE_2D, minimap_tex);
+			last_texture=minimap_tex;
+		}
+	
+	if(window_width<window_height) scale=window_width/256;
+	else scale=window_height/256;
+
+	glPushMatrix();
+	glScalef(scale,scale,scale);
+	glBegin(GL_QUADS);
+
+	scale*=scale;
+	glTexCoord2f(0.0f, 0.0f); glVertex3i(minimap_x_start/scale,10+256,0);
+	glTexCoord2f(1.0f, 0.0f); glVertex3i(minimap_x_start/scale,10,0);
+	glTexCoord2f(1.0f, 1.0f); glVertex3i(minimap_x_start/scale+256,10,0);
+	glTexCoord2f(0.0f, 1.0f); glVertex3i(minimap_x_start/scale+256,10+256,0);
+
 	glEnd();
-
-
+	glPopMatrix();
 }
 
 int map_size=0;
