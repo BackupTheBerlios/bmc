@@ -15,4 +15,5 @@ void clear_clouds_cache();
 void destroy_3d_object(int i);
 void flag_for_destruction();
 void destroy_the_flagged();
+void init_scale_array();
 #endif

@@ -148,14 +148,13 @@ void clear_sector(Uint16 sector)
 
 int sector_add_3do(int objectid, int local_id)
 {
-	int i;
 	int sector_no=sector_get(objects_list[objectid]->x_pos, objects_list[objectid]->y_pos);
 
 	if(sector_no>=num_sectors) return -1;
 
 	sectors[sector_no].e3d_local[local_id]=objectid;
 	add_change();
-	return i;
+	return local_id;
 }
 
 
