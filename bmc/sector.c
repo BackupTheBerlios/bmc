@@ -402,10 +402,10 @@ void get_3d_objects(char *d)
 		o3dio.z_pos=*(Uint8*)d;
 		d++;
 		o3dio.z_rot=*(Uint8*)d;
-		d++;
 		/*
-		o3dio.attributes=*(Uint16*)d;
-		*/
+		//Should this be here or should we put all non-standard attributes in get_3d_objects_full_rotation?
+		d++;
+		o3dio.attributes=*(Uint16*)d;*/
 
 		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos), sector_to_global_y(active_sector,o3dio.y_pos) ,
 		sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
@@ -441,9 +441,9 @@ void get_3d_objects_full_rotation(char *d)
 		d++;
 		o3dio.y_rot=*(Uint8*)d;
 		d++;
-		/*
+	/*	
 		o3dio.attributes=*(Uint32*)d;
-		*/
+	*/
 
 		k=add_e3d(e3dlist_getname(o3dio.object_type),sector_to_global_x(active_sector,o3dio.x_pos),sector_to_global_y(active_sector,o3dio.y_pos),
 		sector_to_global_z(o3dio.z_pos),o3dio.x_rot*1.5,o3dio.y_rot*1.5,o3dio.z_rot*1.5,
@@ -496,7 +496,6 @@ void get_light_objects(char *d)
 
 		memset(&lightio,0,sizeof(light_io));
 
-		d+=2;
 		lightio.x_pos=*(Uint16*)d;
 		d+=2;
 		lightio.y_pos=*(Uint16*)d;
@@ -509,6 +508,11 @@ void get_light_objects(char *d)
 		d++;
 		lightio.b=*(Uint8*)d;
 		d++;
+		lightio.flags=*(Uint8*)d;
+		d++;
+		lightio.intensity=*(Uint8*)d;
+		d++;
+		lightio.interval=*(Uint16*)d;
 
 		k=add_light(sector_to_global_x(active_sector,lightio.x_pos),sector_to_global_y(active_sector,lightio.y_pos),
 		sector_to_global_z(lightio.z_pos),io_to_global_intensity(lightio.r),io_to_global_intensity(lightio.g),
