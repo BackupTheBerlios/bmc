@@ -18,7 +18,7 @@
 typedef struct	{
 	int	spacing;
 	int texture_id;
-	int	widths[9*FONT_CHARS_PER_LINE];
+	int	widths[10*FONT_CHARS_PER_LINE];
 	char name[32];
 } font_info;
 
