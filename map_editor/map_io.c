@@ -564,8 +564,8 @@ int load_map(char * file_name)
 			if(sectors[i].particles_local[j]==-1)
 				break;
 			if(particles_list[sectors[i].particles_local[j]]==NULL)continue;
-			particles_list[sectors[i].particles_local[j]-1]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]-1]->x_pos);
-			particles_list[sectors[i].particles_local[j]-1]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]-1]->y_pos);;
+			particles_list[sectors[i].particles_local[j]]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]]->x_pos);
+			particles_list[sectors[i].particles_local[j]]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]]->y_pos);;
 		}
 
 
