@@ -31,6 +31,10 @@ void move_to_next_frame()
 	int frame_no;
 	int numFrames;
 	char frame_exists;
+/*
+#ifdef EXTRA_DEBUG
+	ERR();
+#endif*/
 
 	lock_actors_lists();
 	for(i=0;i<max_actors;i++)
@@ -125,6 +129,10 @@ void move_to_next_frame()
 void animate_actors()
 {
 	int i;
+	/*
+#ifdef EXTRA_DEBUG
+	ERR();
+#endif*/
 	// lock the actors_list so that nothing can interere with this look
 	lock_actors_lists();	//lock it to avoid timing issues
 	for(i=0;i<max_actors;i++)
@@ -225,6 +233,10 @@ void next_command()
 {
 	int i;
 	int max_queue=0;
+/*
+#ifdef EXTRA_DEBUG
+	ERR();
+#endif*/
 
 	lock_actors_lists();
 	for(i=0;i<max_actors;i++)
@@ -492,7 +504,11 @@ void destroy_actor(int actor_id)
 {
 	int i;
 
-	//lock_actors_lists();	//lock it to avoid timing issues
+#ifdef EXTRA_DEBUG
+	ERR();
+#endif
+
+	lock_actors_lists();	//lock it to avoid timing issues
 	for(i=0;i<max_actors;i++)
 		{
 			if(actors_list[i])
@@ -517,13 +533,16 @@ void destroy_actor(int actor_id)
 						break;
 					}
 		}
-	//unlock_actors_lists();	//unlock it since we are done
+	unlock_actors_lists();	//unlock it since we are done
 }
 
 void destroy_all_actors()
 {
 	int i=0;
 	actor *to_free;
+#ifdef EXTRA_DEBUG
+	ERR();
+#endif
 	lock_actors_lists();	//lock it to avoid timing issues
 	for(i=0;i<max_actors;i++)
 		{
@@ -551,6 +570,10 @@ void update_all_actors()
 {
 	Uint8 str[40];
 
+#ifdef EXTRA_DEBUG
+	ERR();
+#endif
+
 	//we got a nasty error, log it
 	log_to_console(c_red2,resync_server);
 
@@ -563,6 +586,10 @@ void add_command_to_actor(int actor_id, char command)
 {
 	int i=0;
 	int k=0;
+
+#ifdef EXTRA_DEBUG
+	ERR();
+#endif
 
 	lock_actors_lists();
 	while(i<max_actors)
@@ -630,6 +657,10 @@ void get_actor_damage(int actor_id, Uint8 damage)
 {
 	int i=0;
 
+#ifdef EXTRA_DEBUG
+	ERR()
+#endif
+	lock_actors_lists();
 	while(i<max_actors)
 		{
 			if(actors_list[i])
@@ -638,11 +669,12 @@ void get_actor_damage(int actor_id, Uint8 damage)
 						actors_list[i]->damage=damage;
 						actors_list[i]->damage_ms=2000;
 						actors_list[i]->cur_health-=damage;
-						unlock_actors_lists();
-						return;
+						break;
 					}
 			i++;
 		}
+	
+	unlock_actors_lists();
 	//if we got here, it means we don't have this actor, so get it from the server...
 }
 
@@ -650,17 +682,22 @@ void get_actor_heal(int actor_id, Uint8 quantity)
 {
 	int i=0;
 
+#ifdef EXTRA_DEBUG
+	ERR();
+#endif
+
+	lock_actors_lists();
 	while(i<max_actors)
 		{
 			if(actors_list[i])
 				if(actors_list[i]->actor_id==actor_id)
 					{
 						actors_list[i]->cur_health+=quantity;
-						unlock_actors_lists();
-						return;
+						break;
 					}
 			i++;
-		}
+		}	
+	unlock_actors_lists();
 	//if we got here, it means we don't have this actor, so get it from the server...
 }
 

@@ -83,6 +83,13 @@ int start_rendering()
 					else if(afk) go_ifk();
 				}
 			
+			if((int)cur_time-my_timer_clock>500)//Timer failure, log it!
+				{
+					log_to_console(c_red2,"Timer failure, timer has been restarted!");
+					log_error("Timer failure!");
+					SDL_SetTimer((Uint32)my_timer,0);
+				}
+			
 			//cache handling
 			if(cache_system)cache_system_maint();
 			//see if we need to exit

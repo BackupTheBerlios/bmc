@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "global.h"
 
-unsigned char *tile_map;
-unsigned char *height_map;
-int tile_map_size_x;
-int tile_map_size_y;
-int tile_list[256];
+unsigned char *tile_map=NULL;
+unsigned char *height_map=NULL;
+int tile_map_size_x=0;
+int tile_map_size_y=0;
+int tile_list[256]={0};
 char dungeon=0;//no sun
 float ambient_r=0;
 float ambient_g=0;

@@ -13,4 +13,9 @@ void log_conn(const Uint8 *in_data, Uint32 data_lenght);
 #define	LogError(msg)	log_error(msg)
 #endif	//DEBUG
 
+#ifdef EXTRA_DEBUG
+#define ERR() log_func_err( __FILE__, __FUNCTION__, __LINE__)
+#endif
+
+
 #endif
