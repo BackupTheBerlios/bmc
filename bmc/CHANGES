@@ -1,0 +1,98 @@
+09-02-04
+Reduced CPU usage when game is not being dsiplayed (minimized, etc)
+Added additional network polling into draw_scene() and display_actors() to reduce resyncs
+
+06-22-04
+Total revamp of windows handling to use a single window manager interface
+
+04-19-04
+Changes needed to support -DNEW_VERSION better
+
+04-14-04
+The cache option (-DCACHE_SYSTEM) has been working well in combination with VA's and releasing unused memory. VA is still a memory hog, but better.
+Needs more testing by users with & without VA now.
+
+03-30-04
+Added #faq to dump faq.txt to the console
+Changed #mem to work without -DDEBUG if -DCACHE_SYSTEM, but only do detail dumps on debug
+Checked VC vs DevC++ changes
+Have windows use configdir & data dir, but just deault to current
+MD2 with VA now limits how many VA's it'll create in a single frame based on use_vertex_array setting
+
+03-27-04
+Added code for caching with basic LRU support for E3D & MD2
+
+03-25-04
+E3D's dynamically load arrays when displayed instead of at map load (kills map change lag)
+Fixed camera angle memory
+
+03-24-04
+non-Windows clients will now store config and logs in ~/.elc/
+VA support for actors now dynamically build the arrays
+
+03-19-04
+Added caps_filter support
+Memorize camera position, angle, and zoom in el.cfg
+Added version number to el.cfg to prevent problems in version changes
+
+03-18-04
+Added hack to prevent music crashes with high-optimization
+
+03-10-04
+Initial support for VA lists id -DUSE_VERTEXTARRYS defined
+
+03-08-04
+Added music player
+
+03-05-04
+Added sit_lock options to EL.ini to prevent walking if your sitting
+
+03-02-04
+Added username & password to el.ini and disabled by default
+Activated GL error checking in several places when DEBUG defined
+Makefile.linux change to help compiles on 'default' systems
+Added no_alpha_sat flag to reduce GL errors on some broken drivers, automatically set in particles.c
+
+02-24-04
+FreeBSD port
+
+02-12-04
+Trade window now support RightClick to get description
+Made NPC dialog text not click through to playing area
+Manu screen now remembers what you are trying to make
+
+02-05-04
+Added name_text_size and chat_text_size to el.ini to adjust the font sizes
+
+02-02-04
+Fixed name tag & healthbar positioning issues
+Name & healthbar no longer zoom
+Name & healthbar now use the same routine for both actor types
+
+01-29-04
+Added zoom in/out feature.
+
+01-27-04
+Resync reduction for long actions
+
+01-18-04
+Sound engine changed to OpenAL
+
+01-17-04
+Fixed particles  so the aren't visible below ground level or under bridges
+Fixed particle adding in update_ to add correctly and avoid excess looping
+The cursor no longer automatically switched to Fight on a corpse
+Fixed timing issues for actor animation
+SIN()/COS() optimizations for shadows
+
+01-12-04
+Removed excess screen size change message in windowed mode
+
+01-10-04
+Fix console history buffer ofverlow bug
+Fixed another timing issue in particle system, added additional mutexs
+Fixed recent chat scrolling bug
+
+01-07-04
+Added in PM autocomplete
+Added button and ini option to disable FPS display

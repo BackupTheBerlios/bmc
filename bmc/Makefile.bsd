@@ -1,0 +1,48 @@
+.PHONY: clean release
+
+# tune these for your setup & compile options
+OPTIONS=-DBSD -DELC -I/usr/X11R6/include
+PLATFORM=-march=i686
+XDIR=-L/usr/X11R6/lib
+
+# basic compiling and linking - rarely changed
+CFLAGS=$(PLATFORM) -Wall -ggdb -pipe $(OPTIONS) $(shell sdl11-config --cflags) $(shell xml2-config --cflags)
+_CFLAGS=$(PLATFORM) -O3 -fomit-frame-pointer -ffast-math -pipe $(OPTIONS) $(shell sdl11-config --cflags) $(shell xml2-config --cflags)
+LDFLAGS=$(shell sdl11-config --libs) $(XDIR) -lSDL_net -lopenal -lGLU -lGL -lvorbis -lvorbisfile $(shell xml2-config --libs)
+
+# the objects we need
+OBJS=2d_objects.o 3d_objects.o	\
+	actor_scripts.o actors.o asc.o buddy.o	\
+	cache.o colors.o console.o cursors.o	\
+	dialogues.o draw_scene.o	\
+	elconfig.o elwindows.o encyclopedia.o errors.o events.o	\
+	filter.o font.o frustum.o	\
+	gl_init.o hud.o	\
+	ignore.o init.o interface.o items.o	\
+	keys.o knowledge.o lights.o	\
+	main.o manufacture.o map_io.o md2loader.o md5.o misc.o multiplayer.o	\
+	new_actors.o new_character.o	\
+	options.o	\
+	particles.o paste.o pathfinder.o pm_log.o	\
+	questlog.o reflection.o	\
+	shadows.o sound.o spells.o stats.o	\
+	text.o textures.o tile_map.o translate.o trade.o	\
+	weather.o widgets.o
+
+el.x86.bsd.bin: $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o el.x86.bsd.bin $(OBJS)
+
+release:
+	gmake -f Makefile.bsd 'CFLAGS=$(_CFLAGS)'
+
+cal3d:
+	gmake -f Makefile.bsd 'CFLAGS=$(CFLAGS) -DCAL3D' 'LDFLAGS=$(LDFLAGS) -lcal3d' 'OBJS=$(OBJS) cal3dwrap.o'
+
+cal3dwrap.o: cal3dwrap.c cal3dwrap.h
+	g++ $(CFLAGS) -c cal3dwrap.c
+
+%.o:	global.h %.c %.h
+	$(CC) $(CFLAGS) -c $*.c
+
+clean:
+	-rm -f $(OBJS) el.x86.bsd.bin
