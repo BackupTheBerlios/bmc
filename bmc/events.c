@@ -260,7 +260,7 @@ int HandleEvent(SDL_Event *event)
 						s[8]=0;
 						get_particle_objects(s);
 						*/
-									
+						//send_superchecksum(4095);			
 						
 						if(!last_turn_around || last_turn_around+500<cur_time)
 							{

@@ -224,7 +224,83 @@ void change_tile(Uint8 nt, Uint8 t)
 }
 
 
+
+// Functions that send data to server
+void send_superchecksum(int sector)
+{
+	Uint32 t=0;
+	int fy=sector/(tile_map_size_y/4);
+	int fx=sector%(tile_map_size_x/4);
+	int sx,sy,ex,ey,i,j;
+	char msg[5];
+	sx=fx-1;
+	if(sx<0)sx=0;
+	sy=fy-1;
+	if(sy<0)sy=0;
+	ex=fx+1;
+	if(ex==(tile_map_size_x/4))ex=(tile_map_size_x/4)-1;
+	ey=fy+1;
+	if(ey==(tile_map_size_y/4))ey=(tile_map_size_y/4)-1;
+
+	for(i=sx;i<=ex;i++){
+		for(j=sy;j<=ey;j++){
+			t=CRC32_continue(t,(unsigned char*)&sectors[(j*(tile_map_size_x/4))+i].objects_checksum,sizeof(Uint32));
+			t=CRC32_continue(t,(unsigned char*)&sectors[(j*(tile_map_size_x/4))+i].tiles_checksum,sizeof(Uint32));
+		}
+	}
+	
+	msg[0]=SEND_SUPERCHECKSUM;
+	*(Uint32 *)&msg[1]=t;
+	my_tcp_send(my_socket,msg,5);
+}
+
+void update_sector_objects(Uint16 sector)
+{
+	char msg[3];
+	msg[0]=UPDATE_SECTOR_OBJECTS;
+	*(Uint16 *)&msg[1]=sector;
+	my_tcp_send(my_socket,msg,3);
+}
+
+void update_sector_tiles(Uint16 sector)
+{
+	char msg[3];
+	msg[0]=UPDATE_SECTOR_TILES;
+	*(Uint16 *)&msg[1]=sector;
+	my_tcp_send(my_socket,msg,3);
+}
+
+
 // Functions that parse data from server
+
+void get_checksums(char *d, int sector)
+{
+	int fy=sector/(tile_map_size_y/4);
+	int fx=sector%(tile_map_size_x/4);
+	int sx,sy,ex,ey,i,j;
+	char msg[5];
+	sx=fx-1;
+	if(sx<0)sx=0;
+	sy=fy-1;
+	if(sy<0)sy=0;
+	ex=fx+1;
+	if(ex==(tile_map_size_x/4))ex=(tile_map_size_x/4)-1;
+	ey=fy+1;
+	if(ey==(tile_map_size_y/4))ey=(tile_map_size_y/4)-1;
+
+	for(i=sx;i<=ex;i++){
+		for(j=sy;j<=ey;j++){
+			if(*(Uint32*)d != sectors[(j*(tile_map_size_x/4))+i].objects_checksum)
+				update_sector_objects((j*(tile_map_size_x/4))+i);
+			d+=4;
+			if(*(Uint32*)d != sectors[(j*(tile_map_size_x/4))+i].tiles_checksum)
+				update_sector_tiles((j*(tile_map_size_x/4))+i);
+		}
+	}
+
+}
+
+
 void get_tile_data(char *d)
 {
 	int i;

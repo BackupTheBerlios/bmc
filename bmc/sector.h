@@ -33,10 +33,16 @@ void sector_update_checksums(int sector);
 void sector_update_objects_checksum(int sector);
 void sector_update_tiles_checksum(int sector);
 
+void get_checksums(char *d, int sector);
 void get_tile_data(char *d);
 void get_3d_objects(char *d);
 void get_2d_objects(char *d);
 void get_light_objects(char *d);
 void get_particle_objects(char *d);
 void get_3d_objects_full_rotation(char *d);
+
+void send_superchecksum(int sector);
+void update_sector_objects(Uint16 sector);
+void update_sector_tiles(Uint16 sector);
+
 #endif
