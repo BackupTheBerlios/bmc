@@ -129,13 +129,29 @@ int HandleEvent(SDL_Event *event)
 		if ( event->key.keysym.sym == SDLK_LEFT )
 		{
 			if(ctrl_on && cur_mode==mode_3d && selected_3d_object!=-1)
-			if(shift_on)objects_list[selected_3d_object]->z_rot-=1.0f;
-			else objects_list[selected_3d_object]->z_rot-=10.0f;
+			if(shift_on)
+				{
+					objects_list[selected_3d_object]->z_rot-=fast_reconv_rot(2);
+					if(objects_list[selected_3d_object]->z_rot<0) objects_list[selected_3d_object]->z_rot+=360;
+				}
+			else 
+				{
+					objects_list[selected_3d_object]->z_rot-=fast_reconv_rot(11);
+					if(objects_list[selected_3d_object]->z_rot<0) objects_list[selected_3d_object]->z_rot+=360;
+				}
 
 			else
 			if(ctrl_on && cur_mode==mode_2d && selected_2d_object!=-1)
-			if(shift_on)obj_2d_list[selected_2d_object]->z_rot-=1.01f;
-			else obj_2d_list[selected_2d_object]->z_rot-=10.0f;
+			if(shift_on)
+				{
+					obj_2d_list[selected_2d_object]->z_rot-=fast_reconv_rot(2);
+					if(obj_2d_list[selected_2d_object]->z_rot<0) obj_2d_list[selected_2d_object]->z_rot+=360;
+				}
+			else 
+				{
+					obj_2d_list[selected_2d_object]->z_rot-=fast_reconv_rot(11);
+					if(obj_2d_list[selected_2d_object]->z_rot<0) obj_2d_list[selected_2d_object]->z_rot+=360;
+				}
 
 			else
 				{
@@ -146,13 +162,29 @@ int HandleEvent(SDL_Event *event)
 		if ( event->key.keysym.sym == SDLK_RIGHT )
 		{
 			if(ctrl_on && cur_mode==mode_3d && selected_3d_object!=-1)
-			if(shift_on)objects_list[selected_3d_object]->z_rot+=1.0f;
-			else objects_list[selected_3d_object]->z_rot+=10.0f;
+			if(shift_on)
+				{
+					objects_list[selected_3d_object]->z_rot+=fast_reconv_rot(2);
+					if(objects_list[selected_3d_object]->z_rot>360) objects_list[selected_3d_object]->z_rot-=360;
+				}
+			else 
+				{
+					objects_list[selected_3d_object]->z_rot+=fast_reconv_rot(11);
+					if(objects_list[selected_3d_object]->z_rot>360) objects_list[selected_3d_object]->z_rot-=360;
+				}
 
 			else
 			if(ctrl_on && cur_mode==mode_2d && selected_2d_object!=-1)
-			if(shift_on)obj_2d_list[selected_2d_object]->z_rot+=1.01f;
-			else obj_2d_list[selected_2d_object]->z_rot+=10.0f;
+			if(shift_on)
+				{
+					obj_2d_list[selected_2d_object]->z_rot+=fast_reconv_rot(2);
+					if(obj_2d_list[selected_2d_object]->z_rot>0) obj_2d_list[selected_2d_object]->z_rot-=360;
+				}
+			else 
+				{
+					obj_2d_list[selected_2d_object]->z_rot+=fast_reconv_rot(11);
+					if(obj_2d_list[selected_2d_object]->z_rot>360) obj_2d_list[selected_2d_object]->z_rot-=360;
+				}
 
 			else
 				{
@@ -164,13 +196,29 @@ int HandleEvent(SDL_Event *event)
 		if ( event->key.keysym.sym == SDLK_UP)
 		{
 			if(ctrl_on && cur_mode==mode_3d && selected_3d_object!=-1)
-			if(shift_on)objects_list[selected_3d_object]->x_rot-=1.0f;
-			else objects_list[selected_3d_object]->x_rot-=10.0f;
+			if(shift_on)
+				{
+					objects_list[selected_3d_object]->x_rot-=fast_reconv_rot(2);
+					if(objects_list[selected_3d_object]->x_rot<0) objects_list[selected_3d_object]->x_rot+=360;
+				}
+			else 
+				{
+					objects_list[selected_3d_object]->x_rot-=fast_reconv_rot(11);
+					if(objects_list[selected_3d_object]->x_rot<0) objects_list[selected_3d_object]->x_rot+=360;
+				}
 
 			else
 			if(ctrl_on && cur_mode==mode_2d && selected_2d_object!=-1)
-			if(shift_on)obj_2d_list[selected_2d_object]->x_rot-=1.01f;
-			else obj_2d_list[selected_2d_object]->x_rot-=10.0f;
+			if(shift_on)
+				{
+					obj_2d_list[selected_2d_object]->x_rot-=fast_reconv_rot(2);
+					if(obj_2d_list[selected_2d_object]->x_rot<0) obj_2d_list[selected_2d_object]->x_rot+=360;
+				}
+			else 
+				{
+					obj_2d_list[selected_2d_object]->x_rot-=fast_reconv_rot(11);
+					if(obj_2d_list[selected_2d_object]->x_rot<0) obj_2d_list[selected_2d_object]->x_rot+=360;
+				}
 
 			else
 				{
@@ -183,13 +231,29 @@ int HandleEvent(SDL_Event *event)
 		if ( event->key.keysym.sym == SDLK_DOWN )
 		{
 			if(ctrl_on && cur_mode==mode_3d && selected_3d_object!=-1)
-			if(shift_on)objects_list[selected_3d_object]->x_rot+=1.0f;
-			else objects_list[selected_3d_object]->x_rot+=10.0f;
+			if(shift_on)
+				{
+					objects_list[selected_3d_object]->x_rot+=fast_reconv_rot(2);
+					if(objects_list[selected_3d_object]->x_rot>360) objects_list[selected_3d_object]->x_rot-=360;
+				}
+			else 
+				{
+					objects_list[selected_3d_object]->x_rot+=fast_reconv_rot(11);
+					if(objects_list[selected_3d_object]->x_rot>360) objects_list[selected_3d_object]->x_rot-=360;
+				}
 
 			else
 			if(ctrl_on && cur_mode==mode_2d && selected_2d_object!=-1)
-			if(shift_on)obj_2d_list[selected_2d_object]->x_rot+=1.01f;
-			else obj_2d_list[selected_2d_object]->x_rot+=10.0f;
+			if(shift_on)
+				{
+					obj_2d_list[selected_2d_object]->x_rot+=fast_reconv_rot(2);
+					if(obj_2d_list[selected_2d_object]->x_rot>360) obj_2d_list[selected_2d_object]->x_rot-=360;
+				}
+			else 
+				{
+					obj_2d_list[selected_2d_object]->x_rot+=fast_reconv_rot(11);
+					if(obj_2d_list[selected_2d_object]->x_rot>360) obj_2d_list[selected_2d_object]->x_rot-=360;
+				}
 
 			else
 				{
@@ -222,8 +286,16 @@ int HandleEvent(SDL_Event *event)
 			else
 				{
 					if(cur_mode==mode_3d && selected_3d_object!=-1)
-						if(shift_on)objects_list[selected_3d_object]->y_rot-=1.0f;
-						else objects_list[selected_3d_object]->y_rot-=10.0f;
+						if(shift_on)
+							{
+								objects_list[selected_3d_object]->y_rot-=fast_reconv_rot(2);
+								if(objects_list[selected_3d_object]->y_rot<0) objects_list[selected_3d_object]->y_rot+=360;
+							}
+						else 
+							{
+								objects_list[selected_3d_object]->y_rot-=fast_reconv_rot(11);
+								if(objects_list[selected_3d_object]->y_rot<0) objects_list[selected_3d_object]->y_rot+=360;
+							}
 				}
 		}
 		if ( event->key.keysym.sym == SDLK_PAGEDOWN )
@@ -237,8 +309,16 @@ int HandleEvent(SDL_Event *event)
 			else
 				{
 					if(cur_mode==mode_3d && selected_3d_object!=-1)
-						if(shift_on)objects_list[selected_3d_object]->y_rot+=1.0f;
-						else objects_list[selected_3d_object]->y_rot+=10.0f;
+						if(shift_on)
+							{
+								objects_list[selected_3d_object]->y_rot+=fast_reconv_rot(2);
+								if(objects_list[selected_3d_object]->y_rot>360) objects_list[selected_3d_object]->y_rot-=360;
+							}
+						else 
+							{
+								objects_list[selected_3d_object]->y_rot+=fast_reconv_rot(11);
+								if(objects_list[selected_3d_object]->y_rot>360) objects_list[selected_3d_object]->y_rot-=360;
+							}
 				}
 		}
 
@@ -246,51 +326,114 @@ int HandleEvent(SDL_Event *event)
 		if ( event->key.keysym.sym == SDLK_INSERT )
 		{
 			if(cur_mode==mode_3d && selected_3d_object!=-1)
-			if(shift_on)objects_list[selected_3d_object]->z_pos+=0.01f;
-			else objects_list[selected_3d_object]->z_pos+=0.1f;
+			if(shift_on)
+				{
+					objects_list[selected_3d_object]->z_pos+=sector_to_global_z_step(1);
+					if(objects_list[selected_3d_object]->z_pos>4.0f) objects_list[selected_3d_object]->z_pos=4.0f;
+				}
+			else 
+				{
+					objects_list[selected_3d_object]->z_pos+=sector_to_global_z_step(5);
+					if(objects_list[selected_3d_object]->z_pos>4.0f) objects_list[selected_3d_object]->z_pos=4.0f;
+				}
 
 			if(cur_mode==mode_2d && selected_2d_object!=-1)
-			if(shift_on)obj_2d_list[selected_2d_object]->z_pos+=0.01f;
-			else obj_2d_list[selected_2d_object]->z_pos+=0.1f;
+			if(shift_on)
+				{
+					obj_2d_list[selected_2d_object]->z_pos+=sector_to_global_z_step(1);
+					if(obj_2d_list[selected_2d_object]->z_pos>4.0f) obj_2d_list[selected_2d_object]->z_pos=4.0f;
+				}
+			else 
+				{
+					obj_2d_list[selected_2d_object]->z_pos+=sector_to_global_z_step(5);
+					if(obj_2d_list[selected_2d_object]->z_pos>4.0f) obj_2d_list[selected_2d_object]->z_pos=4.0f;
+				}
 
 			if(cur_mode==mode_light && selected_light!=-1)
-			if(shift_on)lights_list[selected_light]->pos_z+=0.01f;
-			else lights_list[selected_light]->pos_z+=0.1f;
+			if(shift_on)
+				{
+					lights_list[selected_light]->pos_z+=sector_to_global_z_step(1);
+					if(lights_list[selected_light]->pos_z>4.0f) lights_list[selected_light]->pos_z=4.0f;
+				}
+			else 
+				{
+					lights_list[selected_light]->pos_z+=sector_to_global_z_step(5);
+					if(lights_list[selected_light]->pos_z>4.0f) lights_list[selected_light]->pos_z=4.0f;
+				}
 
 			if(cur_mode==mode_particles && selected_particles_object!=-1)
-			if(shift_on)particles_list[selected_particles_object]->z_pos+=0.01f;
-			else particles_list[selected_particles_object]->z_pos+=0.1f;
+			if(shift_on)
+				{
+					particles_list[selected_particles_object]->z_pos+=sector_to_global_z_step(1);
+					if(particles_list[selected_particles_object]->z_pos>4.0f) particles_list[selected_particles_object]->z_pos=4.0f;
+				}
+			else 
+				{
+					particles_list[selected_particles_object]->z_pos+=sector_to_global_z_step(5);
+					if(particles_list[selected_particles_object]->z_pos>4.0f) particles_list[selected_particles_object]->z_pos=4.0f;
+				}
 
 			if(cur_mode==mode_particles && view_particles_window)
-				if(shift_on)particles_win_move_preview(0.01f);
-				else particles_win_move_preview(0.1f);
+				if(shift_on)particles_win_move_preview(sector_to_global_z_step(1));
+				else particles_win_move_preview(sector_to_global_z_step(5));
 
 			if(cur_mode==mode_height && selected_height!=-1)
 			if(selected_height<31)selected_height++;
-
 		}
 
 		if ( event->key.keysym.sym == SDLK_DELETE )
 		{
 			if(cur_mode==mode_3d && selected_3d_object!=-1)
-			if(shift_on)objects_list[selected_3d_object]->z_pos-=0.01f;
-			else objects_list[selected_3d_object]->z_pos-=0.1f;
+			if(shift_on)
+				{
+					objects_list[selected_3d_object]->z_pos-=sector_to_global_z_step(1);
+					if(objects_list[selected_3d_object]->z_pos<-2.2f) objects_list[selected_3d_object]->z_pos=-2.2f;
+				}
+			else 
+				{
+					objects_list[selected_3d_object]->z_pos-=sector_to_global_z_step(5);
+					if(objects_list[selected_3d_object]->z_pos<-2.2f) objects_list[selected_3d_object]->z_pos=-2.2f;
+				}
 
 			if(cur_mode==mode_2d && selected_2d_object!=-1)
-			if(shift_on)obj_2d_list[selected_2d_object]->z_pos-=0.01f;
-			else obj_2d_list[selected_2d_object]->z_pos-=0.1f;
+			if(shift_on)
+				{
+					obj_2d_list[selected_2d_object]->z_pos-=sector_to_global_z_step(1);
+					if(obj_2d_list[selected_2d_object]->z_pos<-2.2f) obj_2d_list[selected_2d_object]->z_pos=-2.2f;
+				}
+			else 
+				{
+					obj_2d_list[selected_2d_object]->z_pos-=sector_to_global_z_step(5);
+					if(obj_2d_list[selected_2d_object]->z_pos<-2.2f) obj_2d_list[selected_2d_object]->z_pos=-2.2f;
+				}
 
 			if(cur_mode==mode_light && selected_light!=-1)
-			if(shift_on)lights_list[selected_light]->pos_z-=0.01f;
-			else lights_list[selected_light]->pos_z-=0.1f;
+			if(shift_on)
+				{
+					lights_list[selected_light]->pos_z-=sector_to_global_z_step(1);
+					if(lights_list[selected_light]->pos_z<-2.2f) lights_list[selected_light]->pos_z=-2.2f;
+				}
+			else 
+				{
+					lights_list[selected_light]->pos_z-=sector_to_global_z_step(5);
+					if(lights_list[selected_light]->pos_z<-2.2f) lights_list[selected_light]->pos_z=-2.2f;
+				}
 
 			if(cur_mode==mode_particles && selected_particles_object!=-1)
-			if(shift_on)particles_list[selected_particles_object]->z_pos-=0.01f;
-			else particles_list[selected_particles_object]->z_pos-=0.1f;
+			if(shift_on)
+				{
+					particles_list[selected_particles_object]->z_pos-=sector_to_global_z_step(1);
+					if(particles_list[selected_particles_object]->z_pos<-2.2f)particles_list[selected_particles_object]->z_pos=-2.2f;
+				}
+			else 
+				{
+					particles_list[selected_particles_object]->z_pos-=sector_to_global_z_step(5);
+					if(particles_list[selected_particles_object]->z_pos<-2.2f)particles_list[selected_particles_object]->z_pos=-2.2f;
+				}
 
 			if(cur_mode==mode_particles && view_particles_window)
-				if(shift_on)particles_win_move_preview(-0.01f);
-				else particles_win_move_preview(-0.1f);
+				if(shift_on)particles_win_move_preview(-sector_to_global_z_step(1));
+				else particles_win_move_preview(-sector_to_global_z_step(5));
 
 			if(cur_mode==mode_height && selected_height!=-1)
 			if(selected_height>0)selected_height--;
@@ -535,9 +678,7 @@ int HandleEvent(SDL_Event *event)
 					cur_tool=tool_select;
 					selected_tile=0;
 				}
-
 			
-
 			get_world_x_y();
 			if(!tool_bar_click)
 				{
@@ -575,14 +716,24 @@ int HandleEvent(SDL_Event *event)
 										///
 										if(c1){
 											if(c2)
-												objects_list[selected_3d_object]->x_rot=randomanglex?((minax + (int)(((double)(maxax-minax+1) * rand()) / (RAND_MAX+1.0)))):(rand()%360);
+												{
+													objects_list[selected_3d_object]->x_rot=randomanglex?((minax + (int)(((double)(maxax-minax+1) * rand()) / (RAND_MAX+1.0)))):(rand()%360);
+													objects_list[selected_3d_object]->x_rot=fast_reconv_rot(objects_list[selected_3d_object]->x_rot);
+												}
 											if(c3)
-												objects_list[selected_3d_object]->y_rot=randomangley?((minay + (int)(((double)(maxay-minay+1) * rand()) / (RAND_MAX+1.0)))):(rand()%360);
+												{
+													objects_list[selected_3d_object]->y_rot=randomangley?((minay + (int)(((double)(maxay-minay+1) * rand()) / (RAND_MAX+1.0)))):(rand()%360);
+													objects_list[selected_3d_object]->y_rot=fast_reconv_rot(objects_list[selected_3d_object]->y_rot);
+												}
 											if(c4)
-												objects_list[selected_3d_object]->z_rot=randomanglez?((minaz + (int)(((double)(maxaz-minaz+1) * rand()) / (RAND_MAX+1.0)))):(rand()%360);
+												{
+													objects_list[selected_3d_object]->z_rot=randomanglez?((minaz + (int)(((double)(maxaz-minaz+1) * rand()) / (RAND_MAX+1.0)))):(rand()%360);
+													objects_list[selected_3d_object]->z_rot=fast_reconv_rot(objects_list[selected_3d_object]->z_rot);
+												}
 										}
 										if(randomheight){
 												objects_list[selected_3d_object]->z_pos=(float)(minh + (int)(((double)(maxh-minh+1) * rand()) / (RAND_MAX+1.0)))/10 ;
+												objects_list[selected_3d_object]->z_pos=fast_reconv_z(objects_list[selected_3d_object]->z_pos);
 										}
 										if(ctrl_on)
 											clone_3d_object(selected_3d_object);
@@ -750,13 +901,13 @@ int HandleEvent(SDL_Event *event)
 							{
 								if(cur_tool==tool_kill  && scene_mouse_y>0 && scene_mouse_x>0 && scene_mouse_y<tile_map_size_y*3*6 && scene_mouse_x<tile_map_size_x*3*6)
 									{
-										height_map[(int)(scene_mouse_y/0.5f)*tile_map_size_x*6+(int)(scene_mouse_x/0.5f)]=11;
+										height_map[(int)(scene_mouse_y*2.0f)*tile_map_size_x*6+(int)(scene_mouse_x*2.0f)]=11;
 										return(done);
 									}
 
 								if(cur_tool==tool_clone && scene_mouse_y>0 && scene_mouse_x>0 && scene_mouse_y<tile_map_size_y*3*6 && scene_mouse_x<tile_map_size_x*3*6)
 									{
-										selected_height=height_map[(int)(scene_mouse_y/0.5f)*tile_map_size_x*6+(int)(scene_mouse_x/0.5f)];
+										selected_height=height_map[(int)(scene_mouse_y*2.0f)*tile_map_size_x*6+(int)(scene_mouse_x*2.0f)];
 										cur_tool=tool_select;
 										return(done);
 									}
@@ -771,7 +922,7 @@ int HandleEvent(SDL_Event *event)
 										else
 										if(ctrl_on)draw_big_height_tile(0);
 										else
-										height_map[(int)(scene_mouse_y/0.5f)*tile_map_size_x*6+(int)(scene_mouse_x/0.5f)]=selected_height;
+										height_map[(int)(scene_mouse_y*2.0f)*tile_map_size_x*6+(int)(scene_mouse_x*2.0f)]=selected_height;
 									}
 								if(view_heights_list)get_height_under_mouse_from_list();
 							}

@@ -92,21 +92,21 @@ int check_interface_buttons()
 
 }
 
-
 void get_world_x_y()
 {
 	float window_ratio;
 	float x,y,x1,y1,a,t;
+	if(!window_height||!window_width) return;
 	window_ratio=(GLfloat)window_width/(GLfloat)window_height;
 
 	//x=(float)(mouse_x*3.0*zoom_level/window_width)-(9.0*zoom_level/6.0f);
-	x=(float)((mouse_x)*2.8f*zoom_level/window_width)-(2.8*zoom_level/2.0f);
-	y=(float)((window_height-mouse_y)*2.0f*zoom_level/window_height)-(2.0*zoom_level/2.0f);
+	x=(float)((mouse_x)*window_ratio*2.0f*(float)zoom_level/(float)window_width)-(window_ratio*zoom_level);
+	y=(float)((window_height-mouse_y)*2.0f*(float)zoom_level/(float)window_height)-(2.0*(float)zoom_level/2.0f);
 
 	a=(rz)*3.1415926/180;
 	t=(rx)*3.1415926/180;
 
-	y=y/cos(t);
+	y=(float)y/(float)cos(t);
 
 	x1=x*cos(a)+y*sin(a);
 	y1=y*cos(a)-x*sin(a);

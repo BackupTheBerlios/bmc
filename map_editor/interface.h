@@ -16,6 +16,8 @@
 #define tool_select 2
 #define tool_clone 3
 
+extern float multi;
+
 extern int map_has_changed;
 
 extern int mouse_x;

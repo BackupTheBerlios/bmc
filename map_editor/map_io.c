@@ -139,11 +139,11 @@ void sector_add_map()
 			objects_list[i]->o3dio.object_type=e3dlist_getid(objects_list[i]->file_name);
 			objects_list[i]->o3dio.x_pos=global_to_sector(objects_list[i]->x_pos);
 			objects_list[i]->o3dio.y_pos=global_to_sector(objects_list[i]->y_pos);
-			objects_list[i]->o3dio.z_pos=(objects_list[i]->z_pos+2.2f)/0.04f;
+			objects_list[i]->o3dio.z_pos=global_to_sector_z(objects_list[i]->z_pos);
 	
-			objects_list[i]->o3dio.x_rot=objects_list[i]->x_rot/1.5;
-			objects_list[i]->o3dio.y_rot=objects_list[i]->y_rot/1.5;
-			objects_list[i]->o3dio.z_rot=objects_list[i]->z_rot/1.5;
+			objects_list[i]->o3dio.x_rot=global_to_sector_rot(objects_list[i]->x_rot);
+			objects_list[i]->o3dio.y_rot=global_to_sector_rot(objects_list[i]->y_rot);
+			objects_list[i]->o3dio.z_rot=global_to_sector_rot(objects_list[i]->z_rot);
 	
 			objects_list[i]->o3dio.flags=0;
 			objects_list[i]->o3dio.flags|=(objects_list[i]->self_lit<<0);
@@ -167,11 +167,11 @@ void sector_add_map()
 			obj_2d_list[i]->o2dio.object_type=e2dlist_getid(obj_2d_list[i]->file_name);
 			obj_2d_list[i]->o2dio.x_pos=global_to_sector(obj_2d_list[i]->x_pos);
 			obj_2d_list[i]->o2dio.y_pos=global_to_sector(obj_2d_list[i]->y_pos);
-			obj_2d_list[i]->o2dio.z_pos=(obj_2d_list[i]->z_pos+2.2f)/0.04f;
+			obj_2d_list[i]->o2dio.z_pos=global_to_sector_z(obj_2d_list[i]->z_pos);
 
-			obj_2d_list[i]->o2dio.x_rot=obj_2d_list[i]->x_rot/1.5;
-			obj_2d_list[i]->o2dio.y_rot=obj_2d_list[i]->y_rot/1.5;
-			obj_2d_list[i]->o2dio.z_rot=obj_2d_list[i]->z_rot/1.5;
+			obj_2d_list[i]->o2dio.x_rot=global_to_sector_rot(obj_2d_list[i]->x_rot);
+			obj_2d_list[i]->o2dio.y_rot=global_to_sector_rot(obj_2d_list[i]->y_rot);
+			obj_2d_list[i]->o2dio.z_rot=global_to_sector_rot(obj_2d_list[i]->z_rot);
 			sector_add_2do(i);
 			j++;
 		}
@@ -184,7 +184,7 @@ void sector_add_map()
 		if(lights_list[i]){
 			lights_list[i]->lightio.x_pos=global_to_sector(lights_list[i]->pos_x);
 			lights_list[i]->lightio.y_pos=global_to_sector(lights_list[i]->pos_y);
-			lights_list[i]->lightio.z_pos=(lights_list[i]->pos_z+2.2f)/0.04f;
+			lights_list[i]->lightio.z_pos=global_to_sector_z(lights_list[i]->pos_z);
 
 			lights_list[i]->lightio.r=lights_list[i]->r*255;
 			lights_list[i]->lightio.g=lights_list[i]->g*255;
@@ -204,7 +204,7 @@ void sector_add_map()
 			particles_list[i]->particleio.object_type=partlist_getid(particles_list[i]->def->file_name);
 			particles_list[i]->particleio.x_pos=global_to_sector(particles_list[i]->x_pos);
 			particles_list[i]->particleio.y_pos=global_to_sector(particles_list[i]->y_pos);
-			particles_list[i]->particleio.z_pos=(particles_list[i]->z_pos+2.2f)/0.04f;
+			particles_list[i]->particleio.z_pos=global_to_sector_z(particles_list[i]->z_pos);
 			sector_add_particle(i);
 			j++;
 		}
@@ -317,7 +317,7 @@ int save_map(char * file_name)
 	j=0;
 	for(i=0;i<max_obj_3d;i++){
 
-		if(j>obj_3d_no)break;
+		if(j>=obj_3d_no)break;
 		if(objects_list[i]){
 			fwrite(&objects_list[i]->o3dio, sizeof(object3d_io), 1, f);
 			j++;
@@ -327,7 +327,7 @@ int save_map(char * file_name)
 	//write the 2d objects
 	j=0;
 	for(i=0;i<max_obj_2d;i++){
-		if(j>obj_2d_no)break;
+		if(j>=obj_2d_no)break;
 		if(obj_2d_list[i]){
 			fwrite(&obj_2d_list[i]->o2dio, sizeof(obj_2d_io), 1, f);
 			j++;
@@ -337,7 +337,7 @@ int save_map(char * file_name)
 	//write the lights
 	j=0;
 	for(i=0;i<max_lights;i++){
-		if(j>lights_no)break;
+		if(j>=lights_no)break;
 		if(lights_list[i]){
 			fwrite(&lights_list[i]->lightio, sizeof(light_io), 1, f);
 			j++;
@@ -348,7 +348,7 @@ int save_map(char * file_name)
 	j=0;
 	for(i=0;i<max_particle_systems;i++)
 	{
-		if(j>particles_no)break;
+		if(j>=particles_no)break;
 		if(particles_list[i] && particles_list[i]->def && particles_list[i]->def != &def){	
 			fwrite(&particles_list[i]->particleio,sizeof(particles_io),1,f);
 			j++;
@@ -485,7 +485,7 @@ int load_map(char * file_name)
 			if(cur_3d_obj_io.object_type<e3dlistsize)
 				{
 					k=add_e3d(e3dlist_getname(cur_3d_obj_io.object_type),cur_3d_obj_io.x_pos,cur_3d_obj_io.y_pos,
-					cur_3d_obj_io.z_pos*0.04f-2.2f,cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
+					sector_to_global_z(cur_3d_obj_io.z_pos),cur_3d_obj_io.x_rot*1.5,cur_3d_obj_io.y_rot*1.5,cur_3d_obj_io.z_rot*1.5,
 					cur_3d_obj_io.flags&0x1,cur_3d_obj_io.flags&0x2,cur_3d_obj_io.r/255.0f,cur_3d_obj_io.g/255.0f,cur_3d_obj_io.b/255.0f);
 					memcpy(&objects_list[k]->o3dio,&cur_3d_obj_io,sizeof(object3d_io));
 				}
@@ -501,7 +501,7 @@ int load_map(char * file_name)
 			if(cur_2d_obj_io.object_type<e2dlistsize) 
 				{
 					k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type), cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
-					cur_2d_obj_io.z_pos*0.04f-2.199f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
+					sector_to_global_z(cur_2d_obj_io.z_pos)+0.001f,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
 					memcpy(&obj_2d_list[k]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
 				}
 		}
@@ -513,7 +513,7 @@ int load_map(char * file_name)
 			char * cur_light_pointer=(char *)&cur_light_io;
 			int k;
 			fread(cur_light_pointer, 1, lights_io_size, f);
-			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,cur_light_io.z_pos*0.04f-2.2f,cur_light_io.r/255.0f,cur_light_io.g/255.0f,cur_light_io.b/255.0f,1.0f);
+			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),cur_light_io.r/255.0f,cur_light_io.g/255.0f,cur_light_io.b/255.0f,1.0f);
 			memcpy(&lights_list[k]->lightio,&cur_light_io,sizeof(light_io));
 		}
 
@@ -525,7 +525,7 @@ int load_map(char * file_name)
 			fread(cur_particles_pointer,1,particles_io_size,f);
 			if(cur_particles_io.object_type<partlistsize)
 				{
-					k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,cur_particles_io.z_pos*0.04f-2.2f);
+					k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,sector_to_global_z(cur_particles_io.z_pos));
 					memcpy(&particles_list[k]->particleio,&cur_particles_io,sizeof(particles_io));
 				}
 		}
@@ -554,6 +554,7 @@ int load_map(char * file_name)
 		for(j=0;j<4;j++){
 			if(sectors[i].lights_local[j]==-1)
 				break;
+			if(lights_list[sectors[i].lights_local[j]]==NULL) continue;
 			lights_list[sectors[i].lights_local[j]]->pos_x=sector_to_global_x(i,lights_list[sectors[i].lights_local[j]]->pos_x);
 			lights_list[sectors[i].lights_local[j]]->pos_y=sector_to_global_y(i,lights_list[sectors[i].lights_local[j]]->pos_y);;
 		}

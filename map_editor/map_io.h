@@ -6,7 +6,7 @@ typedef struct
 	Uint16 object_type;//the object index
 	Uint16 x_pos;
 	Uint16 y_pos;
-	Sint8 z_pos;
+	Uint8 z_pos;
 	Uint8 x_rot;
 	Uint8 y_rot;
 	Uint8 z_rot;
@@ -19,7 +19,7 @@ typedef struct
 	Uint16 object_type;//the object index
 	Uint16 x_pos;
 	Uint16 y_pos;
-	Sint8 z_pos;
+	Uint8 z_pos;
 	Uint8 x_rot;
 	Uint8 y_rot;
 	Uint8 z_rot;
@@ -29,7 +29,7 @@ typedef struct
 {
 	Uint16 x_pos;
 	Uint16 y_pos;
-	Sint8 z_pos;
+	Uint8 z_pos;
 	Uint8 r,g,b;//real color (float) is 255/color
 	Uint8 flags;//flags
 }light_io;
@@ -39,7 +39,7 @@ typedef struct
 	Uint16 object_type;
 	Uint16 x_pos;
 	Uint16 y_pos;
-	Sint8 z_pos;
+	Uint8 z_pos;
 }particles_io;
 
 
