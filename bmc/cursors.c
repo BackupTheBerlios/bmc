@@ -10,8 +10,6 @@ int read_mouse_now=0;
 int elwin_mouse=-1;
 
 struct cursors_struct cursors_array[20];
-struct harvest_names_struct harvestable_objects[100];
-struct enter_names_struct entrable_objects[100];
 
 Uint8 *cursors_mem=NULL;
 int cursors_x_lenght;

@@ -35,18 +35,6 @@ struct cursors_struct
 };
 extern struct cursors_struct cursors_array[20];
 
-struct harvest_names_struct
-{
-	char name[80];
-};
-extern struct harvest_names_struct harvestable_objects[100];
-
-struct enter_names_struct
-{
-	char name[80];
-};
-extern struct enter_names_struct entrable_objects[100];
-
 void load_cursors();
 void assign_cursor(int cursor_id);
 void change_cursor(int cursor_id);

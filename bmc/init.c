@@ -153,44 +153,6 @@ void load_part_list()
 	return;
 }
 
-void load_harvestable_list()
-{
-	FILE *f = NULL;
-	int i=0;
-	char strLine[255];
-
-	memset(harvestable_objects, 0, sizeof(harvestable_objects));
-	i=0;
-	f=fopen("harvestable.lst", "rb");
-	if(!f)return;
-	while(1)
-		{
-			fscanf(f,"%s",harvestable_objects[i].name);
-			i++;
-			if(!fgets(strLine, 100, f))break;
-		}
-	fclose(f);
-}
-
-void load_entrable_list()
-{
-	FILE *f = NULL;
-	int i=0;
-	char strLine[255];
-
-	memset(entrable_objects, 0, sizeof(entrable_objects));
-	i=0;
-	f=fopen("entrable.lst", "rb");
-	if(!f)return;
-	while(1)
-		{
-			fscanf(f,"%s",entrable_objects[i].name);
-			i++;
-			if(!fgets(strLine, 100, f))break;
-		}
-	fclose(f);
-}
-
 void load_knowledge_list()
 {
 	FILE *f = NULL;
@@ -597,11 +559,9 @@ void init_stuff()
 	init_2d_obj_cache();
 	load_ignores();
 	load_filters();
-	load_harvestable_list();
 	load_e3d_list();
 	load_e2d_list();
 	load_part_list();
-	load_entrable_list();
 	load_knowledge_list();
 	load_cursors();
 	build_cursors();

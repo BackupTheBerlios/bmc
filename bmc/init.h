@@ -89,8 +89,6 @@ extern char broswer_name[120];
 
 extern char lang[10];
 
-void load_harvestable_list();
-void load_entrable_list();
 void read_config();
 void read_bin_cfg();
 void save_bin_cfg();
