@@ -59,7 +59,7 @@ void init_gl()
         }
     
 	/* Set the window manager title bar */
-	SDL_WM_SetCaption( "Eternal Lands Editor", "testgl" );
+	SDL_WM_SetCaption( "Barren Moon Editor", "testgl" );
 	SDL_WM_SetIcon(SDL_LoadBMP("mapeditor.ico"), NULL);
 }
 

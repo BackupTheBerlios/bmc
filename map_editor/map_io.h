@@ -10,8 +10,12 @@ typedef struct
 	Uint8 x_rot;
 	Uint8 y_rot;
 	Uint8 z_rot;
-	Uint8 flags;//self_lit or blended
+	Uint8 flags;//self_lit, blended
 	Uint8 r,g,b;//real color (float) is 255/color
+	Uint32 attributes;
+	Uint32 reserved_1;
+	Uint32 reserved_2;
+	Uint32 reserved_3;
 }object3d_io;
 
 typedef struct
@@ -23,6 +27,10 @@ typedef struct
 	Uint8 x_rot;
 	Uint8 y_rot;
 	Uint8 z_rot;
+	Uint32 reserved_0;
+	Uint32 reserved_1;
+	Uint32 reserved_2;
+	Uint32 reserved_3;
 }obj_2d_io;
 
 typedef struct
@@ -30,8 +38,14 @@ typedef struct
 	Uint16 x_pos;
 	Uint16 y_pos;
 	Uint8 z_pos;
-	Uint8 r,g,b;//real color (float) is 255/color
+	Uint8 r,g,b;//real color (float) is color/50 (if > 1 it's specifies the intensity)
 	Uint8 flags;//flags
+	Uint8 intensity;
+	Uint16 interval;
+	Uint16 reserved;
+	Uint32 reserved_1;
+	Uint32 reserved_2;
+	Uint32 reserved_3;
 }light_io;
 
 typedef struct
@@ -40,6 +54,10 @@ typedef struct
 	Uint16 x_pos;
 	Uint16 y_pos;
 	Uint8 z_pos;
+	Uint32 reserved_0;
+	Uint32 reserved_1;
+	Uint32 reserved_2;
+	Uint32 reserved_3;
 }particles_io;
 
 
@@ -72,14 +90,17 @@ typedef struct
 	int sector_struct_len;
 	int sectors_no;
 	int sectors_offset;
+	int reserved_0;
+	int reserved_1;
+	int reserved_2;
+	int reserved_3;
+	int reserved_4;
+	int reserved_5;
+	int reserved_6;
+	int reserved_7;
+	int reserved_8;
+	int reserved_9;
 	int reserved_10;
-	int reserved_11;
-	int reserved_12;
-	int reserved_13;
-	int reserved_14;
-	int reserved_15;
-	int reserved_16;
-	int reserved_17;
 }map_header;
 
 extern char dungeon;//no sun

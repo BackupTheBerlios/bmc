@@ -96,6 +96,8 @@ void draw_scene()
 	if(view_light || cur_mode==mode_light)visualise_lights();
 	if(move_tile_a_tile)move_tile();
 	if(move_tile_a_height)move_height_tile();
+	
+	draw_light_halos();
 
 	Enter2DMode();
 

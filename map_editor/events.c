@@ -103,7 +103,7 @@ int HandleEvent(SDL_Event *event)
 					case mode_light:
 					{
 						light *o = (light *) undo_object;
-						add_light(o->pos_x, o->pos_y, o->pos_z, o->r, o->g, o->b, 1.0f);
+						add_light(o->pos_x, o->pos_y, o->pos_z, o->r, o->g, o->b, 1.0f, 0, 0);
 						free(undo_object);
 						undo_object = NULL;
 						break;
@@ -502,6 +502,29 @@ int HandleEvent(SDL_Event *event)
   		if(lights_list[selected_light]->b<5.0f)lights_list[selected_light]->b+=0.1f;
   		if(ch=='3' && selected_light!=-1 && cur_mode==mode_light && alt_on)
   		if(lights_list[selected_light]->b>0.0f)lights_list[selected_light]->b-=0.1f;
+  		if((ch=='h'||ch=='H') && selected_light!=-1 && cur_mode==mode_light)
+  			lights_list[selected_light]->flags^=HALO;
+  		if((ch=='f'||ch=='F') && selected_light!=-1 && cur_mode==mode_light)
+  			lights_list[selected_light]->flags^=FLICKER;
+		if((ch=='q'||ch=='Q') && selected_light!=-1 && cur_mode==mode_light)
+			{
+				if(lights_list[selected_light]->intensity<5.0f) lights_list[selected_light]->intensity+=0.1f;
+				else lights_list[selected_light]->intensity=5.0f;
+			}
+		if((ch=='a'||ch=='A') && selected_light!=-1 && cur_mode==mode_light)
+			{
+				if(lights_list[selected_light]->intensity>0)lights_list[selected_light]->intensity-=0.1f;
+				else lights_list[selected_light]->intensity=0;
+			}
+		if((ch=='w'||ch=='W') && selected_light!=-1 && cur_mode==mode_light)
+			{
+				lights_list[selected_light]->interval+=500;
+			}
+		if((ch=='s'||ch=='S') && selected_light!=-1 && cur_mode==mode_light)
+			{
+				if(lights_list[selected_light]->interval>0) lights_list[selected_light]->interval-=500;
+				else lights_list[selected_light]->interval=0;
+			}
 		//for ambient light
   		if(ch=='1' && cur_mode==mode_map && !alt_on)
   		if(ambient_r<1.0f)ambient_r+=0.02f;

@@ -54,7 +54,7 @@ int check_interface_buttons()
 					if(cur_mode==mode_light)
 						{
 							cur_tool=tool_select;
-							selected_light=add_light(scene_mouse_x,scene_mouse_y,3.0f,1.0f,1.0f,1.0f,1.0f);
+							selected_light=add_light(scene_mouse_x,scene_mouse_y,3.0f,1.0f,1.0f,1.0f,1.0f,0,0);
 						}
 				}
 			if(mouse_x>=320 && mouse_x<=351)cur_tool=tool_kill;
@@ -411,8 +411,8 @@ void draw_light_info()
 	glColor4f(0.0f,0.0f,0.0f,0.5f);
 	glVertex3i(x_menu,y_menu+70,0);
 	glVertex3i(x_menu,y_menu,0);
-	glVertex3i(x_menu+400,y_menu,0);
-	glVertex3i(x_menu+400,y_menu+70,0);
+	glVertex3i(x_menu+450,y_menu,0);
+	glVertex3i(x_menu+450,y_menu+70,0);
 	glColor3f(1.0f,1.0f,1.0f);
 	glEnd();
 	glEnable(GL_TEXTURE_2D);
@@ -452,9 +452,28 @@ void draw_light_info()
 
 	sprintf((char *)str, "Light ID: %i",selected_light);
 	draw_string(x_menu,y_menu,str,1);
+	
+	y_menu+=17;
+	sprintf((char *)str, "[H]alo: %i",((lights_list[selected_light]->flags&HALO)>0));
+	draw_string(x_menu,y_menu,str,1);
+
+	y_menu+=17;
+	sprintf((char *)str, "[F]licker: %i",((lights_list[selected_light]->flags&FLICKER)>0));
+	draw_string(x_menu,y_menu,str,1);
+
+	y_menu-=2*17;
+	x_menu+=12*14;
+
+	draw_string(x_menu,y_menu,"Pulsation:",1);
+
+	y_menu+=17;
+	sprintf((char *)str, "Interval: %g",lights_list[selected_light]->interval);
+	draw_string(x_menu,y_menu,str,1);
+
+	y_menu+=17;
+	sprintf((char *)str, "Intensity: %g",lights_list[selected_light]->intensity);
+	draw_string(x_menu,y_menu,str,1);
 }
-
-
 
 void draw_height_info()
 {

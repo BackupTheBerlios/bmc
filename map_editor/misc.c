@@ -669,7 +669,7 @@ void clone_light(int object_id)
 	g=lights_list[object_id]->g;
 	b=lights_list[object_id]->b;
 
-	selected_light=add_light(scene_mouse_x,scene_mouse_y,z_pos,r,g,b,1.0f);
+	selected_light=add_light(scene_mouse_x,scene_mouse_y,z_pos,r,g,b,1.0f,0,0);
 	cur_tool=tool_select;//change the current tool
 }
 
@@ -945,10 +945,10 @@ void open_map_file()
 
   ofn.lStructSize = sizeof (ofn);
   ofn.hwndOwner = 0;
-  ofn.lpstrFilter = "Eternal Lands Map (*.elm)\0*.elm\0\0";
+  ofn.lpstrFilter = "Barren Moon Map (*.bmm)\0*.bmm\0\0";
   ofn.lpstrFile = szFileName;
   ofn.nMaxFile = MAX_PATH;
-  ofn.lpstrDefExt = "elm";
+  ofn.lpstrDefExt = "bmm";
   strcpy(temp,exec_path);
   strcat(temp,"\\maps\\");
   ofn.lpstrInitialDir = temp;
@@ -985,10 +985,10 @@ void save_map_file()
 
   ofn.lStructSize = sizeof (ofn);
   ofn.hwndOwner = 0;
-  ofn.lpstrFilter = "Eternal Lands Map (*.elm)\0*.elm\0\0";
+  ofn.lpstrFilter = "Barren Moon Map (*.bmm)\0*.bmm\0\0";
   ofn.lpstrFile = szFileName;
   ofn.nMaxFile = MAX_PATH;
-  ofn.lpstrDefExt = "elm";
+  ofn.lpstrDefExt = "bmm";
   strcpy(temp,exec_path);
   strcat(temp,"\\maps\\");
   ofn.lpstrInitialDir = temp;

@@ -142,6 +142,8 @@ typedef struct
    e3d_object *e3d_data;
    unsigned int last_acessed_time;
 
+   Uint32 flags;//Let's just do this the easy way here, and use bitfields in the object3dio...
+
    object3d_io o3dio;
 }object3d;
 

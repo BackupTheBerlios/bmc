@@ -1,6 +1,10 @@
 #ifndef __LIGHTS_H__
 #define __LIGHTS_H__
 
+#define FADE 1
+#define HALO 2
+#define FLICKER 4
+
 typedef struct
 {
   float pos_x;
@@ -9,6 +13,9 @@ typedef struct
   float r;
   float g;
   float b;
+  Uint8 flags;
+  float intensity;
+  float interval;
   light_io lightio;
 }light;
 
@@ -62,16 +69,19 @@ extern sun sun_pos[60*3];
 
 #define max_lights 1000
 extern light *lights_list[max_lights];
+extern GLuint halo_tex;
 
 extern char lights_on;
 extern unsigned char light_level;
 extern int game_minute;
 
+void draw_light_halos();
+void draw_light_halo(light * l);
 void draw_test_light();
 void disable_local_lights();
 void enable_local_lights();
 void draw_lights();
-int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity);
+int add_light(GLfloat x, GLfloat y, GLfloat z, GLfloat r, GLfloat g, GLfloat b, GLfloat intensity, Uint8 flags, float interval);
 void update_scene_lights();
 void init_lights();
 void reset_material();
