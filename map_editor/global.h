@@ -57,6 +57,7 @@
 #include "particles_window.h"
 #include "../bmc/sector.h"
 #include "../bmc/elconfig.h"
+#include "gl_init.h"
 
 #define sector_size_x 15
 #define sector_size_y 15
