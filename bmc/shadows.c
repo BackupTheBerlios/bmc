@@ -418,14 +418,18 @@ void display_shadows()
 {
 	int i;
 	int x,y;
-
+	int sx,sy,ex,ey,j,k;
 	x=-cx;
 	y=-cy;
 	glEnable(GL_CULL_FACE);
-	for(i=0;i<highest_obj_3d;i++)
-		{
-			if(objects_list[i])
-				{
+	get_supersector(current_sector, &sx, &sy, &ex, &ey);
+	for(i=sx;i<=ex;i++)
+		for(j=sy;j<=ey;j++)
+			for(k=0;k<100;k++){
+				if(sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]==-1)continue;
+
+				if(objects_list[sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]])
+					{
 					if(use_shadow_mapping || (!objects_list[i]->e3d_data->is_ground && objects_list[i]->z_pos>-0.20f))
 						{
 							int dist1;
@@ -448,7 +452,7 @@ void display_3d_ground_objects()
 {
 	int i;
 	int x,y;
-
+	int sx,sy,ex,ey,j,k;
 	x=-cx;
 	y=-cy;
 	glEnable(GL_CULL_FACE);
@@ -464,10 +468,14 @@ void display_3d_ground_objects()
 			glEnable(GL_TEXTURE_2D);
 
 		}
-	for(i=0;i<highest_obj_3d;i++)
-		{
-			if(objects_list[i])
-				{
+	get_supersector(current_sector, &sx, &sy, &ex, &ey);
+	for(i=sx;i<=ex;i++)
+		for(j=sy;j<=ey;j++)
+			for(k=0;k<100;k++){
+				if(sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]==-1)continue;
+
+				if(objects_list[sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]])
+					{
 					int dist1;
 					int dist2;
 
@@ -513,7 +521,7 @@ void display_3d_non_ground_objects()
 {
 	int i;
 	int x,y;
-
+	int sx,sy,ex,ey,j,k;
 	x=-cx;
 	y=-cy;
 
@@ -532,10 +540,14 @@ void display_3d_non_ground_objects()
 			glEnable(GL_TEXTURE_2D);
 
 		}
-	for(i=0;i<highest_obj_3d;i++)
-		{
-			if(objects_list[i])
-				{
+	get_supersector(current_sector, &sx, &sy, &ex, &ey);
+	for(i=sx;i<=ex;i++)
+		for(j=sy;j<=ey;j++)
+			for(k=0;k<100;k++){
+				if(sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]==-1)continue;
+
+				if(objects_list[sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]])
+					{
 					if(!objects_list[i]->e3d_data->is_ground)
 					{
 						int dist1;

@@ -61,6 +61,7 @@ int sector_add_tile(int objectid);
 void sector_update_checksums(int sector);
 void sector_update_objects_checksum(int sector);
 void sector_update_tiles_checksum(int sector);
+void get_supersector(int sector, int *sx, int *sy, int *ex, int *ey);
 
 void get_checksums(char *d, int sector);
 void get_tile_data(char *d);

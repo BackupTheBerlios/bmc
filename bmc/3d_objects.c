@@ -320,6 +320,11 @@ void display_objects()
 {
 	int i;
 	int x,y;
+	int sx,sy,ex,ey,j,k;
+
+
+
+
 	x=-cx;
 	y=-cy;
 	check_gl_errors();
@@ -337,9 +342,14 @@ void display_objects()
 		}
 
 	check_gl_errors();
-	for(i=0;i<highest_obj_3d;i++)
-		{
-			object3d	*object_id= objects_list[i];
+
+	get_supersector(current_sector, &sx, &sy, &ex, &ey);
+	for(i=sx;i<=ex;i++)
+		for(j=sy;j<=ey;j++)
+			for(k=0;k<100;k++){
+				object3d	*object_id;
+				if(sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]==-1)continue;
+				object_id= objects_list[sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]];
 
 			if(object_id)
 				{

@@ -279,6 +279,7 @@ void display_3d_reflection()
 	int x,y;
 	double water_clipping_p[4]={0,0,-1,water_deepth_offset};
 	float window_ratio;
+	int sx,sy,ex,ey,j,k;
 
 	window_ratio=(GLfloat)window_width/(GLfloat)window_height;
 
@@ -298,11 +299,15 @@ void display_3d_reflection()
 	glPushMatrix();
 	glScalef(1.0f, 1.0f, -1.0f);
 	//first, render only the submerged objects, with the clipping plane enabled
-	for(i=0;i<highest_obj_3d;i++)
-		{
-			if(objects_list[i])
-				{
-					if(!objects_list[i]->e3d_data->is_ground)
+	get_supersector(current_sector, &sx, &sy, &ex, &ey);
+	for(i=sx;i<=ex;i++)
+		for(j=sy;j<=ey;j++)
+			for(k=0;k<100;k++){
+				if(sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]==-1)continue;
+
+				if(objects_list[sectors[(j*(tile_map_size_x>>2))+i].e3d_local[k]])
+					{
+						if(!objects_list[i]->e3d_data->is_ground)
 					 	{
 							int dist1;
 							int dist2;
