@@ -72,7 +72,7 @@ int label_draw(widget_list *W);
 int label_set_text(Uint32 window_id, Uint32 widget_id, char *text);
 
 // Image
-int image_add_extended(Uint32 window_id, Uint32 wid,  int (*OnInit)(), Uint16 x, Uint16 y, Uint16 lx, Uint16 ly, Uint32 Flags, float size, float r, float g, float b, float id, float u1, float v1, float u2, float v2);
+int image_add_extended(Uint32 window_id, Uint32 wid,  int (*OnInit)(), Uint16 x, Uint16 y, Uint16 lx, Uint16 ly, Uint32 Flags, float size, float r, float g, float b, int id, float u1, float v1, float u2, float v2);
 int image_add(Uint32 window_id, int (*OnInit)(), int id, Uint16 x, Uint16 y, Uint16 lx, Uint16 ly, float u1, float v1, float u2, float v2);
 int image_draw(widget_list *W);
 int image_set_id(Uint32 window_id, Uint32 widget_id, int id);
