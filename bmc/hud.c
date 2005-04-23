@@ -294,6 +294,8 @@ void 	init_vertical_icons()
 			set_window_handler(vert_icons_win, ELW_HANDLER_MOUSEOVER, &mouseover_vertical_icons_handler);
 		}
 
+	if(icons.no) return;
+
 	add_icon(&vert_icons, use_icon_u_start, use_icon_v_start, colored_use_icon_u_start, colored_use_icon_v_start, "Seeds window", view_window, &seeds_win, DATA_WINDOW);
 }
 
