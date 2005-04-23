@@ -362,19 +362,23 @@ void set_icons_state(struct icons_struct * icons)
 {
 	int i, *z;
 	
+	if(!icons) return;
+	
 	for(i=0;i<icons->no;i++)
 		{
-			if(icons->icon[i]->data_type==DATA_WINDOW)
-				{
-					z = (int*)icons->icon[i]->data;
-					if(*z && *z<windows_list.num_windows) icons->icon[i]->state=windows_list.window[*z].displayed;
-				}
-			else if(icons->icon[i]->data_type==DATA_ACTIONMODE)
-				{
-					z = (int*)icons->icon[i]->data;
-					if(action_mode==*z)icons->icon[i]->state=1;
-					else icons->icon[i]->state=0;
-				}
+			if(icons->icon[i]) {
+				if(icons->icon[i]->data_type==DATA_WINDOW)
+					{
+						z = (int*)icons->icon[i]->data;
+						if(z && *z && *z<windows_list.num_windows) icons->icon[i]->state=windows_list.window[*z].displayed;
+					}
+				else if(icons->icon[i]->data_type==DATA_ACTIONMODE)
+					{
+						z = (int*)icons->icon[i]->data;
+						if(z && action_mode==*z)icons->icon[i]->state=1;
+						else icons->icon[i]->state=0;
+					}
+			}
 		}
 
 }
