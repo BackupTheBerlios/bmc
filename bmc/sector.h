@@ -59,9 +59,9 @@ extern int current_sector;
 void check_sector();
 
 int sector_add_3do(int objectid, int local_id);
-int sector_add_2do(int objectid);
+int sector_add_2do(int objectid, int local_id);
 int sector_add_light(int objectid);
-int sector_add_particle(int objectid);
+int sector_add_particle(int objectid, int local_id);
 int sector_add_tile(int objectid);
 void sector_update_checksums(int sector);
 void sector_update_objects_checksum(int sector);

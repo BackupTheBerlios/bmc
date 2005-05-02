@@ -161,16 +161,22 @@ int save_map(char * file_name)
 	sector_size=sizeof(map_sector);
 
 	memset(&cur_3d_obj_io,-1,sizeof(object3d_io));
-
+	memset(&cur_2d_obj_io,-1,sizeof(obj_2d_io));
+	memset(&cur_particles_io,-1,sizeof(particles_io));
+/*
 	//get the number of objects and lights
 	for(i=0;i<max_obj_2d;i++)if(obj_2d_list[i])obj_2d_no++;
 	for(i=0;i<max_lights;i++)if(lights_list[i])lights_no++;
 	// We ignore temporary particle systems (i.e. ones with a ttl)
-	for(i=0;i<max_particle_systems;i++){
-		if(particles_list[i])
-			particles_no++;
-	}
+	for(i=0;i<max_particle_systems;i++)if(particles_list[i])particles_no++;
+*/
+
 	obj_3d_no=max_obj_3d;
+	obj_2d_no=max_obj_2d;
+	//lights_no=max_lights;
+	lights_no=0;//DEBUG
+	particles_no=max_particle_systems;
+
 	sector_no=num_sectors;
 
 	//ok, now build the header...
@@ -220,8 +226,8 @@ int save_map(char * file_name)
 	fwrite(height_map, tile_map_size_x*tile_map_size_y*6*6, 1, f);
 
 	//write the 3d objects
-	j=0;
-	for(i=0;i<max_obj_3d;i++){
+	for(i=0;i<obj_3d_no;i++)
+	{
 		if(objects_list[i])
 			fwrite(&objects_list[i]->o3dio, sizeof(object3d_io), 1, f);
 		else
@@ -229,34 +235,30 @@ int save_map(char * file_name)
 	}
 
 	//write the 2d objects
-	j=0;
-	for(i=0;i<max_obj_2d;i++){
-		if(j>=obj_2d_no)break;
-		if(obj_2d_list[i]){
+	for(i=0;i<obj_2d_no;i++)
+	{
+		if(obj_2d_list[i])
 			fwrite(&obj_2d_list[i]->o2dio, sizeof(obj_2d_io), 1, f);
-			j++;
-		}
+		else
+			fwrite(&cur_2d_obj_io, sizeof(obj_2d_io), 1, f);
 	}
 
 	//write the lights
-	j=0;
-	for(i=0;i<max_lights;i++){
-		if(j>=lights_no)break;
+	for(i=0;i<lights_no;i++){
 		if(lights_list[i]){
 			fwrite(&lights_list[i]->lightio, sizeof(light_io), 1, f);
-			j++;
 		}
 	}
 
 	// Write the particle systems
 	j=0;
-	for(i=0;i<max_particle_systems;i++)
+	for(i=0;i<particles_no;i++)
 	{
-		if(j>=particles_no)break;
-		if(particles_list[i]){
+		if(particles_list[i])
 			fwrite(&particles_list[i]->particleio,sizeof(particles_io),1,f);
-			j++;
-		}
+		else
+			fwrite(&cur_particles_io, sizeof(particles_io), 1, f);
+
 	}
 
 	// writing sectors
@@ -421,10 +423,22 @@ int load_map(char * file_name)
 			char * cur_2do_pointer=(char *)&cur_2d_obj_io;
 			int k;
 			fread(cur_2do_pointer, 1, obj_2d_io_size, f);
-			k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
-			sector_to_global_z(cur_2d_obj_io.z_pos)+0.001,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
-			memcpy(&obj_2d_list[k]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
+			if((Sint16)cur_2d_obj_io.object_type!=-1)
+				{
+					k = add_2d_obj(e2dlist_getname(cur_2d_obj_io.object_type),cur_2d_obj_io.x_pos,cur_2d_obj_io.y_pos,
+					sector_to_global_z(cur_2d_obj_io.z_pos)+0.001,cur_2d_obj_io.x_rot*1.5,cur_2d_obj_io.y_rot*1.5,cur_2d_obj_io.z_rot*1.5);
+
+					if(i!=k)
+						{
+							obj_2d_list[i]=obj_2d_list[k];
+							obj_2d_list[k]=0;
+						}
+					memcpy(&obj_2d_list[i]->o2dio,&cur_2d_obj_io,sizeof(obj_2d_io));
+				}
 		}
+
+//DEBUG!!!!!!!!!!
+lights_no=0;//DEBUG!!!!!!!!!!1
 
 
 	//read the lights
@@ -433,10 +447,21 @@ int load_map(char * file_name)
 			char * cur_light_pointer=(char *)&cur_light_io;
 			int k;
 			fread(cur_light_pointer, 1, lights_io_size, f);
-			k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),
-			io_to_global_intensity(cur_light_io.r),io_to_global_intensity(cur_light_io.g),io_to_global_intensity(cur_light_io.b),
-			io_to_global_intensity(cur_light_io.intensity),cur_light_io.flags, io_to_global_interval(cur_light_io.interval),io_to_global_flicker(cur_light_io.flicker));
-			memcpy(&lights_list[k]->lightio,&cur_light_io,sizeof(light_io));
+
+			/*if((Sint16)cur_light_io.object_type!=-1)
+				{*/
+					k=add_light(cur_light_io.x_pos,cur_light_io.y_pos,sector_to_global_z(cur_light_io.z_pos),
+					io_to_global_intensity(cur_light_io.r),io_to_global_intensity(cur_light_io.g),io_to_global_intensity(cur_light_io.b),
+					io_to_global_intensity(cur_light_io.intensity),cur_light_io.flags, io_to_global_interval(cur_light_io.interval),io_to_global_flicker(cur_light_io.flicker));
+/*
+					if(i!=k)
+						{
+							lights_list[i]=lights_list[k];
+							lights_list[k]=0;
+						}
+*/
+					memcpy(&lights_list[k]->lightio,&cur_light_io,sizeof(light_io));
+			//	}
 		}
 
 	//read particle systems
@@ -444,9 +469,20 @@ int load_map(char * file_name)
 		{
 			char *cur_particles_pointer=(char *)&cur_particles_io;
 			int k;
+
 			fread(cur_particles_pointer,1,particles_io_size,f);
-			k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,sector_to_global_z(cur_particles_io.z_pos));
-			memcpy(&particles_list[k]->particleio,&cur_particles_io,sizeof(particles_io));
+			if((Sint16)cur_particles_io.object_type!=-1)
+				{
+					k=add_particle_sys(partlist_getname(cur_particles_io.object_type),cur_particles_io.x_pos,cur_particles_io.y_pos,sector_to_global_z(cur_particles_io.z_pos));
+
+					if(i!=k)
+						{
+							particles_list[i]=particles_list[k];
+							particles_list[k]=0;
+						}
+
+					memcpy(&particles_list[i]->particleio,&cur_particles_io,sizeof(particles_io));
+				}
 		}
 
 	sectors=(map_sector*)malloc(sizeof(map_sector)*num_sectors);
@@ -466,22 +502,26 @@ int load_map(char * file_name)
 		}
 		for(j=0;j<MAX_2D_PER_SECTOR;j++){
 			if(sectors[i].e2d_local[j]==-1)
-				break;
+				continue;
+			if(objects_list[sectors[i].e2d_local[j]]==0)
+				continue;
 			obj_2d_list[sectors[i].e2d_local[j]]->x_pos=sector_to_global_x(i,obj_2d_list[sectors[i].e2d_local[j]]->x_pos);
 			obj_2d_list[sectors[i].e2d_local[j]]->y_pos=sector_to_global_y(i,obj_2d_list[sectors[i].e2d_local[j]]->y_pos);;
 		}
 		for(j=0;j<MAX_LIGHTS_PER_SECTOR;j++){
 			if(sectors[i].lights_local[j]==-1)
-				break;
+				continue;
 			lights_list[sectors[i].lights_local[j]]->pos_x=sector_to_global_x(i,lights_list[sectors[i].lights_local[j]]->pos_x);
 			lights_list[sectors[i].lights_local[j]]->pos_y=sector_to_global_y(i,lights_list[sectors[i].lights_local[j]]->pos_y);;
 		}
 		for(j=0;j<MAX_PARTICLES_PER_SECTOR;j++){
 			if(sectors[i].particles_local[j]==-1)
-				break;
+				continue;
 			if(sectors[i].particles_local[j]==0)continue; //Hmm, shouldn't happen in newer map formats
-			particles_list[sectors[i].particles_local[j]-1]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]-1]->x_pos);//The client does not have the particle editors default particle system, which is located as no. 0 in the particles_list - hence the particles for this map will always be 1 less than when it was saved in the map editor.
-			particles_list[sectors[i].particles_local[j]-1]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]-1]->y_pos);;
+			//The client does not have the particle editors default particle system, which is located as no. 0 in the particles_list - hence the particles for this map will always be 1 less than when it was saved in the map editor.
+			//entropy say: I don't get it. It crashed that way, so I had to change it. Besides, the maps are dynamic anyway, and we have problems when the client saves the map
+			particles_list[sectors[i].particles_local[j]]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]]->x_pos);
+			particles_list[sectors[i].particles_local[j]]->y_pos=sector_to_global_y(i,particles_list[sectors[i].particles_local[j]]->y_pos);
 		}
 
 

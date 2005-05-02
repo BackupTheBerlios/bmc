@@ -158,21 +158,17 @@ int sector_add_3do(int objectid, int local_id)
 }
 
 
-int sector_add_2do(int objectid)
+int sector_add_2do(int objectid, int local_id)
 {
-	int i;
 	int sector_no=sector_get(obj_2d_list[objectid]->x_pos, obj_2d_list[objectid]->y_pos);
 
 	if(sector_no>=num_sectors) return -1;
 
-	for(i=0;i<MAX_2D_PER_SECTOR;i++){
-		if(sectors[sector_no].e2d_local[i]==-1){
-			sectors[sector_no].e2d_local[i]=objectid;
-			add_change();
-			return i;
-		}
-	}
-	return -1;
+
+	sectors[sector_no].e2d_local[local_id]=objectid;
+	add_change();
+	return local_id;
+
 }
 
 
@@ -194,21 +190,17 @@ int sector_add_light(int objectid)
 }
 
 
-int sector_add_particle(int objectid)
+int sector_add_particle(int objectid, int local_id)
 {
-	int i;
 	int sector_no=sector_get(particles_list[objectid]->x_pos, particles_list[objectid]->y_pos);
 
 	if(sector_no>=num_sectors) return -1;
 
-	for(i=0;i<MAX_PARTICLES_PER_SECTOR;i++){
-		if(sectors[sector_no].particles_local[i]==-1){
-			sectors[sector_no].particles_local[i]=objectid;
-			add_change();
-			return i;
-		}
-	}
-	return -1;
+
+	sectors[sector_no].particles_local[local_id]=objectid;
+	add_change();
+	return local_id;
+
 }
 
 
@@ -458,6 +450,7 @@ void get_2d_objects(char *d)
 	for(i=0;i<numobjects;i++){
 		int k;
 		obj_2d_io o2dio;
+		int local_id,global_id;
 
 		memset(&o2dio,0,sizeof(obj_2d_io));
 
@@ -471,11 +464,22 @@ void get_2d_objects(char *d)
 		d++;
 		o2dio.z_rot=*(Uint8*)d;
 		d++;
+		global_id=*(Uint16*)d;
+		d+=2;
+		local_id=*(Uint8*)d;
+		d++;
 
 		k=add_2d_obj(e2dlist_getname(o2dio.object_type),sector_to_global_x(active_sector,o2dio.x_pos),sector_to_global_y(active_sector,o2dio.y_pos),
 		sector_to_global_z(o2dio.z_pos)+0.001,o2dio.x_rot*1.5,o2dio.y_rot*1.5,o2dio.z_rot*1.5);
-		memcpy(&obj_2d_list[k]->o2dio,&o2dio,sizeof(obj_2d_io));
-		sector_add_2do(k);
+
+		if(global_id!=k)
+			{
+				obj_2d_list[global_id]=obj_2d_list[k];
+				obj_2d_list[k]=0;
+			}
+
+		memcpy(&obj_2d_list[global_id]->o2dio,&o2dio,sizeof(obj_2d_io));
+		sector_add_2do(global_id,local_id);
 	}
 	sector_update_objects_checksum(active_sector);
 }
@@ -486,7 +490,8 @@ void get_light_objects(char *d)
 	int i;
 	Uint8 numobjects=*(Uint8*)d;
 	d++;
-	for(i=0;i<numobjects;i++){
+	for(i=0;i<numobjects;i++)
+	{
 		int k;
 		light_io lightio;
 
@@ -528,9 +533,12 @@ void get_particle_objects(char *d)
 	int i;
 	Uint8 numobjects=*(Uint8*)d;
 	d++;
-	for(i=0;i<numobjects;i++){
+
+	for(i=0;i<numobjects;i++)
+	{
 		int k;
 		particles_io particlesio;
+		int local_id,global_id;
 
 		memset(&particlesio,0,sizeof(particles_io));
 
@@ -542,12 +550,24 @@ void get_particle_objects(char *d)
 		d+=2;
 		particlesio.z_pos=*(Uint8*)d;
 		d++;
+		global_id=*(Uint16*)d;
+		d+=2;
+		local_id=*(Uint8*)d;
+		d++;
+
 
 		k=add_particle_sys(partlist_getname(particlesio.object_type),sector_to_global_x(active_sector,particlesio.x_pos),sector_to_global_y(active_sector,particlesio.y_pos),
 		sector_to_global_z(particlesio.z_pos));
-		memcpy(&particles_list[k]->particleio,&particlesio,sizeof(particles_io));
-		sector_add_particle(k);
+
+		if(global_id!=k)
+			{
+				particles_list[global_id]=particles_list[k];
+				particles_list[k]=0;
+			}
+		memcpy(&particles_list[global_id]->particleio,&particlesio,sizeof(particles_io));
+		sector_add_particle(global_id,local_id);
 	}
+
 	sector_update_objects_checksum(active_sector);
 }
 
@@ -741,6 +761,7 @@ void add_2d_object(char *d)
 
 	int k, sector;
 	obj_2d_io o2dio;
+	int local_id,global_id;
 
 	memset(&o2dio,0,sizeof(obj_2d_io));
 
@@ -755,12 +776,33 @@ void add_2d_object(char *d)
 	o2dio.z_pos=*(Uint8*)d;
 	d++;
 	o2dio.z_rot=*(Uint8*)d;
+	d++;
+	global_id=*(Uint16*)d;
+	d+=2;
+	local_id=*(Uint8*)d;
 
-	k=add_2d_obj(e2dlist_getname(o2dio.object_type),sector_to_global_x(active_sector,o2dio.x_pos),sector_to_global_y(active_sector,o2dio.y_pos),
+
+
+	k=add_2d_obj(e2dlist_getname(o2dio.object_type),sector_to_global_x(sector,o2dio.x_pos),sector_to_global_y(sector,o2dio.y_pos),
 	sector_to_global_z(o2dio.z_pos)+0.001,o2dio.x_rot*1.5,o2dio.y_rot*1.5,o2dio.z_rot*1.5);
-	memcpy(&obj_2d_list[k]->o2dio,&o2dio,sizeof(obj_2d_io));
-	sector_add_2do(k);
+
+	// put the object in global id
+	if(global_id!=k){
+		obj_2d_list[global_id]=obj_2d_list[k];
+		obj_2d_list[k]=0;
+	}
+
+	memcpy(&obj_2d_list[global_id]->o2dio,&o2dio,sizeof(obj_2d_io));
+	sector_add_2do(global_id,local_id);
 	sector_update_objects_checksum(sector);
+
+	#ifdef RADU_DEBUG
+		{
+            char str[256];
+            sprintf(str,"Adding object from add_2d_object at:%f %f in sector %i",sector_to_global_x(active_sector,o2dio.x_pos),sector_to_global_y(active_sector,o2dio.y_pos),sector);
+            LogError(str);
+		}
+	#endif
 }
 
 void delete_2d_object(char *d)
@@ -835,7 +877,7 @@ void add_lights(char *d)
 	lightio.interval=*(Uint8*)d;
 
 
-	k=add_light(sector_to_global_x(active_sector,lightio.x_pos),sector_to_global_y(active_sector,lightio.y_pos),
+	k=add_light(sector_to_global_x(sector,lightio.x_pos),sector_to_global_y(sector,lightio.y_pos),
 	sector_to_global_z(lightio.z_pos),io_to_global_intensity(lightio.r),io_to_global_intensity(lightio.g),
 	io_to_global_intensity(lightio.b), 1.0f,lightio.flags, io_to_global_interval(lightio.interval), io_to_global_flicker(lightio.flicker));
 
@@ -863,6 +905,7 @@ void add_particle(char *d)
 
 	int k, sector;
 	particles_io particlesio;
+	int local_id,global_id;
 
 	memset(&particlesio,0,sizeof(particles_io));
 
@@ -875,12 +918,24 @@ void add_particle(char *d)
 	particlesio.y_pos=*(Uint16*)d;
 	d+=2;
 	particlesio.z_pos=*(Uint8*)d;
+	d++;
+	global_id=*(Uint16*)d;
+	d+=2;
+	local_id=*(Uint8*)d;
 
-	k=add_particle_sys(partlist_getname(particlesio.object_type),sector_to_global_x(active_sector,particlesio.x_pos),sector_to_global_y(active_sector,particlesio.y_pos),
+	k=add_particle_sys(partlist_getname(particlesio.object_type),sector_to_global_x(sector,particlesio.x_pos),sector_to_global_y(sector,particlesio.y_pos),
 	sector_to_global_z(particlesio.z_pos));
-	memcpy(&particles_list[k]->particleio,&particlesio,sizeof(particles_io));
-	sector_add_particle(k);
+
+	// put the object in global id
+	if(global_id!=k){
+		particles_list[global_id]=particles_list[k];
+		particles_list[k]=0;
+	}
+
+	memcpy(&particles_list[global_id]->particleio,&particlesio,sizeof(particles_io));
+	sector_add_particle(global_id,local_id);
 	sector_update_objects_checksum(sector);
+
 }
 
 void delete_particle(char *d)
