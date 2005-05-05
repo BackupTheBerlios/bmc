@@ -251,7 +251,6 @@ int save_map(char * file_name)
 	}
 
 	// Write the particle systems
-	j=0;
 	for(i=0;i<particles_no;i++)
 	{
 		if(particles_list[i])
@@ -503,7 +502,7 @@ lights_no=0;//DEBUG!!!!!!!!!!1
 		for(j=0;j<MAX_2D_PER_SECTOR;j++){
 			if(sectors[i].e2d_local[j]==-1)
 				continue;
-			if(objects_list[sectors[i].e2d_local[j]]==0)
+			if(obj_2d_list[sectors[i].e2d_local[j]]==0)
 				continue;
 			obj_2d_list[sectors[i].e2d_local[j]]->x_pos=sector_to_global_x(i,obj_2d_list[sectors[i].e2d_local[j]]->x_pos);
 			obj_2d_list[sectors[i].e2d_local[j]]->y_pos=sector_to_global_y(i,obj_2d_list[sectors[i].e2d_local[j]]->y_pos);;
@@ -517,7 +516,7 @@ lights_no=0;//DEBUG!!!!!!!!!!1
 		for(j=0;j<MAX_PARTICLES_PER_SECTOR;j++){
 			if(sectors[i].particles_local[j]==-1)
 				continue;
-			if(sectors[i].particles_local[j]==0)continue; //Hmm, shouldn't happen in newer map formats
+			if(particles_list[sectors[i].particles_local[j]]==0)continue;
 			//The client does not have the particle editors default particle system, which is located as no. 0 in the particles_list - hence the particles for this map will always be 1 less than when it was saved in the map editor.
 			//entropy say: I don't get it. It crashed that way, so I had to change it. Besides, the maps are dynamic anyway, and we have problems when the client saves the map
 			particles_list[sectors[i].particles_local[j]]->x_pos=sector_to_global_x(i,particles_list[sectors[i].particles_local[j]]->x_pos);

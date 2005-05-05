@@ -108,7 +108,7 @@ void sector_update_tiles_checksum(int sector)
 
 
 /* SECTOR OBJECT MANIPULATION */
-
+/*
 void clear_sector(Uint16 sector)
 {
 	int i;
@@ -140,6 +140,45 @@ void clear_sector(Uint16 sector)
 		if(sectors[sector].particles_local[i]!=-1){
 			free(particles_list[i]);
 			particles_list[i]=0;
+			sectors[sector].particles_local[i]=-1;
+		}
+	}
+
+}
+*/
+
+
+void clear_sector(Uint16 sector)
+{
+	int i;
+	// 3d objects
+	for(i=0;i<MAX_3D_PER_SECTOR;i++){
+		if(sectors[sector].e3d_local[i]!=-1){
+			destroy_3d_object(sectors[sector].e3d_local[i]);
+			sectors[sector].e3d_local[i]=-1;
+		}
+	}
+	//2d objects
+	for(i=0;i<MAX_2D_PER_SECTOR;i++){
+		if(sectors[sector].e2d_local[i]!=-1){
+			free(obj_2d_list[sectors[sector].e2d_local[i]]);
+			obj_2d_list[sectors[sector].e2d_local[i]]=0;
+			sectors[sector].e2d_local[i]=-1;
+		}
+	}
+	//lights
+	for(i=0;i<MAX_LIGHTS_PER_SECTOR;i++){
+		if(sectors[sector].lights_local[i]!=-1){
+			free(lights_list[sectors[sector].lights_local[i]]);
+			lights_list[sectors[sector].lights_local[i]]=0;
+			sectors[sector].lights_local[i]=-1;
+		}
+	}
+	//particles
+	for(i=0;i<MAX_PARTICLES_PER_SECTOR;i++){
+		if(sectors[sector].particles_local[i]!=-1){
+			free(particles_list[sectors[sector].particles_local[i]]);
+			particles_list[sectors[sector].particles_local[i]]=0;
 			sectors[sector].particles_local[i]=-1;
 		}
 	}
@@ -935,6 +974,7 @@ void add_particle(char *d)
 	memcpy(&particles_list[global_id]->particleio,&particlesio,sizeof(particles_io));
 	sector_add_particle(global_id,local_id);
 	sector_update_objects_checksum(sector);
+
 
 }
 
